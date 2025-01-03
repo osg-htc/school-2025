@@ -1,4 +1,4 @@
-# OSG User School 2023
+# OSG School 2025
 
 <figure>
     <img src="assets/Madison_Skyline.jpeg" alt="Madison Skyline" />
@@ -29,7 +29,7 @@ basic travel and local costs associated with the School.
 
 ## Contact Us
 
-The OSG User School is part of the
+The OSG School is part of the
 [OSG Outreach Area](https://osg-htc.org/outreach/)&nbsp;&mdash;
 please visit that site to learn about other OSG Outreach activities.
 
