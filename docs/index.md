@@ -10,7 +10,7 @@
 
 During the School
 &mdash;
-<span style="font-weight: bold; color: #FF6600;">June 23&ndash;27</span>,
+<span style="font-weight: bold; color: #FF6600;">June 23&ndash;27</span>
 &mdash;
 you will learn to use [high-throughput computing](https://htcondor.org/htc.html) (HTC) systems,
 at your own campus or
