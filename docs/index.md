@@ -43,8 +43,8 @@ basic travel and local costs associated with the School.
 ## Applications
 
 Applications are now open.
-**The deadline for applications is Friday, 7 March 2025.**
-Complete your application by then to ensure consideration!
+**The deadline for applications has been extended to Tuesday, 11 March 2025.**
+Complete your application by the end of that day to ensure consideration!
 
 To apply, complete **both** of the steps below (in parallel, if you like):
 
