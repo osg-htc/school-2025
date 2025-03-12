@@ -8,8 +8,6 @@
 
 *Learn how this summer at the lovely [University of Wisconsin–Madison](https://wisc.edu/)*
 
-<p style="color: #FF6600; font-weight: bold;">Applications are now open! <a href="#applications">See below</a> for details.</p>
-
 During the School
 &mdash;
 <span style="font-weight: bold; color: #FF6600;">June 23&ndash;27</span>
@@ -42,23 +40,23 @@ basic travel and local costs associated with the School.
 
 ## Applications
 
-Applications are now open.
-**The deadline for applications has been extended to Tuesday, 11 March 2025.**
-Complete your application by the end of that day to ensure consideration!
+Applications are now closed for 2025.
+The deadline for applications was Tuesday, 11 Mar 2025.
 
-To apply, complete **both** of the steps below (in parallel, if you like):
-
-* Submit the [online application form](https://uwmadison.co1.qualtrics.com/jfe/form/SV_5dwhDZJNm5ErCbI)
-  (the link goes to a Qualtrics survey, which is the application)
-
-* Have someone email a letter of recommendation for you to
-  [school@osg-htc.org](mailto:school@osg-htc.org)
-  (ideally PDF or plain text)
+If still needed,
+have someone email a letter of recommendation for you to
+[school@osg-htc.org](mailto:school@osg-htc.org)
+(ideally PDF or plain text).
 
 For the letter of recommendation, ask someone who knows you professionally&nbsp;&mdash;
 ideally a faculty member or other supervisor.
 They should clearly write “OSG School 2025” and your name in the subject line and letter,
 so that we can associate your application and letter.
+
+**Applicants:**
+We plan to review applications in March and notify all applicants starting in early April or so.
+We will contact you once decisions have been made.
+Thank you for your patience!
 
 
 ## Contact Us
