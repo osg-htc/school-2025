@@ -28,3 +28,4 @@ extra:
 
 nav:
   - Home:                           index.md
+  - Schedule:                       schedule.md
