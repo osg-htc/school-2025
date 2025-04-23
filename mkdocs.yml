@@ -29,3 +29,7 @@ extra:
 nav:
   - Home:                           index.md
   - Schedule:                       schedule.md
+  - Logistics:
+    - General information:          logistics/index.md
+    - Hotel information:            logistics/hotel.md
+    - Visa requirements:            logistics/visas.md
