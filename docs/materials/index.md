@@ -2,23 +2,24 @@
 
 ## School Overview and Intro
 
-View the slides:
-[pdf](welcome/files/osgs24-day1-part1-welcome-timc.pdf)
+View the slides: [Coming soon]
+<!-- View the slides: [pdf](welcome/files/osgs24-day1-part1-welcome-timc.pdf) -->
 
 ## Intro to HTC and HTCondor Job Execution
 
 ### Intro to HTC Slides
 
-Intro to HTC: [pptx](htcondor/osgschool24-htc-intro.pptx)
+Intro to HTC: [Coming soon]
+<!-- Intro to HTC: [pptx](htcondor/osgschool24-htc-intro.pptx) -->
 
-Worksheet: [pdf](htcondor/HTC-List-Of-Jobs.pdf) or [Google Drive](https://docs.google.com/presentation/d/1DnJMOuw0YjuVg70vCvafXlJUm4k5Ovv7Zd1SJbfk6hU/edit?usp=sharing)
+Worksheet: [Coming soon]
+<!-- Worksheet: [pdf](htcondor/HTC-List-Of-Jobs.pdf) or [Google Drive](https://docs.google.com/presentation/d/1DnJMOuw0YjuVg70vCvafXlJUm4k5Ovv7Zd1SJbfk6hU/edit?usp=sharing) -->
 
 ### Intro to HTCondor Slides
 
-View the slides: [pdf](htcondor/files/osgus24-htc-htcondor.pdf)
-<!--
-[PowerPoint](htcondor/files/osgus22-htc-htcondor.pptx))
--->
+View the slides: [Coming soon]
+<!-- View the slides: [pdf](htcondor/files/osgus24-htc-htcondor.pdf) -->
+<!-- [PowerPoint](htcondor/files/osgus22-htc-htcondor.pptx)) -->
 
 ### Intro Exercises 1: Running and Viewing Simple Jobs (Strongly Recommended)
 
@@ -37,8 +38,8 @@ View the slides: [pdf](htcondor/files/osgus24-htc-htcondor.pdf)
 
 ## Intro to HTCondor Multiple Job Execution
 
-View the Slides: [pdf](htcondor/files/osgus24-htc-htcondor-multiple-jobs.pdf)
-
+View the Slides: [Coming soon]
+<!-- View the Slides: [pdf](htcondor/files/osgus24-htc-htcondor-multiple-jobs.pdf) -->
 
 ### Intro Exercises 2: Running Many HTC Jobs (Strongly Recommended)
 
@@ -47,11 +48,10 @@ View the Slides: [pdf](htcondor/files/osgus24-htc-htcondor-multiple-jobs.pdf)
 - [Exercise 2.3: Use `queue from` with custom variables](htcondor/part2-ex3-queue-from.md)
 - [Bonus Exercise 2.4: Use `queue matching` with a custom variable](htcondor/part2-ex4-queue-matching.md)
 
-
 ## OSG
 
-View the slides:
-[pdf](osg/files/osgs24-day2-part1-osg-timc.pdf)
+View the slides: [Coming soon]
+<!-- View the slides: [pdf](osg/files/osgs24-day2-part1-osg-timc.pdf) -->
 
 ### OSG Exercises: Comparing PATh and OSG (Strongly Recommended)
 
@@ -62,7 +62,8 @@ View the slides:
 
 ## Troubleshooting
 
-View the Slides: [pdf](troubleshooting/files/OSGUS2024_troubleshooting.pdf) [ppt](troubleshooting/files/OSGUS2024_troubleshooting.pptx)
+View the Slides: [Coming soon]
+<!-- View the Slides: [pdf](troubleshooting/files/OSGUS2024_troubleshooting.pdf) [ppt](troubleshooting/files/OSGUS2024_troubleshooting.pptx) -->
 
 ### Troubleshooting Exercises: 
 
@@ -71,9 +72,8 @@ View the Slides: [pdf](troubleshooting/files/OSGUS2024_troubleshooting.pdf) [ppt
 
 ## Software
 
-Slides:
-[pdf](software/files/osgs24-software.pdf),
-[pptx](software/files/osgs24-software.pptx)
+View the Slides: [Coming soon]
+<!-- View the Slides: [pdf](software/files/osgs24-software.pdf), [pptx](software/files/osgs24-software.pptx) -->
 
 ### Software Exercises 1: Exploring Containers
 
@@ -104,10 +104,10 @@ Slides:
 - [Exercise 5.3: Using Conda Environments](software/part5-ex3-conda.md)
 - [Exercise 5.4: Compiling and Running a Simple Code](software/part5-ex4-compiling.md)
 
-
 ## Data
 
-View the slides: [pdf](data/files/osgus24-data.pdf)
+View the Slides: [Coming soon]
+<!-- View the slides: [pdf](data/files/osgus24-data.pdf) -->
 
 ### Data Exercises 1: HTCondor File Transfer (Strongly Recommended)
 
@@ -120,10 +120,10 @@ View the slides: [pdf](data/files/osgus24-data.pdf)
 - [Exercise 2.1: OSDF for inputs](data/part2-ex1-osdf-inputs.md)
 - [Exercise 2.2: OSDF for outputs](data/part2-ex2-osdf-outputs.md)
 
-
 ## Scaling Up
 
-View the slides: [pptx](scaling/files/osgschool24-learning-scaling.pptx)
+View the Slides: [Coming soon]
+<!-- View the slides: [pptx](scaling/files/osgschool24-learning-scaling.pptx) -->
 
 ### Scaling Up Exercises
 
@@ -131,10 +131,10 @@ View the slides: [pptx](scaling/files/osgschool24-learning-scaling.pptx)
 -   [Exercise 1.2: Investigating Job Attributes](scaling/part1-ex2-job-attributes.md)
 -   [Exercise 1.3: Getting Job Information from Log Files](scaling/part1-ex3-log-files.md)
 
-
 ## Workflows with DAGMan
 
-View the slides: [pptx](workflows/files/osg24-dagman.pptx)
+View the Slides: [Coming soon]
+<!-- View the slides: [pptx](workflows/files/osg24-dagman.pptx) -->
 
 ### DAGMan Exercises 1
 
@@ -160,19 +160,22 @@ View the slides
 - [Exercise 1.3: Running a GPU job](gpus/part1-ex3-gpu-jobs.md)
 
 END EXTRA TOPICS THAT ARE NOT READY YET -->
+
 ### Machine Learning
-View the slides: [pdf](ml/Throughput-ML-iross-OSGUS24.pdf)
+
+View the Slides: [Coming soon]
+<!-- View the slides: [pdf](ml/Throughput-ML-iross-OSGUS24.pdf) -->
 
 ### Self-checkpointing for long-running jobs
 
-View the slides: [pdf](checkpoint/files/OSGUS2024_checkpointing.pdf) [ppt](checkpoint/files/OSGUS2024_checkpointing.pptx)
+View the Slides: [Coming soon]
+<!-- View the slides: [pdf](checkpoint/files/OSGUS2024_checkpointing.pdf) [ppt](checkpoint/files/OSGUS2024_checkpointing.pptx) -->
 
 -   [Exercise 1.1: Trying out self-checkpointing](checkpoint/part1-ex1-checkpointing.md)
 
-
 ### Special Environments
 
-View the slides: [Slides coming soon]
+View the slides: [Coming soon]
 
 ### Special Environments Exercises 1
 
@@ -180,7 +183,7 @@ View the slides: [Slides coming soon]
 
 ### Introduction to Research Computing Facilitation
 
-View the slides: [Slides coming soon]
+View the slides: [Coming soon]
 
 ## Final Talks
 
