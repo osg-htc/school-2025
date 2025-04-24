@@ -1,13 +1,29 @@
-## June 22 (Sunday)
+## August 4 (Sunday)
 
 <div style="font-size: larger; font-weight: bold; color: #FF6600;">Welcome Dinner for Participants and Staff</div>
 
 All School participants and staff are encourage to attend!
 
 **Time:** Starting at 6:30 p.m.<br>
-**Location**: [Union South](https://union.wisc.edu/visit/union-south/), 1308 W. Dayton St.
+**Location**: [Fluno Center](https://fluno.com), 601 University Avenue; Skyview Room, 8th floor
 
-## June 23 (Monday)
+<!--
+There is construction all around the Fluno Center;
+use the map below to get to the entrance on University Avenue:
+
+<p><img alt="Map showing Fluno Center entrance near University and Frances" src="../files/fluno-entrance-2024.jpg" title="Fluno Center entrance map" style="max-width: 80%;"/></p>
+
+Rachel, one of the School staff, will be in the hotel lobby to lead a group walking to the Fluno.
+She plans to arrive at the Park Hotel at about 5:40 p.m.,
+and then the whole group will leave at about 6:00 p.m.
+Join the walking group, if you like!
+
+Otherwise, you are welcome to walk on your own,
+to get a ride (maybe even the hotel shuttle will be available),
+or to get there however you like.
+-->
+
+## August 5 (Monday)
 
 <table>
   <thead>
@@ -22,7 +38,7 @@ All School participants and staff are encourage to attend!
     <tr>
       <td>8:00</td>
       <td>8:45</td>
-      <td>Breakfast</td>
+      <td>Breakfast in Computer Sciences 1240</td>
       <td>-</td>
     </tr>
     <tr>
@@ -47,7 +63,7 @@ All School participants and staff are encourage to attend!
       <td>9:45</td>
       <td>10:15</td>
       <td><span class="before-dot text-light-blue">Lecture: Introduction to HTCondor</span></td>
-      <td>Amber</td>
+      <td>Andrew</td>
     </tr>
     <tr>
       <td>10:15</td>
@@ -70,14 +86,14 @@ All School participants and staff are encourage to attend!
     <tr>
       <td>12:15</td>
       <td>13:15</td>
-      <td>Lunch</td>
+      <td>Lunch in Computer Sciences (near 1240)</td>
       <td>-</td>
     </tr>
     <tr>
       <td>13:15</td>
       <td>14:00</td>
       <td><span class="before-dot text-light-blue">Lecture: More HTCondor</span></td>
-      <td>Amber</td>
+      <td>Andrew</td>
     </tr>
     <tr>
       <td>14:15</td>
@@ -95,7 +111,7 @@ All School participants and staff are encourage to attend!
       <td>15:15</td>
       <td>15:30</td>
       <td><span class="before-dot text-light-blue">Lecture: Setting goals for the School and beyond</span></td>
-      <td>Christina</td>
+      <td>Rachel</td>
     </tr>
     <tr>
       <td>15:30</td>
@@ -110,14 +126,16 @@ All School participants and staff are encourage to attend!
       <td>19:00</td>
       <td>20:30</td>
       <td>
-        <span class="before-dot text-orange">Evening work session (optional)</span>
+        <span class="before-dot text-orange">Evening work session (optional)</span><br>
+        Memorial Union – Council Room (4th Floor)<br>
+        <strong>Note:</strong> Free, outdoor showing of Jaws (1975) at 9 p.m.!
       </td>
-      <td>TBD</td>
+      <td>Rachel, Christina, Tim</td>
     </tr>
   </tbody>
 </table>
 
-## June 24 (Tuesday)
+## August 6 (Tuesday)
 
 <table>
   <thead>
@@ -132,7 +150,7 @@ All School participants and staff are encourage to attend!
     <tr>
       <td>8:00</td>
       <td>8:45</td>
-      <td>Breakfast</td>
+      <td>Breakfast in Computer Sciences 1240</td>
       <td>-</td>
     </tr>
     <tr>
@@ -150,7 +168,7 @@ All School participants and staff are encourage to attend!
     <tr>
       <td>10:30</td>
       <td>10:45</td>
-      <td>Break</td>
+      <td>Break<br>Travel document collection, as needed</td>
       <td>-</td>
     </tr>
     <tr>
@@ -168,7 +186,7 @@ All School participants and staff are encourage to attend!
     <tr>
       <td>12:15</td>
       <td>13:30</td>
-      <td>Lunch</td>
+      <td>Lunch in Computer Sciences (near 1240)<br><strong>13:15:</strong> Return documents in 1240</td>
       <td>-</td>
     </tr>
     <tr>
@@ -187,7 +205,7 @@ All School participants and staff are encourage to attend!
       <td>15:00</td>
       <td>15:45</td>
       <td><span class="before-dot text-light-blue">Lecture: Software portability</span></td>
-      <td>Andrew</td>
+      <td>Rachel</td>
     </tr>
     <tr>
       <td>15:45</td>
@@ -202,14 +220,15 @@ All School participants and staff are encourage to attend!
       <td>19:00</td>
       <td>20:30</td>
       <td>
-        <span class="before-dot text-orange">Evening work session (optional)</span>
+        <span class="before-dot text-orange">Evening work session (optional)</span><br>
+        Memorial Union – Council Room (4th Floor)
       </td>
-      <td>TBD</td>
+      <td>Christina, Amber, Tim</td>
     </tr> 
   </tbody>
 </table>
 
-## June 25 (Wednesday)
+## August 7 (Wednesday)
 
 <table>
   <thead>
@@ -224,14 +243,14 @@ All School participants and staff are encourage to attend!
     <tr>
       <td>8:00</td>
       <td>8:45</td>
-      <td>Breakfast</td>
+      <td>Breakfast in Computer Sciences 1240</td>
       <td>-</td>
     </tr>
     <tr>
       <td>9:00</td>
       <td>9:45</td>
       <td><span class="before-dot text-light-blue">Lecture: Working with data</span></td>
-      <td>Showmic</td>
+      <td>Andrew</td>
     </tr>
     <tr>
       <td>9:45</td>
@@ -249,14 +268,13 @@ All School participants and staff are encourage to attend!
       <td>11:00</td>
       <td>12:00</td>
       <td>
-        HTC Showcase Part 1
-        <!--<br>
-        &#9654; <span style="color: rgb(173, 81, 12);">Firstname Lastname</span>;
-        Department/Affiliation<br>
-        <div style="margin-left: 2ex;">“Title of talk”</div>
-        &#9654; <span style="color: rgb(173, 81, 12);">Firstname Lastname</span>;
-        Department/Affiliation<br>
-        <div style="margin-left: 2ex;">“Title of talk”</div>-->
+        HTC Showcase Part 1<br>
+        &#9654; <span style="color: rgb(173, 81, 12);">Michael Gerard</span>;
+        Nuclear Engineering &amp; Engineering Physics<br>
+        <div style="margin-left: 2ex;">“Using CHTC to optimize the Helically Symmetric eXperiment stellarator”</div>
+        &#9654; <span style="color: rgb(173, 81, 12);">Bryce Johnson</span>;
+        Morgridge Institute for Research & UW&ndash;Madison Computer Sciences<br>
+        <div style="margin-left: 2ex;">“Running millions of biophysical simulations with OSPool”</div>
       </td>
       <td>-</td>
     </tr>
@@ -270,7 +288,9 @@ All School participants and staff are encourage to attend!
       <td>12:30</td>
       <td>13:45</td>
       <td>
-        Lunch
+        Lunch in Computer Sciences (near 1240)<br>
+        Optional Domain Lunches: Christina (math); Rachel (biology); Andrew/Amber (chemistry);
+        Ian (ML); Tim (physics &amp; astronomy)
       </td> 
       <td>-</td>
     </tr>
@@ -278,7 +298,8 @@ All School participants and staff are encourage to attend!
       <td>13:45</td>
       <td>17:00</td>
       <td>
-        Afternoon off or optional work time<br>
+        Afternoon off &mdash; <a href="../logistics/fun-day">suggestions for fun</a><br>
+        Or, optional work time<br>
         <span class="before-dot text-black">Or, individual consultations</span>
       </td>
       <td>staff</td>
@@ -287,14 +308,15 @@ All School participants and staff are encourage to attend!
       <td>19:00</td>
       <td>20:30</td>
       <td>
-        <span class="before-dot text-orange">Evening work session (optional)</span>
+        <span class="before-dot text-orange">Evening work session (optional)</span><br>
+        Memorial Union – Langdon Room (4th Floor)<br>
       </td>
-      <td>TBD</td>
+      <td>Christina, Showmic</td>
     </tr>
   </tbody>
 </table>
 
-## June 26 (Thursday)
+## August 8 (Thursday)
 
 <table>
   <thead>
@@ -309,7 +331,7 @@ All School participants and staff are encourage to attend!
     <tr>
       <td>8:00</td>
       <td>8:45</td>
-      <td>Breakfast</td>
+      <td>Breakfast in Computer Sciences 1240</td>
       <td>-</td>
     </tr>
     <tr>
@@ -334,12 +356,12 @@ All School participants and staff are encourage to attend!
       <td>11:00</td>
       <td>12:00</td>
       <td><span class="before-dot text-light-blue">Lecture: DAGMan</span></td>
-      <td>Andrew</td>
+      <td>Rachel</td>
     </tr>
     <tr>
       <td>12:00</td>
       <td>13:15</td>
-      <td>Lunch</td>
+      <td>Lunch in Computer Sciences (near 1240)</td>
       <td>-</td>
     </tr>
     <tr>
@@ -377,14 +399,15 @@ All School participants and staff are encourage to attend!
       <td>19:00</td>
       <td>20:30</td>
       <td>
-        <span class="before-dot text-orange">Evening work session (optional)</span>
+        <span class="before-dot text-orange">Evening work session (optional)</span><br>
+        Memorial Union – Council Room (4th Floor)<br>
       </td>
-      <td>TBD</td>
+      <td>Andrew, Showmic, Tim</td>
     </tr>
   </tbody>
 </table>
 
-## June 27 (Friday)
+## August 9 (Friday)
 
 <table>
   <thead>
@@ -399,7 +422,7 @@ All School participants and staff are encourage to attend!
     <tr>
       <td>8:00</td>
       <td>8:45</td>
-      <td>Breakfast</td>
+      <td>Breakfast in Computer Sciences 1240</td>
       <td>-</td>
     </tr>
     <tr>
@@ -409,7 +432,7 @@ All School participants and staff are encourage to attend!
         <strong>Optional</strong> Lecture: Self-Checkpointing<br>
         <span class="before-dot text-light-orange">Work Time: Apply HTC to own research</span>
       </td>
-      <td>Ian</td>
+      <td>Showmic</td>
     </tr>
     <tr>
       <td>9:45</td>
@@ -442,7 +465,7 @@ All School participants and staff are encourage to attend!
       <td>11:50</td>
       <td>13:00</td>
       <td>
-        Lunch<br>
+        Lunch, Computer Sciences (Staff to direct)<br>
         Optional: Introduction to Research Computing Facilitation
       </td>
       <td>Christina</td>
@@ -452,13 +475,12 @@ All School participants and staff are encourage to attend!
       <td>14:00</td>
       <td>
         HTC Showcase, Part 2
-        <!--<br>
-        &#9654; <span style="color: rgb(173, 81, 12);">Firstname Lastname</span>;
-        Department/Affiliation<br>
-        <div style="margin-left: 2ex;">“Title of talk”</div>
-        &#9654; <span style="color: rgb(173, 81, 12);">Firstname Lastname</span>;
-        Department/Affiliation<br>
-        <div style="margin-left: 2ex;">“Title of talk”</div>-->
+        <br>
+        &#9654; <span style="color: rgb(173, 81, 12);">Dan Wright</span>;
+        Civil &amp; Environmental Engineering<br>
+        <div style="margin-left: 2ex;">“Computational hydroclimate research enabled by HTC”</div>
+        &#9654; <span style="color: rgb(173, 81, 12);">Saloni Bhogale</span>;<br>
+        <div style="margin-left: 2ex;">“TBD”</div>
       </td>
       <td>-</td>
     </tr>
@@ -488,7 +510,7 @@ All School participants and staff are encourage to attend!
       <td>16:00</td>
       <td>16:45</td>
       <td>HTC and HTCondor Philosophy</td>
-      <td>TBD</td>
+      <td>Miron (and Greg?)</td>
     </tr>
     <tr>
       <td>16:45</td>
@@ -501,5 +523,10 @@ All School participants and staff are encourage to attend!
 
 **Closing Dinner for Participants and Staff**
 
-*   **Location:** [Fluno Center](https://fluno.com), 601 University Avenue; Skyview Room, 8th floor
-*   **Time:** Starting at 6:30 p.m.
+*   **Location:** Union South (next to Computer Sciences), indoors/outdoors
+*   **Time:** 6:00&ndash;7:45 p.m. (or so)
+
+We have scheduled a buffet dinner to wrap up the School.
+The buffet itself, and some tables, are inside.
+But if the weather is good, we will have easy access to outdoor space, too, and
+we encourage everyone to head outside with their food.

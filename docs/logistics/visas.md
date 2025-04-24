@@ -49,6 +49,6 @@ When you come to Madison, you must bring:
 | J-1 (Visitor)         | Form DS-2019 (original document, not a copy) |
 | Visa Waiver Program   | Paper copy of ESTA Authorization             |
 
-Please bring all required information and documents to the School, especially on Tuesday, June 24.
+Please bring all required information and documents to the School, especially on Tuesday, August 6.
 School staff will make copies of the documents and return them to you as quickly as possible.
 We will announce further details in class.
