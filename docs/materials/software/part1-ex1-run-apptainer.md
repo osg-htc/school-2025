@@ -53,9 +53,17 @@ the running container so you can use your files.
 version, or checking the version of common tools like `gcc` or Python: 
 
 		:::console
-		$ cat /etc/os-release
+		$ grep "PRETTY_NAME" /etc/os-release 
 		$ gcc --version
 		$ python3 --version
+
+	!!! note "Full Linux version information"
+		In the above example, we used `grep` to only show the value of the `PRETTY_NAME`
+		in the `/etc/os-release` file. There's a lot more information in that file
+		about the Linux version, which you can see with 
+		
+			:::console
+			$ cat /etc/os-release
 
 1. Exit out of the container by typing `exit`. 
 
@@ -63,7 +71,7 @@ version, or checking the version of common tools like `gcc` or Python:
 results as when typed in the container, or different? 
 
 		:::console
-		$ cat /etc/os-release
+		$ grep "PRETTY_NAME" /etc/os-release 
 		$ gcc --version
 		$ python3 --version
 
