@@ -70,7 +70,10 @@ All School participants and staff are encourage to attend!
     <tr>
       <td>12:15</td>
       <td>13:15</td>
-      <td>Lunch</td>
+      <td>
+        Lunch<br>
+        Domain groups
+      </td>
       <td>-</td>
     </tr>
     <tr>
@@ -168,7 +171,10 @@ All School participants and staff are encourage to attend!
     <tr>
       <td>12:15</td>
       <td>13:30</td>
-      <td>Lunch</td>
+      <td>
+        Lunch<br>
+        Software groups
+      </td>
       <td>-</td>
     </tr>
     <tr>
@@ -316,7 +322,7 @@ All School participants and staff are encourage to attend!
       <td>9:00</td>
       <td>9:45</td>
       <td><span class="before-dot text-light-blue">Lecture: Independence in Research Computing</span></td>
-      <td>Christina</td>
+      <td>Danny</td>
     </tr>
     <tr>
       <td>9:45</td>
