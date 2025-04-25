@@ -20,13 +20,13 @@ Default Environment
 
 First, let's run a job without a container to see what the typical job environment is. 
 
-1. Create a bash script with the following lines: 
+1. Create a bash script named `script.sh` with the following lines: 
 
 		:::bash
 		#!/bin/bash
 	
 		hostname
-		cat /etc/os-release 
+		grep "PRETTY_NAME" /etc/os-release 
 		gcc --version
 		python3 --version
 	
