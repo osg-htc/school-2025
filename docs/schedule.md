@@ -322,7 +322,7 @@ All School participants and staff are encourage to attend!
       <td>9:00</td>
       <td>9:45</td>
       <td><span class="before-dot text-light-blue">Lecture: Independence in Research Computing</span></td>
-      <td>Danny>
+      <td>Danny</td>
     </tr>
     <tr>
       <td>9:45</td>
