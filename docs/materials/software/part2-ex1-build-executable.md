@@ -39,7 +39,7 @@ the "trivial" variations. To do so, we first save the results of the `word-varia
 to a file, then use the contents of that file with the `word-contexts.py` command (also saving the
 output to file):
 
-		::: console
+		:::console
 		$ ./word-variations.py Alice_in_Wonderland.txt Dodo > variations.Dodo.txt
 		$ ./word-contexts.py Alice_in_Wonderland.txt $(cat variations.Dodo.txt) > contexts.Dodo.txt
 
