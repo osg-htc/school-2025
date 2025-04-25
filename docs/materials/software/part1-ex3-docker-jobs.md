@@ -20,6 +20,13 @@ there are some good reasons for converting it to a local Apptainer container fir
 We'll do this with the same `python:3.10` Docker container we used in the 
 [first exercise](part1-ex1-run-apptainer.md). 
 
+!!! warning "Ensure environment is ready for Apptainer commands"
+	If your login has been interrupted or you've changed terminals since
+	[Software Exercise 1.1](/school-2025/materials/software/part1-ex1-run-apptainer), 
+	then make sure to run the commands in the
+	[Setup section](/school-2025/materials/software/part1-ex1-run-apptainer/#setup)
+	of that exercise before proceeding!
+
 To convert the Docker container to a local Apptainer container, run: 
 
 	:::console
@@ -43,16 +50,16 @@ Submit File and Executable
 
 1. Once these steps are done, submit the job. You might get a warning about using OSDF for container transfers - ignore this warning for now.
 
-	!!! warning "Proper location for container `.sif` files"
-		The above example is storing the `local-py310.sif` file in the home directory on the Access Point,
-		and in turn that means the job will transfer the file via the Access Point. Container image files,
-		however, are typically large and if you are submitting many jobs, the Access Point can be overwhelmed
-		trying to transfer so many large files!
+!!! warning "Proper location for container `.sif` files"
+	The above example is storing the `local-py310.sif` file in the home directory on the Access Point,
+	and in turn that means the job will transfer the file via the Access Point. Container image files,
+	however, are typically large and if you are submitting many jobs, the Access Point can be overwhelmed
+	trying to transfer so many large files!
 
-		In practice, container image files like this one should be placed in your `$DATA` directory, and the
-		submit file should use the `osdf:///` protocol to declare the transfer. For more information, see the
-		[Data Exercises](/school-2025/materials/data/part2-ex1-osdf-inputs/) or the 
-		[OSPool guide on using the OSDF](https://portal.osg-htc.org/documentation/htc_workloads/managing_data/osdf/).
+	In practice, container image files like this one should be placed in your `$DATA` directory, and the
+	submit file should use the `osdf:///` protocol to declare the transfer. For more information, see the
+	[Data Exercises](/school-2025/materials/data/part2-ex1-osdf-inputs/) or the 
+	[OSPool guide on using the OSDF](https://portal.osg-htc.org/documentation/htc_workloads/managing_data/osdf/).
 
 Finding Docker Containers
 -------------

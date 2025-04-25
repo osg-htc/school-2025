@@ -73,6 +73,13 @@ Build the Container
 
 Once the definition file is complete, we can build the container. 
 
+!!! warning "Ensure environment is ready for Apptainer commands"
+	If your login has been interrupted or you've changed terminals since
+	[Software Exercise 1.1](/school-2025/materials/software/part1-ex1-run-apptainer), 
+	then make sure to run the commands in the
+	[Setup section](/school-2025/materials/software/part1-ex1-run-apptainer/#setup)
+	of that exercise before proceeding!
+
 1. Run the following command to build the container: 
 
 		:::console
@@ -98,7 +105,7 @@ allow us to test our new container.
 1. Then try running the `hello-cow.py` script: 
 
 		:::console
-		apptainer> ./hello-cow.py
+		Apptainer> ./hello-cow.py
 
 1. If it produces an output, our container works! We can now exit (by typing `exit`)
 and submit a job. 
@@ -132,4 +139,13 @@ CPU and memory requests):
 									 ||----w |
 									 ||     ||
 
+!!! warning "Proper location for container `.sif` files"
+	The above example is storing the `py-cowsay.sif` file in the home directory on the Access Point,
+	and in turn that means the job will transfer the file via the Access Point. Container image files,
+	however, are typically large and if you are submitting many jobs, the Access Point can be overwhelmed
+	trying to transfer so many large files!
 
+	In practice, container image files like this one should be placed in your `$DATA` directory, and the
+	submit file should use the `osdf:///` protocol to declare the transfer. For more information, see the
+	[Data Exercises](/school-2025/materials/data/part2-ex1-osdf-inputs/) or the 
+	[OSPool guide on using the OSDF](https://portal.osg-htc.org/documentation/htc_workloads/managing_data/osdf/).
