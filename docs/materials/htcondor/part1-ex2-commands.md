@@ -10,8 +10,8 @@ HTC Exercise 1.2: Experiment With HTCondor Commands
 Exercise Goal
 -------------
 
-The goal of this exercise is to learn about two very important HTCondor commands, `condor_q` and `condor_status`.
-They will be useful for monitoring your jobs and available execute point slots (respectively) throughout the week.
+The goal of this exercise is to learn about two HTCondor commands: `condor_q` and `condor_status`.
+These commmands are useful for monitoring your jobs and viewing available execute point slots throughout the week.
 
 This exercise should take only a few minutes.
 
@@ -23,7 +23,7 @@ As discussed in the lecture, the `condor_status` command is used to view the cur
 At its most basic, the command is:
 
 ``` console
-username@ap1 $ condor_status
+[username@ap40 ~]$ condor_status
 ```
 
 When running this command, there is typically a lot of output printed to the screen. Looking at your terminal output, there is one line per execute point slot. **TIP: You can widen your terminal window, which may help you to see all details of the output better.**
@@ -31,34 +31,37 @@ When running this command, there is typically a lot of output printed to the scr
 *Here is some example output (what you see will be longer):*
 
 ``` console
-slot1@FIU-PATH-EP.osgvo-docker-pilot-55c74f5b7c-kbs77      LINUX      X86_64 Unclaimed Idle      0.000 8053  0+01:14:34
-slot1@UNL-PATH-EP.osgvo-docker-pilot-9489b6b4-9rf4n        LINUX      X86_64 Claimed   Busy      0.930 1024  0+02:42:08
-slot1@WISC-PATH-EP.osgvo-docker-pilot-7b46dbdbb7-xqkkg     LINUX      X86_64 Claimed   Busy      3.530 1024  0+02:40:24
-slot1@SYRA-PATH-EP.osgvo-docker-pilot-gpu-7f6c64d459       LINUX      X86_64 Owner     Idle      0.300  250  7+03:22:21
+Name                                                 OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
+
+slot1_15@IU-Jetstream2-Backfill.e53d75d92d0e         LINUX      X86_64 Claimed   Busy      0.000 2048  0+00:00:08
+slot1_7@IU-Jetstream2-Backfill.f7d8ef98fdd0          LINUX      X86_64 Claimed   Busy      1.000 8192  0+04:57:31
+slot1@glidein_2_813658338@e4014.chtc.wisc.edu        LINUX      X86_64 Unclaimed Idle      0.000   14  0+05:35:29
+slot1@glidein_608506_86504717@node063.lawrence       LINUX      X86_64 Unclaimed Idle      0.000  472  0+15:59:56
+slot1_4@glidein_3651085_902238852@uct2-c576.mwt2.org LINUX      X86_64 Claimed   Busy      4.470 2048  0+05:10:48
 ```
 
 This output consists of 8 columns:
 
 | Col        | Example                      | Meaning                                                                                                                 |
 |:-----------|:-----------------------------|:------------------------------------------------------------------------------------------------------------------------|
-| Name       | `slot1@UNL-PATH-EP.osgvo-docker-pilot-9489b6b4-9rf4n` | Full slot name (including the hostname)                                                                                                  |
+| Name       | `slot1_4@glidein_3651085_902238852@uct2-c576.mwt2.org` | Full slot name (including the hostname)                                                                                                  |
 | OpSys      | `LINUX`                      | Operating system                                                                                                        |
 | Arch       | `X86_64`                     | Slot architecture (e.g., Intel 64 bit)                                                                               |
 | State      | `Claimed`                    | State of the slot (`Unclaimed` is available, `Owner` is being used by the machine owner, `Claimed` is matched to a job) |
 | Activity   | `Busy`                       | Is there activity on the slot?                                                                                          |
-| LoadAv     | `0.930`                      | Load average, a measure of CPU activity on the slot                                                                     |
-| Mem        | `1024`                       | Memory available to the slot, in MB                                                                                     |
-| ActvtyTime | `0+02:42:08`                 | Amount of time spent in current activity (days + hours:minutes:seconds)                                                 |
+| LoadAv     | `4.470`                      | Load average, a measure of CPU activity on the slot                                                                     |
+| Mem        | `2048`                       | Memory available to the slot, in MB                                                                                     |
+| ActvtyTime | `0+05:10:48`                 | Amount of time spent in current activity (days + hours:minutes:seconds)                                                 |
 
 At the end of the slot listing, there is a summary. Here is an example:
 
 ``` console
-                     Machines Owner Claimed Unclaimed Matched Preempting  Drain
+               Total Owner Claimed Unclaimed Matched Preempting  Drain Backfill BkIdle
 
-        X86_64/LINUX    10831     0   10194       631       0          0      6
-      X86_64/WINDOWS        2     2       0         0       0          0      0
+  X86_64/LINUX 54466     0   47991      6313       0        162      0        0      0
+ aarch64/LINUX     1     0       0         1       0          0      0        0      0
 
-               Total    10833     2   10194       631       0          0      6
+         Total 54467     0   47991      6314       0        162      0        0      0
 ```
 
 There is one row of summary for each machine (i.e. "slot") architecture/operating system combination with columns for the number of slots in each state. The final row gives a summary of slot states for the whole pool.
@@ -74,7 +77,7 @@ There is one row of summary for each machine (i.e. "slot") architecture/operatin
 Also try out the `-compact` for a slightly different view of whole machines (i.e. server hostnames), without the individual slots shown.
 
 ``` console
-username@ap1 $ condor_status -compact
+[username@ap40 ~]$ condor_status -compact
 ```
 
 **How has the column information changed?**
@@ -89,15 +92,15 @@ The `condor_q` command lists jobs that are on this access point machine and that
 The default behavior of the command lists only your jobs:
 
 ``` console
-username@ap1 $ condor_q
+[username@ap40 ~]$ condor_q
 ```
 
 The main part of the output (which will be empty, because you haven't submitted jobs yet) shows one set ("batch") of submitted jobs per line. If you had a single job in the queue, it would look something like the below:
 
 ``` console
--- Schedd: ap1.facility.path-cc.io : <128.104.100.43:9618?... @ 07/12/23 09:59:31
+-- Schedd: ap40.uw.osg-htc.org : <128.105.68.62:9618?... @ 04/28/25 13:54:57
 OWNER  BATCH_NAME            SUBMITTED   DONE   RUN    IDLE  TOTAL JOB_IDS
-alice CMD: run_ffmpeg.sh   7/12 09:58      _      _      1      1 18801.0               
+alice CMD: run_ffmpeg.sh   4/28 09:58      _      _      1      1 18801.0               
 ```
 
 This output consists of 8 (or 9) columns:
@@ -106,7 +109,7 @@ This output consists of 8 (or 9) columns:
 |:------------|:----------------|:-------------------------------------------------------------------------------------------------------------------------------|
 | OWNER       | `alice`        | The user ID of the user who submitted the job                                                                                  |
 | BATCH\_NAME | `run_ffmpeg.sh` | The executable or "jobbatchname" specified within the submit file(s)                                                           |
-| SUBMITTED   | `7/12 09:58`    | The date and time when the job was submitted                                                                                   |
+| SUBMITTED   | `4/28 09:58`    | The date and time when the job was submitted                                                                                   |
 | DONE        | `_`             | Number of jobs in this batch that have completed                                                                               |
 | RUN         | `_`             | Number of jobs in this batch that are currently running                                                                        |
 | IDLE        | `1`             | Number of jobs in this batch that are idle, waiting for a match                                                                |
@@ -132,7 +135,7 @@ It shows total counts of jobs in the different possible states.
 By default, the `condor_q` command shows **your** jobs only. To see everyone’s jobs that are queued on the machine, add the `-all` option:
 
 ``` console
-username@ap1 $ condor_q -all
+[username@ap40 ~]$ condor_q -all
 ```
 
 -   How many jobs are queued in total (i.e., running or waiting to run)?
@@ -143,19 +146,19 @@ username@ap1 $ condor_q -all
 The `condor_q` output, by default, groups "batches" of jobs together (if they were submitted with the same submit file or "jobbatchname"). To see more information for EVERY job on a separate line of output, use the `-nobatch` option to `condor_q`:
 
 ``` console
-username@ap1 $ condor_q -all -nobatch
+[username@ap40 ~]$ condor_q -all -nobatch
 ```
 
 **How has the column information changed?** (Below is an example of the top of the output.)
 
 ``` console
--- Schedd: ap1.facility.path-cc.io : <128.104.100.43:9618?... @ 07/12/23 11:58:44
+-- Schedd: ap40.uw.osg-htc.org : <128.105.68.62:9618?... @ 04/28/25 13:57:40
  ID       OWNER            SUBMITTED     RUN_TIME ST PRI SIZE   CMD
-18203.0   s16_alirezakho  7/11 09:51   0+00:00:00 I  0      0.7 pascal
-18204.0   s16_alirezakho  7/11 09:51   0+00:00:00 I  0      0.7 pascal
-18801.0   alice           7/12 09:58   0+00:00:00 I  0      0.0 run_ffmpeg.sh
-18997.0   s16_martincum   7/12 10:59   0+00:00:32 I  0    733.0 runR.pl 1_0 run_perm.R 1 0 10
-19027.5   s16_martincum   7/12 11:06   0+00:09:20 I  0   2198.0 runR.pl 1_5 run_perm.R 1 5 1000
+18203.0   s16_alirezakho  4/28 09:51   0+00:00:00 I  0      0.7 pascal
+18204.0   s16_alirezakho  4/28 09:51   0+00:00:00 I  0      0.7 pascal
+18801.0   alice           4/28 09:58   0+00:00:00 I  0      0.0 run_ffmpeg.sh
+18997.0   s16_martincum   4/28 10:59   0+00:00:32 R  0    733.0 runR.pl 1_0 run_perm.R 1 0 10
+19027.5   s16_martincum   4/28 11:06   0+00:09:20 R  0   2198.0 runR.pl 1_5 run_perm.R 1 5 1000
 ```
 
 The `-nobatch` output shows a line for every job and consists of 8 columns:
@@ -164,7 +167,7 @@ The `-nobatch` output shows a line for every job and consists of 8 columns:
 |:----------|:----------------|:-------------------------------------------------------------------------------|
 | ID        | `18801.0`       | Job ID, which is the `cluster`, a dot character (`.`), and the `process`       |
 | OWNER     | `alice`         | The user ID of the user who submitted the job                                  |
-| SUBMITTED | `7/12 09:58`    | The date and time when the job was submitted                                   |
+| SUBMITTED | `4/28 09:58`    | The date and time when the job was submitted                                   |
 | RUN\_TIME | `0+00:00:00`    | Total time spent running so far (days + hours:minutes:seconds)                 |
 | ST        | `I`             | Status of job: `I` is Idle (waiting to run), `R` is Running, `H` is Held, etc. |
 | PRI       | `0`             | Job priority (see next lecture)                                                |
