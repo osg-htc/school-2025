@@ -23,8 +23,8 @@ Now, let’s try to remember some basic HTCondor ideas from the HTC exercises:
 1.  Download the geolocation code:
 
         :::console
-        $ wget http://proxy.chtc.wisc.edu/SQUID/osg-school-2024/location-wrapper.sh \
-               http://proxy.chtc.wisc.edu/SQUID/osgschool21/wn-geoip.tar.gz
+        $ osdf object get /ospool/uc-shared/public/school/2025/dev/location-wrapper.sh ./
+        $ osdf object get /ospool/uc-shared/public/school/2025/dev/wn-geoip.tar.gz ./
 
     You will be using `location-wrapper.sh` as your executable and `wn-geoip.tar.gz` as an input file.
  
@@ -33,7 +33,7 @@ Now, let’s try to remember some basic HTCondor ideas from the HTC exercises:
     and uses the `$(Process)` macro to write different `output` and `error` files.
     Also, add the following requirement to the submit file (it’s not important to know what it does):
 
-        container_image = http://proxy.chtc.wisc.edu/SQUID/osg-school-2024/python27.sif
+        container_image = osdf:///ospool/uc-shared/public/school/2025/dev/python27.sif
 
     Try to do this step without looking at materials from the earlier exercises.
     But if you are stuck, see [HTC Exercise 2.2](../htcondor/part2-ex2-queue-n.md).
