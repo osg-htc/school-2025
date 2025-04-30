@@ -94,8 +94,8 @@ To submit this program with a collection of two variable values for each run, on
 1.  Download and unpack some books from Project Gutenberg:
 
         :::console
-        user@ap1 $ wget http://proxy.chtc.wisc.edu/SQUID/osgschool20/books.zip
-        user@ap1 $ unzip books.zip
+        user@ap1 $ osdf object get /ospool/uc-shared/public/school/2025/dev/books.tar.gz
+        user@ap1 $ tar -xzf books.tar.gz
 
 1.  Create a new submit file (or base it off a previous one!) named `wordcount-top.sub`, including memory and disk requests of 20 MB.
 1.  All of the jobs will use the same `executable` and `log` statements.
