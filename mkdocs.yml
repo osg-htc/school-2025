@@ -41,7 +41,7 @@ nav:
         - 1.2 - Experiment with HTCondor commands: materials/htcondor/part1-ex2-commands.md
         - 1.3 - Run jobs!:   materials/htcondor/part1-ex3-jobs.md
         - 1.4 - Read and interpret log files: materials/htcondor/part1-ex4-logs.md
-        - 1.5 - Determining resource needs: materials/htcondor/part1-ex5-request.md
+        - 1.5 - Determine resource needs: materials/htcondor/part1-ex5-request.md
         - 1.6 - Remove jobs from the queue: materials/htcondor/part1-ex6-remove.md
       - Bonus Exercises - Job Attributes and Handling:
         - Bonus Exercise 1.7 - Compile and run some C code: materials/htcondor/part1-ex7-compile.md
