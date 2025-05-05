@@ -10,9 +10,9 @@ HTC Exercise 2.1: Work With Input and Output Files
 Exercise Goal
 -------------
 
-The goal of this exercise is make input files available to your job on the execute machine and to return output files back created in your job back to you on the access point. This small change significantly adds to the kinds of jobs that you can run.
+The goal of this exercise is make input files available to your job on the execution point and to return output files back created in your job back to you on the access point. This small change significantly adds to the kinds of jobs that you can run.
 
-Viewing a Job Sandbox
+View a Job Sandbox
 ---------------------
 
 Before you learn to transfer files to and from your job, it is good to understand a bit more about the environment in which your job runs.
@@ -87,7 +87,7 @@ for word in sorted(words.keys()):
 1.  Download the input file for the script (263K lines, ~1.4 MB) and save it in your submit directory:
 
         :::console
-        username@ap1 $ wget http://proxy.chtc.wisc.edu/SQUID/osgschool20/intro-2.1-words.txt
+        [username@ap40]$ pelican object get osdf://ospool/uc-shared/public/school/2025/dev/intro-2.1-words.txt
 
 1.  Create a submit file for the `freq.py` executable.
 1.  Add a line called `transfer_input_files = ` to tell HTCondor to transfer the input file to the job:
@@ -119,7 +119,7 @@ Let’s start by exploring what happens to files that a job creates in the sandb
 We will use a very simple method for creating a new file: we will copy an input file to another name.
 
 1.  Find or create a small input file (it is fine to use any small file from a previous exercise).
-1.  Create a submit file that transfers the input file and copies it to another name (as if doing `/bin/cp input.txt output.txt` on the command line)
+1.  Create a submit file and executable that transfers the input file and copies it to another name (as if doing `/bin/cp input.txt output.txt` on the command line)
     -   Make the output filename different than any filenames that are in your submit directory
     -   What is the `executable` line?
     -   What is the `arguments` line?
