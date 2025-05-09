@@ -10,8 +10,10 @@ HTC Exercise 1.4: Read and Interpret Log Files
 Exercise Goal
 -----------------
 
-The goal of this exercise is to learn how to understand the contents of a job's log file, which is essentially a "history" of the steps HTCondor took to run your job.
+The goal of this exercise is to learn how to understand the contents of a job's log file, which contains a "history" of the steps HTCondor took to run your job.
 If you suspect something has gone wrong with your job, the log is the a great place to start looking for indications of whether things might have gone wrong (in addition to the .err file).
+
+Additionally, the log file is a great place to look while you are testing your jobs, as it records resource usage.
 
 This exercise is short, but you'll want to at least read over it before moving on.
 
@@ -23,15 +25,15 @@ For this exercise, we can examine a log file for any previous job that you have 
 A job log file is updated throughout the life of a job, usually at key events. Each event starts with a heading that indicates what happened and when. Here are **all** of the event headings from the `sleep` job log (detailed output in between headings has been omitted here):
 
 ``` file
-000 (5739.000.000) 2024-07-10 10:44:20 Job submitted from host: <128.104.100.43:9618?addrs=...>
-040 (5739.000.000) 2024-07-10 10:45:10 Started transferring input files
-040 (5739.000.000) 2024-07-10 10:45:10 Finished transferring input files
-001 (5739.000.000) 2024-07-10 10:45:11 Job executing on host: <128.104.55.42:9618?addrs=...>
-006 (5739.000.000) 2024-07-10 10:45:20 Image size of job updated: 72
-040 (5739.000.000) 2024-07-10 10:45:20 Started transferring output files
-040 (5739.000.000) 2024-07-10 10:45:20 Finished transferring output files
-006 (5739.000.000) 2024-07-10 10:46:11 Image size of job updated: 4072
-005 (5739.000.000) 2024-07-10 10:46:11 Job terminated.
+000 (5739.000.000) 2025-04-28 10:44:20 Job submitted from host: <128.104.100.43:9618?addrs=...>
+040 (5739.000.000) 2025-04-28 10:45:10 Started transferring input files
+040 (5739.000.000) 2025-04-28 10:45:10 Finished transferring input files
+001 (5739.000.000) 2025-04-28 10:45:11 Job executing on host: <128.104.55.42:9618?addrs=...>
+006 (5739.000.000) 2025-04-28 10:45:20 Image size of job updated: 72
+040 (5739.000.000) 2025-04-28 10:45:20 Started transferring output files
+040 (5739.000.000) 2025-04-28 10:45:20 Finished transferring output files
+006 (5739.000.000) 2025-04-28 10:46:11 Image size of job updated: 4072
+005 (5739.000.000) 2025-04-28 10:46:11 Job terminated.
 ```
 
 There is a lot of extra information in those lines, but you can see:
@@ -40,37 +42,30 @@ There is a lot of extra information in those lines, but you can see:
 -   The date and local time of each event
 -   A brief description of the event: submission, execution, some information updates, and termination
 
-Some events provide no information in addition to the heading. For example:
-
-``` file
-000 (5739.000.000) 2024-07-10 10:44:20 Job submitted from host: <128.104.100.43:9618?addrs=...>
-...
-```
-
 !!! note
     Each event ends with a line that contains only 3 dots: `...`
 
 However, some lines have additional information to help you quickly understand where and how your job is running. For example:  
 
 ``` file
-001 (5739.000.000) 2024-07-10 10:45:11 Job executing on host: <128.104.55.42:9618?addrs=...>
-	SlotName: slot1@WISC-PATH-IDPL-EP.osgvo-docker-pilot-idpl-7c6575d494-2sj5w
-	CondorScratchDir = "/pilot/osgvo-pilot-2q71K9/execute/dir_9316"
-	Cpus = 1
-	Disk = 174321444
-	GLIDEIN_ResourceName = "WISC-PATH-IDPL-EP"
-	GPUs = 0
-	Memory = 8192
+001 (5739.000.000) 2025-04-28 10:45:11 Job executing on host: <128.105.69.202:35973?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-84-2188-4cc2-94a8-c303]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector9#46060696%20192.170.231.11:9618%3faddrs%3d192.170.231.11-9618+[fd85-ee78-d8a6-8607--1-7398]-9618%26alias%3dospool-ccb.osgprod.tempest.chtc.io%26noUDP%26sock%3dcollector7#26736031&PrivNet=e4033.chtc.wisc.edu&addrs=128.105.69.202-35973+[2607-f388-2200-100-1270-fdff-fe56-c3c4]-35973&alias=e4033.chtc.wisc.edu&noUDP>
+        SlotName: slot1_5@e4033.chtc.wisc.edu
+        CondorScratchDir = "/var/lib/condor/execute/slot1/dir_3037242/glide_LLniGP/execute/dir_378707"
+        Cpus = 1
+        Disk = 1049643
+        GLIDEIN_ResourceName = "GLOW"
+        GPUs = 0
+        Memory = 1024
 ...
 ```
--   The `SlotName` is the name of the execution point slot your job was assigned to by HTCondor, and the name of the execution point resource is provided in `GLIDEIN_ResourceName`
--   The `CondorScratchDir` is the name of the scratch directory that was created by HTCondor for your job to run inside
--   The `Cpu`, `GPUs`, `Disk`, and `Memory` values provide the maximum amount of each resource your job has used while running
+-   The `SlotName` is the name of the execution point slot your job was assigned to by HTCondor, and the name of the execution point resource is provided in `GLIDEIN_ResourceName`.
+-   The `CondorScratchDir` is the name of the scratch directory that was created by HTCondor for your job to run inside.
+-   The `Cpu`, `GPUs`, `Disk`, and `Memory` values provide the maximum amount of each resource your job can use while running.
 
 Another example of is the periodic update:
 
 ``` file
-006 (5739.000.000) 2024-07-10 10:45:20 Image size of job updated: 72
+006 (5739.000.000) 2025-04-28 10:45:20 Image size of job updated: 72
     1  -  MemoryUsage of job (MB)
     72  -  ResidentSetSize of job (KB)
 ...
@@ -81,21 +76,25 @@ These updates record the amount of memory that the job is using on the execute m
 The job termination event includes a lot of very useful information:
 
 ``` file
-005 (5739.000.000) 2024-07-10 10:46:11 Job terminated.
-    (1) Normal termination (return value 0)
-        Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
-        Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
-        Usr 0 00:00:00, Sys 0 00:00:00  -  Total Remote Usage
-        Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
-    0  -  Run Bytes Sent By Job
-    27848  -  Run Bytes Received By Job
-    0  -  Total Bytes Sent By Job
-    27848  -  Total Bytes Received By Job
-    Partitionable Resources :    Usage  Request Allocated
-       Cpus                 :                 1         1
-       Disk (KB)            :       40       30   4203309
-       Memory (MB)          :        1        1         1
-Job terminated of its own accord at 2024-07-10 10:46:11 with exit-code 0.
+005 (5739.000.000) 2025-04-28 10:46:11 Job terminated.
+        (1) Normal termination (return value 0)
+                Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+                Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+                Usr 0 00:00:00, Sys 0 00:00:00  -  Total Remote Usage
+                Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+        306  -  Run Bytes Sent By Job
+        683  -  Run Bytes Received By Job
+        306  -  Total Bytes Sent By Job
+        683  -  Total Bytes Received By Job
+        Partitionable Resources :    Usage  Request Allocated
+           Cpus                 :        0        1         1
+           Disk (KB)            :      139  1048576   1049858
+           GPUs                 :                           0
+           Memory (MB)          :        4     1024      1024
+           TimeExecute (s)      :       12
+           TimeSlotBusy (s)     :       14
+
+        Job terminated of its own accord at 2025-05-01T15:59:27Z with exit-code 0.
 ...
 ```
 
@@ -119,10 +118,10 @@ When are events written to the job log file? Let’s find out. Read through the 
 1.  Right away, run a command to show the log file and **keep showing** updates as they occur:
 
         :::console
-        username@ap1 $ tail -f sleep.log
+        [username@ap40]$ tail -f sleep.log
 
 1.  Watch the output carefully. When do events appear in the log file?
-1.  After the termination event appears, press Control-C to end the `tail` command and return to the shell prompt.
+1.  After the termination event appears, press CTRL+C to end the `tail` command and return to the shell prompt.
 
 
 Understanding How HTCondor Writes Files

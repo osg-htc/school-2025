@@ -4,7 +4,7 @@ status: testing
 
 <style type="text/css"> pre em { font-style: normal; background-color: yellow; } pre strong { font-style: normal; font-weight: bold; color: \#008; } </style>
 
-Bonus HTC Exercise 1.8: Explore condor_q
+Bonus HTC Exercise 1.7: Explore condor_q
 ======================================
 
 The goal of this exercise is try out some of the most common options to the `condor_q` command, so that you can view jobs effectively.
@@ -17,32 +17,32 @@ Selecting Jobs
 The `condor_q` program has many options for selecting which jobs are listed. You have already seen that the default mode is to show only your jobs in "batch" mode:
 
 ``` console
-username@ap1 $ condor_q
+[username@ap40]$ condor_q
 ```
 
 You've seen that you can view all jobs (all users) in the submit node's queue by using the `-all` argument:
 
 ``` console
-username@ap1 $ condor_q -all
+[username@ap40]$ condor_q -all
 ```
 
 And you've seen that you can view more details about queued jobs, with each separate job on a single line using the `-nobatch` option:
 
 ``` console
-username@ap1 $ condor_q -nobatch
-username@ap1 $ condor_q -all -nobatch
+[username@ap40]$ condor_q -nobatch
+[username@ap40]$ condor_q -all -nobatch
 ```
 
 Did you know you can also name one or more user IDs on the command line, in which case jobs for all of the named users are listed at once?
 
 ``` console
-username@ap1 $ condor_q <USERNAME1> <USERNAME2> <USERNAME3>
+[username@ap40]$ condor_q <USERNAME1> <USERNAME2> <USERNAME3>
 ```
 
 To list just the jobs associated with a single cluster number:
 
 ``` console
-username@ap1 $ condor_q <CLUSTER>
+[username@ap40]$ condor_q <CLUSTER>
 ```
 
 For example, if you want to see the jobs in cluster 5678 (i.e., `5678.0`, `5678.1`, etc.), you use `condor_q 5678`.
@@ -50,7 +50,7 @@ For example, if you want to see the jobs in cluster 5678 (i.e., `5678.0`, `5678.
 To list a specific job (i.e., cluster.process, as in 5678.0):
 
 ``` console
-username@ap1 $ condor_q <JOB.ID>
+[username@ap40]$ condor_q <JOB.ID>
 ```
 
 For example, to see job ID 5678.1, you use `condor_q 5678.1`.
@@ -79,7 +79,7 @@ You may have wondered why it is useful to be able to list a single job ID using 
 If you add the `-long` option to `condor_q` (or its short form, `-l`), it will show the complete ClassAd for each selected job, instead of the one-line summary that you have seen so far. Because job ClassAds may have 80–90 attributes (or more), it probably makes the most sense to show the ClassAd for a single job at a time. And you know how to show just one job! Here is what the command looks like:
 
 ``` console
-username@ap1 $ condor_q -long <JOB.ID>
+[username@ap40]$ condor_q -long <JOB.ID>
 ```
 
 The output from this command is long and complex. Most of the attributes that HTCondor adds to a job are arcane and uninteresting for us now. But here are some examples of common, interesting attributes taken directly from `condor_q` output (except with some line breaks added to the `Requirements` attribute):
@@ -87,17 +87,17 @@ The output from this command is long and complex. Most of the attributes that HT
 ``` file
 MyType = "Job"
 Err = "sleep.err"
-UserLog = "/home/cat/intro-2.1-queue/sleep.log"
-Requirements = ( IsOSGSchoolSlot =?= true ) &&
-        ( TARGET.Arch == "X86_64" ) &&
-        ( TARGET.OpSys == "LINUX" ) &&
-        ( TARGET.Disk >= RequestDisk ) &&
-        ( TARGET.Memory >= RequestMemory ) &&
-        ( TARGET.HasFileTransfer )
+UserLog = "/home/username/intro-2.1-queue/sleep.log"
+Requirements = ((OSGVO_OS_STRING == "RHEL 9"))
+    && (TARGET.Arch == "X86_64")
+    && (TARGET.OpSys == "LINUX")
+    && (TARGET.Disk >= RequestDisk)
+    && (TARGET.Memory >= RequestMemory)
+    && ((TARGET.FileSystemDomain == MY.FileSystemDomain) || (TARGET.HasFileTransfer))
 ClusterId = 2420
 WhenToTransferOutput = "ON_EXIT"
-Owner = "cat"
-CondorVersion = "$CondorVersion: 8.5.5 May 03 2016 BuildID: 366162 $"
+Owner = "username"
+CondorVersion = "$CondorVersion: 24.7.3 2025-04-17 BuildID: 802763 PackageID: 24.7.3-0.802763 GitSHA: bb5d9294 RC $"
 Out = "sleep.out"
 Cmd = "/bin/sleep"
 Arguments = "120"
@@ -138,7 +138,7 @@ Sometimes, you submit a job and it just sits in the queue in Idle state, never r
 To ask HTCondor why your job is not running, add the `-better-analyze` option to `condor_q` for the specific job. For example, for job ID 2423.0, the command is:
 
 ``` console
-username@ap1 $ condor_q -better-analyze 2423.0
+[username@ap40]$ condor_q -better-analyze 2423.0
 ```
 
 Of course, replace the job ID with your own.
@@ -154,53 +154,48 @@ should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
 request_disk = 10MB
 request_memory = 8TB
+requirements = (OSGVO_OS_STRING == "RHEL 9")
 queue
 ```
 
-(Do you see what I did?)
-
 1.  Save and submit this file.
-1.  Run `condor_q -better-analyze` on the job ID.
+1.  Run `condor_q -better-analyze` on the job ID (this may take a minute to run).
 
-There is a lot of output, but a few items are worth highlighting. Here is a sample from my own job (with some lines omitted):
+There is a lot of output, but a few items are worth highlighting. Here is a sample (with some lines omitted):
 
 ``` file
 
--- Schedd: ap1.facility.path-cc.io : <128.105.68.66:9618?...
+-- Schedd: ap40.uw.osg-htc.org : <128.105.68.62:9618?...
 ...
 
-Job 98096.000 defines the following attributes:
+Job 12635168.000 defines the following attributes:
 
-    RequestDisk = 10240
-    RequestMemory = 8388608
+    RequestDisk = 10240 (kb)
+    RequestMemory = 8388608 (mb)
 
-The Requirements expression for job 98096.000 reduces to these conditions:
+The Requirements expression for job 12635168.000 reduces to these conditions:
 
+        Slots
+Step   Matched  Condition
+----- --------- ---------
+[0]        7425  OSGVO_OS_STRING == "RHEL 9"
+[1]        9251  TARGET.Arch == "X86_64"
+[2]        7424  [0] && [1]
+[5]        9241  TARGET.Disk >= RequestDisk
+[7]           0  TARGET.Memory >= RequestMemory
 
-         Slots
-Step    Matched  Condition
------  --------  ---------
-[1]       11227  Target.OpSysMajorVer == 7
-[9]       13098  TARGET.Disk >= RequestDisk
-[11]          0  TARGET.Memory >= RequestMemory
+12635168.000:  Run analysis summary ignoring user priority.  Of 9252 slots on 3328 machines,
+   9252 slots are rejected by your job's requirements
+      0 slots reject your job because of their own requirements
+      0 slots match and are willing to run your job
 
-No successful match recorded.
-Last failed match: Fri Jul 12 15:36:30 2019
-
-Reason for last match failure: no match found
-
-98096.000:  Run analysis summary ignoring user priority.  Of 710 machines,
-    710 are rejected by your job's requirements
-      0 reject your job because of their own requirements
-      0 match and are already running your jobs
-      0 match but are serving other users
-      0 are able to run your job
-...
+WARNING:  Be advised:
+   No machines matched the jobs's constraints
 ```
 
 At the end of the summary, `condor_q` provides a breakdown of how **machines** and their own requirements match against my own job's requirements. 710 total machines were considered above, and **all** of them were rejected based on **my job's requirements**. In other words, I am asking for something that is not available. But what?
 
-Further up in the output, there is an analysis of the job's requirements, along with how many slots within the pool match each of those requirements. The example above reports that 13098 slots match our small disk request request, but **none** of the slots matched the `TARGET.Memory >= RequestMemory` condition. The output also reports the value used for the `RequestMemory` attribute: my job asked for **8 terabytes** of memory (8,388,608 MB) -- of course no machines matched that part of the expression! That's a lot of memory on today's machines.
+Further up in the output, there is an analysis of the job's requirements, along with how many slots within the pool match each of those requirements. The example above reports that 9241 slots match our small disk request request, but **none** of the slots matched the `TARGET.Memory >= RequestMemory` condition. The output also reports the value used for the `RequestMemory` attribute: my job asked for **8 terabytes** of memory (8,388,608 MB) -- of course no machines matched that part of the expression! That's a lot of memory on today's machines.
 
 The output from `condor_q -analyze` (and `condor_q -better-analyze`) may be helpful or it may not be, depending on your exact case. The example above was constructed so that it would be obvious what the problem was. But in many cases, this is a good place to start looking if you are having problems matching.
 
@@ -215,7 +210,7 @@ There is a way to select the specific job attributes you want `condor_q` to tell
 To use autoformatting, use the `-af` option followed by the attribute name, for each attribute that you want to output:
 
 ``` console
-username@ap1 $ condor_q -all -af Owner ClusterId Cmd
+[username@ap40]$ condor_q -all -af Owner ClusterId Cmd
 moate 2418 /share/test.sh
 cat 2421 /bin/sleep
 cat 2422 /bin/sleep
