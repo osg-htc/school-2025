@@ -32,9 +32,8 @@ View the slides: [Coming soon]
 
 ### Bonus Exercises: Job Attributes and Handling
 
-- [Bonus Exercise 1.7: Compile and run some C code](htcondor/part1-ex7-compile.md)
-- [Bonus Exercise 1.8: Explore `condor_q`](htcondor/part1-ex8-queue.md)
-- [Bonus Exercise 1.9: Explore `condor_status`](htcondor/part1-ex9-status.md)
+- [Bonus Exercise 1.7: Explore `condor_q`](htcondor/part1-ex7-queue.md)
+- [Bonus Exercise 1.8: Explore `condor_status`](htcondor/part1-ex8-status.md)
 
 ## Intro to HTCondor Multiple Job Execution
 

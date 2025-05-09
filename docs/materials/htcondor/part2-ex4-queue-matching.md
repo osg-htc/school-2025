@@ -60,7 +60,7 @@ To use the script:
 
 1.  Create and save this script as `wordcount.py`.
 1.  Verify the script by running it on one book manually.
-1.  Create a new submit file to submit one job (pick a book file and model your submit file off of the one above)
+1.  Create a new submit file to submit one job (pick a book file and model your submit file off of the one above).
 1.  Modify the following submit file statements to work for all books:
 
         :::text
@@ -82,22 +82,22 @@ The result is the same as if we had written out a much longer submit file:
 ``` file
 ...
 
-transfer_input_files = AAiW.txt
-arguments = "AAiW.txt"
-output = AAiW.txt.out
-error = AAiW.txt.err
+transfer_input_files = Alice_in_Wonderland.txt
+arguments = Alice_in_Wonderland.txt
+output = Alice_in_Wonderland.txt.out
+error = Alice_in_Wonderland.txt.err
 queue
 
-transfer_input_files = PandP.txt
-arguments = "PandP.txt"
-output = PandP.txt.out
-error = PandP.txt.err
+transfer_input_files = Pride_and_Prejudice.txt
+arguments = Pride_and_Prejudice.txt
+output = Pride_and_Prejudice.txt.out
+error = Pride_and_Prejudice.txt.err
 queue
 
-transfer_input_files = TAoSH.txt
-arguments = "TAoSH.txt"
-output = TAoSH.txt.out
-error = TAoSH.txt.err
+transfer_input_files = Dracula.txt
+arguments = Dracula.txt
+output = Dracula.txt.out
+error = Dracula.txt.err
 queue
 
 ...
