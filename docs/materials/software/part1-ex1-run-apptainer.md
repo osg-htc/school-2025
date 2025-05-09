@@ -1,5 +1,5 @@
 ---
-status: testing
+status: ready
 ---
 
 <style type="text/css"> pre em { font-style: normal; background-color: yellow; } pre strong { font-style: normal; font-weight: bold; color: \#008; } </style>
@@ -20,13 +20,14 @@ Make sure you are logged into `ap40.uw.osg-htc.org`.  For this exercise
 we will be using Apptainer containers maintained by OSG staff or existing 
 containers on Docker Hub. 
 
-We will set two environment variables that will help lighten the load on the 
+We will set some environment variables that will help lighten the load on the 
 Access Point as we work with containers: 
 
 	:::console
-	$ mkdir ~/apptainer_cache
-	$ export APPTAINER_CACHEDIR=$HOME/apptainer_cache
-	$ export TMPDIR=$HOME/apptainer_cache
+	$ mkdir -p $HOME/tmp
+	$ export TMPDIR=$HOME/tmp
+	$ export APPTAINER_TMPDIR=$HOME/tmp
+	$ export APPTAINER_CACHEDIR=$HOME/tmp
 
 Exploring Apptainer Containers
 -------------------
@@ -52,9 +53,17 @@ the running container so you can use your files.
 version, or checking the version of common tools like `gcc` or Python: 
 
 		:::console
-		$ cat /etc/os-release
+		$ grep "PRETTY_NAME" /etc/os-release 
 		$ gcc --version
 		$ python3 --version
+
+	!!! note "Full Linux version information"
+		In the above example, we used `grep` to only show the value of the `PRETTY_NAME`
+		in the `/etc/os-release` file. There's a lot more information in that file
+		about the Linux version, which you can see with 
+		
+			:::console
+			$ cat /etc/os-release
 
 1. Exit out of the container by typing `exit`. 
 
@@ -62,7 +71,7 @@ version, or checking the version of common tools like `gcc` or Python:
 results as when typed in the container, or different? 
 
 		:::console
-		$ cat /etc/os-release
+		$ grep "PRETTY_NAME" /etc/os-release 
 		$ gcc --version
 		$ python3 --version
 

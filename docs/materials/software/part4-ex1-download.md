@@ -80,8 +80,8 @@ we'll use an abbreviated fasta file with mouse genome information.
 1.  Download these files to your current directory: 
 
         :::console
-        username@login $ wget http://proxy.chtc.wisc.edu/SQUID/osg-school-2024/pdbaa.tar.gz
-        username@login $ wget http://proxy.chtc.wisc.edu/SQUID/osg-school-2024/mouse.fa
+        username@login $ osdf object get /ospool/uc-shared/public/school/2025/dev/pdbaa.tar.gz
+        username@login $ osdf object get /ospool/uc-shared/public/school/2025/dev/mouse.fa
 
 1.  Untar the `pdbaa` database: 
 

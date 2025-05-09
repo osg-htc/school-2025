@@ -15,29 +15,46 @@ same script over and over to run many jobs.
 Setup
 -------
 
-1. Download and unzip a set of Protein Data Bank (PDB) files: 
+1. Download the materials for this exercise using
 
 		:::console
-		$ wget http://proxy.chtc.wisc.edu/SQUID/osg-school-2024/alkanes.tar.gz
-		$ tar -xzf alkanes.tar.gz
+		$ osdf object get /ospool/uc-shared/public/school/2025/dev/contexts.tar.gz
+		$ tar -xzf contexts.tar.gz
 
-1. For these exercises, we are going to run a command that counts the number of 
-atoms in the PDB file . Run it now as an example: 
+1. There are two scripts included in the materials: `word-variations.py` and `word-contexts.py`.
+The first one will identify "trivial" variations (capitalization, punctuation) on the provided word.
+For example:
 
 		:::console
-		$ grep ATOM cubane.pdb | wc -l > atoms_cubane.pdb
+		$ ./word-variations.py Alice_in_Wonderland.txt Dodo
+
+	The second one expands the detection of the provided word to report an additional word before
+	and after the provided word, for example:
+
+		:::console
+		$ ./word-contexts.py Alice_in_Wonderland.txt Dodo
+
+1. We want to use these two scripts to find all the contexts where a word was used, regardless of
+the "trivial" variations. To do so, we first save the results of the `word-variations.py` command
+to a file, then use the contents of that file with the `word-contexts.py` command (also saving the
+output to file):
+
+		:::console
+		$ ./word-variations.py Alice_in_Wonderland.txt Dodo > variations.Dodo.txt
+		$ ./word-contexts.py Alice_in_Wonderland.txt $(cat variations.Dodo.txt) > contexts.Dodo.txt
 
 Add a Header
 ----------
 
-1. To create a basic script, you can put the command above into a file 
-called `get_atoms.sh`. To make it clear what language we expect to use to 
+1. To create a basic script, you can put the above commands into a file 
+called `get_contexts.sh`. To make it clear what language we expect to use to 
 run the script, we will add the following header on the first line: ``#!/bin/bash`
 
 		:::file
 		#!/bin/bash
 		
-		grep ATOM cubane.pdb | wc -l > atoms_cubane.pdb
+		./word-variations.py Alice_in_Wonderland.txt Dodo > variations.Dodo.txt
+		./word-contexts.py Alice_in_Wonderland.txt $(cat variations.Dodo.txt) > contexts.Dodo.txt
 
 
 	The "header" of `#!/bin/bash` will tell the computer that this is a bash shell script 
@@ -53,39 +70,43 @@ run the script, we will add the following header on the first line: ``#!/bin/bas
 1. Can you now run the script? 
 
 		:::console
-		$ ./get_atoms.sh
+		$ ./get_contexts.sh
 
 1. This gives "permission denied." Let's add executable permissions to the script 
 and try again: 
 
 		:::console
-		$ chmod +x get_atoms.sh
-		$ ./get_atoms.sh
+		$ chmod +x get_contexts.sh
+		$ ./get_contexts.sh
 
 Incorporate Arguments
 ----------
 
-Can you imagine trying to run this script on all of our pdb files? It would be tedious
-to edit it for each one, even for only six inputs. Instead, we should add arguments 
-to the script to make it easy to reuse the script. 
+Let's say that you want to find the contexts for every occurrence of a character's name.
+Can you imagine trying to run this script for each name? It would be tedious
+to edit it for each one, especially since the name is used in multiple places in the script. 
+And if you want to use this script to analyze other texts, you'd also have to change the filename.
+
+Instead of manually editing the `get_contexts.sh` for each time we want to run a different analysis,
+we should add arguments to the script to make it easy to reuse. 
 Any information in a script or executable that is going to change or vary across 
 jobs or analyses should likely be turned into an argument that is specified on the command line. 
 
 1. In our example above, which pieces of the script are likely to change or vary? 
 
-1. The name of the input file (`cubane.pdb`) and output file (`atoms_cubane.pdb`) should 
+1. The name of the input file (`Alice_in_Wonderland.txt`) and the name to detect (`Dodo`) should 
 be turned into arguments. Can you envision what our script should look like if we ran it 
 with input arguments? 
 
 1. Let's say we want to be able to run the following command: 
 
 		:::console
-		$ ./get_atoms.sh cubane.pdb atoms_cubane.pdb
+		$ ./get_contexts.sh Alice_in_Wonderland.txt Dodo
 
 	In order to get arguments from the command line into the script, you have 
 	to use special variables in the script. In bash, these are `$1` (for the first 
 	argument), `$2` (for the second argument) and so on. Try to figure out where 
-	these should go in our `get_atoms.sh` script. 
+	these should go in our `get_contexts.sh` script. 
 
     !!! note "Other Languages"
 		Each language is going to have its own syntax for reading command line 
@@ -99,7 +120,8 @@ with input arguments?
 		:::file
 		#!/bin/bash
 		
-		grep ATOM $1 | wc -l > $2
+		./word-variations.py $1 $2 > variations.$2.txt
+		./word-contexts.py $1 $(cat variations.$2.txt) > contexts.$2.txt
 		
 	Try running it as described above. Does it work? 
 
@@ -107,38 +129,59 @@ with input arguments?
 numbers `$1` and `$2` are not very meaningful in themselves! Let's rewrite the script to 
 assign the arguments to meaningful variable names: 
 
- 		:::file
+		:::file
 		#!/bin/bash
 		
-		PDB_INPUT=$1
-		PDB_ATOM_OUTPUT=$2
-		
-		grep ATOM ${PDB_INPUT} | wc -l > ${PDB_ATOM_OUTPUT}
+		FILENAME="${1}"
+		TARGET_WORD="${2}"
+
+		./word-variations.py ${FILENAME} ${TARGET_WORD} > variations.${TARGET_WORD}.txt
+		./word-contexts.py ${FILENAME} $(cat variations.${TARGET_WORD}.txt) > contexts.${TARGET_WORD}.txt
 
     !!! note "Why curly brackets?"
         You'll notice above that we started using curly brackets around our variables. 
-        While you technically don't need them (`$PDB_INPUT` would also be fine), using 
+        While you technically don't need them (`$TARGET_WORD` would also be fine), using 
         them makes the name of the variable (compared to other text) completely clear. 
-        This is especially useful when combining variables with underscores. 
+        This is especially useful when combining variables with underscores, and in the
+		case of specifying the numerical arguments (`$1`, `$2`, etc.) the curly braces
+		allow you to go above a value of `9` without error.
 
-1. There is one final place where we could optimize this script. If we want our output 
-files to always have the same naming convention, based on the input file name, then 
-we shouldn't have a separate argument for that -- it's asking for typos. Instead, we 
-should use variables inside the script to construct the output file name, based on the 
-input file. That will look like this: 
+1. There is one final place where we could optimize this script. The output filename
+`variations.${TARGET_WORD}.txt` is used in multiple places in the script. If we decide we
+want to change the naming convention of the output file, we'd have to remember to edit 
+all the locations where that name is used, which is asking for typos. Instead, we 
+should use a variable for referring to the output filename, so that we only ever need to change
+one spot in the file. We can do a similar thing for the second output file.
+After making these changes, the script will look like this: 
 
- 		:::file
+		:::file
 		#!/bin/bash
 		
-		PDB_INPUT=$1
-		PDB_ATOM_OUTPUT=atoms_${PDB_INPUT}
-		
-		grep ATOM ${PDB_INPUT} | wc -l > ${PDB_ATOM_OUTPUT}
+		FILENAME="${1}"
+		TARGET_WORD="${2}"
+		VARIATIONS_OUTPUT="variations.${TARGET_WORD}.txt"
+		CONTEXTS_OUTPUT="contexts.${TARGET_WORD}.txt"
 
-	You may want to construct other variables, like paths and filenames in this way. But 
-	it depends on how you want to use the script! If we want the flexibility of specifying 
-	a custom output file name, then we should undo this last change so it can be 
-	treated as a separate argument. 
+		./word-variations.py ${FILENAME} ${TARGET_WORD} > ${VARIATIONS_OUTPUT}
+		./word-contexts.py ${FILENAME} $(cat ${VARIATIONS_OUTPUT}) > ${CONTEXTS_OUTPUT}
+
+	You may consider this optimization to be optimal and that's fine. But for longer scripts,
+	being able to change "customizable" values in a single place helps prevent inconsistencies
+	when making edits. Furthermore, this structure makes it easier to add additional arguments
+	to the script. For example, if we wanted to always define custom names for the output files
+	we could change the definitions at the top of script to read in the third and fourth arguments
+	as the value, i.e.,
+
+		:::file
+		#!/bin/bash
+		
+		FILENAME="${1}"
+		TARGET_WORD="${2}"
+		VARIATIONS_OUTPUT="${3}"
+		CONTEXTS_OUTPUT="${4}"
+
+		./word-variations.py ${FILENAME} ${TARGET_WORD} > ${VARIATIONS_OUTPUT}
+		./word-contexts.py ${FILENAME} $(cat ${VARIATIONS_OUTPUT}) > ${CONTEXTS_OUTPUT}
 
 Your Work
 ----------
