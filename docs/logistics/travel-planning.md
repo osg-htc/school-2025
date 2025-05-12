@@ -136,7 +136,7 @@ To get bus tickets, pick one method:
 ### Travel by Personal Car
 
 If you are driving to Madison,
-you will be reimbursed the mileage rate of $0.XXX per mile
+you will be reimbursed the mileage rate of $0.700 per mile
 for the shortest round-trip distance (as calculated by Google Maps), plus tolls.
 Also, we will pay for parking costs for the week at the hotel in Madison (but not elsewhere).
 We recommend keeping your receipts for tolls.
