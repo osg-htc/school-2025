@@ -5,6 +5,7 @@ Please read them carefully.
 There will be other pages with local details soon.
 
 -   [Visa requirements for non-residents](visas.md)
+-   [Travel planning to and from Madison](travel-planning.md)
 -   [Hotel information](hotel.md)
 
 As always: If you have questions, email us at <school@osg-htc.org>.
@@ -16,10 +17,10 @@ Use that email address for all emails about the organization of the School.
 
 Most participants should plan to travel as follows:
 
--   **Arrive on Sunday, June 22, 2025,** by about 5:00 p.m. (if possible).
+-   **Arrive on Sunday, June 22, 2025,** by about 5:00–5:30pm (if possible).
     There is a welcome dinner on Sunday evening for all participants and staff,
     and then classes begin on Monday morning.
-    This is a nice way to learn more about the School and begin the week.
+    The dinner is a nice way to learn more about the School and begin the week.
 
 -   **Depart on Saturday, June 28, 2025,** any time.
     The School ends with a closing dinner on Friday evening,
