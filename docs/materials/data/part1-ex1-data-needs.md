@@ -35,7 +35,7 @@ genome information.
 1. Copy the BLAST executables:
    
         :::console
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/dev/ncbi-blast-2.12.0+-x64-linux.tar.gz
+        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/dev/ncbi-blast-2.12.0+-x64-linux.tar.gz .
         user@ap40 $ tar -xzvf ncbi-blast-2.12.0+-x64-linux.tar.gz
 
 1.  Download these files to your current directory:
