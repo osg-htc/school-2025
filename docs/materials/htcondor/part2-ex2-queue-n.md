@@ -30,54 +30,52 @@ Running Many Jobs With One queue Statement
 ------------------------------------------
 
 **Example** 
-Here is a C program that uses a stochastic (random) method to estimate the value of π. The single argument to the program is the number of samples to take. More samples should result in better estimates!
+Here is a Python program that uses a stochastic (random) method to estimate the value of π. The single argument to the program is the number of samples to take. More samples should result in better estimates!
 
-``` c
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/time.h>
+``` Python
+#!/usr/bin/env python3
 
-int main(int argc, char *argv[])
-{
-  struct timeval my_timeval;
-  int iterations = 0;
-  int inside_circle = 0;
-  int i;
-  double x, y, pi_estimate;
+import random
+import sys
 
-  gettimeofday(&my_timeval, NULL);
-  srand48(my_timeval.tv_sec ^ my_timeval.tv_usec);
+def mcpi(iterations: int) -> tuple[float, int]:
+    """
+    This function uses Monte Carlo sampling to estimate the value of pi.
+    """
 
-  if (argc == 2) {
-    iterations = atoi(argv[1]);
-  } else {
-    printf("usage: circlepi ITERATIONS\n");
-    exit(1);
-  }
+    inside_circle: int = 0
 
-  for (i = 0; i < iterations; i++) {
-    x = (drand48() - 0.5) * 2.0;
-    y = (drand48() - 0.5) * 2.0;
-    if (((x * x) + (y * y)) <= 1.0) {
-      inside_circle++;
-    }
-  }
-  pi_estimate = 4.0 * ((double) inside_circle / (double) iterations);
-  printf("%d iterations, %d inside; pi = %f\n", iterations, inside_circle, pi_estimate);
-  return 0;
-}
+    for i in range(iterations):
+        x: float = random.random()
+        y: float = random.random()
+
+        if (x**2 + y**2) <= 1:
+            inside_circle += 1
+
+    pi_estimate: float = 4 * (inside_circle / iterations)
+
+    return pi_estimate, inside_circle
+
+
+if __name__ == "__main__":
+   # Print usage if no argument is provided
+   if len(sys.argv) == 1:
+      print("usage: mcpi.py ITERATIONS\n")
+      exit(1)
+      
+   # Read in first argument 
+   iterations = int(sys.argv[1])
+   # Estimate pi
+   pi_estimate, inside_circle = mcpi(iterations)
+   # Friendly printout
+   print(f"{iterations} iterations, {inside_circle} inside; pi = {pi_estimate}\n")
 ```
 
-1.  In a new directory for this exercise, create and save the code to a file named `circlepi.c`
-1.  Compile the code (we will cover this in more detail during the Software lecture):
-
-        :::console
-        [username@ap40]$ gcc -o circlepi circlepi.c
-
+1.  In a new directory for this exercise, create and save the code to a file named `mcpi.py`
 1.  Test the program with just 1000 samples:
 
         :::console
-        [username@ap40]$ ./circlepi 1000
+        [username@ap40]$ ./mcpi.py 1000
 
 Now suppose that you want to run the program many times, to produce many estimates.
 To do so, we can tell HTCondor how many jobs to "queue up" via the `queue` statement
@@ -85,8 +83,8 @@ we've been putting at the end of each of our submit files.
 Let’s see how it works:
 
 1.  Write a normal submit file for this program
-    -   Pass 1 million (`1000000`) as the command line argument to `circlepi`
-    -   Make sure to include `log`, `output`, and `error` (with filenames like `circlepi.log`), and `request_*` lines
+    -   Pass 1 million (`1000000`) as the command line argument to `mcpi.py`
+    -   Make sure to include `log`, `output`, and `error` (with filenames like `mcpi.log`), and `request_*` lines
     -   At the end of the file, write `queue 3` instead of just `queue` ("queue 3 jobs" vs. "queue a job").
 1.  Submit the file. Note the slightly different message from `condor_submit`:
 
@@ -99,9 +97,9 @@ Here is some sample `condor_q -nobatch` output:
 
 ``` console
  ID       OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD
-10228.0   cat             7/25 11:57   0+00:00:00 I  0    0.7 circlepi 1000000000
-10228.1   cat             7/25 11:57   0+00:00:00 I  0    0.7 circlepi 1000000000
-10228.2   cat             7/25 11:57   0+00:00:00 I  0    0.7 circlepi 1000000000
+10228.0   cat             7/25 11:57   0+00:00:00 I  0    0.7 mcpi 1000000000
+10228.1   cat             7/25 11:57   0+00:00:00 I  0    0.7 mcpi 1000000000
+10228.2   cat             7/25 11:57   0+00:00:00 I  0    0.7 mcpi 1000000000
 ```
 
 In this sample, all three jobs are part of **cluster** `10228`, 
@@ -122,7 +120,7 @@ Using queue *N* With Output
 When all three jobs in your single cluster are finished, examine the resulting files.
 
 -   What is in the output file? 
--   What is in the error file? (hopefully it is empty!)
+-   What is in the error file? (Hopefully it is empty!)
 -   What is in the log file? Look carefully at the job IDs in each event.
 -   Is this what you expected? Is it what you wanted? If the output is not what you expected, what do you think happened?
 
