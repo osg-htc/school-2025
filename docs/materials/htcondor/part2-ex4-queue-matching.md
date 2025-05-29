@@ -7,13 +7,13 @@ status: testing
 Bonus HTC Exercise 2.4: Submit With “queue matching”
 =================================================
 
-Exercise Goal
----------------
+## Exercise Goal
 
-The goal of this exercise is to submit many jobs from a single submit file by using the `queue ... matching` syntax to submit jobs with variable values derived from files in the current directory which match a specified pattern.
+Now that you've mastered many `queue` statements, it's time to learn another powerful `queue` statement!
 
-Counting Words in Files
------------------------
+The goal of this exercise is to submit many jobs from a single submit file by using the `queue ... matching` syntax. With this, you can submit jobs with variables that match files with a specified pattern!
+
+## Counting Words in Files
 
 Returning to our book word-counting example, let's pretend that instead of
 three books, we have an entire library. While we could list all of the text
@@ -21,8 +21,7 @@ files in a `books.txt` file and use `queue book from books.txt`, it could be a
 tedious process, especially for tens of thousands of files. Luckily HTCondor
 provides a mechanism for submitting jobs based on pattern-matched files.
 
-Queue Jobs By Matching Filenames
---------------------------------
+## Queue Jobs By Matching Filenames
 
 This is an example of a common scenario: We want to run one job per file, where the filenames match a certain consistent pattern. The `queue ... matching` statement is made for this scenario.
 
@@ -110,15 +109,13 @@ statement. Beware the dangers of matching more files than intended! One
 solution may be to put all of the books into an `books` directory and `queue
 matching books/*.txt`. Can you think of other solutions? If you have time, try one!
 
-Extra Challenge 1
------------------
+## Extra Challenge 1
 
 In the example above, you used a single log file for all three jobs. HTCondor handles this situation with no problem; each job writes its events into the log file without getting in the way of other events and other jobs. But as you may have seen, it may be difficult for a person to understand the events for any particular job in the combined log file.
 
 Create a new submit file that works just like the one above, except that each job writes its own log file.
 
-Extra Challenge 2
------------------
+## Extra Challenge 2
 
 Between this exercise and the previous one, you have explored two of the three primary `queue` statements. How would you use the `queue in ... list` statement to accomplish the same thing(s) as one or both of the exercises?
 
