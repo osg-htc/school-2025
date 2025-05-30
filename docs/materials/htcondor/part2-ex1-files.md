@@ -97,7 +97,7 @@ for word in sorted(words.keys()):
 1.  Since we want HTCondor to pass an argument to our Python executable, we need to remember to add an `arguments = ` line in our submit file so that HTCondor knows to pass an argument to the job. Set this `arguments = ` line equal to the argument to the Python script (i.e., the name the input file).
 1.  Submit the job to HTCondor, wait for it to finish, and check the output!
 
-If things do not work the first time, keep trying! At this point in the exercises, we are telling you less and less explicitly how to do steps that you have done before. If you get stuck, ask for help in the Slack channel.
+If things do not work the first time, keep trying! At this point in the exercises, we are telling you less and less explicitly how to do steps that you have done before. If you get stuck, ask for help!
 
 !!! note
     If you want to transfer more than one input file, list all of them on a single `transfer_input_files` command,
