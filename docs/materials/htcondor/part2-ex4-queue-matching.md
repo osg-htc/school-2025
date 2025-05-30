@@ -76,32 +76,6 @@ To use the script:
 
 HTCondor uses the `queue ... matching` statement to look for files in the submit directory that match the given pattern, then queues one job per match. For each job, the given variable (e.g., `book` here) is assigned the name of the matching file, so that it can be used in `output`, `error`, and other statements.
 
-The result is the same as if we had written out a much longer submit file:
-
-``` file
-...
-
-transfer_input_files = Alice_in_Wonderland.txt
-arguments = Alice_in_Wonderland.txt
-output = Alice_in_Wonderland.txt.out
-error = Alice_in_Wonderland.txt.err
-queue
-
-transfer_input_files = Pride_and_Prejudice.txt
-arguments = Pride_and_Prejudice.txt
-output = Pride_and_Prejudice.txt.out
-error = Pride_and_Prejudice.txt.err
-queue
-
-transfer_input_files = Dracula.txt
-arguments = Dracula.txt
-output = Dracula.txt.out
-error = Dracula.txt.err
-queue
-
-...
-```
-
 How many jobs were created? Is this what you expected? If you ran this in the
 same directory as Exercise 2.3, you may have noticed that a job was submitted
 for the `books_n.txt` file that holds the variable values in the `queue from`
