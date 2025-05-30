@@ -7,17 +7,17 @@ status: testing
 HTC Exercise 2.3: Submit with “queue from”
 =============================================
 
-Exercise Goals
----------------
+## Exercise Goals
 
-In the next two exercises, you will **explore more ways to use a single
-submit file to submit many jobs**. The goal of this exercise is to submit many
+While using `queue *N*`, `$(Cluster)`, and `$(Process)` can be useful for some jobs, it's not great for all jobs. What if you want to submit the same task for differently named files? What if you want to iterate over non-numerical parameters?
+
+In the next two exercises, you will explore more ways to use a single
+submit file to submit many jobs. The goal of this exercise is to submit many
 jobs from a single submit file by using the `queue ... from` syntax to read
 variable values from a file.
 
 
-Background
-----------
+## Background
 
 When submitting many jobs from a single submit file, always consider:
 
@@ -26,8 +26,7 @@ When submitting many jobs from a single submit file, always consider:
 
 For `queue *N*`, jobs are distinguished by the built-in `$(Process)` variable. But what if you need something more customized or something that's not a number? HTCondor can do that! HTCondor can distinguish and submit multiple jobs using *custom* variables.
 
-Example: Counting Words in Files
------------------------
+## Example: Counting Words in Files
 
 Imagine you have a collection of books, and you want to analyze how word usage varies from book to book or author to author. You could create separate submit files for each book and submit all of the files manually, but you'd have to edit the file each time.
 
@@ -50,8 +49,7 @@ queue
 
 This would be overly verbose and tedious! Let's see a better way to automate this.
 
-Queue Jobs From a List of Values
---------------------------------
+## Queue Jobs From a List of Values
 
 Suppose we want to modify our word-frequency analysis from a previous exercise so that it outputs only the top *N* most common words of a document. However, we want to experiment with different values of *N*. 
 

@@ -7,8 +7,7 @@ status: testing
 HTC Exercise 2.2: Use queue *N*, $(Cluster), and $(Process)
 ==============================================================
 
-Background
-------------
+## Background
 
 Suppose you have a program that you want to run many times with different arguments each time. With what you know so far, you have a couple of choices:
 
@@ -18,16 +17,14 @@ Suppose you have a program that you want to run many times with different argume
 Neither of these options seems very satisfying. Fortunately, HTCondor's `queue` statement is here to help!
 
 
-Exercise Goal
--------------
+## Exercise Goal
 
 The goal of the next several exercises is
 to learn to submit many jobs from a single HTCondor `queue` statement,
 and to control things like filenames and arguments on a per-job basis when doing so.
 
 
-Running Many Jobs With One queue Statement
-------------------------------------------
+## Running Many Jobs With One `queue` Statement
 
 **Example** 
 Here is a Python program that uses a stochastic (random) method to estimate the value of π. The single argument to the program is the number of samples to take. More samples should result in better estimates!
@@ -114,8 +111,7 @@ So in the example above, the job ID of the second job is `10228.1`.
 
 **Pop Quiz:** Do you remember how to ask HTCondor's queue to list the status of all of the jobs from one cluster? How about one specific job ID?
 
-Using queue *N* With Output
----------------------------
+## Using `queue *N*` With Output
 
 When all three jobs in your single cluster are finished, examine the resulting files.
 
@@ -124,13 +120,14 @@ When all three jobs in your single cluster are finished, examine the resulting f
 -   What is in the log file? Look carefully at the job IDs in each event.
 -   Is this what you expected? Is it what you wanted? If the output is not what you expected, what do you think happened?
 
-Using $(Process) to Distinguish Jobs
-------------------------------------
+## Using `$(Process)` to Distinguish Jobs
 
 As you saw with the experiment above, each job ended up overwriting the same output and error filenames in the submission directory.
 After all, we didn't tell it to behave any differently when it ran three jobs.
 
 We need a way to separate output (and error) files *per job that is queued*, not just for the whole cluster of jobs. Fortunately, HTCondor has a way to separate the files easily.
+
+*Do you remember how we did this in [HTC Exercise 1.3](/school-2025/materials/htcondor/part1-ex3-jobs/)?*
 
 When processing a submit file, HTCondor will replace any instance of `$(Process)` with the process number of the job, for each job that is queued. 
 For example, you can use the `$(Process)` variable to define a separate output file name for each job:
@@ -161,8 +158,7 @@ When all three jobs are finished, examine the resulting files again.
 -   How many files are there of each type? What are their names?
 -   Is this what you expected? Is it what you wanted from the π estimation process?
 
-Using $(Cluster) to Separate Files Across Runs
-----------------------------------------------
+## Using `$(Cluster)` to Separate Files Across Runs
 
 With `$(Process)`, you can get separate output (and error) filenames for each job within a run. However, the next time you submit the same file, all of the output and error files are overwritten by new ones created by the new jobs. Maybe this is the behavior that you want. But sometimes, you may want to separate files by run, as well.
 
@@ -176,8 +172,7 @@ For one particular run, it might result in output filenames like `my-output-file
 
 However, the next run would have different filenames, replacing `2444` with the new Cluster number of that run.
 
-Using $(Process) and $(Cluster) in Other Statements
----------------------------------------------------
+## Using `$(Process)` and `$(Cluster)` in Other Statements
 
 The `$(Cluster)` and `$(Process)` variables can be used in any submit file statement, although they are useful in some kinds of submit file statements and not really for others. For example, consider using $(Cluster) or $(Process) in each of the below:
 
@@ -188,14 +183,13 @@ The `$(Cluster)` and `$(Process)` variables can be used in any submit file state
 
 Unfortunately, HTCondor does not easily let you perform math on the `$(Process)` number when using it. So, for example, if you use `$(Process)` as a numeric argument to a command, it will always result in jobs getting the arguments 0, 1, 2, and so on. If you have control over your program and the way in which it uses command-line arguments, then you are fine. Otherwise, you might need a solution like those in the next exercises.
 
-(Optional) Defining JobBatchName for Tracking
----------------------------------------------
+## (Optional) Defining JobBatchName for Tracking
 
 It is possible to define arbitrary attributes in your submit file, and that one purpose of such attributes is to track or report on different jobs separately. In this optional exercise, you will see how this technique can be used.
 
-Once again, we will use `sleep` jobs, so that your jobs remain in the queue long enough to experiment on.
+We will use `sleep` jobs, so that your jobs remain in the queue long enough to experiment on.
 
-1.  Create a submit file that runs `sleep 120`.
+1.  Create a script and submit file that runs `sleep 120`.
 1.  Instead of a single `queue` statement, write this:
 
         :::file

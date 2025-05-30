@@ -7,7 +7,9 @@ status: testing
 HTC Exercise 1.5: Determine Resource Needs
 ===========================================
 
-The goal of this exercise is to demonstrate how to test and tune the `request_*` statements in a submit file for when you don't know what resources your job needs.
+## Exercise Goal
+
+Now that we know what the log file is and how to read it, let's apply that knowledge. The goal of this exercise is to demonstrate how to test and tune the `request_*` statements in a submit file for when you don't know what resources your job needs.
 
 There are three resource request statements that you should use in an HTCondor submit file:
 
@@ -17,28 +19,35 @@ There are three resource request statements that you should use in an HTCondor s
 
 HTCondor defaults to certain values for these request settings, so you do not need to use them to get small jobs to run. However, it is highly recommended to estimate resource requests before submitting any job, **especially** before submitting multiple jobs.
 
-Why is this important?
+### Check Your Understanding
 
--  If your job goes over the request values, it may be removed from the execution point and held (status `H` in the `condor_q` output, awaiting action on your part) without saving any partial job output files. So it is a disadvantage to not declare your resource needs or underestimate them. 
--  Conversely, if you overestimate your resource requests, your jobs will match to fewer slots and take longer to match to a slot to begin running. Additionally, by hogging up resources that you don't need, other users may be deprived of the resources they require. In the long run, it works better for all users of the pool if you declare what you really need.
+As a quick review, take a moment to think about what happens in the following scenarios, as discussed in the previous exercise. When you have thought of your answer, check your understanding by expanding the boxes below.
+
+??? question "What happens if you **under-request** resources?"
+    If your job goes over the request values, it may be removed from the execution point and held (status `H` in the `condor_q` output, awaiting action on your part) without saving any partial job output files. So it is a disadvantage to not declare your resource needs or underestimate them. 
+    
+??? question "What happens if you **over-request** resources?" 
+    If you overestimate your resource requests, your jobs will match to fewer slots and take longer to match to a slot to begin running. Additionally, by hogging up resources that you don't need, other users may be deprived of the resources they require. In the long run, it works better for all users of the pool if you declare what you really need.
 
 But how do you know what to request? In particular, we are concerned with memory and disk, but true HTC splits work up into jobs that each use as few CPU cores as possible (one CPU core is always best to have the most jobs running).
 
-Determine Resource Needs Before Running Any Jobs
---------------------------------------------------
+## Determine Resource Needs Before Running Any Jobs
 
 !!! note
-    If you are running short on time, you can skip to "Determining Resource Needs By Running Test Jobs", below, but try to come back and read over this part at some point.
+    If you are running short on time, you can skip to [Determining Resource Needs By Running Test Jobs](#determine-resource-needs-by-running-test-jobs-recommended) below, but try to come back and read over this part at some point.
 
 It can be very difficult to predict the memory needs of your running program without running tests. Typically, the memory size of a job changes over time, making the task even trickier. 
-If you have knowledge ahead of time about your job’s maximum memory needs, use that number or a slightly larger number to ensure your job has enough memory to complete. If this is your first time running your job, you can request a fairly large amount of memory (as high as what's on your laptop or workstation, if you know your program can run without crashing) for a first test job, OR you can run the program locally and "watch" it:
+If you have knowledge ahead of time about your job’s maximum memory needs, use that number or a slightly larger number to ensure your job has enough memory to complete.
+
+If this is your first time running your job, you can request a fairly large amount of memory (as high as what's on your laptop or workstation, if you know your program can run without crashing) for a first test job, OR you can run the program locally and "watch" it.
 
 ### Examine a Running Program on a Local Computer
 
-When working on a shared access point, you should not run computationally-intensive work because it can use resources needed by HTCondor to manage the queue for all uses. 
-However, you may have access to other computers (your laptop, for example, or another server) where you can observe the memory usage of a program. The downside is that you'll have to watch a program run for essentially the entire time, to make sure you catch the maximum memory usage.
+When working on a shared Access Point, **you should never run computationally-intensive work** because it can use resources needed by HTCondor to manage the queue for all users.
 
-#### For Memory: 
+However, you may have access to other computers (e.g. your laptop, workstation, another server) where you can observe the memory usage of a program. The downside is that you'll have to watch a program run for essentially the entire time, to make sure you catch the maximum memory usage.
+
+#### Estimating Memory
 
 On Mac and Windows, for example, the "Activity Monitor" and "Task Manager" applications may be useful. On a Mac or Linux system, you can use the `ps` command or the `top` command in the Terminal to watch a running program and see (roughly) how much memory it is using. Full coverage of these tools is beyond the scope of this exercise, but here are two quick examples:
 
@@ -76,8 +85,8 @@ Swap:  4194296k total,      148k used,  4194148k free,  2960760k cached
 
 The `top` command (shown here with an option to limit the output to a single user ID) also shows information about running processes, but updates periodically by itself. Type the letter `q` to quit the interactive display. Again, the highlighted `RES` column shows an approximation of memory usage.
 
-#### For Disk: 
-Determining disk needs is easier, because you can check on the size of files that a program is using while it runs. However, it is important to count all files that HTCondor counts to get an accurate size. HTCondor counts **everything** in your job sandbox toward your job’s disk usage:
+#### Estimating Disk
+Determining disk needs is easier, because you can check on the size of files that a program is using while it runs. However, it is important to count all files that HTCondor counts to get an accurate size. HTCondor counts **everything** in your job sandbox toward your job’s disk usage, including the following:
 
 -   The executable itself
 -   All "input" files (anything else that gets transferred TO the job, even if you don't think of it as "input")
@@ -86,8 +95,7 @@ Determining disk needs is easier, because you can check on the size of files tha
 
 If you can run your program within a single directory on a local computer (not on the access point), you should be able to view files and their sizes with the `ls -lh` and `du` commands.
 
-Determine Resource Needs By Running Test Jobs (Recommended)
-------------------------------------------------------
+## Determine Resource Needs By Running Test Jobs (Recommended)
 
 Despite the techniques mentioned above, by far the easiest approach to measuring your job’s resource needs is to run one or a small number of sample jobs and have HTCondor itself tell you about the resources used during the runs.
 
@@ -121,8 +129,7 @@ So, now we know that HTCondor saw that the job used 6,739 KB of disk (= about 6.
 
 This is a great technique for determining the real resource needs of your job. If you think resource needs vary from run to run, submit a few sample jobs and look at all the results. You should round up your resource requests a little, just in case your job occasionally uses more resources.
 
-Set Resource Requirements
------------------------------
+# Set Resource Requirements
 
 Once you know your job’s resource requirements, it is easy to declare them in your submit file. For example, taking our results above as an example, we might slightly increase our requests above what was used, just to be safe:
 
@@ -141,7 +148,6 @@ Pay close attention to units:
 
 HTCondor translates these requirements into attributes that become part of the job's `requirements` expression. However, do not put your CPU, memory, and disk requirements directly into the `requirements` expression; use the `request_*` statements instead.
 
-**If you still have time in this working session, Add these requirements to your submit file for the Python script, rerun the job, and confirm in the log file that your requests were used.**
+**If you still have time in this working session, add these requirements to your submit file for the Python script, rerun the job, and confirm in the log file that your requests were used.**
 
 After changing the requirements in your submit file, did your job run successfully? If not, why?
-(Hint: HTCondor polls a job's resource use on a timer. How long are these jobs running for?)

@@ -12,19 +12,19 @@ Background
 
 There are different High Throughput Computing (HTC) systems at universities, government facilities, and other institutions around the world, and they may have different user experiences. For example, some systems have dedicated resources (which means your job will be guaranteed a certain amount of resources/time to complete), while other systems have opportunistic, backfill resources (which means your job can take advantage of some resources, but those resources could be removed at any time). Other systems have a mix of dedicated and opportunistic resources. 
 
-Durring the OSG School, you will practice on the "[OSG's Open Science Pool (OSPool)](https://osg-htc.org/services/open_science_pool.html)". The OSPool provides researchers with **opportunitistic resources and the ability to run many smaller and shorter jobs silmnulatinously**. The OSPool is composed of approximately 60,000+ cores and dozens of different GPUs. 
+During the OSG School, you will mostly practice on the "[OSG's Open Science Pool (OSPool)](https://osg-htc.org/services/open_science_pool.html)". The OSPool provides researchers with **opportunistic resources and the ability to run many smaller and shorter jobs simultaneously**. The OSPool is composed of approximately 60,000+ cores and dozens of different GPUs. 
 
 Exercise Goal 
 ---
 
-The goal of this first exercise is to log in to the OSPool access point and look around a little bit, which will take only a few minutes. 
+The goal of this first exercise is to log in to the OSPool Access Point and look around a little bit, which will take only a few minutes. 
 
-**If you have trouble getting SSH access to the access point, ask the instructors right away! Gaining access is critical for all remaining exercises.**
+**If you have trouble logging in to the Access Point, ask the instructors right away! Gaining access is critical for all remaining exercises.**
 
 Logging In
 ----------
 
-You will login to OSPool access pool, `ap40.uw.osg-htc.org`, using the username assigned to you. 
+You will log in to an OSPool Access Point, `ap40.uw.osg-htc.org`, using the username assigned to you. 
 
 To log in, use a [Secure Shell](http://en.wikipedia.org/wiki/Secure_Shell) (SSH) client.
 
@@ -67,7 +67,7 @@ Copy-and-paste is fine, but **you will learn more if you take the time to type e
 Organizing Your Workspace
 -------------------------
 
-You will be doing many different exercises over the next few days, many of them on this access point. Each exercise may use many files, once finished. To avoid confusion, it is useful to create a separate directory for each exercise. Additionally, directories that contain numerous files can be inefficient. This number varies, depending on the file system type.
+You will be doing many different exercises over the next few days, many of them on this Access Point. Each exercise may use or generate many files. To avoid confusion and stay organized, it is useful to create a separate directory for each exercise. Additionally, directories that contain numerous files can be reduce system performance. The exact number varies, depending on the file system type.
 
 To create a directory, use the `mkdir` command. We can change directories with the `cd` command, as shown below.
 
@@ -83,9 +83,9 @@ To return to the directory above the `intro-1.1-login` directory, use the `cd` c
 [username@ap40 ~]$
 ```
 
-### The meaning of (`..`), (`.`), and (`~`)
+### The meaning of `..`, `.`, and `~`
 
-Sometimes, you'll see (`..`), (`.`), and (`~`) in commands and paths. These symbols represent different paths in the system.
+Sometimes, you'll see `..`, `.`, and `~` in commands and paths. These symbols represent different paths in the system.
 
 * Two dots (`..`) represent the directory above the current directory.
 * One dot (`.`) represents the current directory.
@@ -102,10 +102,12 @@ $CondorVersion: 24.7.3 2025-04-17 BuildID: 802763 PackageID: 24.7.3-0.802763 Git
 $CondorPlatform: x86_64_AlmaLinux9 $
 ```
 
+Do you see a different version? If so, why might it be different?
+
 Reference Materials
 -------------------
 
 Here are a few links to reference materials that will be useful on your journey in research computing!
 
-- [Software Carpentry Unix Shell Lesson](https://eharstad.github.io/shell-novice/); This lesson is a good place to start learning about the Unix shell, including how to navigate directories, create files, and write simple scripts.
-- [HTCondor manuals](https://htcondor.readthedocs.io/en/latest/); we recommend reading the manual corresponding to the version of HTCondor that you use. That link points to the latest version of the manual, but you can switch versions using the toggle in the lower left corner of that page.
+- [Software Carpentry Unix Shell Lesson](https://eharstad.github.io/shell-novice/). Are you new to the command line or need a refresher? This lesson is a good place to start learning about the Unix shell, including how to navigate directories, create files, and write simple scripts.
+- [HTCondor manual](https://htcondor.readthedocs.io/en/latest/). We recommend reading the manual corresponding to the version of HTCondor that you use. This link points to the latest version of the manual, but you can switch versions using the toggle in the lower left corner of that page.

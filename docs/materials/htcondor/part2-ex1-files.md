@@ -7,13 +7,11 @@ status: testing
 HTC Exercise 2.1: Work With Input and Output Files
 =====================================================
 
-Exercise Goal
--------------
+## Exercise Goal
 
 The goal of this exercise is make input files available to your job on the execution point and to return output files back created in your job back to you on the access point. This small change significantly adds to the kinds of jobs that you can run.
 
-View a Job Sandbox
----------------------
+## View a Job Sandbox
 
 Before you learn to transfer files to and from your job, it is good to understand a bit more about the environment in which your job runs.
 When the HTCondor `starter` process prepares to run your job, it creates a new directory for your job and all of its files.
@@ -45,14 +43,13 @@ Next, look at the output that appears after the `Sandbox:` line; it is the outpu
 | `.machine.ad`     | The machine ClassAd                         |
 | `_condor_stderr`  | Saved standard error from the job           |
 | `_condor_stdout`  | Saved standard output from the job          |
-| `tmp/`, `var/tmp/`| Directories in which to put temporary files |
+| `tmp/`, `var/`, `tmp/`| Directories in which to put temporary files |
 
 So, HTCondor wrote copies of the job and machine ads (for use by the job, if desired), transferred your executable (`sandbox.sh`), ran it, and saved its standard output and standard error into files. Notice that your submit file, which was in the same directory on the access point machine as your executable, was **not** transferred, nor were any other files that happened to be in directory with the submit file.
 
 Now that we know something about the sandbox, we can transfer more files to and from it.
 
-Running a Job With Input Files
-------------------------------
+## Running a Job With Input Files
 
 Next, you will run a job that requires an input file. Remember, the initial job sandbox will contain only the job executable, unless you tell HTCondor explicitly about every other file that needs to be transferred to the job.
 
@@ -100,7 +97,7 @@ for word in sorted(words.keys()):
 1.  Since we want HTCondor to pass an argument to our Python executable, we need to remember to add an `arguments = ` line in our submit file so that HTCondor knows to pass an argument to the job. Set this `arguments = ` line equal to the argument to the Python script (i.e., the name the input file).
 1.  Submit the job to HTCondor, wait for it to finish, and check the output!
 
-If things do not work the first time, keep trying! At this point in the exercises, we are telling you less and less explicitly how to do steps that you have done before. If you get stuck, ask for help in the Slack channel.
+If things do not work the first time, keep trying! At this point in the exercises, we are telling you less and less explicitly how to do steps that you have done before. If you get stuck, ask for help!
 
 !!! note
     If you want to transfer more than one input file, list all of them on a single `transfer_input_files` command,
@@ -110,8 +107,7 @@ If things do not work the first time, keep trying! At this point in the exercise
         transfer_input_files = a.txt, b.txt, c.txt
 
 
-Transferring Output Files
--------------------------
+## Transferring Output Files
 
 So far, we have relied on programs that send their output to the standard output and error streams, which HTCondor captures, saves, and returns back to the submit directory. But what if your program writes one or more files for its output? How do you tell HTCondor to bring them back?
 
@@ -129,8 +125,7 @@ We will use a very simple method for creating a new file: we will copy an input 
 
 What happened? Can you tell what HTCondor did with the output file that was created (did it end up back on the access point?), after it was created in the job sandbox? Look carefully at the list of files in your submit directory now.
 
-Transferring Specific Output Files
-----------------------------------
+## Transferring Specific Output Files
 
 As you saw in the last exercise, by default HTCondor transfers files that are created in the job sandbox back to the submit directory when the job finishes. In fact, HTCondor will also transfer back **changed** input files, too. But, this only works for files that are in the top-level sandbox directory, and **not** for ones contained in subdirectories.
 

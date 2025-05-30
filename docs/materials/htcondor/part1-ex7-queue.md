@@ -7,12 +7,15 @@ status: testing
 Bonus HTC Exercise 1.7: Explore condor_q
 ======================================
 
+## Exercise Goal
+
+`condor_q` is a handy command to check the status of your jobs, but there are many powerful options available that can give you useful information!
+
 The goal of this exercise is try out some of the most common options to the `condor_q` command, so that you can view jobs effectively.
 
 The main part of this exercise should take just a few minutes, but if you have more time later, come back and work on the extension ideas at the end to become a `condor_q` expert!
 
-Selecting Jobs
---------------
+## Selecting Jobs
 
 The `condor_q` program has many options for selecting which jobs are listed. You have already seen that the default mode is to show only your jobs in "batch" mode:
 
@@ -45,9 +48,9 @@ To list just the jobs associated with a single cluster number:
 [username@ap40]$ condor_q <CLUSTER>
 ```
 
-For example, if you want to see the jobs in cluster 5678 (i.e., `5678.0`, `5678.1`, etc.), you use `condor_q 5678`.
+For example, if you want to see the jobs in cluster `5678` (i.e., `5678.0`, `5678.1`, etc.), you use `condor_q 5678`.
 
-To list a specific job (i.e., cluster.process, as in 5678.0):
+To list a specific job (i.e., `cluster.process`, as in `5678.0`):
 
 ``` console
 [username@ap40]$ condor_q <JOB.ID>
@@ -61,7 +64,7 @@ For example, to see job ID 5678.1, you use `condor_q 5678.1`.
 
 Let’s get some practice using `condor_q` selections!
 
-1.  Using a previous exercise, submit several `sleep` jobs.
+1.  Using a previous exercise, submit several jobs.
 1.  List all jobs in the queue — are there others besides your own?
 1.  Practice using all forms of `condor_q` that you have learned:
     -   List just your jobs, with and without batching.
@@ -71,8 +74,7 @@ Let’s get some practice using `condor_q` selections!
     -   Try listing several clusters and job IDs at once.
 1.  When there are a variety of jobs in the queue, try combining a username and a different user's cluster or job ID in the same command — what happens?
 
-Viewing a Job ClassAd
----------------------
+## Viewing a Job ClassAd
 
 You may have wondered why it is useful to be able to list a single job ID using `condor_q`. By itself, it may not be that useful. But, in combination with another option, it is very useful!
 
@@ -109,7 +111,13 @@ Arguments = "120"
 
 **See what you can find in a job ClassAd from your own job.**
 
-1.  Using a previous exercise, submit a `sleep` job that sleeps for at least 3 minutes (180 seconds).
+1.  Write a submit file for a `sleep` job that sleeps for at least 3 minutes (executable below). Submit the job.
+
+        :::console
+        #!/bin/bash
+        
+        sleep 180
+
 1.  Before the job executes, capture its ClassAd and save to a file:
 
         :::console
@@ -130,8 +138,7 @@ Now examine each saved ClassAd file. Here are a few things to look for:
     -   BytesSent
     -   JobStatus
 
-Why Is My Job Not Running?
---------------------------
+## Why Is My Job Not Running?
 
 Sometimes, you submit a job and it just sits in the queue in Idle state, never running. It can be difficult to figure out why a job never matches and runs. Fortunately, HTCondor can give you some help.
 
@@ -193,14 +200,13 @@ WARNING:  Be advised:
    No machines matched the jobs's constraints
 ```
 
-At the end of the summary, `condor_q` provides a breakdown of how **machines** and their own requirements match against my own job's requirements. 710 total machines were considered above, and **all** of them were rejected based on **my job's requirements**. In other words, I am asking for something that is not available. But what?
+At the end of the summary, `condor_q` provides a breakdown of how **machines** and their own requirements match against my own job's requirements. 9252 total slots were considered above, and **all** of them were rejected based on **my job's requirements**. In other words, I am asking for something that is not available. But what?
 
-Further up in the output, there is an analysis of the job's requirements, along with how many slots within the pool match each of those requirements. The example above reports that 9241 slots match our small disk request request, but **none** of the slots matched the `TARGET.Memory >= RequestMemory` condition. The output also reports the value used for the `RequestMemory` attribute: my job asked for **8 terabytes** of memory (8,388,608 MB) -- of course no machines matched that part of the expression! That's a lot of memory on today's machines.
+Further up in the output, there is an analysis of the job's requirements, along with how many slots within the pool match each of those requirements. The example above reports that 9241 slots match our small disk request request, but **none** of the slots matched the `TARGET.Memory >= RequestMemory` condition. The output also reports the value used for the `RequestMemory` attribute: my job asked for **8 terabytes** of memory (8,388,608 MB)—of course no machines matched that part of the expression! That's a lot of memory on today's machines.
 
-The output from `condor_q -analyze` (and `condor_q -better-analyze`) may be helpful or it may not be, depending on your exact case. The example above was constructed so that it would be obvious what the problem was. But in many cases, this is a good place to start looking if you are having problems matching.
+The output from `condor_q -better-analyze` may or may not be helpful, depending on your exact case. The example above was constructed so that it would be obvious what the problem was. But in many cases, this is a good place to start looking if you are having problems matching.
 
-Bonus: Automatic Formatting Output
-----------------------------------
+## Bonus: Automatic Formatting Output
 
 **Do this exercise only if you have time, though it's pretty awesome!**
 
