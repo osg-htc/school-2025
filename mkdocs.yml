@@ -32,5 +32,9 @@ nav:
   - Logistics:
     - General information:          logistics/index.md
     - Hotel information:            logistics/hotel.md
+    - Location and transportation:  logistics/location.md
     - Visa requirements:            logistics/visas.md
     - Travel planning:              logistics/travel-planning.md
+    - Travel advice:                logistics/travel-advice.md
+    - Health guidelines:            logistics/health.md
+    - Continue Your Access to the OSPool: logistics/projects.md
