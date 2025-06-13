@@ -76,4 +76,4 @@ So please use this option only when you must pay for approved flight changes.
 
 If there are significant changes to your travel plans,
 when you have time,
-please [email us](mailto:school@opensciencegrid.org) with your news or reach out to us on Slack.
+please [email us](mailto:school@osg-htc.org) with your news or reach out to us on Slack.
