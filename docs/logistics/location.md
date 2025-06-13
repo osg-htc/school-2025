@@ -25,4 +25,7 @@ Generally, just follow signs for 1240.
 ## Restrooms
 
 There are restrooms across the hallway and a bit to the right of 1240.
+
+Gender-neutral bathrooms are on office floors upstairs in a separate wing: Rooms 4329, 5329, 6329, 7329. Labeled as "toilet".
+
 For those, or other options, just ask staff!
