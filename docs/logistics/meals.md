@@ -91,6 +91,44 @@ Linden
 
 - Regular Coffee
 
+### Tuesday, June 24, 2025
+
+#### Breakfast (8:00 AM - 9:00 AM)
+
+Griddle Bar
+
+- Blueberry Pancakes
+- Bacon
+- Chicken Sausage
+- Fruit Salad
+- Maple Syrup and Butter
+- Assorted Egg Bites
+- Mini Cinnamon Rolls
+- Gluten-free Bagels
+- Oatmeal with Oat Milk
+- Greek Yogurt
+- Granola Bars
+
+#### Lunch (12:15 PM - 1:15 PM)
+
+Breese
+
+- Mixed Greens, Balsamic, and Ranch
+- Halal Chicken Shawarma
+- Saffron Rice
+- Falafel
+- Naan
+- Pickled Vegetables, Tzatziki, Tahini Sauce
+- Tomato Basil Bisque
+- Curry Tomato Lentil Soup
+- Cookies
+- Gluten-free Cookies
+- Assorted Cold Beverages
+
+#### PM Break (12:30 PM - 4:00 PM)
+
+- Regular Coffee
+
 ## Meal Reimbursement Tips
 
 Again, if you are **not** part of the UW&ndash;Madison community,
