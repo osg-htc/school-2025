@@ -52,9 +52,10 @@ Many [Madison Metro](https://www.cityofmadison.com/metro) buses stop near the ho
 pass through the University of Wisconsin&ndash;Madison campus.
 Bus fare is $2.00, and if using a transfer ask the driver for a free transfer pass upon boarding.
 
-[Google Maps](https://maps.google.com) is a great resource for finding the best bus routes to use in Madison,
-giving multiple route options for each trip.
-Additionally, the [Madison Metro Website](https://www.cityofmadison.com/metro/routes-schedules)
+#### Apps 
+* [Google Maps](https://maps.google.com) is a great resource for finding the best bus routes to use in Madison, giving multiple route options for each trip.
+* Transit ([Android](https://play.google.com/store/apps/details?id=com.thetransitapp.droid), [Apple App Store](https://apps.apple.com/us/app/transit-subway-bus-times/id498151501)) is great app for finding and real-time tracking of buses.
+* Additionally, the [Madison Metro Website](https://www.cityofmadison.com/metro/routes-schedules)
 provides a web interface to plan your trip.
 
 !!! note 
