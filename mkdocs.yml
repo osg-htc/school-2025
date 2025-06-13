@@ -32,5 +32,9 @@ nav:
   - Logistics:
     - General information:          logistics/index.md
     - Hotel information:            logistics/hotel.md
+    - Location:                     logistics/location.md
+    - Local transportation:         logistics/local-transportation.md
     - Visa requirements:            logistics/visas.md
     - Travel planning:              logistics/travel-planning.md
+    - Travel advice:                logistics/travel-advice.md
+    - Health guidelines:            logisitcs/health.md
