@@ -7,7 +7,7 @@ The school will be held at the
 This location is about 1.3 miles from the Best Western Premier Park Hotel.
 The main classroom is Room 1240 (see below).
 
-See the [local transportation](local-transportation.md) page
+See the [local transportation](#local-transportation) below
 for suggestions about getting around Madison.
 
 ## Computer Sciences Building, Room 1240
