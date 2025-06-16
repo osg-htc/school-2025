@@ -37,6 +37,9 @@ like gluten-free items,
 are provided in low quantities that are meant just for those people who requested them.
 Please do not take them unless they are for you.
 
+If you have dietary restrictions and have questions about the menu, please feel free
+to ask staff!
+
 ### Sunday, June 22, 2025
 
 #### Opening Dinner (6:30 PM - 8:30 PM)
@@ -64,7 +67,6 @@ Badger Breakfast
 - Hash Browns
 - Fresh Fruit Salad
 - Granola Bars
-- Oatmeal with Oat Milk (for Vegan and Lacto-Vegetarian)
 - Coffee
 - Hot Tea
 - Bottled Juice
@@ -101,7 +103,6 @@ Griddle Bar
 - Fruit Salad
 - Maple Syrup and Butter
 - Assorted Egg Bites
-- Oatmeal with Oat Milk (for Vegan and Lacto-Vegetarian)
 - Greek Yogurt
 - Granola Bars
 - Coffee
@@ -137,12 +138,10 @@ Badger Breakfast
 - Baby Red Potatoes
 - Assorted Greek Yogurts
 - Granola Bars
-- Oatmeal with Oat Milk (for Vegan and Lacto-Vegetarian)
 - Fruit Salad
 - Coffee
 - Tea
 - Bottled Juices
-- Peanut Butter (for Vegan, Lacto-Vegetarian, and Lactose-Intolerant)
 
 #### Lunch (12:30 PM - 1:45 PM)
 
@@ -168,7 +167,6 @@ Griddle Bar
 - Chicken Sausage
 - Hash Browns
 - Assorted Egg Bites
-- Oatmeal with Oat Milk (for Vegan and Lacto-Vegetarian)
 - Yogurt
 - Granola Bars
 - Coffee
@@ -205,7 +203,6 @@ Badger Breakfast
 - Hash Browns
 - Donuts
 - Granola Bars
-- Oatmeal with Oat Milk (for Vegan and Lacto-Vegetarian)
 - Fruit Salad
 - Coffee
 - Tea
