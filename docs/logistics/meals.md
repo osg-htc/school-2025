@@ -60,12 +60,11 @@ Global Buffet
 Badger Breakfast
 
 - Coffee Cake
-- Plain Eggs
+- Plain Scrambled Eggs
 - Hash Browns
 - Fresh Fruit Salad
 - Granola Bars
-- Gluten Free Muffins
-- Oatmeal with Oat Milk
+- Oatmeal with Oat Milk (for Vegan and Lacto-Vegetarian)
 - Coffee
 - Hot Tea
 - Bottled Juice
@@ -85,7 +84,6 @@ Linden
 - Pico de Gallo, Salsa Verde, and Sour Cream
 - Corn Tortilla Chips
 - Cookies
-- Gluten-free Cookies
 
 #### PM Break (12:30 PM - 4:00 PM)
 
@@ -103,11 +101,10 @@ Griddle Bar
 - Fruit Salad
 - Maple Syrup and Butter
 - Assorted Egg Bites
-- Mini Cinnamon Rolls
-- Gluten-free Bagels
-- Oatmeal with Oat Milk
+- Oatmeal with Oat Milk (for Vegan and Lacto-Vegetarian)
 - Greek Yogurt
 - Granola Bars
+- Coffee
 
 #### Lunch (12:15 PM - 1:15 PM)
 
@@ -122,12 +119,132 @@ Breese
 - Tomato Basil Bisque
 - Curry Tomato Lentil Soup
 - Cookies
-- Gluten-free Cookies
 - Assorted Cold Beverages
 
 #### PM Break (12:30 PM - 4:00 PM)
 
 - Regular Coffee
+
+### Wednesday, June 25, 2025
+
+#### Breakfast (8:00 AM - 9:00 AM)
+
+Badger Breakfast
+
+- Bagels
+- Cream Cheese
+- Plain Scrambled Eggs
+- Baby Red Potatoes
+- Assorted Greek Yogurts
+- Granola Bars
+- Oatmeal with Oat Milk (for Vegan and Lacto-Vegetarian)
+- Fruit Salad
+- Coffee
+- Tea
+- Bottled Juices
+- Peanut Butter (for Vegan, Lacto-Vegetarian, and Lactose-Intolerant)
+
+#### Lunch (12:30 PM - 1:45 PM)
+
+Boxed Lunches 
+
+- Chicken, White Cheddar, Garlic Aioli, Cranberry Wild Rice Bread
+- Chimichurri Tofu, Mixed Greens, Cuban Bread
+- Italian Meats and Cheeses on Hoagie
+- Red Potato Salad, Fresh Herbs, Vinaigrette
+- Grilled Vegetable Pasta Salad
+- Kettle Chips
+- Cookies
+- Cold Beverages
+
+### Thursday, August June 26, 2025
+
+#### Breakfast (8:00 AM - 9:00 AM)
+
+Griddle Bar
+
+- French Toast
+- Bacon
+- Chicken Sausage
+- Hash Browns
+- Assorted Egg Bites
+- Oatmeal with Oat Milk (for Vegan and Lacto-Vegetarian)
+- Yogurt
+- Granola Bars
+- Coffee
+- Tea
+
+#### Lunch (12:00 PM - 1:15 PM)
+
+Frances
+
+- Mixed Greens, Balsamic, and Ranch
+- Cucumber Salad
+- Vegetarian Potstickers
+- Mandarin Chicken
+- Chimichurri Tofu
+- Garlic Green Beans
+- White Rice
+- Cookies
+- Cold Beverages
+
+#### PM Break (12:30 PM - 4:30 PM)
+
+- Coffee
+- Pita Chips, Hummus, Vegetables with Dill Dip
+- Soda
+- Bottled Water
+
+### Friday, June 27, 2025
+
+#### Breakfast (8:00 AM - 9:00 AM)
+
+Badger Breakfast
+
+- Plain Scrambled Eggs
+- Hash Browns
+- Donuts
+- Granola Bars
+- Oatmeal with Oat Milk (for Vegan and Lacto-Vegetarian)
+- Fruit Salad
+- Coffee
+- Tea
+- Bottled Juice
+
+#### Lunch (12:00 PM - 1:00 PM)
+
+Linden
+
+- Burgers
+- Beyond Brats
+- Mixed Greens, Balsamic, and Ranch
+- Grilled Vegetable Pasta Salad
+- Fruit Salad
+- Seasoned House Fried Chips
+- Buns and Condiments
+- Cookies
+- Assorted Cold Beverages
+
+#### PM Break (12:30 PM - 4:00 PM)
+
+- Coffee
+
+#### Closing Dinner (6:30 PM - 8:00 PM)
+
+**Location: Fluno Center, 601 University Avenue; Skyview Room, 8th Floor**
+
+Pastaciutta Buffeteria
+
+- Cavatappi Pasta
+- Cheese Lasagna
+- Grilled Chicken Breast
+- Meatballs
+- Italian Vegetable Blend
+- Breadsticks
+- Marinara Sauce and Alfredo Sauce
+- Caesar Salad
+- Tiramisu
+- Cannoli
 
 ## Meal Reimbursement Tips
 
