@@ -470,35 +470,34 @@ All School participants and staff are encourage to attend!
     </tr>
     <tr>
       <td>14:00</td>
-      <td>14:30</td>
+      <td>14:10</td>
       <td>
         Open Q&A<br>
-        <span class="before-dot text-light-orange">Work time: Apply HTC to own research</span><br>
         Break
       </td>
       <td>-</td>
     </tr>
     <tr>
-      <td>14:30</td>
-      <td>15:30</td>
+      <td>14:10</td>
+      <td>15:10</td>
       <td>Lightning talks by volunteer participants</td>
       <td>Attendees</td>
     </tr>
     <tr>
+      <td>15:10</td>
       <td>15:30</td>
-      <td>16:00</td>
-      <td>Open Q&amp;A and work time</td>
+      <td>Open Q&amp;A <br> break</td>
       <td>staff</td>
     </tr>
     <tr>
-      <td>16:00</td>
-      <td>16:45</td>
+      <td>15:30</td>
+      <td>16:30</td>
       <td>HTC and HTCondor Philosophy</td>
-      <td>TBD</td>
+      <td>Dr. Miron Livny; Greg Thain</td>
     </tr>
     <tr>
-      <td>16:45</td>
-      <td>17:15</td>
+      <td>16:30</td>
+      <td>17:00</td>
       <td><span class="before-dot text-light-blue">Lecture: Forward</span></td>
       <td>Tim</td>
     </tr>
