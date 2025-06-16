@@ -4,15 +4,16 @@ status: in progress
 
 <style type="text/css"> pre em { font-style: normal; background-color: yellow; } pre strong { font-style: normal; font-weight: bold; color: \#008; } </style>
 
-Bonus HTC Exercise 1.9: Explore condor_status
+Bonus HTC Exercise 1.8: Explore condor_status
 ===========================================
+
+## Exercise Goal
 
 The goal of this exercise is try out some of the most common options to the `condor_status` command, so that you can view slots effectively.
 
 The main part of this exercise should take just a few minutes, but if you have more time later, come back and work on the extension ideas at the end to become a `condor_status` expert!
 
-Selecting Slots
----------------
+## Selecting Slots
 
 The `condor_status` program has many options for selecting which slots are listed. You've already learned the basic `condor_status` and the `condor_status -compact` variation (which you may wish to retry now, before proceeding).
 
@@ -41,8 +42,7 @@ List all the slots in the pool.
 1. How many are there total?
 2. How many slots are currently available?
 
-Viewing a Slot ClassAd
-----------------------
+## Viewing a Slot ClassAd
 
 Just as with `condor_q`, you can use `condor_status` to view the complete ClassAd for a given slot (often confusingly called the “machine” ad):
 
@@ -70,8 +70,7 @@ As you may be able to tell, there is a mix of attributes about the machine as a 
 
 Go ahead and examine a machine ClassAd now.
 
-Viewing Slots by ClassAd Expression
------------------------------------
+## Viewing Slots by ClassAd Expression
 
 Often, it is helpful to view slots that meet some particular criteria. For example, if you know that your job needs a lot of memory to run, you may want to see how many high-memory slots there are and whether they are busy. You can filter the list of slots like this using the `-constraint` option and a ClassAd expression.
 
@@ -94,8 +93,7 @@ If you are interested in learning more about writing ClassAd expressions, look a
     The `condor_q` command accepts the `-constraint` option as well!
     As you might expect, the option allows you to limit the jobs that are listed based on a ClassAd expression.
 
-Bonus: Formatting Output
-----------------------------
+## Bonus: Formatting Output
 
 The `condor_status` command accepts the same `-autoformat` (`-af`) options that `condor_q` accepts, and the options have the same meanings in both commands. Of course, the attributes available in machine ads may differ from the ones that are available in job ads. Use the HTCondor Manual or look at individual slot ClassAds to get a better idea of what attributes are available.
 
