@@ -155,7 +155,6 @@ Now that we have our data partitioned into independent subsets to be mapped in p
 
 Let's start by editing our template executable file! In our executable there's two main segments of the `minimap2` command that will be changed: The input `reads.fastq` file and the output `output.sam` file. 
 
->[!IMPORTANT]
 !!! question "Thinking Ahead Before Errors!"
 
     **Renaming our output files**
@@ -180,7 +179,7 @@ Let's start by editing our template executable file! In our executable there's t
 ### Generating the List of Jobs
 Next, we need to generate a list of jobs for HTCondor to run. In previous exercises, we've used the `queue` statements such as `queue <num>` and `queue <variable> matching *.txt`. For our exercise, we will use the `queue <var> from <list>` submission strategy. 
 
-??? question 
+!!! question 
     What values should we pass to HTCondor to scale our `minimap2` workflow up? 
 
 1. Move to your `~/scaling-up/inputs/` directory
@@ -275,36 +274,36 @@ Now, you are ready to submit the whole workload.
     3. Ensure your `log`, `error`, and `output` files all include the name of the read subset file being used mapped in this job.
     4. Organize the output files using the correct `transfer_output_remaps` statement
     
-    🧠 Before submitting:
-    - Are all your subset filenames listed in `list_of_fastq.txt`?
-      - Did you test at least one job successfully?
-      - Are you remapping outputs into the `outputs/` folder?
-    
+    **Before submitting:**
+
+    * Are all your subset filenames listed in `list_of_fastq.txt`?
+        * Did you test at least one job successfully?
+        * Are you remapping outputs into the `outputs/` folder?
+
     When ready, submit with:
-    ```bash
+    ```
     condor_submit minimap2_multi.submit
     ```
-    
-    ??? example "Solution Set"
 
-        Your final submit file should look something like this:
-        
-        :::console
-        +SingularityImage      = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
+    ??? success "Solution Set - ⚠️ Try to Solve Before Viewing ⚠️"
 
-        executable             = ./minimap2.sh
-        arguments              = $(read_subset_file)
-        transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
-        
-        transfer_output_files  = ./$(read_subset_file)_output.sam
-        transfer_output_remaps  = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
-         
-        output        = logs/output/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.out
-        error         = logs/error/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.err
-        log           = logs/log/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.log
-
-        request_cpus           = 2
-        request_disk           = 4 GB
-        request_memory         = 4 GB 
-         
-        queue read_subset_file from ./list_of_fastq.txt
+        Your final submit file, `minimap2_multi.submit`, should look something like this:
+            
+            +SingularityImage      = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
+            
+            executable             = ./minimap2.sh
+            arguments              = $(read_subset_file)
+            transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
+            
+            transfer_output_files  = ./$(read_subset_file)_output.sam
+            transfer_output_remaps = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
+            
+            output                 = logs/output/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.out
+            error                  = logs/error/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.err
+            log                    = logs/log/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.log
+            
+            request_cpus           = 2
+            request_disk           = 4 GB
+            request_memory         = 4 GB 
+            
+            queue read_subset_file from ./list_of_fastq.txt
