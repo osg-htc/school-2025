@@ -20,14 +20,23 @@ Make sure you are logged into `ap40.uw.osg-htc.org`.  For this exercise
 we will be using Apptainer containers maintained by OSG staff or existing 
 containers on Docker Hub. 
 
-We will set some environment variables that will help lighten the load on the 
-Access Point as we work with containers: 
+There is some set-up that we should do to help lighten the load on the 
+Access Point as we work with containers. 
 
-	:::console
-	$ mkdir -p $HOME/tmp
-	$ export TMPDIR=$HOME/tmp
-	$ export APPTAINER_TMPDIR=$HOME/tmp
-	$ export APPTAINER_CACHEDIR=$HOME/tmp
+First, download the `apptainer-setup.sh` script:
+
+```
+osdf object get /ospool/uc-shared/public/school/2025/dev/apptainer-setup.sh ./
+```
+
+Then run the script using this command:
+
+```
+. apptainer-setup.sh
+```
+
+You should see a message that the setup has been completed.
+(This is the only time you'll need to run this script.)
 
 Exploring Apptainer Containers
 -------------------
@@ -42,6 +51,11 @@ First, let's try to run a container from the [OSG-Supported List](https://portal
 		$ apptainer shell /cvmfs/singularity.opensciencegrid.org/htc/ubuntu:22.04
 
 	It may take a few minutes to start - don't worry if this happens. 
+
+	!!! warning "About the `/cvmfs` path"
+		In the above example, we used a path beginning with `/cvmfs` to launch a container.
+        
+        **This should be the only place that you use such a path!**
 
 1. Once the container starts, the prompt will change to either `Singularity>` or 
   `Apptainer>`. Run `ls` and `pwd`. Where are you? Do you see your files? 
