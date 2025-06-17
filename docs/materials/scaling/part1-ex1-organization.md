@@ -51,8 +51,9 @@ how would you organize this HTC workload in directories (folders) on the Access 
 There will also be system and HTCondor files produced when we submit a job&nbsp;&mdash;
 how would you organize the log, standard output, and standard error files?
 
->[!TIP]
-> Make sure to consider which files will be re-used often (common files across all jobs) versus which files will be used only once. Files often re-used, can be placed in your `/ospool/ap40/data/<user.name>/` directory to take advantage of the caching benefits when using the `osdf://` transfer plugin.
+!!! tip
+    
+    Make sure to consider which files will be re-used often (common files across all jobs) versus which files will be used only once. Files often re-used, can be placed in your `/ospool/ap40/data/<user.name>/` directory to take advantage of the caching benefits when using the `osdf://` transfer plugin.
 
 Try making those changes before moving on to the next section of the tutorial.
 
@@ -96,8 +97,9 @@ For our exercise, we will use the following data organizational structure:
 
 4. Move the `minimap2.sif` container image file to your `/ospool/ap40/data/<user.name>/scaling-up/software` directory using the `mv` command. 
 
->[!TIP]
-> Every one of our jobs will use both the `reference_genome.fasta` and `minimap2.sif` files. These files, due to their frequent usage and larger size, significantly benefit from the OSDF's caching mechanism. In order to use the OSDF file transfer mechanism, we should 1) place them somewhere on our `ospool/ap40/data/<user.name>/` directory and 2) use the `osdf:///` protocol prefix when calling these files in our submit file.
+!!! tip
+    
+    Every one of our jobs will use both the `reference_genome.fasta` and `minimap2.sif` files. These files, due to their frequent usage and larger size, significantly benefit from the OSDF's caching mechanism. In order to use the OSDF file transfer mechanism, we should 1) place them somewhere on our `ospool/ap40/data/<user.name>/` directory and 2) use the `osdf:///` protocol prefix when calling these files in our submit file.
 
 5. View the current directory and its subdirectories by using the `ls` command with the *recursive* (`-R`) flag:
 
@@ -128,34 +130,36 @@ To get ready for our mapping step, we need to prepare our read files. This inclu
    split -l 20000 reads.fastq reads_fastq_chunk_
    rm reads.fastq
    ```
->[!IMPORTANT]
-> One of the most important steps in scaling up our workflows to run on HTC systems, such as the OSPool, is maintaining a clear organizational structure. This includes deleting files we will not be using anymore. For the rest of the exercise, we will not be using the `reads.fastq` file after splitting it. **Not deleting this file can cause downstream issues. Do not skip this step.**
+!!! warning "Important"
+    
+    One of the most important steps in scaling up our workflows to run on HTC systems, such as the OSPool, is maintaining a clear organizational structure. This includes deleting files we will not be using anymore. For the rest of the exercise, we will not be using the `reads.fastq` file after splitting it. **Not deleting this file can cause downstream issues. Do not skip this step.**
 
 ### Adapting the Executable
 Now that we have our data partitioned into independent subsets to be mapped in parallel, we can work on adapting our executable for use on the OSPool. We will start with the following template executable file, which is also found in your project directory under `~/scaling-up/minimap2.sh`.
 
-        :::console
-        #!/bin/bash
-        # Use minimap2 to map the basecalled reads to the reference genome
-         ./minimap2 -ax map-ont reference_genome.fasta reads.fastq > output.sam
+    :::console
+    #!/bin/bash
+    # Use minimap2 to map the basecalled reads to the reference genome
+    ./minimap2 -ax map-ont reference_genome.fasta reads.fastq > output.sam
 
 | Command Segment | ./minimap2                             | -ax map-ont                                                                      | reference_genome.fasta               | reads.fastq                                 | \>                                         | output.sam                          |
 |-----------------|----------------------------------------|----------------------------------------------------------------------------------|--------------------------------------|---------------------------------------------|--------------------------------------------|-------------------------------------|
 | **Meaning**         | The program we'll run to map our reads | Specifies the type of reads we're using <br>(Oxford Nanopore Technologies reads) | The input reference we're mapping to | The reads we are mapping against our genome | redirects the output of minimap2 to a file | The output file of our mapping step |
 
->[!IMPORTANT]
->**Before moving forward think about how you would adapt this executable template for HTC**
->
->If we want to map each one of our reads subsets against the reference genome, think about the following questions:
-> * What parts of the command will change with each job?
-> * What parts of the command will stay the same?
+!!! question "Time-Out!"
+
+    **Before moving forward think about how you would adapt this executable template for HTC**
+    If we want to map each one of our reads subsets against the reference genome, think about the following questions:
+        * What parts of the command will change with each job?
+        * What parts of the command will stay the same?
 
 Let's start by editing our template executable file! In our executable there's two main segments of the `minimap2` command that will be changed: The input `reads.fastq` file and the output `output.sam` file. 
 
 >[!IMPORTANT]
->**Renaming our output files**
->
->What do you think would happen if we do keep the output file on our executable as `output.sam`?
+!!! question "Thinking Ahead Before Errors!"
+
+    **Renaming our output files**
+    What do you think would happen if we do keep the output file on our executable as `output.sam`?
 
 1. Modify the executable to accept the name of our input `reads.fastq` subsets as an argument.
 
@@ -220,8 +224,9 @@ Now we want to submit a test job that uses this organizing scheme,
 using just one item in our input set&nbsp;&mdash;
 in this example, we will use the `Alice_in_Wonderland.txt` file from our `input` directory.
 
->[!TIPS]
-> It is important to always check your workflows before scaling up to full production. Generally, we recommand testing your job with a single job followed by a handful (2-5) jobs before submitting your full submission. 
+!!! tip "Time-Out!"
+
+    It is important to always check your workflows before scaling up to full production. Generally, we recommand testing your job with a single job followed by a handful (2-5) jobs before submitting your full submission. 
 
 1.  Fill in the incomplete lines of the submit file, as shown below:
 
