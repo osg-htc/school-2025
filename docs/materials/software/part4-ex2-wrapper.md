@@ -16,7 +16,7 @@ common practice for managing what happens in a job.
 Background
 ----------
 
-Wrapper scripts are a useful tool for running software that can't be compiled into one piece, needs to be installed with every job, or just for running extra steps.  A wrapper script can either install the software from the source code, or use an already existing software (as in this exercise). Not only does this portability technique work with almost any kind of software that can be locally installed, it also allows for a great deal of control and flexibility for what happens within your job. Once you can write a script to handle your software (and often your data as well), you can submit a large variety of workflows to a distributed computing system like the Open Science Grid.
+Wrapper scripts are a useful tool for running software that can't be compiled into one piece, needs to be installed with every job, or just for running extra steps.  A wrapper script can either install the software from the source code, or use an already existing software (as in this exercise). Not only does this portability technique work with almost any kind of software that can be locally installed, it also allows for a great deal of control and flexibility for what happens within your job. Once you can write a script to handle your software (and often your data as well), you can submit a large variety of workflows to a distributed computing system like the OSPool.
 
 For this exercise, we will write a wrapper script as an alternate way to run the same job as the previous exercise. 
 
@@ -84,3 +84,12 @@ Now that our database and BLAST software are being transferred to the job as `ta
         username@login $ chmod u+x run_blast.sh
 
 Your job is now ready to submit. Submit it using `condor_submit` and monitor using `condor_q`.
+
+Apply to Your Work
+------------------
+
+1. How could you use a wrapper script to execute multiple commands in one job?
+
+1. Would it be easier to manage the files for your job if you used compressed files like .tar.gz?
+
+1. What other tasks could you perform inside of the job as part of the wrapper script?

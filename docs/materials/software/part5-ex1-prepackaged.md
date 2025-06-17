@@ -139,3 +139,10 @@ run the job. You already have these files back in the directory where you unpack
 	!!! note
 		For a very similar compiling example, see this guide on how to 
 		compile `samtools`: [Example Software Compilation](https://portal.osg-htc.org/documentation/htc_workloads/using_software/example-compilation/)
+
+Apply to Your Work
+------------------
+
+1. What are the compilation instructions for your software? (If they aren't written down anywhere, now is a good time!)
+
+1. How portable is your software? Can you compile it on one machine and run it on another?

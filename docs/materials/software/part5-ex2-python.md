@@ -17,6 +17,13 @@ Background
 **Why learn this?**: This is very similar to the [previous exercise](part5-ex1-prepackaged.md). 
 
 
+!!! tip "Just need Python?"
+    If you just need Python and don't want to go through the process below,
+    we recommend that you build a container that already has Python installed.
+
+    * For more information on containers, see this [previous exercise](part1-ex1-run-apptainer.md).
+    * For instructions on building a Python container, see this [OSPool guide](https://portal.osg-htc.org/documentation/software_examples/python/manage-python-packages/#install-python-packages).
+
 Pre-Building
 --------------------------------
 
@@ -146,4 +153,11 @@ the [Use a Wrapper Script exercise](part4-ex2-wrapper.md) might be a good candid
 1. Submit the job using `condor_submit`. 
 
 1. Check the `.out` file to see if the job completed.
+
+Apply to Your Work
+------------------
+
+1. Do you need to compile Python with special options?
+
+2. What version of Python and what Python packages do you need?
 

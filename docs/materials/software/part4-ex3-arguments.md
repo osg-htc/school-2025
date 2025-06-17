@@ -106,3 +106,10 @@ standard output file to see how the variables printed.
 !!! tip "See also"
     For more practice in writing scripts like the `run_blast.sh` script,
     see the earlier exercise: [2.1 Build an HTC-Friendly Executable](part2-ex1-build-executable.md).
+
+Apply to Your Work
+------------------
+
+1. How can you use variables in your script to make the code more readable?
+
+2. What parts of your script would benefit from using a variable?

@@ -75,3 +75,8 @@ Create an Executable
 Regardless of which approach you use, check out 
 the [Build an HTC-Friendly Executable](part2-ex1-build-executable.md) exercise
 for some tips on how to make your script more robust and easy to use with multiple jobs. 
+
+Apply to Your Work
+------------------
+
+This whole page is about applying the previous exercises to your work 🙂.

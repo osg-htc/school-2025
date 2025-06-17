@@ -161,3 +161,11 @@ will tell us how accurate we are, after the job runs):
 1. Submit the blast job using `condor_submit`. Once the job starts, it
 should run in just a few minutes and produce a file called
 `results.txt`.
+
+Apply to Your Work
+------------------
+
+1. Is the software you want to use available as a standalone binary, like `blastx`?
+   How could you find out, and where could you get the necessary file?
+
+2. How could you adapt a submit file to use a binary executable file?

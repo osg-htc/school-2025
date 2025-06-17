@@ -79,4 +79,12 @@ useful for running Jupyter notebooks that use tensorflow?
 
 1. Does your chosen image meet at least 2 of the criteria above? 
 
+Apply to Your Work
+------------------
+
+1. Do you or your colleagues use Docker containers for running calculations?
+
+1. Is the software you want to use already available via a container registry 
+   such as [DockerHub](https://hub.docker.com/), [NVIDIA Catalog](https://catalog.ngc.nvidia.com/containers), or elsewhere?
+
 [^1]: This list and previous text taken from [Introduction to Docker](https://carpentries-incubator.github.io/docker-introduction/)
