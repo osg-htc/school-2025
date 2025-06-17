@@ -34,14 +34,14 @@ Read mapping using algorithms, like `minimap2`, do not scale up well by simply a
 The components of each of our jobs will be:
 
 * **Inputs**
-  * A subset of reads.fastq - `reads_subset_a.fastq`
-  * A copy of the reference genome - `reference_genome.fasta`
-  * A copy of our minimap2 container (provided to you) - `minimap2.sif`
-  * A copy of our executable (template provided) - `run_minimap2.sh`
+    * A subset of reads.fastq - `reads_subset_a.fastq`
+    * A copy of the reference genome - `reference_genome.fasta`
+    * A copy of our minimap2 container (provided to you) - `minimap2.sif`
+    * A copy of our executable (template provided) - `run_minimap2.sh`
 * **Outputs**
-  * A SAM-formatted output file - `reads_subset_a.sam`
+    * A SAM-formatted output file - `reads_subset_a.sam`
 * **System Generated Files**
-  * A set of log, standard error, and standard out files - `job.49302_reads_subset_a.log`, `job.49302_reads_subset_a.err`, `job.49302_reads_subset_a.out`
+    * A set of log, standard error, and standard out files - `job.49302_reads_subset_a.log`, `job.49302_reads_subset_a.err`, `job.49302_reads_subset_a.out`
 
 ## Make an Organization Plan
 
@@ -140,9 +140,9 @@ Now that we have our data partitioned into independent subsets to be mapped in p
     :::console
     #!/bin/bash
     # Use minimap2 to map the basecalled reads to the reference genome
-    ./minimap2 -ax map-ont reference_genome.fasta reads.fastq > output.sam
+    minimap2 -ax map-ont reference_genome.fasta reads.fastq > output.sam
 
-| Command Segment | ./minimap2                             | -ax map-ont                                                                      | reference_genome.fasta               | reads.fastq                                 | \>                                         | output.sam                          |
+| Command Segment | `minimap2`                             | `-ax map-ont`                                                                      | `reference_genome.fasta`               | `reads.fastq`                                 | `>`                                         | `output.sam`                          |
 |-----------------|----------------------------------------|----------------------------------------------------------------------------------|--------------------------------------|---------------------------------------------|--------------------------------------------|-------------------------------------|
 | **Meaning**         | The program we'll run to map our reads | Specifies the type of reads we're using <br>(Oxford Nanopore Technologies reads) | The input reference we're mapping to | The reads we are mapping against our genome | redirects the output of minimap2 to a file | The output file of our mapping step |
 
@@ -166,7 +166,7 @@ Let's start by editing our template executable file! In our executable there's t
         #!/bin/bash
         reads_subset_file = $1
         # Use minimap2 to map the basecalled reads to the reference genome
-         ./minimap2 -ax map-ont reference_genome.fasta $(reads_subset_file) > output.sam
+        minimap2 -ax map-ont reference_genome.fasta $(reads_subset_file) > output.sam
 
 2. Modify the executable use the name of our input reads subset file (`$reads_subset_file`) as the prefix of our output file.
 
@@ -174,7 +174,7 @@ Let's start by editing our template executable file! In our executable there's t
         #!/bin/bash
         reads_subset_file = "$1"
         # Use minimap2 to map the basecalled reads to the reference genome
-         ./minimap2 -ax map-ont reference_genome.fasta "$(reads_subset_file)" > "$(reads_subset_file)_output.sam"
+        minimap2 -ax map-ont reference_genome.fasta "$(reads_subset_file)" > "$(reads_subset_file)_output.sam"
 
 ### Generating the List of Jobs
 Next, we need to generate a list of jobs for HTCondor to run. In previous exercises, we've used the `queue` statements such as `queue <num>` and `queue <variable> matching *.txt`. For our exercise, we will use the `queue <var> from <list>` submission strategy. 
@@ -245,10 +245,10 @@ in this example, we will use the `Alice_in_Wonderland.txt` file from our `input`
 
 2.  Next, edit the submit file lines that tell the log, output, and error files where to go:
 
-           :::console
-           output        = logs/output/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.out
-           error         = logs/error/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.err
-           log           = logs/log/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.log
+        :::console 
+        output        = logs/output/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.out
+        error         = logs/error/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.err
+        log           = logs/log/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.log
 
 3.  Last, add to the submit file your resource requirements:
 
