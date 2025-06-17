@@ -87,3 +87,39 @@
 /*$font-family-base: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;*/
 /*$headings-font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;*/
 /*$headings-font-weight: 600;*/
+
+:root {
+  --md-admonition-icon--halt: url("https://cdn.jsdelivr.net/npm/@mdi/svg/svg/hand-back-left.svg");
+}
+.md-typeset .admonition.halt,
+.md-typeset details.halt {
+  border-color: rgb(235, 12, 12);
+}
+.md-typeset .halt > .admonition-title,
+.md-typeset .halt > summary {
+  background-color: rgba(235, 12, 12, 0.1);
+}
+.md-typeset .halt > .admonition-title::before,
+.md-typeset .halt > summary::before {
+  background-color: rgb(235, 12, 12);
+  -webkit-mask-image: var(--md-admonition-icon--halt);
+          mask-image: var(--md-admonition-icon--halt);
+}
+
+:root {
+  --md-admonition-icon--pro-tip: url("https://cdn.jsdelivr.net/npm/@mdi/svg/svg/brain.svg");
+}
+.md-typeset .admonition.pro-tip,
+.md-typeset details.pro-tip {
+  border-color: rgb(177, 0, 222);
+}
+.md-typeset .pro-tip > .admonition-title,
+.md-typeset .pro-tip > summary {
+  background-color: rgba(177, 0, 222, 0.1);
+}
+.md-typeset .pro-tip > .admonition-title::before,
+.md-typeset .pro-tip > summary::before {
+  background-color: rgb(177, 0, 222);
+  -webkit-mask-image: var(--md-admonition-icon--pro-tip);
+          mask-image: var(--md-admonition-icon--pro-tip);
+}
