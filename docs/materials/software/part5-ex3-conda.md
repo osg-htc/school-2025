@@ -87,6 +87,7 @@ tar.gz file with our environment:
 		:::console
 		(base)[user@login]$ conda pack -n py3-numpy
 
+
 Submit a Job
 -------------
 
@@ -116,3 +117,18 @@ yourself and then check the suggestions in the next point.
 	 `transfer_input_files`. 
 
 6. Submit the job and see what happens!
+
+!!! warning "When `conda pack` fails..."
+    As useful as the `conda pack` utility is, it does not work with all Conda or Python packages.
+    If your job fails with an obscure error, you may have encountered such a situation.
+
+    * For more information on containers, see this [previous exercise](part1-ex1-run-apptainer.md).
+    * For instructions on building a Conda container, see this [OSPool guide](https://portal.osg-htc.org/documentation/software_examples/other_languages_tools/conda-container/).
+
+Apply to Your Work
+------------------
+
+1. Do you use Conda for installing your software? What are the packages you need?
+
+1. Do you have an `environment.yaml` file that defines your Conda environment?
+    How could you incorporate that in the above instructions?

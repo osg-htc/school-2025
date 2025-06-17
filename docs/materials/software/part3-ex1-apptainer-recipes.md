@@ -95,4 +95,15 @@ Environment
 To set environment variables (especially useful for software in a custom location), 
 use the `%environment` section of the definition file. 
 
+Apply to Your Work
+------------------
+
+1. What is a good container to use as the base (specified in the `From:` line) for your container?
+
+2. Does your software need certain Linux libraries in order to work?
+
+3. Are there any environment variables that your software is expecting to use?
+If so, should you define them in the `%environment` section, or should you define them for each job?
+
+
 [^1]: This text and previous list taken from [Introduction to Docker](https://carpentries-incubator.github.io/docker-introduction/)

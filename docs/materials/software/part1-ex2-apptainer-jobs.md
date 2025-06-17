@@ -75,3 +75,13 @@ Experimenting With Other Containers
 
 1. Try submitting a job that uses one of these containers. Change the executable 
 script to explore different aspects of that container. 
+
+Apply to Your Work
+------------------
+
+1. Could you use any of the OSG-supported containers to run your calculations?
+   If not, could you use any of them as a starting point for installing the missing software?
+
+1. How important is it for your jobs to have a consistent software environment? 
+   How portable are scripts and software that you use?
+

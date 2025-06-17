@@ -99,3 +99,10 @@ Now that our code is compiled, we can use it to submit a job.
 
 1. Once the job has run and left the queue, you should be able to see the results (seven rows of Pascal's triangle) in the `.out` file created by the job.
 
+Apply to Your Work
+------------------
+
+1. Do you write and compile your own code like in this exercise?
+
+1. How portable is your compiled code? Do you have any assumptions about what libraries are available at runtime?
+

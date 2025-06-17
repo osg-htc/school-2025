@@ -109,3 +109,12 @@ as above. What version of Linux is used in this container? Does the version of P
 match what you expect, based on the name of the container? 
 
 1. Once done, type `exit` to leave the container. 
+
+Apply to Your Work
+------------------
+
+1. Is the software you want to use already available via a container registry 
+   such as [DockerHub](https://hub.docker.com/), [NVIDIA Catalog](https://catalog.ngc.nvidia.com/containers), or elsewhere?
+
+1. Consider what it takes to install your software - if you could choose the operating system, would that make it easier to install your software?
+
