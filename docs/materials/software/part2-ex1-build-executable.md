@@ -41,7 +41,7 @@ output to file):
 
 		:::console
 		$ ./word-variations.py Alice_in_Wonderland.txt Dodo > variations.Dodo.txt
-		$ ./word-contexts.py Alice_in_Wonderland.txt $(cat variations.Dodo.txt) > contexts.Dodo.txt
+		$ ./word-contexts.py Alice_in_Wonderland.txt variations.Dodo.txt > contexts.Dodo.txt
 
 Add a Header
 ----------
@@ -54,7 +54,7 @@ run the script, we will add the following header on the first line: ``#!/bin/bas
 		#!/bin/bash
 		
 		./word-variations.py Alice_in_Wonderland.txt Dodo > variations.Dodo.txt
-		./word-contexts.py Alice_in_Wonderland.txt $(cat variations.Dodo.txt) > contexts.Dodo.txt
+		./word-contexts.py Alice_in_Wonderland.txt variations.Dodo.txt > contexts.Dodo.txt
 
 
 	The "header" of `#!/bin/bash` will tell the computer that this is a bash shell script 
@@ -121,7 +121,7 @@ with input arguments?
 		#!/bin/bash
 		
 		./word-variations.py $1 $2 > variations.$2.txt
-		./word-contexts.py $1 $(cat variations.$2.txt) > contexts.$2.txt
+		./word-contexts.py $1 variations.$2.txt > contexts.$2.txt
 		
 	Try running it as described above. Does it work? 
 
@@ -136,7 +136,7 @@ assign the arguments to meaningful variable names:
 		TARGET_WORD="${2}"
 
 		./word-variations.py ${FILENAME} ${TARGET_WORD} > variations.${TARGET_WORD}.txt
-		./word-contexts.py ${FILENAME} $(cat variations.${TARGET_WORD}.txt) > contexts.${TARGET_WORD}.txt
+		./word-contexts.py ${FILENAME} variations.${TARGET_WORD}.txt > contexts.${TARGET_WORD}.txt
 
     !!! note "Why curly brackets?"
         You'll notice above that we started using curly brackets around our variables. 
@@ -163,7 +163,7 @@ After making these changes, the script will look like this:
 		CONTEXTS_OUTPUT="contexts.${TARGET_WORD}.txt"
 
 		./word-variations.py ${FILENAME} ${TARGET_WORD} > ${VARIATIONS_OUTPUT}
-		./word-contexts.py ${FILENAME} $(cat ${VARIATIONS_OUTPUT}) > ${CONTEXTS_OUTPUT}
+		./word-contexts.py ${FILENAME} ${VARIATIONS_OUTPUT} > ${CONTEXTS_OUTPUT}
 
 	You may consider this optimization to be optimal and that's fine. But for longer scripts,
 	being able to change "customizable" values in a single place helps prevent inconsistencies
@@ -181,7 +181,7 @@ After making these changes, the script will look like this:
 		CONTEXTS_OUTPUT="${4}"
 
 		./word-variations.py ${FILENAME} ${TARGET_WORD} > ${VARIATIONS_OUTPUT}
-		./word-contexts.py ${FILENAME} $(cat ${VARIATIONS_OUTPUT}) > ${CONTEXTS_OUTPUT}
+		./word-contexts.py ${FILENAME} ${VARIATIONS_OUTPUT} > ${CONTEXTS_OUTPUT}
 
 Your Work
 ----------
