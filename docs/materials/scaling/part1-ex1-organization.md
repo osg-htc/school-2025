@@ -88,19 +88,18 @@ For our exercise, we will use the following data organizational structure:
         $ mkdir logs/error
         $ mkdir logs/output
         $ mkdir /ospool/ap40/data/<user.name>/scaling-up/inputs
+        $ mkdir /ospool/ap40/data/<user.name>/scaling-up/software
 
 2. Move the `reads.fastq` file to your `inputs` directory using the `mv` command. 
 
 3. Move the `reference_genome.fasta` file to your `/ospool/ap40/data/<user.name>/scaling-up/inputs` directory using the `mv` command. 
 
-4. . Move the `minimap2.sif` container image file to your `/ospool/ap40/data/<user.name>/scaling-up/software` directory using the `mv` command. 
+4. Move the `minimap2.sif` container image file to your `/ospool/ap40/data/<user.name>/scaling-up/software` directory using the `mv` command. 
 
 >[!TIP]
-> Every one of our jobs will use both the `reference_genome.fasta` and `minimap2.sif` files. These files, due to their frequent usage and larger size, significantly benefit from the OSDF's caching mechanism. 
+> Every one of our jobs will use both the `reference_genome.fasta` and `minimap2.sif` files. These files, due to their frequent usage and larger size, significantly benefit from the OSDF's caching mechanism. In order to use the OSDF file transfer mechanism, we should 1) place them somewhere on our `ospool/ap40/data/<user.name>/` directory and 2) use the `osdf:///` protocol prefix when calling these files in our submit file.
 
-
-
-3View the current directory and its subdirectories by using the `ls` command with the *recursive* (`-R`) flag:
+5. View the current directory and its subdirectories by using the `ls` command with the *recursive* (`-R`) flag:
 
         :::console
         $ ls -R
@@ -112,65 +111,195 @@ For our exercise, we will use the following data organizational structure:
 
         ./output:
 
-3.  Next, create directories for the HTCondor log, standard output, and standard output files (in one directory):
+## Composing Your Job
+
+### Wrangling The Data
+To get ready for our mapping step, we need to prepare our read files. This includes two crucial steps, splitting our reads and saving the read subset file names to a file.
+
+1. Navigate to your `~/scaling-up/inputs/` directory
+
+   ```
+   cd ~/scaling-up/inputs/
+   ```
+
+2. Split the FASTQ file into subsets of `5,000` reads per subset. Since each FASTQ read consist of four lines in the FASTQ file, we can split `reads.fastq` every `20,000` lines
+
+    ```
+   split -l 20000 reads.fastq reads_fastq_chunk_
+   rm reads.fastq
+   ```
+>[!IMPORTANT]
+> One of the most important steps in scaling up our workflows to run on HTC systems, such as the OSPool, is maintaining a clear organizational structure. This includes deleting files we will not be using anymore. For the rest of the exercise, we will not be using the `reads.fastq` file after splitting it. **Not deleting this file can cause downstream issues. Do not skip this step.**
+
+### Adapting the Executable
+Now that we have our data partitioned into independent subsets to be mapped in parallel, we can work on adapting our executable for use on the OSPool. We will start with the following template executable file, which is also found in your project directory under `~/scaling-up/minimap2.sh`.
 
         :::console
-        $ mkdir logs
-        $ mkdir errout
+        #!/bin/bash
+        # Use minimap2 to map the basecalled reads to the reference genome
+         ./minimap2 -ax map-ont reference_genome.fasta reads.fastq > output.sam
 
-## Submit One Job
+| Command Segment | ./minimap2                             | -ax map-ont                                                                      | reference_genome.fasta               | reads.fastq                                 | \>                                         | output.sam                          |
+|-----------------|----------------------------------------|----------------------------------------------------------------------------------|--------------------------------------|---------------------------------------------|--------------------------------------------|-------------------------------------|
+| **Meaning**         | The program we'll run to map our reads | Specifies the type of reads we're using <br>(Oxford Nanopore Technologies reads) | The input reference we're mapping to | The reads we are mapping against our genome | redirects the output of minimap2 to a file | The output file of our mapping step |
+
+>[!IMPORTANT]
+>**Before moving forward think about how you would adapt this executable template for HTC**
+>
+>If we want to map each one of our reads subsets against the reference genome, think about the following questions:
+> * What parts of the command will change with each job?
+> * What parts of the command will stay the same?
+
+Let's start by editing our template executable file! In our executable there's two main segments of the `minimap2` command that will be changed: The input `reads.fastq` file and the output `output.sam` file. 
+
+>[!IMPORTANT]
+>**Renaming our output files**
+>
+>What do you think would happen if we do keep the output file on our executable as `output.sam`?
+
+1. Modify the executable to accept the name of our input `reads.fastq` subsets as an argument.
+
+        :::console
+        #!/bin/bash
+        reads_subset_file = $1
+        # Use minimap2 to map the basecalled reads to the reference genome
+         ./minimap2 -ax map-ont reference_genome.fasta $(reads_subset_file) > output.sam
+
+2. Modify the executable use the name of our input reads subset file (`$reads_subset_file`) as the prefix of our output file.
+
+        :::console
+        #!/bin/bash
+        reads_subset_file = "$1"
+        # Use minimap2 to map the basecalled reads to the reference genome
+         ./minimap2 -ax map-ont reference_genome.fasta "$(reads_subset_file)" > "$(reads_subset_file)_output.sam"
+
+### Generating the List of Jobs
+Next, we need to generate a list of jobs for HTCondor to run. In previous exercises, we've used the `queue` statements such as `queue <num>` and `queue <variable> matching *.txt`. For our exercise, we will use the `queue <var> from <list>` submission strategy. 
+
+??? question 
+    What values should we pass to HTCondor to scale our `minimap2` workflow up? 
+
+1. Move to your `~/scaling-up/inputs/` directory
+
+        :::console
+        $ mv ~/scaling-up/inputs/
+        $ ls -la
+        total 12
+        drwxr-xr-x  2 daniel.morales.1 daniel.morales.1 4096 Jun 13 16:08 .
+        drwx------ 10 daniel.morales.1 daniel.morales.1 4096 Jun 13 16:07 ..
+        -rw-r--r--  1 daniel.morales.1 daniel.morales.1   14 Jun 13 16:08 reads_fastq_chunk_a
+        -rw-r--r--  1 daniel.morales.1 daniel.morales.1   14 Jun 13 16:08 reads_fastq_chunk_b
+        -rw-r--r--  1 daniel.morales.1 daniel.morales.1   14 Jun 13 16:08 reads_fastq_chunk_c
+        -rw-r--r--  1 daniel.morales.1 daniel.morales.1   14 Jun 13 16:08 reads_fastq_chunk_d
+2. Make a list of all the files in `~/scaling-up/inputs/` and save it to `~/scaling-up/list_of_fastq.txt`
+
+        :::console
+        $ ls > ~/scaling-up/list_of_fastq.txt
+        $ mv ~/scaling-up/
+        $ ls -la
+        total 12
+        drwxr-xr-x  2 daniel.morales.1 daniel.morales.1 4096 Jun 13 16:08 .
+        drwx------ 10 daniel.morales.1 daniel.morales.1 4096 Jun 13 16:07 ..
+        -rw-r--r--  1 daniel.morales.1 daniel.morales.1   14 Jun 13 16:08 list_of_fastq.txt
+
+3. Use `head` to preview the first 10 lines of `list_of_fastq.txt`
+
+        :::console
+        $ head ~/scaling-up/list_of_fastq.txt
+        reads_fastq_chunk_a
+        reads_fastq_chunk_b
+        reads_fastq_chunk_c
+        reads_fastq_chunk_d
+        reads_fastq_chunk_e
+        ...
+        reads_fastq_chunk_j
+
+## Testing Our Jobs - Submit **_One_** Job
 
 Now we want to submit a test job that uses this organizing scheme,
 using just one item in our input set&nbsp;&mdash;
 in this example, we will use the `Alice_in_Wonderland.txt` file from our `input` directory.
 
+>[!TIPS]
+> It is important to always check your workflows before scaling up to full production. Generally, we recommand testing your job with a single job followed by a handful (2-5) jobs before submitting your full submission. 
+
 1.  Fill in the incomplete lines of the submit file, as shown below:
 
         :::console
-        executable    = wordcount.py
-        arguments     = Alice_in_Wonderland.txt
+        +SingularityImage       = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
 
-        transfer_input_files    = input/Alice_in_Wonderland.txt
-        transfer_output_files   = counts.Alice_in_Wonderland.txt
-        transfer_output_remaps  = "counts.Alice_in_Wonderland.txt=output/counts.Alice_in_Wonderland.txt"
+        executable              = minimap2.sh
+        arguments               = reads_fastq_chunk_a
+
+        transfer_input_files    = ./input/reads_fastq_chunk_a, osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
+        transfer_output_files   = reads_fastq_chunk_a_output.sam
+        transfer_output_remaps  = "reads_fastq_chunk_a_output.sam=output/reads_fastq_chunk_a_output.sam"
 
     To tell HTCondor the location of the input file, we need to include the input directory.
     Also, this submit file uses the `transfer_output_remaps` feature that you learned about;
     it will move the output file to the `output` directory by renaming or remapping it.
 
-1.  Next, edit the submit file lines that tell the log, output, and error files where to go:
+2.  Next, edit the submit file lines that tell the log, output, and error files where to go:
+
+           :::console
+           output        = logs/output/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.out
+           error         = logs/error/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.err
+           log           = logs/log/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.log
+
+3.  Last, add to the submit file your resource requirements:
 
         :::console
-        output        = logs/job.$(ClusterID).$(ProcID).out
-        error         = errout/job.$(ClusterID).$(ProcID).err
-        log           = errout/job.$(ClusterID).$(ProcID).log
+        request_cpus           = 2
+        request_disk           = 4 GB
+        request_memory         = 4 GB 
+     
+        queue 1
 
-1.  Submit your job and monitor its progress.
+4.  Submit your job and monitor its progress.
 
 ## Submit Multiple Jobs
 
-Now, you are ready to submit the whole workload.
+Now, you are ready to submit the whole workload. 
 
-1.  Create a file with the list of input files (the input set);
-    here, this is the list of the book files to analyze.
-    Do this by using the shell `ls` command and redirecting its output to a file:
+!!! example "Try It Yourself!"
 
+    You've split your large FASTQ file into multiple read subsets, and you're ready to run `minimap2` on all of them in parallel.
+
+    1. Edit your submit file to use the `queue <var> from <file>` syntax.
+    2. Ensure the `arguments`, `transfer_input_files`, `transfer_output_files` fields change with each input.
+    3. Ensure your `log`, `error`, and `output` files all include the name of the read subset file being used mapped in this job.
+    4. Organize the output files using the correct `transfer_output_remaps` statement
+    
+    🧠 Before submitting:
+    - Are all your subset filenames listed in `list_of_fastq.txt`?
+      - Did you test at least one job successfully?
+      - Are you remapping outputs into the `outputs/` folder?
+    
+    When ready, submit with:
+    ```bash
+    condor_submit minimap2_multi.submit
+    ```
+    
+    ??? example "Solution Set"
+
+        Your final submit file should look something like this:
+        
         :::console
-        $ ls input > booklist.txt
-        $ cat booklist.txt
+        +SingularityImage      = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
 
-1.  Modify the submit file to reference the file of inputs and replace the fixed value (`Alice_in_Wonderland.txt`) with a variable (`$(book)`):
+        executable             = ./minimap2.sh
+        arguments              = $(read_subset_file)
+        transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
+        
+        transfer_output_files  = ./$(read_subset_file)_output.sam
+        transfer_output_remaps  = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
+         
+        output        = logs/output/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.out
+        error         = logs/error/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.err
+        log           = logs/log/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.log
 
-        :::console
-        executable    = wordcount.py
-        arguments     = $(book)
-
-        transfer_input_files    = input/$(book)
-        transfer_output_files   = counts.$(book)
-        transfer_output_remaps  = "counts.$(book)=output/counts.$(book)"
-
-        queue book from booklist.txt
-
-1.  Submit the jobs
-
-1.  When complete, look at the complete set of input and (now) output files to see how they are organized.
+        request_cpus           = 2
+        request_disk           = 4 GB
+        request_memory         = 4 GB 
+         
+        queue read_subset_file from ./list_of_fastq.txt
