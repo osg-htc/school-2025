@@ -25,6 +25,15 @@ searches will lead you to a BLAST website page that looks like this:
 
     ![BLAST landing page](files/part1-ex1-blast-landing-page.png)
 
+    Note that the URL for this webpage starts with `blast.ncbi.nlm.nih.gov`.
+
+    !!! warning "Check your sources!"
+        You should always be careful downloading software from the internet!
+        Only download software from a trusted source and be on the lookout for
+        forfeits.
+
+        Feel free to ask a facilitator if you are not sure if you can trust a software source.
+
 1.  Click on the title that says ["Download
 BLAST"](files/part1-ex1-blast-front-page.png) and then look for the
 link that has the [latest installation and source
@@ -48,7 +57,8 @@ we're going to use one of the pre-built binaries.  **Before proceeding,
 look at the list of downloads and try to determine which one you want.**
 
 1.  Based on our operating system, we want to use the Linux binary,
-which is labelled with the `x64-linux` suffix. 
+which is labelled with the `x64-linux` suffix. **Right click on the filename
+and then click "Copy link address".**
 
 	![BLAST download page](files/part1-ex1-blast-dl-list-linux.png)
 
@@ -56,15 +66,22 @@ which is labelled with the `x64-linux` suffix.
 
 	All the other links are either for source code or other operating
 systems. 
+
+    !!! note "What about the version number?"
+        While the image shows files for version `2.13.0` of BLAST, 
+        the version you'll see will almost certainly be newer. 
+
+        You can ignore the version number for the purpose of this exercise.
 	
 1. On the Access Point, create a directory for
 this exercise. Then download the appropriate `tar.gz` file and un-tar/decompress it
 it. If you want to do this all from the command line, the sequence will 
-look like this (using `wget` as the download command.) 
+look like this (using `wget` as the download command.) **Use the link you copied from
+the previous step.**
 
         :::console
-        user@login $ wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.15.0/ncbi-blast-2.15.0+-x64-linux.tar.gz
-        user@login $ tar -xzf ncbi-blast-2.15.0+-x64-linux.tar.gz
+        user@login $ wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.16.0+-x64-linux.tar.gz
+        user@login $ tar -xzf ncbi-blast-2.16.0+-x64-linux.tar.gz
 
 1.  We're going to be using the `blastx` binary in our job. Where is it
 in the directory you just decompressed?
@@ -144,3 +161,11 @@ will tell us how accurate we are, after the job runs):
 1. Submit the blast job using `condor_submit`. Once the job starts, it
 should run in just a few minutes and produce a file called
 `results.txt`.
+
+Apply to Your Work
+------------------
+
+1. Is the software you want to use available as a standalone binary, like `blastx`?
+   How could you find out, and where could you get the necessary file?
+
+2. How could you adapt a submit file to use a binary executable file?

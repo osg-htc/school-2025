@@ -149,3 +149,17 @@ CPU and memory requests):
 	submit file should use the `osdf:///` protocol to declare the transfer. For more information, see the
 	[Data Exercises](/school-2025/materials/data/part2-ex1-osdf-inputs/) or the 
 	[OSPool guide on using the OSDF](https://portal.osg-htc.org/documentation/htc_workloads/managing_data/osdf/).
+
+Apply to Your Work
+------------------
+
+1. Have you ever wanted to "just install" your software for use on the OSPool? 
+   Could you accomplish that by building your own Apptainer container?
+
+1. Do you know how to install your software on a brand new computer?
+
+    - If so, how you would incorporate those instructions into an Apptainer definition file?
+    - If not, can you find the necessary instructions?
+
+1. Do you have a simple test you can use to check if the software you want to use is working as expected?
+

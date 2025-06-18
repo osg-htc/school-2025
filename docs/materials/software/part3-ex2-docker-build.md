@@ -107,7 +107,10 @@ Upload Container and Submit Job
 -------------------------------
 
 Right now the container image only exists on your computer. To use it in CHTC or 
-elsewhere, it needs to be added to a public registry like Docker Hub. 
+elsewhere, it needs to be added to a **public** registry like Docker Hub. 
+
+!!! danger "**Anyone** can access a public Docker container!"
+    Make sure that you do include any secret or privileged information in your container.
 
 1. To put your container image in Docker Hub, use the `docker push` command on the 
 command line:
@@ -120,6 +123,13 @@ command line:
 
 1. Once your container image is in DockerHub, you can use it in jobs as described 
 in [Exercise 1.3](part1-ex3-docker-jobs.md). 
+
+Apply to Your Work
+------------------
+
+1. What is a good container to use as the base (specified in the `FROM` line) for your container?
+
+2. Does your software need certain Linux libraries in order to work?
 
 > Thanks to [Josh Karpel](https://github.com/JoshKarpel/osg-school-example-dockerfile) for 
 providing the original sample `Dockerfile`!

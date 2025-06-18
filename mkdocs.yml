@@ -5,6 +5,11 @@ theme:
   name: material
   logo: assets/OSG_Logo.svg
   favicon: assets/OSG_Logo.png
+  custom_dir: overrides
+  icon:
+    admonition:
+      halt: material/hand-back-left
+      pro-tip: material/brain
 
 markdown_extensions:
   - attr_list
@@ -16,6 +21,14 @@ markdown_extensions:
   - toc:
       permalink: True
   - footnotes
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - overrides/.icons
+  - pymdownx.critic
+
 
 extra_css:
   - stylesheets/code-highlight.css
@@ -92,10 +105,11 @@ nav:
     - Scaling Up:
       - Scaling Up - Organizing and Testing
         - 1.1 - Organizing HTC workloads: materials/scaling/part1-ex1-organization.md
+        - 1.2 - Composing Your Jobs: materials/scaling/part2-ex1-composing-the-job.md
       - Exploring Resources
-        - 2.1 - Log Into a Local Pool
-        - 2.2 - Hardware Differences Between OSPool and the CHTC Pool
-        - 2.3 - Software Differences Between OSPool and the CHTC Pool
+        - 2.1 - Log Into a Local Pool: 
+        - 2.2 - Hardware Differences Between OSPool and the CHTC Pool: 
+        - 2.3 - Software Differences Between OSPool and the CHTC Pool: 
       - Exploring Jobs
         - 3.1 - Investigating Job Attributes: materials/scaling/part1-ex2-job-attributes.md
         - 3.2 - Getting Job Information from Log Files: materials/scaling/part1-ex3-log-files.md

@@ -60,7 +60,8 @@ Now, let's try running that same script inside a container.
 
 		:::file
 		universe = container
-		container_image = /cvmfs/singularity.opensciencegrid.org/htc/ubuntu:22.04
+        OSDF_URL = osdf:///ospool/uc-shared/public/OSG-Staff/images/repo/x86_64
+		container_image = $(OSDF_URL)/htc__ubuntu__22.04.sif
    
 1. If the submit file you copied has something like `requirements = (OSGVO_OS_STRING == "RHEL 9")`, remove that. When you use containers, you should not specify an OS in the requirements as that will unnecessarily limit the number of resources you can run on.
 
@@ -74,3 +75,13 @@ Experimenting With Other Containers
 
 1. Try submitting a job that uses one of these containers. Change the executable 
 script to explore different aspects of that container. 
+
+Apply to Your Work
+------------------
+
+1. Could you use any of the OSG-supported containers to run your calculations?
+   If not, could you use any of them as a starting point for installing the missing software?
+
+1. How important is it for your jobs to have a consistent software environment? 
+   How portable are scripts and software that you use?
+
