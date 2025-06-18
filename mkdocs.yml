@@ -107,12 +107,12 @@ nav:
         - 1.1 - Organizing HTC workloads: materials/scaling/part1-ex1-organization.md
         - 1.2 - Composing Your Jobs: materials/scaling/part2-ex1-composing-the-job.md
       - Exploring Resources
-        - 2.1 - Log Into a Local Pool: 
-        - 2.2 - Hardware Differences Between OSPool and the CHTC Pool: 
-        - 2.3 - Software Differences Between OSPool and the CHTC Pool: 
+        - 2.1 - Log Into a Local Pool: materials/scaling/part2-ex1-chtc-node.md
+        - 2.2 - Hardware Differences Between OSPool and the CHTC Pool: materials/scaling/part2-ex2-hardware-diffs.md
+        - 2.3 - Software Differences Between OSPool and the CHTC Pool: materials/scaling/part2-ex3-software-diffs.md
       - Exploring Jobs
-        - 3.1 - Investigating Job Attributes: materials/scaling/part1-ex2-job-attributes.md
-        - 3.2 - Getting Job Information from Log Files: materials/scaling/part1-ex3-log-files.md
+        - 3.1 - Investigating Job Attributes: materials/scaling/part3-ex1-job-attributes.md
+        - 3.2 - Getting Job Information from Log Files: materials/scaling/part3-ex2-log-files.md
     - DAGMan Exercises:
       - 1.1 - A simple DAG: materials/workflows/part1-ex1-simple-dag.md
       - 1.2 - A brief detour through the Mandelbrot set: materials/workflows/part1-ex2-mandelbrot.md
