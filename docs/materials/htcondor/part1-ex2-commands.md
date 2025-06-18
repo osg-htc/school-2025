@@ -9,6 +9,8 @@ HTC Exercise 1.2: Experiment With HTCondor Commands
 
 ## Exercise Goal
 
+Before you run work on a High Throughput Computing system, it's useful to know what resources are available and how to view jobs.
+
 The goal of this exercise is to learn about two HTCondor commands: `condor_q` and `condor_status`.
 These commands are useful for monitoring your jobs and viewing available Execution Point slots throughout the week.
 
@@ -22,7 +24,7 @@ At its most basic, the command is:
 [username@ap40 ~]$ condor_status
 ```
 
-When running this command, there is typically a lot of output printed to the screen. Looking at your terminal output, there is one line per execute point slot. 
+When running this command, there is typically a lot of output printed to the screen. Looking at your terminal output, there is one line per Execution Point slot. 
 
 !!! tip
 
@@ -64,7 +66,7 @@ At the end of the slot listing, there is a summary. Here is an example:
          Total 54467     0   47991      6314       0        162      0        0      0
 ```
 
-There is one row of summary for each machine (i.e. "slot") architecture/operating system combination with columns for the number of slots in each state. The final row gives a summary of slot states for the whole pool.
+There is one row of summary for each machine (i.e., "slot") architecture/operating system combination with columns for the number of slots in each state. The final row gives a summary of slot states for the whole pool.
 
 ### Questions
 
@@ -98,7 +100,7 @@ This output consists of 9 columns:
 |:------------|:----------------|:-------------------------------------------------------------------------------------------------------------------------------|
 | OWNER       | `alice`        | The user ID of the user who submitted the job                                                                                  |
 | BATCH\_NAME | `run_ffmpeg.sh` | The "jobbatchname" specified within the submit file. If not specified, it's given the value of `ID: <ClusterID>` | 
-| SUBMITTED   | `4/28 09:58`    | The date and time when the job was submitted                                                                                   |
+| SUBMITTED   | `4/28 09:58`    | The date and time when the job(s) was submitted                                                                                   |
 | DONE        | `_`             | Number of jobs in this batch that have completed                                                                               |
 | RUN         | `_`             | Number of jobs in this batch that are currently running                                                                        |
 | IDLE        | `1`             | Number of jobs in this batch that are idle, waiting for a match                                                                |
@@ -132,7 +134,7 @@ By default, the `condor_q` command shows **your** jobs only. To see everyone’s
 
 ### Viewing Jobs without the Default "batch" Mode
 
-The `condor_q` output, by default, groups "batches" of jobs together (i.e. if they were submitted with the same submit file or "jobbatchname"). To see more information for EVERY job on a separate line of output, use the `-nobatch` option to `condor_q`:
+The `condor_q` output, by default, groups "batches" of jobs together (i.e., if they were submitted with the same submit file or "jobbatchname"). To see more information for EVERY job on a separate line of output, use the `-nobatch` option to `condor_q`:
 
 ``` console
 [username@ap40 ~]$ condor_q -all -nobatch

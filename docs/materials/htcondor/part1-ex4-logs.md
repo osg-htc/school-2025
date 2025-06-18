@@ -9,7 +9,7 @@ HTC Exercise 1.4: Read and Interpret Log Files
 
 ## Exercise Goal
 
-In the previous exercise, we learned how to translate a simple list of computational tasks into HTCondor jobs. With each job, we generated a `.log` file. What is this file?
+In the previous exercise, we learned how to translate a simple list of computational tasks into HTCondor jobs. What if we want to learn more about our jobs?
 
 The goal of this exercise is to learn how to understand the contents of a job's log file, which contains a history of the steps HTCondor took to run your job. The log file is also a great place to look while you are testing your jobs, as it records resource usage.
 
@@ -21,10 +21,10 @@ In our last exercise, we collected information about the slots and submitted a r
 
 Why should we care about our resource usage? There are two undesirable scenarios:
 
-* **Under-requesting resources.** If you under-request resources (i.e. memory, disk), your job go into the hold state when its usage exceeds the resources allocated to it. This means your job stops running, and you have to fix the issue by requesting more resources and resubmit the job.
-* **Over-requesting resources.** The easy solution to avoid the above scenario is to request a lot of resources, right? Unfortunately, no! Over-requesting resources means HTCondor needs to find a slot that has those resources, which can take longer than necessary if your job could have run on a slot with fewer resources. This is especially detrimental when you plan to submit many jobs.
+* **Under-requesting resources.** If you under-request resources (i.e. memory, disk), your jobs go into the hold state when their usage exceeds the resources allocated to it. This means your jobs stops running, and you have to fix the issue by requesting more resources and resubmit the jobs.
+* **Over-requesting resources.** The easy solution to avoid the above scenario is to request a lot of resources, right? Unfortunately, no! Over-requesting resources means HTCondor needs to find a slot that has those resources, which can take longer than necessary if your jobs could have run on a slot with fewer resources. This is especially detrimental when you plan to submit many jobs.
 
-For this exercise, we can examine a log file for any previous job that you have run. The example output below is based on a single job (process) within with the batch of jobs we submitted.
+For this exercise, we can examine a log file for any previous jobs that you have run. The example output below is based on a single job (process) within with the batch of jobs we submitted.
 
 A job log file is updated throughout the life of a job, usually at key events. Each event starts with a heading that indicates what happened and when. Here are **some** of the event headings from the `tz_slotinfo` job log (detailed output in between headings has been omitted here):
 
@@ -50,7 +50,7 @@ View one of these log files and scroll through, observing what's written. There 
 !!! note
     Because we printed a single log file for all 50 jobs in the batch of jobs, all 50 jobs' events are printed in this log file as they happen. If you want an individual log file for each job in the batch, use `$(Process)` in the `log` line of the submit file.
 
-However, some lines have additional information to help you quickly understand where and how your job is running. For example:  
+However, some lines have additional information to help you quickly understand where and how your jobs are running. For example:  
 
 ``` file
 001 (12636880.000.000) 2025-05-27 17:35:54 Job executing on host: <10.118.5.219:33393?CCBID=128.105.82.148:9618%3faddrs%3d128.105.82.148-9618+[2607-f388-2200-87-d439-a1c8-2a11-24fc]-9618%26alias%3dospool-ccb.osg.chtc.io%26noUDP%26sock%3dcollector1#72672458%20192.170.231.11:9618%3faddrs%3d192.170.231.11-9618+[fd85-ee78-d8a6-8607--1-73ab]-9618%26alias%3dospool-ccb.osgprod.tempest.chtc.io%26noUDP%26sock%3dcollector7#31809902&PrivNet=c219.mgmt.hellbender&addrs=10.118.5.219-33393&alias=c219.mgmt.hellbender&noUDP>
@@ -76,7 +76,7 @@ Another example of is the periodic update:
 ...
 ```
 
-These updates record the amount of memory that the job is using on the execute machine. This can be helpful information, so that in future runs of the job, you can tell HTCondor how much memory you will need.
+These updates record the amount of memory that your jobs are using on the Execution Points. This can be helpful information, so that in future runs of the job, you can tell HTCondor how much memory you will need.
 
 The job termination event includes a lot of very useful information:
 
@@ -115,6 +115,7 @@ There are many other kinds of events, but the ones above will occur in almost ev
 * Why do you think the CPU usage shows `0` instead of `1`?
 * What might account for the difference between `TimeExecute` and `TimeSlotBusy`?
 
+Discuss your answers to these questions with a neighbor or staff member.
 
 ## Understanding How HTCondor Writes Files
 
