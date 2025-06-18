@@ -1,4 +1,4 @@
-# Exercise 1.2: Investigating Job Attributes
+# Exercise 3.1: Investigating Job Attributes
 
 The objective of this exercise is to your awareness of job "class ad attributes",
 especially ones that may help you look for issues with your jobs in the OSPool.

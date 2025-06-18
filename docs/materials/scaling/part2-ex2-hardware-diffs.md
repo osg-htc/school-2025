@@ -2,7 +2,7 @@
 status: testing
 ---
 
-# Scaling Up Exercise 2.1: Hardware Differences Between OSPool and the CHTC Pool
+# Scaling Up Exercise 2.2: Hardware Differences Between OSPool and the CHTC Pool
 
 The goal of this exercise is to compare hardware differences between the 
 Open Science Pool and a local HTC system like the one at CHTC, using similar 

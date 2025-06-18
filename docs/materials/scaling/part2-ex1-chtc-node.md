@@ -2,7 +2,7 @@
 status: testing
 ---
 
-# Scaling Up Exercise 2.1: Logging Into a Local Pool
+# Scaling Up Exercise 2.1: Log Into a Local Pool
 
 ## Introduction
 
