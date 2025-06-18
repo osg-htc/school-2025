@@ -470,7 +470,7 @@ All School participants and staff are encourage to attend!
     </tr>
     <tr>
       <td>14:00</td>
-      <td>14:10</td>
+      <td>14:15</td>
       <td>
         Open Q&A<br>
         Break
@@ -478,13 +478,13 @@ All School participants and staff are encourage to attend!
       <td>-</td>
     </tr>
     <tr>
-      <td>14:10</td>
-      <td>15:10</td>
+      <td>14:15</td>
+      <td>15:15</td>
       <td>Lightning talks by volunteer participants</td>
       <td>Attendees</td>
     </tr>
     <tr>
-      <td>15:10</td>
+      <td>15:15</td>
       <td>15:30</td>
       <td>Open Q&amp;A <br> break</td>
       <td>staff</td>
