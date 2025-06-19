@@ -72,7 +72,7 @@ All School participants and staff are encourage to attend!
       <td>13:15</td>
       <td>
         Lunch<br>
-        Domain groups
+        Domain groups: TBD
       </td>
       <td>-</td>
     </tr>
@@ -256,13 +256,13 @@ All School participants and staff are encourage to attend!
       <td>12:00</td>
       <td>
         HTC Showcase Part 1
-        <!--<br>
-        &#9654; <span style="color: rgb(173, 81, 12);">Firstname Lastname</span>;
-        Department/Affiliation<br>
-        <div style="margin-left: 2ex;">“Title of talk”</div>
-        &#9654; <span style="color: rgb(173, 81, 12);">Firstname Lastname</span>;
-        Department/Affiliation<br>
-        <div style="margin-left: 2ex;">“Title of talk”</div>-->
+        <br>
+        &#9654; <span style="color: rgb(173, 81, 12);">Michael Martinez</span>;
+        Physics<br>
+        <!--<div style="margin-left: 2ex;">“Title of talk”</div>-->
+        &#9654; <span style="color: rgb(173, 81, 12);">Spencer Ericksen</span>;
+        Small Molecule Facility<br>
+        <!--<div style="margin-left: 2ex;">“Title of talk”</div>-->
       </td>
       <td>-</td>
     </tr>
