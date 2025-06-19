@@ -5,7 +5,8 @@
 All School participants and staff are encourage to attend!
 
 **Time:** Starting at 6:30 p.m.<br>
-**Location**: [Union South](https://union.wisc.edu/visit/union-south/), 1308 W. Dayton St.
+**Location**: [Union South](https://union.wisc.edu/visit/union-south/), 1308 West Dayton Street,
+Industry room (3rd floor)
 
 ## June 23 (Monday)
 
@@ -153,7 +154,10 @@ All School participants and staff are encourage to attend!
     <tr>
       <td>10:30</td>
       <td>10:45</td>
-      <td>Break</td>
+      <td>
+        Break<br>
+        <strong>Also:</strong> Collect travel documents as needed
+      </td>
       <td>-</td>
     </tr>
     <tr>
@@ -173,7 +177,8 @@ All School participants and staff are encourage to attend!
       <td>13:30</td>
       <td>
         Lunch<br>
-        Software groups
+        Software groups<br>
+        <strong>Also:</strong> Return travel documents (~13:20)
       </td>
       <td>-</td>
     </tr>
