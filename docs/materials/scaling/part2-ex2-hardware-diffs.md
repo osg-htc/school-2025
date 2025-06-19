@@ -33,7 +33,7 @@ To create our parameter sweep,
 we will create a **new** submit file with the queue...in syntax
 and change the value of our parameter (`request_memory`) for each batch of jobs.
 
-1. Creat a subdirectory for this exercise (we've used `mem-requests` below). 
+1. Create a subdirectory for this exercise (we've used `mem-requests` below). 
 1. In this folder, create this template submit file: 
 
 		executable          = /usr/bin/sleep
@@ -55,8 +55,8 @@ and change the value of our parameter (`request_memory`) for each batch of jobs.
 the parentheses (1, 2, 3) using those values as the memory request. Five 
 jobs are submitted for each memory value. 
 1. **Edit the list** to reflect different 
-amounts of memory. We recommend this list in gigabytes (GB): 2, 4, 8, 16, 32, 64, 128, 256, 512
-1.  Submit the submit file (should be about 30-45 jobs). 
+amounts of memory. We recommend this list in gigabytes (GB), although you can use whatever values you want: 2, 4, 8, 16, 32, 64, 128, 256, 512
+1.  Submit the submit file (should be about 45 jobs). 
 
 ### Monitoring the local jobs
 
@@ -122,3 +122,9 @@ That being said, high-memory are a high-demand, low-availability resource in the
 so your 64&nbsp;GB jobs (or higher!) may have taken longer to run or complete.
 On the other hand, CHTC has a fair number of 64&nbsp;GB (and greater) slots
 so all your jobs have a high chance of running.
+
+This is useful information if your job profile includes high memory jobs. It could 
+help you decide which jobs to run on CHTC versus the OSPool. If you have access 
+to different computing systems, it is a good idea to find out this information - even 
+run some tests, lik we did here! - in order to get the most out of what is 
+available to you. 

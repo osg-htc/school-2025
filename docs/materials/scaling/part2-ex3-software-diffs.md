@@ -85,3 +85,11 @@ Now we will run our shell script on the CHTC pool to survey what resources are a
 1. Copy or recreate the job setup above on `ap40.uw.osg-htc.org`. 
 1. Submit the jobs. 
 1. Look at the results. Similar or different? 
+
+## Reflection
+
+Were there any surprises about what was available? Knowing what software is likely 
+(or not) to be available on a given system can inform how you install or manage 
+your software when submitting jobs. CHTC does not have a lot of software available 
+by default, so software portability is important. Because the OSPool varies so much, 
+containers are a good idea. 
