@@ -29,6 +29,7 @@ extra:
 nav:
   - Home:                           index.md
   - Schedule:                       schedule.md
+  - Health Guidelines:              health.md
   - Logistics:
     - General information:          logistics/index.md
     - Hotel information:            logistics/hotel.md
@@ -40,4 +41,4 @@ nav:
     - Meal information:             logistics/meals.md
     - Dining options:               logistics/dining.md
     - Madison Fun Day:              logistics/fun-day.md
-    - Continue Your Access to the OSPool: logistics/projects.md
+    - Long-term OSPool access:      logistics/projects.md
