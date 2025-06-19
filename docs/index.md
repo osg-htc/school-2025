@@ -38,25 +38,10 @@ People accepted to this program will receive financial support for
 basic travel and local costs associated with the School.
 
 
-## Applications
+## Welcome!
 
-Applications are now closed for 2025.
-The deadline for applications was Tuesday, 11 Mar 2025.
-
-If still needed,
-have someone email a letter of recommendation for you to
-[school@osg-htc.org](mailto:school@osg-htc.org)
-(ideally PDF or plain text).
-
-For the letter of recommendation, ask someone who knows you professionally&nbsp;&mdash;
-ideally a faculty member or other supervisor.
-They should clearly write “OSG School 2025” and your name in the subject line and letter,
-so that we can associate your application and letter.
-
-**Applicants:**
-We plan to review applications in March and notify all applicants starting in early April or so.
-We will contact you once decisions have been made.
-Thank you for your patience!
+The School is the week of June 23&ndash;27.
+We welcome the roughly sixty participants from around the United States, plus Makerere University in Uganda!
 
 
 ## Contact Us
