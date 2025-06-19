@@ -1,7 +1,3 @@
----
-status: testing
----
-
 # Scaling Up Exercise 2.1: Log Into a Local Pool
 
 ## Introduction
@@ -14,21 +10,29 @@ system operated by the Center for High Throughput Computing.
 
 ## Log In
 
+The CHTC Access Point we will be using is called `ap2003.chtc.wisc.edu`. You should be 
+able to log into this computer with the same username and login steps as for 
+`ap40.uw.osg-htc.org`. 
 
+## Initial Exploration
 
-### Set up ssh key
+In the following exercises, we will explore the differences between the OSPool and 
+the CHTC pool more deeply. But to start, let's run a few commands to compare. 
 
-In later exercises, it might be useful to transfer files from the CHTC Access Point 
-(`ap2003`) to the OSPool Access Point (`ap40`). To facilitate this process, follow 
-the steps below to set up an ssh key that will allow you to connect the two. 
+### What's in the pool? 
 
-1. Make sure you are logged into `ap2003.chtc.wisc.edu`
-1. Run this command
-		$ ssh-keygen
-1. Download the generated key file to your desktop. 
-1. Log into the [COmanage Registry](https://registry.cilogon.org/).
-1. Click on your profile and add the key. 
+1. Log into `ap2003.chtc.wisc.edu`.
+1. Run these commands: 
+	``` console
+[username@ap2003 ~]$ condor_status | tail
+[username@ap2003 ~]$ condor_status -compact | tail -n 15
+```
+1. How many "slots" are in the pool? How many of each operating system? 
+1. In a separate window, log into `ap40.uw.osg-htc.org` and run the same commands. 
+1. How many "slots" are in the OSPool? How many of each operating system? 
 
-## Initial exploration
+### Jobs in the queue
 
-`condor_status`
+1. On `ap2003.chtc.wisc.edu` run `condor_q -all`. 
+1. On `ap40.uw.osg-htc.org`, run the same command. 
+1. How many jobs are on `ap40` compared to `ap2003`? 
