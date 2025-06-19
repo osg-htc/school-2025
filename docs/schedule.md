@@ -458,13 +458,13 @@ All School participants and staff are encourage to attend!
       <td>14:00</td>
       <td>
         HTC Showcase, Part 2
-        <!--<br>
+        <br>
+        &#9654; <span style="color: rgb(173, 81, 12);">Daniel Morales</span>;
+        Biological Sciences<br>
+        <!--<div style="margin-left: 2ex;">“Title of talk”</div>-->
         &#9654; <span style="color: rgb(173, 81, 12);">Firstname Lastname</span>;
-        Department/Affiliation<br>
-        <div style="margin-left: 2ex;">“Title of talk”</div>
-        &#9654; <span style="color: rgb(173, 81, 12);">Firstname Lastname</span>;
-        Department/Affiliation<br>
-        <div style="margin-left: 2ex;">“Title of talk”</div>-->
+        Computer Sciences<br>
+        <!--<div style="margin-left: 2ex;">“Title of talk”</div>-->
       </td>
       <td>-</td>
     </tr>
