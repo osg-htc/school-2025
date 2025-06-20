@@ -2,6 +2,9 @@
 
 The source files for the OSG School 2025 website.
 
+## Local preview
+
+### Using Docker
 To serve the website locally, download Docker and use the command in the root directory:
 
 
@@ -14,9 +17,28 @@ ARM
 docker run --rm -it -p 8100:8000 -v  ${PWD}:/docs ghcr.io/afritzler/mkdocs-material
 ```
 
-# Adding Documentation to the Website
+### Using Python
 
-## Adding in the Documentation
+Requires that the `mkdocs-material` Python package is installed.
+
+```
+conda create -n mkdocs
+conda activate mkdocs
+python3 -m pip install mkdocs-material
+```
+
+To launch the local preview, run
+
+```
+mkdocs serve
+```
+
+in the top level of the repository.
+Then navigate to [http://127.0.0.1:8000/school-2025/](http://127.0.0.1:8000/school-2025/) in your browser.
+
+## Adding Documentation to the Website
+
+### Adding in the Documentation
 
 Documentation is hosted in the ```/docs/material``` directory. 
 
@@ -61,12 +83,11 @@ nav:
 
 **Note:** This is generated in order so the order of the categories should correspond to the material overview page. 
 
-## Adding in Additional Files
+### Adding in Additional Files
 
 Files corresponding to each category should be in the subdirectory at location ```/docs/material/<category>/files/```.
 
 Additionally all files should be referenced in the ```/docs/material/index.md``` file using format:
-```markdown
 ```markdown
 ## <category>
 
