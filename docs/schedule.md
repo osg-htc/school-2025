@@ -462,7 +462,7 @@ All School participants and staff are encourage to attend!
         &#9654; <span style="color: rgb(173, 81, 12);">Daniel Morales</span>;
         Biological Sciences<br>
         <!--<div style="margin-left: 2ex;">“Title of talk”</div>-->
-        &#9654; <span style="color: rgb(173, 81, 12);">Firstname Lastname</span>;
+        &#9654; <span style="color: rgb(173, 81, 12);">Blaine Hoak</span>;
         Computer Sciences<br>
         <!--<div style="margin-left: 2ex;">“Title of talk”</div>-->
       </td>
