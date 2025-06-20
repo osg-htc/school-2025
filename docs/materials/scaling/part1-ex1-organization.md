@@ -30,6 +30,14 @@ To get the files for this exercise:
 1.  As you learned earlier, expand this tarball file; it will create a `organizing-files` directory.
 1.  Change to that directory, or create a separate one for this exercise and copy the files in.
 
+
+!!! note "Using Files from the Data Exercises section"
+
+    We will be reusing some of the files from the Data Exercises 2 - OSDF for inputs and OSDF for outputs sections. If you did not complete these or wish to simply get a fresh set of these files, use the command below:
+        
+        pelican get osdf:///<PATH>
+        pelican get osdf:///<PATH>
+
 ## Our Workload
 
 Imagine you're working with a large set of DNA sequencing data from an organism. The sequencing file contains millions of snippets of DNA, which we call **reads**. Your goal is to figure out where these reads came from by matching them to a known reference genome using a read mapping tool.

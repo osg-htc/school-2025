@@ -90,9 +90,9 @@ Let's start by editing our template executable file! In our executable there's t
 
         :::console
         #!/bin/bash
-        {++reads_subset_file="$1"++}
+        reads_subset_file="$1"
         # Use minimap2 to map the basecalled reads to the reference genome
-        minimap2 -ax map-ont reference_genome.fasta {==$(reads_subset_file)==} > output.sam
+        minimap2 -ax map-ont reference_genome.fasta $(reads_subset_file) > output.sam
 
 2. Modify the executable use the name of our input reads subset file (`$reads_subset_file`) as the prefix of our output file.
 
@@ -100,15 +100,13 @@ Let's start by editing our template executable file! In our executable there's t
         #!/bin/bash
         reads_subset_file="$1"
         # Use minimap2 to map the basecalled reads to the reference genome
-        minimap2 -ax map-ont reference_genome.fasta "$(reads_subset_file)" > {=="$(reads_subset_file)_output.sam"==}
+        minimap2 -ax map-ont reference_genome.fasta "$(reads_subset_file)" > "$(reads_subset_file)_output.sam"
 
 !!! question "Not sure how variables work on bash?"
 
     Reach out for help from one of the School staff members! You can also review the Software Carpentries' [Unix Shell - Loops](https://swcarpentry.github.io/shell-novice/05-loop.html) tutorial for examples on how to use these variables in your daily computational use.
 
 ## Testing Our Jobs - Submit a Test List of Jobs
-
-[I actually think this section works better if we introduce it before the Composing Your Job section.]
 
 Now we want to submit a test job with our organizing scheme and adapted executable, using only a small set of our reads subset. We're going to start off with the multi-job submit template below. 
 
@@ -211,27 +209,27 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
             **For Loop:** If you are familiar with the `for` loop structure, imagine you wished to run the following loop:
             
                 :::console
-                for {++read_subset_file++} in {==reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_z==}
+                for read_subset_file in reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_z
                 do
-                    ./minimap2.sh $({++read_subset_file++})
+                    ./minimap2.sh $(read_subset_file)
                 done
                 
-            In the example above, we would feed the list of FASTQ files in `~/scaling-up/inputs/` to the variable `$({++read_subset_file++})` as a {==list of strings==}. To express your jobs as a `for` loop in condor, we would instead use the `queue <Var> in <List>` syntax. In the example above, this would be represented as: 
+            In the example above, we would feed the list of FASTQ files in `~/scaling-up/inputs/` to the variable `$(read_subset_file)` as a list of strings. To express your jobs as a `for` loop in condor, we would instead use the `queue <Var> in <List>` syntax. In the example above, this would be represented as: 
             
-                queue {++read_subset_file++} in ({==reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_z==})
+                queue read_subset_file in (reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_z)
     
         !!! success "" 
             **While Loop:** A closer representation to HTCondor's _list of jobs_ structure is the `while` loop. If you are familiar with the `while` loop in bash, you could also consider the set of job submissions to mirror something like:
             
                 :::console
-                while read {++read_subset_file++};
+                while read read_subset_file;
                 do
-                    ./minimap2.sh $({++read_subset_file++})
-                done < {==list_of_fastq.txt==}
+                    ./minimap2.sh $(read_subset_file)
+                done < list_of_fastq.txt
             
-            Here we feed the contents of `{==list_of_fastq.txt==}`, the list of files in `~/scaling-up/inputs/` to the same `$({++read_subset_file++})` variable. The `while` loop iterates through each line of `list_of_fastq.txt`, appending the line's value to `$(read_subset_file)`. To express your jobs as a `for` loop in condor, we would instead use the `queue <Var> in <List>` syntax. In the example above, this would be represented as: 
+            Here we feed the contents of `list_of_fastq.txt`, the list of files in `~/scaling-up/inputs/` to the same `$(read_subset_file)` variable. The `while` loop iterates through each line of `list_of_fastq.txt`, appending the line's value to `$(read_subset_file)`. To express your jobs as a `for` loop in condor, we would instead use the `queue <Var> in <List>` syntax. In the example above, this would be represented as: 
             
-                queue {++read_subset_file++} from {==./list_of_files.txt==}
+                queue read_subset_file from ./list_of_files.txt
         
         For jobs with more than 5 values, we generally recommend using the `queue var from list_of_files.txt` syntax. 
 
@@ -287,21 +285,21 @@ Now, you are ready to submit the whole workload.
             +SingularityImage      = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
             
             executable             = ./minimap2.sh
-            {==arguments              = $(read_subset_file)==}
-            transfer_input_files   = {==./input/$(read_subset_file)==}, osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
+            arguments              = $(read_subset_file)
+            transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
             
-            transfer_output_files  = {==./$(read_subset_file)_output.sam==}
-            transfer_output_remaps = {=="$(read_subset_file)==}_output.sam=output/{==$(read_subset_file)==}_output.sam"
+            transfer_output_files  = ./$(read_subset_file)_output.sam
+            transfer_output_remaps = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
             
-            output                 = logs/output/job.$(ClusterID).$(ProcID){==_$(read_subset_file)==}_output.out
-            error                  = logs/error/job.$(ClusterID).$(ProcID){==_$(read_subset_file)==}_output.err
-            log                    = logs/log/job.$(ClusterID).$(ProcID){==_$(read_subset_file)==}_output.log
+            output                 = logs/output/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.out
+            error                  = logs/error/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.err
+            log                    = logs/log/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.log
             
             request_cpus           = 2
             request_disk           = 4 GB
             request_memory         = 4 GB 
             
-            queue {==read_subset_file from ./list_of_fastq.txt==}
+            queue read_subset_file from ./list_of_fastq.txt
 
 ## Checking Your Jobs' Progress
 
