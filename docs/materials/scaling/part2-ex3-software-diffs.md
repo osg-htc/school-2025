@@ -12,9 +12,9 @@ The following shell script probes for software and returns the version if it is 
 #!/bin/sh
 
 host_info(){
-hostname
-source /etc/os-release
-echo $PRETTY_NAME
+    hostname
+    source /etc/os-release
+    echo $PRETTY_NAME
 }
 
 get_version(){

@@ -24,9 +24,9 @@ the CHTC pool more deeply. But to start, let's run a few commands to compare.
 1. Log into `ap2003.chtc.wisc.edu`.
 1. Run these commands: 
 	``` console
-[username@ap2003 ~]$ condor_status | tail
-[username@ap2003 ~]$ condor_status -compact | tail -n 15
-```
+    [username@ap2003 ~]$ condor_status | tail
+    [username@ap2003 ~]$ condor_status -compact | tail -n 15
+    ```
 1. How many "slots" are in the pool? How many of each operating system? 
 1. In a separate window, log into `ap40.uw.osg-htc.org` and run the same commands. 
 1. How many "slots" are in the OSPool? How many of each operating system? 
