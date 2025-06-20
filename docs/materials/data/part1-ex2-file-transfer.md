@@ -9,7 +9,7 @@ Exercise Goal
 -------------
 
 The objective of this exercise is to refresh yourself on HTCondor file
-transfer, to implement file compression, use the knowledge of [previous exercise]((part1-ex1-data-needs.md)) and begin examining the
+transfer, to implement file compression, use the knowledge of [previous exercise](part1-ex1-data-needs.md) and begin examining the
 memory and disk space used by your jobs in order to plan larger batches.
 We will also explore ways to deal with output data.
 
