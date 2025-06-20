@@ -1,8 +1,6 @@
 [file named incorrectly (should be 1.2, not 2.1?)]
 
-[also the below header should match the name in the sidebar.]
-
-# Scaling Up Our Workload 
+# Composing Your Jobs
 
 ## Exercise Goal
 
@@ -11,6 +9,8 @@ In our previous exercise, [Scaling-Up Exercise 1 Part 1](../part1-ex1-organizati
 ## Introduction
 
 High throughput computing allows us to efficiently scale analyses by distributing jobs across many computing resources. In this lesson, we will continue the example from the previous exercise, now learning how to structure and submit a read mapping workflow using the OSPool and `minimap2`. This includes adapting your executable script and submit file to dynamically handle many input files in parallel.
+
+[INSERT MINIMAP WORKFLOW - YOU ARE HERE]
 
 !!! halt "**Halt!** Do not proceed if you haven't completed the [Scaling-Up Exercise 1 Part 1](../part1-ex1-organization)"
     
@@ -63,7 +63,9 @@ Let's start by editing our template executable file! In our executable there's t
         # Use minimap2 to map the basecalled reads to the reference genome
         minimap2 -ax map-ont reference_genome.fasta "$(reads_subset_file)" > {=="$(reads_subset_file)_output.sam"==}
 
-[Add a callout to have users ask a staff member if they don't understand what the script is doing. I don't expect all users to know bash variable syntax. You may also consider adding references.]
+!!! question "Not sure how variables work on bash?"
+
+    Reach out for help from one of the School staff members! You can also review the Software Carpentries' [Unix Shell - Loops](https://swcarpentry.github.io/shell-novice/05-loop.html) tutorial for examples on how to use these variables in your daily computational use.
 
 ### Generating the List of Jobs
 Next, we need to generate a list of jobs for HTCondor to run. In previous exercises, we've used the `queue` statements such as `queue <num>` and `queue <variable> matching *.txt`. For our exercise, we will use the `queue <var> from <list>` submission strategy. 
@@ -106,24 +108,51 @@ Next, we need to generate a list of jobs for HTCondor to run. In previous exerci
         ...
         reads_fastq_chunk_j
 
-## Testing Our Jobs - Submit **_One_** Job
+## Testing Our Jobs - Submit a Test List of Jobs
 
 [I actually think this section works better if we introduce it before the Composing Your Job section.]
 
-Now we want to submit a test job that uses this organizing scheme,
-using just one item in our input set&nbsp;&mdash;
-in this example, we will use the `Alice_in_Wonderland.txt` file from our `input` directory.
+Now we want to submit a test job with our organizing scheme and adapted executable, using only a small set of our reads subset. We're going to start off with the multi-job submit template below. 
 
-[Alice in Wonderland??? ^]
+    :::console
+    container_image         = <path_to_sif>
+    
+    executable              = <path_to_executable>
 
-!!! pro-tip "Pro-Tip: Always Test Your Workflows!"
+    transfer_input_files    = <path_to_input_files>
+    transfer_output_files   = <path_to_output_files>
 
-    It is important to always check your workflows before scaling up to full production. Generally, we recommand testing your job with a single job followed by a handful (2-5) jobs before submitting your full submission. 
+    log                     = <path_to_log_file>
+    error                   = <path_to_stderror_file>
+    output                  = <path_to_stdout_file>
 
-1.  Fill in the incomplete lines of the submit file, as shown below: [idk if we are using +SingularityImage or container_image. Ask Andrew?]
+    request_cpus            = <num-of-cpus>
+    request_memory          = <amount-of-memory>
+    request_disk            = <amount-of-disk>
+
+    queue
+
+!!! example "Try It Yourself!"
+
+    You've split your large FASTQ file into multiple read subsets, and you're ready to run `minimap2` on all of them in parallel. Before moving forward, check your understanding by trying to write the submit file yourself! Consider the following:
+
+    1. What `queue` strategy discussed in the OSG School is best for our setup?
+        * Think about the List Of Jobs created in the [Generating the List of Jobs](#generating-the-list-of-jobs) section
+    2. How can we dynamically specify the `arguments`, `transfer_input_files`, `transfer_output_files` fields values with each `read_subset_file`.
+    3. Ensure your `log`, `error`, and `output` files all include the name of the read subset file being used mapped in this job.
+    4. Organize the output files using the correct `transfer_output_remaps` statement
+        * Remember, we want our output to be saved as `~/scaling-up/outputs/reads_fastq_chunk_a_output.sam` on the Access Point
+    5. Which file transfer protocols should we use for our inputs/outputs?
+        * Consider whether these files are used one or repeatedly across all your jobs.
+
+    !!! halt "Try to Draft a Submit File Before Moving Forward️"
+
+For our template, lets use `read_subset_file` as our variable name to pass the name of each subset file to.
+
+1.  Fill in the incomplete lines of the submit file, as shown below: 
 
         :::console
-        +SingularityImage       = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
+        container_image         = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
 
         executable              = minimap2.sh
         arguments               = reads_fastq_chunk_a
@@ -150,9 +179,57 @@ in this example, we will use the `Alice_in_Wonderland.txt` file from our `input`
         request_disk           = 4 GB
         request_memory         = 4 GB 
      
-        queue 1
+        queue {==read_subset_file from ./test_list_of_fastq.txt==}
+
+    
+    !!! pro-tip "Thinking of our jobs as a `for` or `while` loop"
+        
+        We can think of our multi-job submission as a sort of `for` or `while` loop in bash.
+        
+        !!! success ""
+            **For Loop:** If you are familiar with the `for` loop structure, imagine you wished to run the following loop:
+            
+                :::console
+                for {++read_subset_file++} in {==reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_z==}
+                do
+                    ./minimap2.sh $({++read_subset_file++})
+                done
+                
+            In the example above, we would feed the list of FASTQ files in `~/scaling-up/inputs/` to the variable `$({++read_subset_file++})` as a {==list of strings==}. To express your jobs as a `for` loop in condor, we would instead use the `queue <Var> in <List>` syntax. In the example above, this would be represented as: 
+            
+                queue {++read_subset_file++} in ({==reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_z==})
+    
+        !!! success "" 
+            **While Loop:** A closer representation to HTCondor's _list of jobs_ structure is the `while` loop. If you are familiar with the `while` loop in bash, you could also consider the set of job submissions to mirror something like:
+            
+                :::console
+                while read {++read_subset_file++};
+                do
+                    ./minimap2.sh $({++read_subset_file++})
+                done < {==list_of_fastq.txt==}
+            
+            Here we feed the contents of `{==list_of_fastq.txt==}`, the list of files in `~/scaling-up/inputs/` to the same `$({++read_subset_file++})` variable. The `while` loop iterates through each line of `list_of_fastq.txt`, appending the line's value to `$(read_subset_file)`. To express your jobs as a `for` loop in condor, we would instead use the `queue <Var> in <List>` syntax. In the example above, this would be represented as: 
+            
+                queue {++read_subset_file++} from {==./list_of_files.txt==}
+        
+        For jobs with more than 5 values, we generally recommend using the `queue var from list_of_files.txt` syntax. 
 
 4.  Submit your job and monitor its progress.
+    
+    Submit your test job using `condor_submit`
+
+        :::console
+        condor_submit multi_job_minimap.sub
+
+    Monitor the progress of your job using `condor_watch_q`
+
+        :::console
+        condor_watch_q
+        [OUTPUT OF WATCH Q]
+
+??? success "Always Check Your Test Jobs Worked!"
+
+    Review your `condor_watch_q` output and your files on the Access Point. 
 
 ## Submit Multiple Jobs
 
