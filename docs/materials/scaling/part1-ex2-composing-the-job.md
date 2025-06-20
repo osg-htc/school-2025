@@ -307,7 +307,7 @@ Now, you are ready to submit the whole workload.
 
 We can use the command `condor_watch_q` to track our job submission. As your jobs progress through the various `job state`, Condor will update the output of `condor_watch_q`.
 
-!!! tip "tip: Jobs Holds *Aren't* Always Bad!"
+!!! tip "Pro-Tip: Jobs Holds *Aren't* Always Bad!"
     
     Seeing your jobs in the Held state? Don’t panic! This is often just HTCondor doing its job to protect your workflow.
 

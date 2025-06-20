@@ -74,7 +74,7 @@ how would you organize this HTC workload in directories (folders) on the Access 
 There will also be system and HTCondor files produced when we submit a job&nbsp;&mdash;
 how would you organize the log, standard output, and standard error files?
 
-!!! pro-tip "When to Use the Open Science Data Federation (OSDF)"
+!!! tip "When to Use the Open Science Data Federation (OSDF)"
     
     Make sure to consider which files will be re-used often (common files across all jobs) versus which files will be used only once. Files often re-used, can be placed in your `/ospool/ap40/data/<user.name>/` directory to take advantage of the caching benefits when using the `osdf://` transfer plugin.
 
@@ -130,7 +130,7 @@ For our exercise, we will use the following data organizational structure:
 
 4. Move the `minimap2.sif` container image file to your `/ospool/ap40/data/<user.name>/scaling-up/software` directory using the `mv` command.
 
-!!! pro-tip "Stop and Consider: Why are we moving our files to these directories?"
+!!! tip "Stop and Consider: Why are we moving our files to these directories?"
 
     When preparing your jobs for high-throughput computing, think about how each file will be used. Will the file be reused across many jobs? Or is it specific to a single job? Will it need to be transferred repeatedly—or just once?
     
