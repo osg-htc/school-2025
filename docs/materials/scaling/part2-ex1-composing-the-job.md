@@ -1,8 +1,16 @@
-# Scaling Up Our Workload 
+[file named incorrectly (should be 1.2, not 2.1?)]
 
-High-throughput computing (HTC) allows us to efficiently scale this analysis by distributing jobs across many computing resources. In this lesson, you'll learn how to structure and submit a read mapping workflow using the OSPool and `minimap2`. This includes adapting your executable script and submit file to dynamically handle many input files in parallel.
+# Composing Your Jobs
 
-In our previous exercise, [Scaling-Up Exercise 1 Part 1](../part1-ex1-organization), you prepared your directory structure and organized your data for distributed processing. In this section, we’ll move forward with composing and testing your HTC jobs to take full advantage of the OSPool's capacity.
+## Exercise Goal
+
+In our previous exercise, [Scaling-Up Exercise 1 Part 1](../part1-ex1-organization), we learned about the importance of preparing and organizing a directory structure for large-scale workloads. In this section, we'll learn strategies to compose and test these large-scale workloads in the form of jobs.
+
+## Introduction
+
+High throughput computing allows us to efficiently scale analyses by distributing jobs across many computing resources. In this lesson, we will continue the example from the previous exercise, now learning how to structure and submit a read mapping workflow using the OSPool and `minimap2`. This includes adapting your executable script and submit file to dynamically handle many input files in parallel.
+
+[INSERT MINIMAP WORKFLOW - YOU ARE HERE]
 
 !!! halt "**Halt!** Do not proceed if you haven't completed the [Scaling-Up Exercise 1 Part 1](../part1-ex1-organization)"
     
@@ -28,10 +36,10 @@ Now that we have our data partitioned into independent subsets to be mapped in p
 
 !!! halt "Time-Out! **Think about how you would adapt this executable template for HTC**"
 
-    If we want to map each one of our reads subsets against the reference genome, think about the following questions
+    If we want to map each one of our reads subsets against the reference genome, think about the following questions:
 
-        * What parts of the command will change with each job?
-        * What parts of the command will stay the same?
+    * What parts of the command will change with each job?
+    * What parts of the command will stay the same?
 
 Let's start by editing our template executable file! In our executable there's two main segments of the `minimap2` command that will be changed: The input `reads.fastq` file and the output `output.sam` file. 
 
@@ -55,6 +63,10 @@ Let's start by editing our template executable file! In our executable there's t
         # Use minimap2 to map the basecalled reads to the reference genome
         minimap2 -ax map-ont reference_genome.fasta "$(reads_subset_file)" > {=="$(reads_subset_file)_output.sam"==}
 
+!!! question "Not sure how variables work on bash?"
+
+    Reach out for help from one of the School staff members! You can also review the Software Carpentries' [Unix Shell - Loops](https://swcarpentry.github.io/shell-novice/05-loop.html) tutorial for examples on how to use these variables in your daily computational use.
+
 ### Generating the List of Jobs
 Next, we need to generate a list of jobs for HTCondor to run. In previous exercises, we've used the `queue` statements such as `queue <num>` and `queue <variable> matching *.txt`. For our exercise, we will use the `queue <var> from <list>` submission strategy. 
 
@@ -66,12 +78,12 @@ Next, we need to generate a list of jobs for HTCondor to run. In previous exerci
         $ mv ~/scaling-up/inputs/
         $ ls -la
         total 12
-        drwxr-xr-x  2 daniel.morales.1 daniel.morales.1 4096 Jun 13 16:08 .
-        drwx------ 10 daniel.morales.1 daniel.morales.1 4096 Jun 13 16:07 ..
-        -rw-r--r--  1 daniel.morales.1 daniel.morales.1   14 Jun 13 16:08 reads_fastq_chunk_a
-        -rw-r--r--  1 daniel.morales.1 daniel.morales.1   14 Jun 13 16:08 reads_fastq_chunk_b
-        -rw-r--r--  1 daniel.morales.1 daniel.morales.1   14 Jun 13 16:08 reads_fastq_chunk_c
-        -rw-r--r--  1 daniel.morales.1 daniel.morales.1   14 Jun 13 16:08 reads_fastq_chunk_d
+        drwxr-xr-x  2 username username 4096 Jun 13 16:08 .
+        drwx------ 10 username username 4096 Jun 13 16:07 ..
+        -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_a
+        -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_b
+        -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_c
+        -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_d
 
 2. Make a list of all the files in `~/scaling-up/inputs/` and save it to `~/scaling-up/list_of_fastq.txt`
 
@@ -80,9 +92,9 @@ Next, we need to generate a list of jobs for HTCondor to run. In previous exerci
         $ mv ~/scaling-up/
         $ ls -la
         total 12
-        drwxr-xr-x  2 daniel.morales.1 daniel.morales.1 4096 Jun 13 16:08 .
-        drwx------ 10 daniel.morales.1 daniel.morales.1 4096 Jun 13 16:07 ..
-        -rw-r--r--  1 daniel.morales.1 daniel.morales.1   14 Jun 13 16:08 list_of_fastq.txt
+        drwxr-xr-x  2 username username 4096 Jun 13 16:08 .
+        drwx------ 10 username username 4096 Jun 13 16:07 ..
+        -rw-r--r--  1 username username   14 Jun 13 16:08 list_of_fastq.txt
 
 3. Use `head` to preview the first 10 lines of `list_of_fastq.txt`
 
@@ -96,20 +108,51 @@ Next, we need to generate a list of jobs for HTCondor to run. In previous exerci
         ...
         reads_fastq_chunk_j
 
-## Testing Our Jobs - Submit **_One_** Job
+## Testing Our Jobs - Submit a Test List of Jobs
 
-Now we want to submit a test job that uses this organizing scheme,
-using just one item in our input set&nbsp;&mdash;
-in this example, we will use the `Alice_in_Wonderland.txt` file from our `input` directory.
+[I actually think this section works better if we introduce it before the Composing Your Job section.]
 
-!!! pro-tip "Pro-Tip: Always Test Your Workflows!"
+Now we want to submit a test job with our organizing scheme and adapted executable, using only a small set of our reads subset. We're going to start off with the multi-job submit template below. 
 
-    It is important to always check your workflows before scaling up to full production. Generally, we recommand testing your job with a single job followed by a handful (2-5) jobs before submitting your full submission. 
+    :::console
+    container_image         = <path_to_sif>
+    
+    executable              = <path_to_executable>
 
-1.  Fill in the incomplete lines of the submit file, as shown below:
+    transfer_input_files    = <path_to_input_files>
+    transfer_output_files   = <path_to_output_files>
+
+    log                     = <path_to_log_file>
+    error                   = <path_to_stderror_file>
+    output                  = <path_to_stdout_file>
+
+    request_cpus            = <num-of-cpus>
+    request_memory          = <amount-of-memory>
+    request_disk            = <amount-of-disk>
+
+    queue
+
+!!! example "Try It Yourself!"
+
+    You've split your large FASTQ file into multiple read subsets, and you're ready to run `minimap2` on all of them in parallel. Before moving forward, check your understanding by trying to write the submit file yourself! Consider the following:
+
+    1. What `queue` strategy discussed in the OSG School is best for our setup?
+        * Think about the List Of Jobs created in the [Generating the List of Jobs](#generating-the-list-of-jobs) section
+    2. How can we dynamically specify the `arguments`, `transfer_input_files`, `transfer_output_files` fields values with each `read_subset_file`.
+    3. Ensure your `log`, `error`, and `output` files all include the name of the read subset file being used mapped in this job.
+    4. Organize the output files using the correct `transfer_output_remaps` statement
+        * Remember, we want our output to be saved as `~/scaling-up/outputs/reads_fastq_chunk_a_output.sam` on the Access Point
+    5. Which file transfer protocols should we use for our inputs/outputs?
+        * Consider whether these files are used one or repeatedly across all your jobs.
+
+    !!! halt "Try to Draft a Submit File Before Moving Forward️"
+
+For our template, lets use `read_subset_file` as our variable name to pass the name of each subset file to.
+
+1.  Fill in the incomplete lines of the submit file, as shown below: 
 
         :::console
-        +SingularityImage       = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
+        container_image         = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
 
         executable              = minimap2.sh
         arguments               = reads_fastq_chunk_a
@@ -136,9 +179,57 @@ in this example, we will use the `Alice_in_Wonderland.txt` file from our `input`
         request_disk           = 4 GB
         request_memory         = 4 GB 
      
-        queue 1
+        queue {==read_subset_file from ./test_list_of_fastq.txt==}
+
+    
+    !!! pro-tip "Thinking of our jobs as a `for` or `while` loop"
+        
+        We can think of our multi-job submission as a sort of `for` or `while` loop in bash.
+        
+        !!! success ""
+            **For Loop:** If you are familiar with the `for` loop structure, imagine you wished to run the following loop:
+            
+                :::console
+                for {++read_subset_file++} in {==reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_z==}
+                do
+                    ./minimap2.sh $({++read_subset_file++})
+                done
+                
+            In the example above, we would feed the list of FASTQ files in `~/scaling-up/inputs/` to the variable `$({++read_subset_file++})` as a {==list of strings==}. To express your jobs as a `for` loop in condor, we would instead use the `queue <Var> in <List>` syntax. In the example above, this would be represented as: 
+            
+                queue {++read_subset_file++} in ({==reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_z==})
+    
+        !!! success "" 
+            **While Loop:** A closer representation to HTCondor's _list of jobs_ structure is the `while` loop. If you are familiar with the `while` loop in bash, you could also consider the set of job submissions to mirror something like:
+            
+                :::console
+                while read {++read_subset_file++};
+                do
+                    ./minimap2.sh $({++read_subset_file++})
+                done < {==list_of_fastq.txt==}
+            
+            Here we feed the contents of `{==list_of_fastq.txt==}`, the list of files in `~/scaling-up/inputs/` to the same `$({++read_subset_file++})` variable. The `while` loop iterates through each line of `list_of_fastq.txt`, appending the line's value to `$(read_subset_file)`. To express your jobs as a `for` loop in condor, we would instead use the `queue <Var> in <List>` syntax. In the example above, this would be represented as: 
+            
+                queue {++read_subset_file++} from {==./list_of_files.txt==}
+        
+        For jobs with more than 5 values, we generally recommend using the `queue var from list_of_files.txt` syntax. 
 
 4.  Submit your job and monitor its progress.
+    
+    Submit your test job using `condor_submit`
+
+        :::console
+        condor_submit multi_job_minimap.sub
+
+    Monitor the progress of your job using `condor_watch_q`
+
+        :::console
+        condor_watch_q
+        [OUTPUT OF WATCH Q]
+
+??? success "Always Check Your Test Jobs Worked!"
+
+    Review your `condor_watch_q` output and your files on the Access Point. 
 
 ## Submit Multiple Jobs
 
@@ -150,7 +241,7 @@ Now, you are ready to submit the whole workload. We can think of our multi-job s
         ./minimap2.sh $(fastq_read_subset_file)
     done
     
-In the example above, we would feed the list of FASTQ files in `~/scaling-up/inputs/` to the variable $(fastq_read_subset_file) as a list of strings. A closer representation to HTCondor's _list of jobs_ structure is the `while` loop. If you are familiar with the `while` loop in bash, you could also consider the set of job submissions to mirror something like:
+In the example above, we would feed the list of FASTQ files in `~/scaling-up/inputs/` to the variable `$(fastq_read_subset_file)` as a list of strings. A closer representation to HTCondor's _list of jobs_ structure is the `while` loop. If you are familiar with the `while` loop in bash, you could also consider the set of job submissions to mirror something like:
 
     :::console
     while read fastq_read_subset_file;
@@ -180,7 +271,7 @@ Here we feed the contents of `list_of_fastq.txt`, the list of files in `~/scalin
     condor_submit minimap2_multi.submit
     ```
 
-    ??? success "Solution Set - ⚠️ Try to Solve Before Viewing ⚠️"
+    ??? success "Solution - ⚠️ Try to Solve Before Viewing ⚠️"
 
         Your final submit file, `minimap2_multi.submit`, should look something like this:
             
@@ -219,6 +310,7 @@ We can use the command `condor_watch_q` to track our job submission. As your job
         condor_q -held
 
     **To release your held job after fixing the issue (e.g., typos or missing files):**
+    [Not necessarily true. They'll need `condor_qedit` or resubmission]
 
         :::console
         condor_release <JobID>
@@ -226,111 +318,3 @@ We can use the command `condor_watch_q` to track our job submission. As your job
     If you're unsure whether to release or dig deeper, or if the hold message is cryptic—we’re here to help! Reach out to the OSG Support team at [support@osg-htc.org](mailto:support@osg-htc.org) with your job ID(s) and a brief description of what you're trying to do. We’re always happy to assist.
 
     ✅ **Remember: held jobs are a signal, not a failure. Use them to improve and scale your workflows with confidence.**
-
-!!! halt "FOR STAFF REVIEWERS: IGNORE BELOW"
-
-
-
-
-
-??? example "Challange: Scaling Beyond by Generalizing Our Scripts"
-
-    You've successfully mapped your C. elegans reads to a reference genome using HTCondor on the OSPool, but what if your project includes other species, new reference versions, or additional sequencing runs? Let’s take it a step further and make your workflow modular, reproducible, and interchangeable!
-    
-    **Generalize Your Workflow**
-    
-    Let's start by generalizing our executable file `minimap2.sh`. 
-    
-    1. Review your `minimap2.sh` file below
-    
-            :::console
-            #!/bin/bash
-            reads_subset_file = "$1"
-            # Use minimap2 to map the basecalled reads to the reference genome
-            minimap2 -ax map-ont reference_genome.fasta "$(reads_subset_file)" > "$(reads_subset_file)_output.sam"
-    
-        !!! example "Try It Yourself!"
-        
-            Ask yourself the following guiding questions while generalizing this script:
-        
-            1. Can we use arguments to represent additional parts of the `minimap2` command?
-            2. Are all our files represented by a variable or are some hard-coded into the script?
-            3. What about our command flags?
-    
-            ??? success "Solution Set - ⚠️ Try to Solve Before Viewing ⚠️"
-        
-                Your final executable file, `minimap2.sh`, should look something like this:
-                    
-                    :::console
-                    #!/bin/bash
-                    run_options="$1"
-                    reference_file="$2"
-                    reads_subset_file="$3"
-                    output_file_suffix="$4"
-                    # Use minimap2 to map the basecalled reads to the reference genome
-                    minimap2 $run_options "$reference_file" "$reads_subset_file" > "${reads_subset_file}${output_file_suffix}"
-          
-                We now have a `minimap2.sh` executable that can accept four (4) arguments representing each segment of the command. This allows us to quickly and easily adapt our minimap run to different presets, files, or run modes. 
-    
-       2. Review your `minimap2.sub` file below
-    
-               :::console
-               +SingularityImage      = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
-                
-               executable             = ./minimap2.sh
-               arguments              = $(read_subset_file)
-               transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
-            
-               transfer_output_files  = ./$(read_subset_file)_output.sam
-               transfer_output_remaps = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
-            
-               output                 = logs/output/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.out
-               error                  = logs/error/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.err
-               log                    = logs/log/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.log
-            
-               request_cpus           = 2
-               request_disk           = 4 GB
-               request_memory         = 4 GB 
-            
-               queue read_subset_file from ./list_of_fastq.txt
-
-        !!! example "Try It Yourself!"
-        
-               Ask yourself the following guiding questions while generalizing this script:
-        
-               1. Can we use dynamically assign values to any of the Job ClassAds?
-                   a. Which Job ClassAds are static (won't change much between submissions)?
-                   b. Which Job ClassAds are dynamic (change between submissions)?
-               2. Are all our files represented by a variable or are some hard-coded into the script?
-                   a. Which job files **will not** change between submissions?
-               3. What about our arguments for the executable?
-    
-            ??? success "Solution Set - ⚠️ Try to Solve Before Viewing ⚠️"
-    
-                   Your final submit file, `minimap2.sub`, should look something like this:
-    
-                       +SingularityImage      = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
-                        executable             = ./minimap2.sh
-                       "one 'two with spaces' 3"
-                       arguments              = "'-ax map-ont' reference_genome.fasta $(read_subset_file) _output.sam"
-                       transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
-                    
-                       transfer_output_files  = ./$(read_subset_file)_output.sam
-                       transfer_output_remaps = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
-                    
-                       output                 = logs/output/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.out
-                       error                  = logs/error/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.err
-                       log                    = logs/log/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.log
-                    
-                       request_cpus           = 2
-                       request_disk           = 4 GB
-                       request_memory         = 4 GB 
-                    
-                       queue read_subset_file from ./list_of_fastq.txt
-    
-                   We can now pass through our arguments to the executable that we've generalized.
-                
-                   !!! pro-tip "Pro-Tip: Spacing in HTCondor's Argument ClassAd"
-    
-                       HTCondor's `Arguments` ClassAd is interpreted as a space-delimited set of values. This means we need to wrap arguments that contain spaces in them (for example `-ax map-ont`) in single-quotas (`'-ax map-ont'`). We also need to wrap the full set of arguments in double quotes ("list of arguments"). For more information on advanced argument usage, please refer to the [condor_submit Manual Page on ReadTheDocs](https://htcondor.readthedocs.io/en/latest/man-pages/condor_submit.html#arguments)
-    

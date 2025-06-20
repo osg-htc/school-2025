@@ -1,8 +1,22 @@
 # Organizing HTC Workloads
 
-Imagine you are a computational biologist working on the mighty roundworm (_C. elegans_). You've conducted a mutagenesis experiment, sequenced your worm genomes, and now want to map your genomic reads to see how different regions of the genome have evolved. 
+## Exercise Goal
 
-This section will use a typical read mapping workflow in bioinfomatics to explore how we can sustainably scale up our workloads on the OSPool. These exercises will focus on establishing job-level organization, construction of a multi-job submit file, job progress tracking using log information and troubleshooting. 
+When working with large datasets or running a task many times over (e.g. across subsets, parameters, or files), organizing your workload becomes essential. High-throughput computing (HTC) allows you to run thousands of independent jobs efficiently, but success depends on how well you prepare your files and manage your project structure.
+
+This exercise introduces core principles of HTC workflow organization through a practical example. While the specific task—read mapping—comes from bioinformatics, the underlying strategies apply to any domain that handles data at scale. 
+
+[INSERT MINIMAP WORKFLOW - YOU ARE HERE]
+
+You'll learn how to:
+
+* Plan and organize your workload for high-throughput execution
+* Structure input, output, and support files for efficient job management
+* Track outputs, logs, and errors across many jobs in a clean, reproducible way
+
+
+In this exercise, you’ll use a typical bioinformatics read mapping workflow to explore how to sustainably scale your workloads on the OSPool. You’ll focus on job-level organization, building a multi-job submit file, tracking job progress with logs, and troubleshooting job failures.
+
 
 ## Log into an OSPool Access Point
 
@@ -18,12 +32,21 @@ To get the files for this exercise:
 
 ## Our Workload
 
-We can map our genomic reads to the _C. elegans_ reference genome using tools like `minimap2` or `bwa`. For this exercise, we will be using `minimap2`. To map our reads to the reference genome, we would use the command:
+Imagine you're working with a large set of DNA sequencing data from an organism. The sequencing file contains millions of snippets of DNA, which we call **reads**. Your goal is to figure out where these reads came from by matching them to a known reference genome using a read mapping tool.
+
+One commonly used tool for this task is `minimap2`, which quickly finds where each DNA read best matches the reference. For this exercise, we'll use `minimap2` to map our reads to a reference genome.
+
+To do that, we might run a command like:
 
     :::console
     $ minimap2 -ax map-ont [reference_genome.fasta] [sequencing_reads.fastq] > output.sam
 
-We want to run this command to map all our reads against the reference genome. FASTq files contain 4 lines per read, you can run the following command to calculate the number of reads in your FASTq file:
+Here’s what these files are:
+- `reference_genome.fasta`: a file containing the complete reference genome we’re mapping to.
+- `sequencing_reads.fastq`: a file containing millions of DNA fragments, called **reads**, from a sequencing machine.
+- `output.sam`: a **SAM file**, which is a standard text format, used to store the results of mapping—where each read aligns in the genome.
+
+We want to run this command to map all our reads against the reference genome. FASTQ files contain 4 lines per read, you can run the following command to calculate the number of reads in your FASTQ file:
 
     :::console
     $ expr $(wc -l < reads.fastq) / 4
@@ -31,17 +54,17 @@ We want to run this command to map all our reads against the reference genome. F
 
 Read mapping using algorithms, like `minimap2`, do not scale up well by simply adding additional CPUs to the problem. These mappers typically plateau their speed around 2-4 CPUs. This problem, however, can be solved by employing a "divide and conquer" approach. With this approach, we can subdivide our input reads.fastq file into smaller subsets which can be submitting to HTCondor as a set of independent parallel-running jobs. 
 
-The components of each of our jobs will be:
+We expect to be working with the following files in each of our jobs:
 
 * **Inputs**
     * A subset of reads.fastq - `reads_subset_a.fastq`
-    * A copy of the reference genome - `reference_genome.fasta`
-    * A copy of our minimap2 container (provided to you) - `minimap2.sif`
-    * A copy of our executable (template provided) - `run_minimap2.sh`
+    * The reference genome - `reference_genome.fasta`
+    * A minimap2 container image - `minimap2.sif`
+    * The executable - `run_minimap2.sh`
 * **Outputs**
-    * A SAM-formatted output file - `reads_subset_a.sam`
+    * A SAM-formatted output file - `reads_subset_a.sam` [what is SAM-formatted?] - [Does the above section clarify or need further workup?]
 * **System Generated Files**
-    * A set of log, standard error, and standard out files - `job.49302_reads_subset_a.log`, `job.49302_reads_subset_a.err`, `job.49302_reads_subset_a.out`
+    * A set of log, standard error, and standard out files
 
 ## Make an Organization Plan
 
@@ -55,7 +78,7 @@ how would you organize the log, standard output, and standard error files?
     
     Make sure to consider which files will be re-used often (common files across all jobs) versus which files will be used only once. Files often re-used, can be placed in your `/ospool/ap40/data/<user.name>/` directory to take advantage of the caching benefits when using the `osdf://` transfer plugin.
 
-Try making those changes before moving on to the next section of the tutorial.
+    [LARGE FILES ONLY]
 
 ### Organize Files
 
@@ -82,49 +105,88 @@ For our exercise, we will use the following data organizational structure:
 1.  Set up this structure on the command line by running: 
 
         :::console
-        $ mkdir inputs
-        $ mkdir outputs
-        $ mkdir logs
-        $ mkdir logs/log
-        $ mkdir logs/error
-        $ mkdir logs/output
-        $ mkdir /ospool/ap40/data/<user.name>/scaling-up/inputs
-        $ mkdir /ospool/ap40/data/<user.name>/scaling-up/software
+        $ mkdir -p inputs
+        $ mkdir -p outputs
+        $ mkdir -p logs
+        $ mkdir -p logs/log
+        $ mkdir -p logs/error
+        $ mkdir -p logs/output
+        $ cd /ospool/ap40/data/$USER/
+        $ mkdir -p scaling-up/inputs
+        $ mkdir -p scaling-up/software
 
-2. Move the `reads.fastq` file to your `inputs` directory using the `mv` command. 
+    !!! halt "FOR STAFF REVIEWERS: DO WE PREFER?"
+    
+        Do we prefer below:
+    
+            $ mkdir -p inputs outputs logs/{log,error,output}
+            $ cd /ospool/ap40/data/$USER/
+            $ mkdir -p scaling-up/{inputs,software}
+
+
+2. Move the `reads.fastq` file to your `inputs` directory (the one under `/home`) using the `mv` command. 
 
 3. Move the `reference_genome.fasta` file to your `/ospool/ap40/data/<user.name>/scaling-up/inputs` directory using the `mv` command. 
 
-4. Move the `minimap2.sif` container image file to your `/ospool/ap40/data/<user.name>/scaling-up/software` directory using the `mv` command. 
+4. Move the `minimap2.sif` container image file to your `/ospool/ap40/data/<user.name>/scaling-up/software` directory using the `mv` command.
 
-!!! pro-tip "Frequently Used Files on the OSDF - `reference_genome.fasta` & `minimap2.sif`"
+!!! pro-tip "Stop and Consider: Why are we moving our files to these directories?"
+
+    When preparing your jobs for high-throughput computing, think about how each file will be used. Will the file be reused across many jobs? Or is it specific to a single job? Will it need to be transferred repeatedly—or just once?
     
-    Every one of our jobs will use both the `reference_genome.fasta` and `minimap2.sif` files. These files, due to their frequent usage and larger size, significantly benefit from the OSDF's caching mechanism. In order to use the OSDF file transfer mechanism, we should 1) place them somewhere on our `ospool/ap40/data/<user.name>/` directory and 2) use the `osdf:///` protocol prefix when calling these files in our submit file.
+    With that in mind:  
+    - Why might it make sense to place `reads.fastq` in your `/home` directory?  
+    - Why are we storing `reference_genome.fasta` and `minimap2.sif` in `/ospool/ap40/data/` instead?
 
-### Wrangling The Data
-To get ready for our mapping step, we need to prepare our read files. This includes two crucial steps, splitting our reads and saving the read subset file names to a file.
+    ??? success "Solution"
 
-1. Navigate to your `~/scaling-up/inputs/` directory
+        Files in `/home` are transferred to each job, directly from the AP to the EP. These files do not get cached in the OSDF, which makes sense for files that change across jobs—such as subsets of `reads.fastq`. 
 
-   ```
-   cd ~/scaling-up/inputs/
-   ```
+        But `reference_genome.fasta` and `minimap2.sif` are the same in every job. By storing them in `/ospool/ap40/data/` and using `osdf://` to access them, we avoid repeatedly transferring them. Instead, they're cached near where jobs run, which speeds things up and reduces network load.
 
-2. Split the FASTQ file into subsets of `5,000` reads per subset. Since each FASTQ read consist of four lines in the FASTQ file, we can split `reads.fastq` every `20,000` lines
 
-    ```
-   split -l 20000 reads.fastq reads_fastq_chunk_
-   rm reads.fastq
-   ```
+### Wrangling the Data
+To get ready for our mapping step, we need to prepare our read files. This includes two crucial steps, splitting our reads.
+
+1. Navigate to your `~/scaling-up/inputs/` directory.
+    
+        :::console
+        cd ~/scaling-up/inputs/
+
+2. Split the FASTQ file into subsets. We can divide our `reads.fastq` into subsets of `500,000` reads per subset. Since each FASTQ read consist of four lines in the FASTQ file, we can split `reads.fastq` every 2,000,000 lines.
+
+        :::console
+        split -l 2000000 reads.fastq reads_fastq_chunk_
+        rm reads.fastq 
+
+    This will generate 99 read subset files with the prefix `eads_fastq_chunk_`. 
+
+    !!! tip "Subsetting Data - Your Milage May Vary"
+    
+        When subsetting your data, you should exercise your own judgement. The ideal job profile on the OSPool typically looks something like:
+            
+        * Runtime: Between 10mins and <10hrs
+        * Memory (RAM): 1-5 GB
+        * Inputs: <1 GB
+        * Outputs: <1 GB
+    
+        Jobs with larger profiles **may** still run, but will likely face significant increases in `idle` state while waiting for a machine to match. 
+
+3. Delete (or move) the `reads.fastq` file from the input directory.
+
+In the next exercise, we will generate a list of jobs for HTCondor using the the subset files in this directory. To avoid accidentally including the `reads.fastq` file in our list of jobs, please delete it or move it out of this directory.
+
 !!! warning "Organization in HTC is Critical!"
     
     One of the most important steps in scaling up our workflows to run on HTC systems, such as the OSPool, is maintaining a clear organizational structure. This includes deleting files we will not be using anymore. For the rest of the exercise, we will not be using the `reads.fastq` file after splitting it. **Not deleting this file can cause downstream issues. Do not skip this step.**
 
-## Review Our Progress
+## Review Your Progress
 
-Now that we've set up our directory structure and pre-processed our data, we can focus on preparing our submission scripts and getting our jobs running! Before we move on, take this time to comb through your directory structure and compare it to the structure below.
+Now that we've set up our directory structure and pre-processed our data, we can focus on preparing our submission scripts and getting our jobs running!
 
-!!! success "Checking our progress"
+!!! success "Checking your progress"
+
+    Before you move on, take this time to comb through your directory structure and compare it to the structure below.
 
     View the current directory and its subdirectories by using the `ls` command with the *recursive* (`-R`) flag. Your overall structure should look something like this:
     
@@ -133,7 +195,7 @@ Now that we've set up our directory structure and pre-processed our data, we can
         │   │   ├── inputs
         │   │   │   ├── reads_fastq_chunk_a
         │   │   │   ├── reads_fastq_chunk_b
-        │   │   │   ├── reads_fastq_chunk_zzz
+        │   │   │   ├── reads_fastq_chunk_c
         │   │   ├── outputs
         │   │   ├── logs
         │   │   │   ├── log
