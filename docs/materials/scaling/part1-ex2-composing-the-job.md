@@ -1,5 +1,3 @@
-[file named incorrectly (should be 1.2, not 2.1?)]
-
 # Composing Your Jobs
 
 ## Exercise Goal
@@ -20,9 +18,50 @@ High throughput computing allows us to efficiently scale analyses by distributin
 
 Make sure you are logged into `ap40.uw.osg-htc.org`. 
 
-## Composing Your Job
+## Generating the List of Jobs
+Next, we need to generate a list of jobs for HTCondor to run. In previous exercises, we've used the `queue` statements such as `queue <num>` and `queue <variable> matching *.txt`. 
 
-### Adapting the Executable
+For our exercise, we will use the `queue <var> from <list>` submission strategy. 
+
+!!! pro-tip "Think Ahead!" 
+    What values should we pass to HTCondor to scale our `minimap2` workflow up? 
+
+1. Move to your `~/scaling-up/inputs/` directory
+        
+        $ mv ~/scaling-up/inputs/
+        $ ls -la
+        total 12
+        drwxr-xr-x  2 username username 4096 Jun 13 16:08 .
+        drwx------ 10 username username 4096 Jun 13 16:07 ..
+        -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_a
+        -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_b
+        -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_c
+        -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_d
+
+2. Make a list of all the files in `~/scaling-up/inputs/` and save it to `~/scaling-up/list_of_fastq.txt`
+
+        :::console
+        $ ls > ~/scaling-up/list_of_fastq.txt
+        $ mv ~/scaling-up/
+        $ ls -la
+        total 12
+        drwxr-xr-x  2 username username 4096 Jun 13 16:08 .
+        drwx------ 10 username username 4096 Jun 13 16:07 ..
+        -rw-r--r--  1 username username   14 Jun 13 16:08 list_of_fastq.txt
+
+3. Use `head` to preview the first 10 lines of `list_of_fastq.txt`
+
+        :::console
+        $ head ~/scaling-up/list_of_fastq.txt
+        reads_fastq_chunk_a
+        reads_fastq_chunk_b
+        reads_fastq_chunk_c
+        reads_fastq_chunk_d
+        reads_fastq_chunk_e
+        ...
+        reads_fastq_chunk_j
+
+## Adapting the Executable
 Now that we have our data partitioned into independent subsets to be mapped in parallel, we can work on adapting our executable for use on the OSPool. We will start with the following template executable file, which is also found in your project directory under `~/scaling-up/minimap2.sh`.
 
     :::console
@@ -67,47 +106,6 @@ Let's start by editing our template executable file! In our executable there's t
 
     Reach out for help from one of the School staff members! You can also review the Software Carpentries' [Unix Shell - Loops](https://swcarpentry.github.io/shell-novice/05-loop.html) tutorial for examples on how to use these variables in your daily computational use.
 
-### Generating the List of Jobs
-Next, we need to generate a list of jobs for HTCondor to run. In previous exercises, we've used the `queue` statements such as `queue <num>` and `queue <variable> matching *.txt`. For our exercise, we will use the `queue <var> from <list>` submission strategy. 
-
-!!! pro-tip "Think Ahead!" 
-    What values should we pass to HTCondor to scale our `minimap2` workflow up? 
-
-1. Move to your `~/scaling-up/inputs/` directory
-        
-        $ mv ~/scaling-up/inputs/
-        $ ls -la
-        total 12
-        drwxr-xr-x  2 username username 4096 Jun 13 16:08 .
-        drwx------ 10 username username 4096 Jun 13 16:07 ..
-        -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_a
-        -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_b
-        -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_c
-        -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_d
-
-2. Make a list of all the files in `~/scaling-up/inputs/` and save it to `~/scaling-up/list_of_fastq.txt`
-
-        :::console
-        $ ls > ~/scaling-up/list_of_fastq.txt
-        $ mv ~/scaling-up/
-        $ ls -la
-        total 12
-        drwxr-xr-x  2 username username 4096 Jun 13 16:08 .
-        drwx------ 10 username username 4096 Jun 13 16:07 ..
-        -rw-r--r--  1 username username   14 Jun 13 16:08 list_of_fastq.txt
-
-3. Use `head` to preview the first 10 lines of `list_of_fastq.txt`
-
-        :::console
-        $ head ~/scaling-up/list_of_fastq.txt
-        reads_fastq_chunk_a
-        reads_fastq_chunk_b
-        reads_fastq_chunk_c
-        reads_fastq_chunk_d
-        reads_fastq_chunk_e
-        ...
-        reads_fastq_chunk_j
-
 ## Testing Our Jobs - Submit a Test List of Jobs
 
 [I actually think this section works better if we introduce it before the Composing Your Job section.]
@@ -149,39 +147,62 @@ Now we want to submit a test job with our organizing scheme and adapted executab
 
 For our template, lets use `read_subset_file` as our variable name to pass the name of each subset file to.
 
-1.  Fill in the incomplete lines of the submit file, as shown below: 
+1. It is useful to think about constructing your submit file starting with the `queue` statement. This helps us predict how we need to structure our submit file in order to dynamically submit many jobs at once. 
+
+    !!! question "What `queue` statement do you think would work best for our current workflow?"
+        
+        Consider the following:
+
+        * We have a set of FASTQ formatted reads_fastq_chunk_ subset files we need to submit along with each job.
+        * Each reads_fastq_chunk_ subset file name is in our `~/scaling-up/list_of_fastq.txt` list of jobs.
+
+        ??? success "Solution"
+
+            Since we have our list of job files saved in `~/scaling-up/list_of_fastq.txt`, we will use the `queue <var> from <list_of_var.txt>` syntax. 
+
+            **Our queue statement will be:**
+            
+            `queue read_subset_file from ~/scaling-up/list_of_fastq.txt`
+
+2. Fill in the incomplete lines of the submit file, as shown below: 
 
         :::console
         container_image         = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
 
         executable              = minimap2.sh
-        arguments               = reads_fastq_chunk_a
+        arguments               = $(read_subset_file)
 
-        transfer_input_files    = ./input/reads_fastq_chunk_a, osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
-        transfer_output_files   = reads_fastq_chunk_a_output.sam
-        transfer_output_remaps  = "reads_fastq_chunk_a_output.sam=output/reads_fastq_chunk_a_output.sam"
+3. Now, specify where the input and output files should be:
+
+        :::console
+        transfer_input_files    = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
+        transfer_output_files   = $(read_subset_file)_output.sam
+        transfer_output_remaps  = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
 
     To tell HTCondor the location of the input file, we need to include the input directory.
     Also, this submit file uses the `transfer_output_remaps` feature that you learned about;
     it will move the output file to the `output` directory by renaming or remapping it.
 
-2.  Next, edit the submit file lines that tell the log, output, and error files where to go:
+4.  Next, edit the submit file lines that tell the log, output, and error files where to go:
 
         :::console 
-        output        = logs/output/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.out
-        error         = logs/error/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.err
-        log           = logs/log/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.log
+        output        = logs/output/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.out
+        error         = logs/error/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.err
+        log           = logs/log/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.log
 
-3.  Last, add to the submit file your resource requirements:
+5.  Add to the submit file your resource requirements:
 
         :::console
         request_cpus           = 2
         request_disk           = 4 GB
         request_memory         = 4 GB 
      
-        queue {==read_subset_file from ./test_list_of_fastq.txt==}
+6.  Lastly, finish your submit file with the `queue` statement:
 
+        queue read_subset_file from ./test_list_of_fastq.txt
     
+    We will be using `./test_list_of_fastq.txt` instead while will only have a sample (3) of our reads subsets. We will use the fully scale list in the next section. 
+
     !!! pro-tip "Thinking of our jobs as a `for` or `while` loop"
         
         We can think of our multi-job submission as a sort of `for` or `while` loop in bash.
@@ -214,7 +235,11 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
         
         For jobs with more than 5 values, we generally recommend using the `queue var from list_of_files.txt` syntax. 
 
-4.  Submit your job and monitor its progress.
+7.  Generate `./test_list_of_fastq.txt` using `head` command
+
+        head -n 2 ./list_of_fastq.txt > ./test_list_of_fastq.txt
+
+7.  Submit your job and monitor its progress.
     
     Submit your test job using `condor_submit`
 
@@ -231,25 +256,9 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
 
     Review your `condor_watch_q` output and your files on the Access Point. 
 
-## Submit Multiple Jobs
+## Submit Multiple Jobs - Scaling to Full Dataset
 
-Now, you are ready to submit the whole workload. We can think of our multi-job submission as a sort of `for` or `while` loop in bash. If you are familiar with the `for` loop structure, imagine you wished to run the following loop:
-
-    :::console
-    for fastq_read_subset_file in reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_
-    do
-        ./minimap2.sh $(fastq_read_subset_file)
-    done
-    
-In the example above, we would feed the list of FASTQ files in `~/scaling-up/inputs/` to the variable `$(fastq_read_subset_file)` as a list of strings. A closer representation to HTCondor's _list of jobs_ structure is the `while` loop. If you are familiar with the `while` loop in bash, you could also consider the set of job submissions to mirror something like:
-
-    :::console
-    while read fastq_read_subset_file;
-    do
-        ./minimap2.sh $(fastq_read_subset_file)
-    done < list_of_fastq.txt
-
-Here we feed the contents of `list_of_fastq.txt`, the list of files in `~/scaling-up/inputs/` to the same `$(fastq_read_subset_file)` variable. The `while` loop iterates through each line of `list_of_fastq.txt`, appending the line's value to `$(fastq_read_subset_file)`. 
+Now, you are ready to submit the whole workload. 
 
 !!! example "Try It Yourself!"
 
