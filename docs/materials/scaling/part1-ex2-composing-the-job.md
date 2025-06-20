@@ -10,7 +10,7 @@ High throughput computing allows us to efficiently scale analyses by distributin
 
 [INSERT MINIMAP WORKFLOW - YOU ARE HERE]
 
-!!! halt "**Halt!** Do not proceed if you haven't completed the [Scaling-Up Exercise 1 Part 1](../part1-ex1-organization)"
+!!! danger "**Halt!** Do not proceed if you haven't completed the [Scaling-Up Exercise 1 Part 1](../part1-ex1-organization)"
     
     This is part two of our Scaling Up Exercise 1 set and should **only** be completed after you've successfully completed [Scaling-Up Exercise 1 Part 1](../part1-ex1-organization). 
 
@@ -23,7 +23,7 @@ Next, we need to generate a list of jobs for HTCondor to run. In previous exerci
 
 For our exercise, we will use the `queue <var> from <list>` submission strategy. 
 
-!!! pro-tip "Think Ahead!" 
+!!! tip "Think Ahead!" 
     What values should we pass to HTCondor to scale our `minimap2` workflow up? 
 
 1. Move to your `~/scaling-up/inputs/` directory
@@ -73,7 +73,7 @@ Now that we have our data partitioned into independent subsets to be mapped in p
 |-----------------|----------------------------------------|----------------------------------------------------------------------------------|--------------------------------------|---------------------------------------------|--------------------------------------------|-------------------------------------|
 | **Meaning**         | The program we'll run to map our reads | Specifies the type of reads we're using <br>(Oxford Nanopore Technologies reads) | The input reference we're mapping to | The reads we are mapping against our genome | redirects the output of minimap2 to a file | The output file of our mapping step |
 
-!!! halt "Time-Out! **Think about how you would adapt this executable template for HTC**"
+!!! danger "Time-Out! **Think about how you would adapt this executable template for HTC**"
 
     If we want to map each one of our reads subsets against the reference genome, think about the following questions:
 
@@ -143,7 +143,7 @@ Now we want to submit a test job with our organizing scheme and adapted executab
     5. Which file transfer protocols should we use for our inputs/outputs?
         * Consider whether these files are used one or repeatedly across all your jobs.
 
-    !!! halt "Try to Draft a Submit File Before Moving Forward️"
+    !!! danger "Try to Draft a Submit File Before Moving Forward️"
 
 For our template, lets use `read_subset_file` as our variable name to pass the name of each subset file to.
 
@@ -203,7 +203,7 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
     
     We will be using `./test_list_of_fastq.txt` instead while will only have a sample (3) of our reads subsets. We will use the fully scale list in the next section. 
 
-    !!! pro-tip "Thinking of our jobs as a `for` or `while` loop"
+    !!! tip "Thinking of our jobs as a `for` or `while` loop"
         
         We can think of our multi-job submission as a sort of `for` or `while` loop in bash.
         
@@ -307,7 +307,7 @@ Now, you are ready to submit the whole workload.
 
 We can use the command `condor_watch_q` to track our job submission. As your jobs progress through the various `job state`, Condor will update the output of `condor_watch_q`.
 
-!!! pro-tip "Pro-Tip: Jobs Holds *Aren't* Always Bad!"
+!!! tip "tip: Jobs Holds *Aren't* Always Bad!"
     
     Seeing your jobs in the Held state? Don’t panic! This is often just HTCondor doing its job to protect your workflow.
 
