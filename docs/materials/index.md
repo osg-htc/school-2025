@@ -47,17 +47,14 @@ View the Slides: [Coming soon]
 - [Exercise 2.3: Use `queue from` with custom variables](htcondor/part2-ex3-queue-from.md)
 - [Bonus Exercise 2.4: Use `queue matching` with a custom variable](htcondor/part2-ex4-queue-matching.md)
 
-## OSG
+## The Open Science Pool (OSPool)
 
 View the slides: [Coming soon]
 <!-- View the slides: [pdf](osg/files/osgs24-day2-part1-osg-timc.pdf) -->
 
-### OSG Exercises: Comparing PATh and OSG (Strongly Recommended)
+### OSPool Exercises: Researching the OSPool (Strongly Recommended)
 
-- [Exercise 1.1: Log in to the OSPool Access Point](osg/part1-ex1-login-scp.md)
-- [Exercise 1.2: Running jobs in the OSPool](osg/part1-ex2-submit-osg.md)
-- [Exercise 1.3: Hardware differences between PATh and OSG](osg/part1-ex3-hardware-diffs.md)
-- [Exercise 1.4: Software differences in OSPool](osg/part1-ex4-software-diffs.md)
+- [Exercise 1.1: Where Do Jobs Run?](ospool/part1-ex1-where-run.md)
 
 ## Troubleshooting
 
