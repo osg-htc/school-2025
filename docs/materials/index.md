@@ -57,6 +57,8 @@ View the slides: [Coming soon]
 - [Exercise 1.1: Where Do Jobs Run?](ospool/part1-ex1-where-run.md)
 - [Exercise 1.2: How Much Can I Get?](ospool/part1-ex2-capacity.md)
 - [Exercise 1.3: How Does Capacity Change?](ospool/part1-ex3-dynamic-capacity.md)
+- [Exercise 1.4: What Is In an Execution Point?](ospool/part1-ex4-ep-sandbox.md)
+- [Bonus Exercise 1.5: Viewing OSPool Information](ospool/part1-ex5-ospool-views.md)
 
 ## Troubleshooting
 
