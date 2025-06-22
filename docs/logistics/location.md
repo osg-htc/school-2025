@@ -83,13 +83,15 @@ rapid routes (A, B, F), you usually need to buy a ticket from the ticket machine
 at the bus station. 
 * To set up the app: 
 	* Go to this page to download the app: https://madisonwi.justride.tickets/
-	* Once the app is downloaded, create an account. 
+	* Once the app is downloaded, create an account and log in. 
 	* Add funds to the "Tap & Ride Balance." 
+	* Create a barcode: 
+		* From the first screen, click on "Tap and Ride" 
+		* Scroll down to the "Your Active Tokens" section
+		* Choose "Create a barcode."
+		* Go through the steps to create a barcode. 
 * To use the app: 
-	* When the bus is arriving, access your barcode:
-		* Choose the menu button on the top right.
-		* Select "My account."
-		* Select "Scan Account." 
+	* When the bus is arriving, access your barcode (it should be on the first screen when you open the app.)
 	* Scan the barcode on the middle part of the bus scanner. [See this video](https://www.youtube.com/watch?v=asefIj2XWJU).
 * If paying with cash and using a transfer, ask the driver for a free transfer pass upon boarding.
 * There's a useful [fare FAQ here](https://www.cityofmadison.com/metro/fares/fast-fares). 
