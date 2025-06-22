@@ -95,7 +95,7 @@ If you have time, talk to your neighbor(s) about it!
 
 ## Next exercise
 
-Once completed, move onto the next exercise: [How Much Can I Get?](part1-ex2-how-much-capacity.md).
+Once completed, move onto the next exercise: [How Much Can I Get?](part1-ex2-capacity.md).
 
 ## Extra Challenge: Cleaning up your submit directory
 
