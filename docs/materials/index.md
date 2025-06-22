@@ -55,6 +55,7 @@ View the slides: [Coming soon]
 ### OSPool Exercises: Researching the OSPool (Strongly Recommended)
 
 - [Exercise 1.1: Where Do Jobs Run?](ospool/part1-ex1-where-run.md)
+- [Exercise 1.2: How Much Can I Get?](ospool/part1-ex2-capacity.md)
 
 ## Troubleshooting
 

@@ -4,7 +4,7 @@ status: testing
 
 # OSPool Exercise 1.1: Where Do Jobs Run?
 
-In the lecture about OSG services,
+In the lecture about the Open Science Pool,
 we said that the OSPool is really just a big, strange HTCondor pool.
 Yesterday, you already learned a great deal about HTCondor,
 and even ran your jobs in the OSPool.
@@ -24,10 +24,10 @@ Do they clump together?
 Do they all run at the nearest institution?
 Let’s do an experiment!
 
-There is a single computational task here, and you will run it 50 times to collect a sample of results.
+There is a single computational task here, and you will run it many times to collect a sample of results.
 The task simply returns information about the geographic location of the Execution Point it runs on.
 We provide the executable and associated data,
-so work will be to write a submit file that queues multiple jobs.
+so your work will be to transform this task into a job and run it 50 times.
 Once complete, you will manually combine the results and input them to a mapping service.
 
 ### Where in the world are my jobs?
@@ -38,7 +38,7 @@ Geolocation uses a registry to match a computer’s network address to an approx
 To start, you will reuse some basic HTCondor skills from the HTC exercises:
 
 1.  Log in to `ap40.uw.osg-htc.org` (if not already)
-1.  Create and change into a new folder for this exercise, for example `osg-ex11`
+1.  Create and change into a new folder for this exercise, for example `ospool-ex11`
 1.  Download the geolocation code:
 
         :::console
