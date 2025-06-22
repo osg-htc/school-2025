@@ -90,9 +90,9 @@ at the bus station.
 		* Choose the menu button on the top right.
 		* Select "My account."
 		* Select "Scan Account." 
-	* Scan the barcode on the middle part of the bus scanner. 
+	* Scan the barcode on the middle part of the bus scanner. [See this video](https://www.youtube.com/watch?v=asefIj2XWJU).
 * If paying with cash and using a transfer, ask the driver for a free transfer pass upon boarding.
-* There's a useful [FAQ here](https://www.cityofmadison.com/metro/fares/fast-fares). 
+* There's a useful [fare FAQ here](https://www.cityofmadison.com/metro/fares/fast-fares). 
 
 #### Apps 
 * [Google Maps](https://maps.google.com) is a great resource for finding the best bus routes to use in Madison, giving multiple route options for each trip.
