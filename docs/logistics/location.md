@@ -76,8 +76,23 @@ is full of great restaurants, shops, and attractions, and is worth walking along
 Many [Madison Metro](https://www.cityofmadison.com/metro) buses stop near the hotel and
 pass through the University of Wisconsin&ndash;Madison campus.
 
-* Bus fare is $2.00.
-* If using a transfer, ask the driver for a free transfer pass upon boarding.
+* Bus fare is $2.00. 
+* There are several ways to pay. On any bus, you can use the Madison Metro app. 
+On regular routes, you can pay with cash. On the 
+rapid routes (A, B, F), you usually need to buy a ticket from the ticket machine 
+at the bus station. 
+* To set up the app: 
+	* Go to this page to download the app: https://madisonwi.justride.tickets/
+	* Once the app is downloaded, create an account. 
+	* Add funds to the "Tap & Ride Balance." 
+* To use the app: 
+	* When the bus is arriving, access your barcode:
+		* Choose the menu button on the top right.
+		* Select "My account."
+		* Select "Scan Account." 
+	* Scan the barcode on the middle part of the bus scanner. 
+* If paying with cash and using a transfer, ask the driver for a free transfer pass upon boarding.
+* There's a useful [FAQ here](https://www.cityofmadison.com/metro/fares/fast-fares). 
 
 #### Apps 
 * [Google Maps](https://maps.google.com) is a great resource for finding the best bus routes to use in Madison, giving multiple route options for each trip.
