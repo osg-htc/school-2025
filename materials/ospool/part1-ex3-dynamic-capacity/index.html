@@ -1768,13 +1768,12 @@ And as usual, talk to neighbors or staff about it, if you like!</p>
 <p>Go back to the same exercise directory you used earlier, and run the same commands as before.</p>
 <p><strong>However</strong>, be sure to change the output filenames for each one, or you will overwrite your previous data.
 Here are the commands again, with different output filenames:</p>
-<div class="codehilite"><pre><span></span><code>    :::console
-    $ condor_status -avail -af CPUs | sort -n | uniq -c &gt; cpus-snapshot2.txt
-    $ condor_status -avail -af GPUs | sort -n | uniq -c &gt; gpus-snapshot2.txt
-    $ condor_status -avail -af &quot;eval(quantize(Memory/CPUs, 2048))&quot; | sort -n | uniq -c &gt; memory-snapshot2.txt
-    $ condor_status -avail -af OpSysAndVer | sort | uniq -c &gt; opsysandver-snapshot2.txt
-    $ condor_status -avail -af CondorVersion | sort | uniq -c &gt; condorver-snapshot2.txt
-    $ condor_status -avail -af PelicanPluginVersion | sort | uniq -c &gt; pelicanver-snapshot2.txt
+<div class="codehilite"><pre><span></span><code><span class="gp">$ </span>condor_status -avail -af CPUs <span class="p">|</span> sort -n <span class="p">|</span> uniq -c &gt; cpus-snapshot2.txt
+<span class="gp">$ </span>condor_status -avail -af GPUs <span class="p">|</span> sort -n <span class="p">|</span> uniq -c &gt; gpus-snapshot2.txt
+<span class="gp">$ </span>condor_status -avail -af <span class="s2">&quot;eval(quantize(Memory/CPUs, 2048))&quot;</span> <span class="p">|</span> sort -n <span class="p">|</span> uniq -c &gt; memory-snapshot2.txt
+<span class="gp">$ </span>condor_status -avail -af OpSysAndVer <span class="p">|</span> sort <span class="p">|</span> uniq -c &gt; opsysandver-snapshot2.txt
+<span class="gp">$ </span>condor_status -avail -af CondorVersion <span class="p">|</span> sort <span class="p">|</span> uniq -c &gt; condorver-snapshot2.txt
+<span class="gp">$ </span>condor_status -avail -af PelicanPluginVersion <span class="p">|</span> sort <span class="p">|</span> uniq -c &gt; pelicanver-snapshot2.txt
 </code></pre></div>
 
 <p>Per type of file (cpus-, gpus-, etc.), compare your snapshots.
