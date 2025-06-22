@@ -764,6 +764,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part1-ex2-capacity/" class="md-nav__link">
+        1.2 - How much can I get?
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -1753,7 +1765,7 @@
                 
                 
                 <h1 id="ospool-exercise-11-where-do-jobs-run">OSPool Exercise 1.1: Where Do Jobs Run?<a class="headerlink" href="#ospool-exercise-11-where-do-jobs-run" title="Permanent link">&para;</a></h1>
-<p>In the lecture about OSG services,
+<p>In the lecture about the Open Science Pool,
 we said that the OSPool is really just a big, strange HTCondor pool.
 Yesterday, you already learned a great deal about HTCondor,
 and even ran your jobs in the OSPool.
@@ -1769,10 +1781,10 @@ Does each one go to a different location?
 Do they clump together?
 Do they all run at the nearest institution?
 Let’s do an experiment!</p>
-<p>There is a single computational task here, and you will run it 50 times to collect a sample of results.
+<p>There is a single computational task here, and you will run it many times to collect a sample of results.
 The task simply returns information about the geographic location of the Execution Point it runs on.
 We provide the executable and associated data,
-so work will be to write a submit file that queues multiple jobs.
+so your work will be to transform this task into a job and run it 50 times.
 Once complete, you will manually combine the results and input them to a mapping service.</p>
 <h3 id="where-in-the-world-are-my-jobs">Where in the world are my jobs?<a class="headerlink" href="#where-in-the-world-are-my-jobs" title="Permanent link">&para;</a></h3>
 <p>To find the physical location of the computers your jobs our running on, you will use a method called <em>geolocation</em>.
@@ -1780,7 +1792,7 @@ Geolocation uses a registry to match a computer’s network address to an approx
 <p>To start, you will reuse some basic HTCondor skills from the HTC exercises:</p>
 <ol>
 <li>Log in to <code>ap40.uw.osg-htc.org</code> (if not already)</li>
-<li>Create and change into a new folder for this exercise, for example <code>osg-ex11</code></li>
+<li>Create and change into a new folder for this exercise, for example <code>ospool-ex11</code></li>
 <li>
 <p>Download the geolocation code:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">$ </span>osdf object get /ospool/uc-shared/public/school/2025/dev/location-wrapper.sh ./
@@ -1888,13 +1900,13 @@ If you get stuck, review the <a href="../../">slides from Monday</a>.</p>
         </a>
       
       
-        <a href="../../troubleshooting/part1-ex1-troubleshooting/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="../part1-ex2-capacity/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              1.1 - Troubleshooting Jobs
+              1.2 - How much can I get?
             </div>
           </div>
           <div class="md-footer__button md-icon">
