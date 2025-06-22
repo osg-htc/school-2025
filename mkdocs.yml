@@ -75,6 +75,7 @@ nav:
         - Bonus Exercise 2.4 - Use queue matching with a custom variable: materials/htcondor/part2-ex4-queue-matching.md
     - Researching the OSPool:
       - 1.1 - Where do jobs run?: materials/ospool/part1-ex1-where-run.md
+      - 1.2 - How much can I get?: materials/ospool/part1-ex2-capacity.md
     - Troubleshooting Exercises:
       - 1.1 - Troubleshooting Jobs: materials/troubleshooting/part1-ex1-troubleshooting.md
       - 1.2 - Job Retry: materials/troubleshooting/part1-ex2-job-retry.md
