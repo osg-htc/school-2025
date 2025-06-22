@@ -14,7 +14,7 @@ Maybe these views will help you better understand the scope and dynamic nature o
 You have seen at least one map of OSPool contributors so far.
 Where do these maps come from?
 
-Please visit [https://map.osg-htc.org/].
+Please visit [https://map.osg-htc.org/](https://map.osg-htc.org/).
 
 *   From the View drop-down menu, try different options.
 *   The default “OSG Sites” view is not well defined… maybe don’t think too hard about that one!
@@ -26,7 +26,7 @@ Please visit [https://map.osg-htc.org/].
 
 You can explore some information about research projects that have used the OSPool:
 
-Please visit [https://osg-htc.org/services/ospool/projects.html];
+Please visit [https://osg-htc.org/services/ospool/projects.html](https://osg-htc.org/services/ospool/projects.html);
 be patient, these pages get live data and take a while to fully load.
 As the page says, the data is for projects that ran at least 100 jobs in the OSPool in the past year.
 
@@ -44,7 +44,7 @@ For a view from the capacity contributor’s perspective,
 we have a new feature called the “CE Dashboard” —
 the name comes from the HTCondor-CE, from which the source data is collected.
 
-Please visit [https://ce-dashboard.ospool.osg-htc.org/index.html].
+Please visit [https://ce-dashboard.ospool.osg-htc.org/index.html](https://ce-dashboard.ospool.osg-htc.org/index.html).
 
 *   Click on a CE name to see information about the past 2 weeks of contributions
     (for a local example, scroll down and try “CHTC-Spark-CE1”).
