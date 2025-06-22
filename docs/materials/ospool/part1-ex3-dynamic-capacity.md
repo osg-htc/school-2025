@@ -79,13 +79,13 @@ Go back to the same exercise directory you used earlier, and run the same comman
 **However**, be sure to change the output filenames for each one, or you will overwrite your previous data.
 Here are the commands again, with different output filenames:
 
-        :::console
-        $ condor_status -avail -af CPUs | sort -n | uniq -c > cpus-snapshot2.txt
-        $ condor_status -avail -af GPUs | sort -n | uniq -c > gpus-snapshot2.txt
-        $ condor_status -avail -af "eval(quantize(Memory/CPUs, 2048))" | sort -n | uniq -c > memory-snapshot2.txt
-        $ condor_status -avail -af OpSysAndVer | sort | uniq -c > opsysandver-snapshot2.txt
-        $ condor_status -avail -af CondorVersion | sort | uniq -c > condorver-snapshot2.txt
-        $ condor_status -avail -af PelicanPluginVersion | sort | uniq -c > pelicanver-snapshot2.txt
+    :::console
+    $ condor_status -avail -af CPUs | sort -n | uniq -c > cpus-snapshot2.txt
+    $ condor_status -avail -af GPUs | sort -n | uniq -c > gpus-snapshot2.txt
+    $ condor_status -avail -af "eval(quantize(Memory/CPUs, 2048))" | sort -n | uniq -c > memory-snapshot2.txt
+    $ condor_status -avail -af OpSysAndVer | sort | uniq -c > opsysandver-snapshot2.txt
+    $ condor_status -avail -af CondorVersion | sort | uniq -c > condorver-snapshot2.txt
+    $ condor_status -avail -af PelicanPluginVersion | sort | uniq -c > pelicanver-snapshot2.txt
 
 Per type of file (cpus-, gpus-, etc.), compare your snapshots.
 Do you see any interesting differences?
