@@ -91,3 +91,11 @@ Per type of file (cpus-, gpus-, etc.), compare your snapshots.
 Do you see any interesting differences?
 Some are more likely to change than others.
 Once again, talk to others about what you found, if you like.
+
+## Next Exercise
+
+The last exercise and this one were about capacity.
+For the next one, we will look at one aspect of what an Execution Point is.
+
+When ready, move on to the next exercise:
+[What Is In an Execution Point?](part1-ex4-ep-sandbox.md)
