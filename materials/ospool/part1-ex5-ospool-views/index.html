@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://osg-htc.org/school-2025/materials/ospool/part1-ex4-software-diffs/">
+        <link rel="canonical" href="https://osg-htc.org/school-2025/materials/ospool/part1-ex5-ospool-views/">
       
       <link rel="icon" href="../../../assets/OSG_Logo.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
     
     
       
-        <title>OSG Exercise 1.4: Software Differences in OSPool - OSG School 2025</title>
+        <title>Bonus Exercise 1.5 - Viewing OSPool Information - OSG School 2025</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#osg-exercise-14-software-differences-in-ospool" class="md-skip">
+        <a href="#ospool-exercise-15-optional-viewing-ospool-information" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              OSG Exercise 1.4: Software Differences in OSPool
+              Bonus Exercise 1.5 - Viewing OSPool Information
             
           </span>
         </div>
@@ -366,12 +366,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
       
       <label class="md-nav__link" for="__nav_5">
         Materials
@@ -651,12 +653,14 @@
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" checked>
       
       <label class="md-nav__link" for="__nav_5_3">
         Researching the OSPool
@@ -701,6 +705,82 @@
       <a href="../part1-ex3-dynamic-capacity/" class="md-nav__link">
         1.3 - How Does Capacity Change?
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../part1-ex4-ep-sandbox/" class="md-nav__link">
+        1.4 - What Is In an Execution Point?
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Bonus Exercise 1.5 - Viewing OSPool Information
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Bonus Exercise 1.5 - Viewing OSPool Information
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#maps" class="md-nav__link">
+    Maps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projects" class="md-nav__link">
+    Projects
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ce-dashboard" class="md-nav__link">
+    CE Dashboard
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1633,36 +1713,23 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#comparing-operating-systems" class="md-nav__link">
-    Comparing operating systems
+  <a href="#maps" class="md-nav__link">
+    Maps
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#submitting-probe-jobs" class="md-nav__link">
-    Submitting probe jobs
-  </a>
-  
-    <nav class="md-nav" aria-label="Submitting probe jobs">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#software-probe-code" class="md-nav__link">
-    Software probe code
+  <a href="#projects" class="md-nav__link">
+    Projects
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#probing-several-servers" class="md-nav__link">
-    Probing several servers
+      
+        <li class="md-nav__item">
+  <a href="#ce-dashboard" class="md-nav__link">
+    CE Dashboard
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1679,102 +1746,50 @@
               
                 
                 
-                <h1 id="osg-exercise-14-software-differences-in-ospool">OSG Exercise 1.4: Software Differences in OSPool<a class="headerlink" href="#osg-exercise-14-software-differences-in-ospool" title="Permanent link">&para;</a></h1>
-<p>The goal of this exercise is to see some differences in the availability of software in the OSPool.
-At your local cluster, you may be used to having certain versions of software.
-But in the OSPool,
-it is likely that the software you need will not be available at all.</p>
-<h2 id="comparing-operating-systems">Comparing operating systems<a class="headerlink" href="#comparing-operating-systems" title="Permanent link">&para;</a></h2>
-<p>To really see differences between Execution Points in the PATh Facility versus the OSPool,
-you will want to compare the &ldquo;machine&rdquo; ClassAds between the two pools.
-Rather than inspecting the very long ClassAd for each Execution Point,
-you will look at a specific attribute called <code>OpSysAndVer</code>,
-which tells us the operating system version of the Execution Point.
-An easy way to show this attribute for all Execution Points is by using <code>condor_status</code>
-in conjunction with the <code>-autoformat</code> (or <code>-af</code>, for short) option.
-The <code>-autoformat</code> option is like the <code>-format</code> option you learned about earlier,
-and outputs the attributes you choose for each slot;
-but as you may have guessed, it does some automatic formatting for you.</p>
-<p>So, let’s examine the operating system and (major) version of slots on the PATh Facility and the OSPool.</p>
-<ol>
-<li>
-<p>Log in or switch to <code>ap1.facility.path-cc.io</code> and run the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">$ </span>condor_status -autoformat OpSysAndVer
-</code></pre></div>
-
-</li>
-<li>
-<p>Log in or switch to <code>ap40.uw.osg-htc.org</code> (parallel windows are handy!)
-    and run the same command</p>
-</li>
-</ol>
-<p>You will see many values for the operating system and major version.
-Some are abbreviated&nbsp;— for example,
-<code>RedHat</code> stands for “Red Hat Enterprise Linux” and
-<code>SL</code> stands for “Scientific Linux” (a Red Hat variant).</p>
-<p>The only problem is that with hundreds or thousands of slots,
-it's difficult to get a feel for the composition of each pool from this output.
-You can use the <code>sort</code> and <code>uniq</code> commands, in sequence, on the <code>condor_status</code> output
-to get counts of each unique operating system and version string.
-Your command line should look something like this:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">$ </span>condor_status -autoformat OpSysAndVer <span class="p">|</span> sort <span class="p">|</span> uniq -c
-</code></pre></div>
-
-<p>How would you describe the difference between the PATh Facility and OSPool?</p>
-<h2 id="submitting-probe-jobs">Submitting probe jobs<a class="headerlink" href="#submitting-probe-jobs" title="Permanent link">&para;</a></h2>
-<p>Now you have some idea of the diversity of operating systems on the OSPool.
-This is a step in the right direction to knowing what software is available in general.
-But what you really want to know is whether your specific software tool (and version) is available.</p>
-<h3 id="software-probe-code">Software probe code<a class="headerlink" href="#software-probe-code" title="Permanent link">&para;</a></h3>
-<p>The following shell script probes for software and returns the version if it is installed:</p>
-<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/sh</span>
-
-get_version<span class="o">(){</span>
-    <span class="nv">program</span><span class="o">=</span><span class="nv">$1</span>
-    <span class="nv">$program</span> --version &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-    <span class="nv">double_dash_rc</span><span class="o">=</span><span class="nv">$?</span>
-    <span class="nv">$program</span> -version &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-    <span class="nv">single_dash_rc</span><span class="o">=</span><span class="nv">$?</span>
-    which <span class="nv">$program</span> &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-    <span class="nv">which_rc</span><span class="o">=</span><span class="nv">$?</span>
-    <span class="k">if</span> <span class="o">[</span> <span class="nv">$double_dash_rc</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nv">$program</span> --version <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-    <span class="k">elif</span> <span class="o">[</span> <span class="nv">$single_dash_rc</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nv">$program</span> -version <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-    <span class="k">elif</span> <span class="o">[</span> <span class="nv">$which_rc</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$program</span><span class="s2"> installed but could not find version information&quot;</span>
-    <span class="k">else</span>
-        <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$program</span><span class="s2"> not installed&quot;</span>
-    <span class="k">fi</span>
-<span class="o">}</span>
-
-get_version <span class="s1">&#39;R&#39;</span>
-get_version <span class="s1">&#39;cmake&#39;</span>
-get_version <span class="s1">&#39;python&#39;</span>
-get_version <span class="s1">&#39;python3&#39;</span>
-</code></pre></div>
-
-<p>If there's a specific command line program that your research requires, feel free to add it to the script!
-For example, if you wanted to test for the existence and version of <code>nslookup</code>, you would add the following to the end
-of the script:</p>
-<div class="codehilite"><pre><span></span><code>get_version &#39;nslookup&#39;
-</code></pre></div>
-
-<h3 id="probing-several-servers">Probing several servers<a class="headerlink" href="#probing-several-servers" title="Permanent link">&para;</a></h3>
-<p>For this part of the exercise, try creating a submit file without referring to previous exercises!</p>
-<ol>
-<li>Log in or switch to <code>ap40.uw.osg-htc.org</code></li>
-<li>Create and change into a new folder for this exercise, e.g. <code>osg-ex14</code></li>
-<li>Save the above script as a file named <code>sw_probe.sh</code></li>
-<li>Make sure the script can be run: <code>chmod a+x sw_probe.sh</code></li>
-<li>Try running the script in place to make sure it works: <code>./sw_probe.sh</code></li>
-<li>Create a submit file that runs <code>sw_probe.sh</code> 100 times
-    and uses macros to write different <code>output</code>, <code>error</code>, and <code>log</code> files</li>
-<li>Submit your job and wait for the results</li>
-</ol>
-<p>Will you be able to do your research on the OSG with what's available?
-Do not worry if it does not seem like you can:
-Later today, you will learn how to make your jobs portable enough so that they can run anywhere!</p>
+                <h1 id="ospool-exercise-15-optional-viewing-ospool-information">OSPool Exercise 1.5 (Optional): Viewing OSPool Information<a class="headerlink" href="#ospool-exercise-15-optional-viewing-ospool-information" title="Permanent link">&para;</a></h1>
+<p>As a final — and completely optional — step in our exploration of the OSPool,
+we invite you to look at some of the views on the OSPool that we provide publicly
+for funding agencies, researchers, capacity contributors, and even ourselves.
+Maybe these views will help you better understand the scope and dynamic nature of the OSPool.</p>
+<h2 id="maps">Maps<a class="headerlink" href="#maps" title="Permanent link">&para;</a></h2>
+<p>You have seen at least one map of OSPool contributors so far.
+Where do these maps come from?</p>
+<p>Please visit (https://map.osg-htc.org/).</p>
+<ul>
+<li>From the View drop-down menu, try different options.</li>
+<li>The default “OSG Sites” view is not well defined… maybe don’t think too hard about that one!</li>
+<li>CC* refers to the NSF Campus Cyberinfrastructure program,
+    which has funded (as you can see) many sites that contribute to the OSPool.</li>
+<li>You will learn more about the “Open Science Data Federation” (or OSDF) on Wednesday</li>
+</ul>
+<h2 id="projects">Projects<a class="headerlink" href="#projects" title="Permanent link">&para;</a></h2>
+<p>You can explore some information about research projects that have used the OSPool:</p>
+<p>Please visit (https://osg-htc.org/services/ospool/projects.html);
+be patient, these pages get live data and take a while to fully load.
+As the page says, the data is for projects that ran at least 100 jobs in the OSPool in the past year.</p>
+<ul>
+<li>Note that most projects are named after the home institution and last name of the project PI.
+    For example, <code>FIU_Li</code> is a project based at Florida International University, and t​​he PI is Jun Li.</li>
+<li>Often, the PI is not the person running jobs, but rather students and post-docs.
+    Continuing the <code>FIU_Li</code> example, Professor Li is not running these jobs…
+    but the person who is running them is right here in the auditorium with us!
+    Who is it?!?</li>
+<li>Scroll down to see a table of projects; click on a project name to learn more about that project.</li>
+</ul>
+<h2 id="ce-dashboard">CE Dashboard<a class="headerlink" href="#ce-dashboard" title="Permanent link">&para;</a></h2>
+<p>For a view from the capacity contributor’s perspective,
+we have a new feature called the “CE Dashboard” —
+the name comes from the HTCondor-CE, from which the source data is collected.</p>
+<p>Please visit (https://ce-dashboard.ospool.osg-htc.org/index.html).</p>
+<ul>
+<li>Click on a CE name to see information about the past 2 weeks of contributions
+    (for a local example, scroll down and try “CHTC-Spark-CE1”).</li>
+<li>You can see information about the recent history
+    of CPU, memory, and disk contributions and allocations to researcher jobs.</li>
+<li>Scroll down to see information about projects (as in the previous section) that ran on the site.</li>
+<li>There is too much information to describe here, but if you are interested in this view,
+    talk to the staff, especially Tim C. who uses the CE Dashboard daily.</li>
+</ul>
                 
                   
                 
@@ -1792,6 +1807,39 @@ Later today, you will learn how to make your jobs portable enough so that they c
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../part1-ex4-ep-sandbox/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              1.4 - What Is In an Execution Point?
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../../troubleshooting/part1-ex1-troubleshooting/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              1.1 - Troubleshooting Jobs
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
