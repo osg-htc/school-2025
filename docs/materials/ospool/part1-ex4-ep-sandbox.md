@@ -104,3 +104,9 @@ What was there? What _was not_ there?
 How are these directories similar to and different from each other.
 How are they similar to and different from your working directory on the Access Point.
 Think about these things when preparing and running jobs for the OSPool!
+
+## Next Exercise
+
+This was the final suggested exercise of this section.
+But if you like, there is a Bonus Exercise to look at various views of OSPool information:
+[Viewing OSPool Information](part1-ex5-ospool-views.md)

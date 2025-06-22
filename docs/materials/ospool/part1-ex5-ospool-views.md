@@ -53,3 +53,9 @@ Please visit [https://ce-dashboard.ospool.osg-htc.org/index.html](https://ce-das
 *   Scroll down to see information about projects (as in the previous section) that ran on the site.
 *   There is too much information to describe here, but if you are interested in this view,
     talk to the staff, especially Tim C. who uses the CE Dashboard daily.
+
+## What’s Next?
+
+This is the last exercise in the OSPool series.
+Either move on to the next series, if ready, or
+work on applying what you have learned to your own research or the research you support.

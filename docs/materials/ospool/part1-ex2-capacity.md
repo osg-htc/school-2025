@@ -140,3 +140,11 @@ you will see we say nothing about disk needs,
 but rather focus on the amount of data to be transferred in and out of the Execution Point.
 That is because network capacity is usually a greater bottleneck than disk!
 There will be more on this topic on Wednesday.
+
+## Next Exercise
+
+If this exercise was about analyzing a snapshot of available capacity,
+the next one is about how that capacity changes over time.
+
+When ready, move on to the next exercise:
+[How Does Capacity Change?](part1-ex3-dynamic-capacity.md)
