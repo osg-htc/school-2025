@@ -114,7 +114,8 @@ Industry room (3rd floor)
       <td>19:00</td>
       <td>20:30</td>
       <td>
-        <span class="before-dot text-orange">Evening work session (optional)</span>
+        <span class="before-dot text-orange">Evening work session (optional)</span><br>
+        Memorial Union – Board Room (3rd Floor East)
       </td>
       <td>Andrew, Tim C.</td>
     </tr>
@@ -213,7 +214,8 @@ Industry room (3rd floor)
       <td>19:00</td>
       <td>20:30</td>
       <td>
-        <span class="before-dot text-orange">Evening work session (optional)</span>
+        <span class="before-dot text-orange">Evening work session (optional)</span><br>
+        Memorial Union – Board Room (3rd Floor East)
       </td>
       <td>Christina, Showmic, Tim C.</td>
     </tr> 
@@ -298,7 +300,8 @@ Industry room (3rd floor)
       <td>19:00</td>
       <td>20:30</td>
       <td>
-        <span class="before-dot text-orange">Evening work session (optional)</span>
+        <span class="before-dot text-orange">Evening work session (optional)</span><br>
+        Memorial Union – Board Room (3rd Floor East)
       </td>
       <td>Amber, Showmic</td>
     </tr>
@@ -388,7 +391,8 @@ Industry room (3rd floor)
       <td>19:00</td>
       <td>20:30</td>
       <td>
-        <span class="before-dot text-orange">Evening work session (optional)</span>
+        <span class="before-dot text-orange">Evening work session (optional)</span><br>
+        Memorial Union – Board Room (3rd Floor East)
       </td>
       <td>Danny, Tim C.</td>
     </tr>
