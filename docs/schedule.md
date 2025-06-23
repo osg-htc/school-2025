@@ -116,7 +116,7 @@ Industry room (3rd floor)
       <td>
         <span class="before-dot text-orange">Evening work session (optional)</span>
       </td>
-      <td>TBD</td>
+      <td>Andrew, Tim C.</td>
     </tr>
   </tbody>
 </table>
@@ -215,7 +215,7 @@ Industry room (3rd floor)
       <td>
         <span class="before-dot text-orange">Evening work session (optional)</span>
       </td>
-      <td>TBD</td>
+      <td>Christina, Showmic, Tim C.</td>
     </tr> 
   </tbody>
 </table>
@@ -300,7 +300,7 @@ Industry room (3rd floor)
       <td>
         <span class="before-dot text-orange">Evening work session (optional)</span>
       </td>
-      <td>TBD</td>
+      <td>Amber, Showmic</td>
     </tr>
   </tbody>
 </table>
@@ -390,7 +390,7 @@ Industry room (3rd floor)
       <td>
         <span class="before-dot text-orange">Evening work session (optional)</span>
       </td>
-      <td>TBD</td>
+      <td>Danny, Tim C.</td>
     </tr>
   </tbody>
 </table>
