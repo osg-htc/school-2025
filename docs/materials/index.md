@@ -2,8 +2,7 @@
 
 ## School Overview and Intro
 
-View the slides: [Coming soon]
-<!-- View the slides: [pdf](welcome/files/osgs24-day1-part1-welcome-timc.pdf) -->
+View the slides: [pdf](welcome/files/osgs25-day1-part1-welcome-timc.pdf)
 
 ## Intro to HTC and HTCondor Job Execution
 
