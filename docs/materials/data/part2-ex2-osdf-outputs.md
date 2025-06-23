@@ -4,213 +4,106 @@ status: reviewed
 
 Data Exercise 2.2: Using OSDF for outputs
 =========================================================
+This exercise will use a [Minimap2](https://github.com/lh3/minimap2) workflow to
+demonstrate the functionality of OSDF for transferring input files to jobs on OSG.
 
-In this exercise, we will run a multimedia program that converts and manipulates video files.
-In particular, we want to convert large `.mov` files to smaller (10-100s of MB) `mp4` files.
-Just like the Blast database in the [previous exercise](part2-ex1-osdf-inputs.md), these video
-files are potentially too large to send to jobs using HTCondor's default file transfer for 
-inputs/outputs, so we will use OSDF.
+As presented in the Data [lecture](files/osgus25-data.pdf), for submitting multiple jobs that require larger files, OSDF not only reduces the load on the OSPool network
+but also keeps a copy of the files in different caching sites, which results in faster transfer of files to the Execution Point. 
 
-Data
-----
+OSDF is connected to a distributed set of caches spread across the U.S.
+They are connected with high bandwidth connections to each other, and to the data origin servers, where your data is
+originally placed.
 
-To get the exercise set up:
+![OSDF Map](files/osgus19-day4-part2-CacheLocations.png)
 
-1.  Log into `ap40.uw.osg-htc.org`
-
-1.  Create a directory for this exercise named `osdf-outputs` and change into it.
-
-1.  Download the input data and store it under the OSDF directory (`cd` to that
-    directory first):
-
-        :::console
-        user@ap40 $ cd /ospool/ap40/data/[USERNAME]/
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/ducks.mov
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/teaching.mov
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/test_open_terminal.mov
-
-1.  We're going to need a list of these files later.  Below is the final list of movie files.
-    `cd` back to your `osdf-outputs` directory and create a file named `movie_list.txt`,
-    with the following content:
-
-        :::file
-        ducks.mov
-        teaching.mov
-        test_open_terminal.mov
-
-Software
---------
-
-We'll be using a multi-purpose media tool called `ffmpeg`  to convert video formats.
-The basic command to convert a file looks like this: 
-
-``` console
-user@ap40 $ ./ffmpeg -i input.mov output.mp4
-```
-
-In order to resize our files, we're going to manually set the video bitrate and resize the frames, so that the resulting
-file is smaller.
-
-``` console
-user@ap40 $ ./ffmpeg -i input.mp4 -b:v 400k -s 640x360 output.mp4
-```
-
-To get the `ffmpeg` binary do the following:
-
-1.  We'll be downloading the `ffmpeg` pre-built static binary originally from this page: <http://johnvansickle.com/ffmpeg/>. 
-
-        :::console
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/ffmpeg-release-64bit-static.tar.xz
-
-1.  Once the binary is downloaded, un-tar it, and then copy the main `ffmpeg` program into your current directory: 
-
-        :::console
-        user@ap40 $ tar -xf ffmpeg-release-64bit-static.tar.xz
-        user@ap40 $ cp ffmpeg-4.0.1-64bit-static/ffmpeg ./
-
-Script
-------
-
-We want to write a script that runs on the worker node that uses `ffmpeg` to convert a `.mov` file to a smaller format.
-Our script will need to run the proper executable. Create a file called `run_ffmpeg.sh`, that does the steps described above.
-Use the name of the smallest `.mov` file in the `ffmpeg` command.
-An example of that script is below: 
-
-    :::bash
-    #!/bin/bash
-
-    ./ffmpeg -i test_open_terminal.mov -b:v 400k -s 640x360 test_open_terminal.mp4
-
-Ultimately we'll want to submit several jobs (one for each `.mov` file), but to start with, we'll run one job to make
-sure that everything works.
-
-Remember to `chmod +x run_ffmpeg.sh` to make the script executable.
-
-Submit File
------------
-
-Create a submit file for this job, based on other submit files from the school. Things to consider:
-
-1.  We'll be copying the video file into the job's working directory from OSDF, so make sure to request enough disk space for the
-    input `mov` file and the output `mp4` file.
-    If you're aren't sure how much to request, ask a helper.
-
-1.  Add the same requirements as the previous exercise: 
-
-        requirements = (OSGVO_OS_STRING == "RHEL 9")
-
-1.  We need to transfer the `ffmpeg` program that we downloaded above, and the movie from OSDF:
-
-        transfer_input_files = ffmpeg, osdf:///ospool/ap40/data/[USERNAME]/test_open_terminal.mov
-
-1.  Transfer outputs via OSDF. This requires a transfer remap:
-
-        transfer_output_files = test_open_terminal.mp4
-        transfer_output_remaps = "test_open_terminal.mp4 = osdf:///ospool/ap40/data/[USERNAME]/test_open_terminal.mp4"
-
-
-Initial Job
------------
-
-With everything in place, submit the job. Once it finishes, we should check to make sure everything ran as expected:
-
-1.  Check the OSDF directory. Did the output `.mp4` file return?
-3.  Check file sizes. How big is the returned `.mp4` file? How does that compare to the original `.mov` input?
-
-If your job successfully returned the converted `.mp4` file and did **not** transfer the `.mov` file to the submit
-server, and the `.mp4` file was appropriately scaled down, then we can go ahead and convert all of the files we uploaded
-to OSDF.
-
-Multiple jobs
--------------
-
-We wrote the name of the `.mov` file into our `run_ffmpeg.sh` executable script.
-To submit a set of jobs for all of our `.mov` files, what will we need to change in:
-
-1. The script?
-1. The submit file?
-
-Once you've thought about it, check your reasoning against the instructions below.
-
-### Add an argument to your script
-
-**Look at your `run_ffmpeg.sh` script. What values will change for every job?**
-
-The input file will change with every job - and don't forget that the output file will too! Let's make them both into
-arguments.
-
-To add arguments to a bash script, we use the notation `$1` for the first argument (our input file) and `$2` for the
-second argument (our output file name).
-The final script should look like this: 
-
-``` file
-#!/bin/bash
-
-./ffmpeg -i $1 -b:v 400k -s 640x360 $2
-```
-
-### Modify your submit file
-
-1.  We now need to tell each job what arguments to use.
-    We will do this by adding an arguments line to our submit file.
-    Because we'll only have the input file name, the "output" file name will be the input file name with the `mp4`
-    extension.
-    That should look like this: 
-
-        :::file
-        arguments = $(mov) $(mov).mp4
-
-1.  Update the `transfer_input_files` to have `$(mov)`:
-
-        :::file
-        transfer_input_files = ffmpeg, osdf:///ospool/ap40/data/[USERNAME]/$(mov)
-
-1.  Similarly, update the output/remap with `$(mov).mp4`:
-
-        :::file
-        transfer_output_files = $(mov).mp4
-        transfer_output_remaps = "$(mov).mp4 = osdf:///ospool/ap40/data/[USERNAME]/$(mov).mp4"
-
-1. To set these arguments, we will use the `queue .. from` syntax.
-   In our submit file, we can then change our queue statement to:
-
-        queue mov from movie_list.txt
-
-Once you've made these changes, try submitting all the jobs!
-
-Bonus
+Setup
 -----
+- Please make sure that you are logged into `ap40.uw.osg-htc.org`.
+- Create a folder named `minimap2-read` and `cd` into the directory
+- All the required files for this lesson are located at `/ospool/ap40/osg-staff/tutorial-ospool-minimap/`
+- Copy all the files and folders into the `minimap2-read` directory. 
 
-If you wanted to set a different output file name, bitrate and/or size for each original movie, how could you modify:
+!!! note "File Sizes"
+    - What are the contents and the size of the `data` and `software` directories that you copied?
 
-1. `movie_list.txt` 
-2. Your submit file 
-3. `run_ffmpeg.sh`
-
-to do so?
+### Software Setup
+For using Minimap2, you will need a container of minimap2. The container is provided in the `/ospool/ap40/osg-staff/tutorial-ospool-minimap/software` directory. 
 
 
-??? "Show hint"
+Prepare files for the job
+--------------------------------
+Minimap2 compares and aligns large pieces of genetic information, like DNA sequences. This is useful for tasks like identifying similarities between genomes, verifying sequences, or assembling genetic data from scratch. For this exercise, we will just do an indexing using the refern
 
-    Here's the changes you can make to the various files:
-    
-    1.  `movie_list.txt` 
-    
-            ducks.mov ducks.mp4 500k 1280x720
-            teaching.mov teaching.mp4 400k 320x180
-            test_open_terminal.mov terminal.mp4 600k 640x360
-    
-    1. Submit file
-    
-            arguments = $(mov) $(mp4) $(bitrate) $(size)
-    
-            queue mov,mp4,bitrate,size from movie_list.txt
-    
-    
-    1. `run_ffmpeg.sh`
-    
-            #!/bin/bash
-            ./ffmpeg -i $1 -b:v $3 -s $4 $2
+
+Place files in OSDF
+--------------------------------
+
+There are some files we will be using frequently that do not change often. One example of this is the apptainer/singularity container image we will be using for run our minimap2 mappings. The Open Science Data Federation is a data lake accessible to the OSPool with built in caching. The OSDF can significantly improve throughput for jobs by caching files closer to the execution points. 
+
+>[!WARNING]
+> The OSDF caches files aggressively. Using files on the OSDF with names that are not unique from previous versions can cause your job to download an incorrect previous version of the data file. We recommend using unique version-controlled names for your files, such as `data_file_04JAN2025_version4.txt` with the data of last update and a version identifier. This ensures your files are correctly called by HTCondor from the OSDF. 
+
+### Copy your data to the OSDF space
+
+OSDF provides a directory for you to store data which can be accessed through the caching servers.
+First, you need to move your `minimap2.sif` image. For `ap40.uw.osg-htc.org`, the directory
+to use is `/ospool/ap40/data/[USERNAME]/`
+
+Note that files placed in the `/ospool/ap40/data/[USERNAME]/` directory will only be accessible
+by your own jobs.
+
+Second, the exercise will use a reference genome file named `Celegans_ref.mmi` to map against the FASTQ files. Copy the `Celegans_ref.mmi` file to your OSDF directory as well.
+
+Considerations
+--------------
+    - Why `minimap2.sif` and `Celegans_ref.mmi` placed in the OSDF directory?
+    - What do you think will happen if you make changes to `minimap2.sif`? Will the caches
+   be updated automatically, or is there a possiblility that the old version of
+   `minimap2.sif` will be served up to jobs? What is the solution to this problem?
+   (Hint: OSDF only considers the filename when caching data)
+
+Modify the Submit File and Wrapper
+----------------------------------
+
+Now, our data are ready. We will need our wrapper script and submit file to use OSDF:
+
+1. Copy the following contents and save that as `minimap2_index.sh`
+
+        #!/bin/bash
+        minimap2 -x map-ont -d Celegans_ref.mmi Celegans_ref.fa
+
+2. Create a submit file to submit the wrapper script `minimap2_index.sh` as an executable. Use the software using the
+        container_image = "osdf:///ospool/ap40/data/[USERNAME]/minimap2.sif"  
+   
+5. HTCondor knows how to do OSDF transfers, so you just have to provide the correct URL in 
+   `transfer_input_files`. Note there is no servername (3 slashes in :///) and is just based on namespace (`/ospool/ap40/data/` in this case):
+
+        ::file
+        transfer_input_files = blastx, $(inputfile), osdf:///ospool/ap40/data/[USERNAME]/Celegans_ref.mmi
+
+1. Confirm that your queue statement is correct for the current directory. It should be something like:
+
+        ::file
+        queue inputfile matching mouse_rna.fa.*
+
+And that `mouse_rna.fa.*` files exist in the current directory (you should have copied a few them from the previous exercise
+directory).
+
+Submit the Job
+--------------
+
+Now submit and monitor the job! If your 100 jobs from the previous exercise haven't started running yet, this job will
+not yet start.
+However, after it has been running for ~2 minutes, you're safe to continue to the next exercise!
+
+Note: Keeping OSDF 'Clean'
+--------------------------------
+
+Just as for any data directory, it is VERY important to remove old files from OSDF when you no longer need them,
+especially so that you'll have plenty of space for such files in the future.
+For example, you would delete (`rm`) files from `/ospool/ap40/data/[USERNAME]/` on when you don't need them there
+anymore, but only after all jobs have finished.
+The next time you use OSDF after the school, remember to first check for old files that you can delete.
 
 
 
