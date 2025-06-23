@@ -1831,8 +1831,8 @@ Geolocation uses a registry to match a computer’s network address to an approx
 <li>Create and change into a new folder for this exercise, for example <code>ospool-ex11</code></li>
 <li>
 <p>Download the geolocation code:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">$ </span>osdf object get /ospool/uc-shared/public/school/2025/dev/location-wrapper.sh ./
-<span class="gp">$ </span>osdf object get /ospool/uc-shared/public/school/2025/dev/wn-geoip.tar.gz ./
+<div class="codehilite"><pre><span></span><code><span class="gp">$ </span>osdf object get /ospool/uc-shared/public/school/2025/location-wrapper.sh ./
+<span class="gp">$ </span>osdf object get /ospool/uc-shared/public/school/2025/wn-geoip.tar.gz ./
 </code></pre></div>
 
 <p>You will be using <code>location-wrapper.sh</code> as your executable and <code>wn-geoip.tar.gz</code> as an input file.</p>
@@ -1842,7 +1842,7 @@ Geolocation uses a registry to match a computer’s network address to an approx
     transfer <code>wn-geoip.tar.gz</code> as an input file,
     and use the <code>$(Process)</code> macro to write different <code>output</code> and <code>error</code> files.
     Also, add the following requirement to the submit file (it’s not important to know what it does, yet):</p>
-<div class="codehilite"><pre><span></span><code>container_image = osdf:///ospool/uc-shared/public/school/2025/dev/python27.sif
+<div class="codehilite"><pre><span></span><code>container_image = osdf:///ospool/uc-shared/public/school/2025/python27.sif
 </code></pre></div>
 
 <p>Try to do this step without looking at materials from the earlier exercises.
