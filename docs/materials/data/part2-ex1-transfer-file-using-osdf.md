@@ -4,12 +4,14 @@ status: reviewed
 
 Data Exercise 2.1: Using OSDF for Large Shared Data
 ===================================================
-
-This exercise will use a [Minimap2](https://github.com/lh3/minimap2) workflow to
+This exercise will use a [BLAST](http://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastHome) workflow to
 demonstrate the functionality of OSDF for transferring input files to jobs on OSG.
 
-As presented in the Data [lecture](files/osgus25-data.pdf), for submitting multiple jobs that require larger files, OSDF not only reduces the load on the OSPool network
-but also keeps a copy of the files in different caching sites, which results in faster transfer of files to the Execution Point. 
+Because our individual blast jobs from previous exercises would take a bit longer
+with a larger database (too long for an workable exercise), we'll imagine for this exercise that our
+`pdbaa_files.tar.gz` file is too large for `transfer_input_files` (larger than ~1 GB).
+For this exercise, we will use the same inputs, but instead of using `transfer_input_files` for the `pdbaa` database,
+we will place it in OSDF and have the jobs download from there.
 
 OSDF is connected to a distributed set of caches spread across the U.S.
 They are connected with high bandwidth connections to each other, and to the data origin servers, where your data is
@@ -19,16 +21,15 @@ originally placed.
 
 Setup
 -----
-- Please make sure that you are logged into `ap40.uw.osg-htc.org`.
-- Create a folder named `minimap2-read` and `cd` into the directory
-- All the required files for this lesson are located at `/ospool/ap40/osg-staff/tutorial-ospool-minimap/`
-- Copy all the files into the `minimap2-read` directory. 
 
-!!! note "File Sizes"
-    - What are the contents and the size for the `data` and `software` directories that you copied?
-
-### Software Setup
-For using Minimap2, you will need a container of minimap2. The container is provided in the `/ospool/ap40/osg-staff/tutorial-ospool-minimap/software` directory. 
+-   Make sure you're logged in to `ap40.uw.osg-htc.org`
+-   Copy the following files from the previous Blast exercises to a new directory in `/home/<username>` called `osdf-shared`:
+    - `blast_wrapper.sh`
+    - `blastx`
+    - `mouse_rna.fa.1`
+    - `mouse_rna.fa.2`
+    - `mouse_rna.fa.3`
+    - Your most recent submit file (probably named `blast_split.sub`)
 
 Place the Database in OSDF
 --------------------------------
@@ -36,7 +37,7 @@ Place the Database in OSDF
 ### Copy to your data to the OSDF space
 
 OSDF provides a directory for you to store data which can be accessed through the caching servers.
-First, you need to move your `minimap2.sif` image. For `ap40.uw.osg-htc.org`, the directory
+First, you need to move your BLAST database (`pdbaa_files.tar.gz`) into this directory. For `ap40.uw.osg-htc.org`, the directory
 to use is `/ospool/ap40/data/[USERNAME]/`
 
 Note that files placed in the `/ospool/ap40/data/[USERNAME]/` directory will only be accessible
@@ -87,9 +88,3 @@ especially so that you'll have plenty of space for such files in the future.
 For example, you would delete (`rm`) files from `/ospool/ap40/data/[USERNAME]/` on when you don't need them there
 anymore, but only after all jobs have finished.
 The next time you use OSDF after the school, remember to first check for old files that you can delete.
-
-Next exercise
--------------
-
-Once completed, move onto the next exercise: [Using OSDF for outputs](part2-ex2-osdf-outputs.md)
-
