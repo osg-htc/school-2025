@@ -1661,19 +1661,6 @@
     Setup
   </a>
   
-    <nav class="md-nav" aria-label="Setup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#software-setup" class="md-nav__link">
-    Software Setup
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1724,13 +1711,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#next-exercise" class="md-nav__link">
-    Next exercise
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1745,33 +1725,34 @@
                 
                 
                 <h1 id="data-exercise-21-using-osdf-for-large-shared-data">Data Exercise 2.1: Using OSDF for Large Shared Data<a class="headerlink" href="#data-exercise-21-using-osdf-for-large-shared-data" title="Permanent link">&para;</a></h1>
-<p>This exercise will use a <a href="https://github.com/lh3/minimap2">Minimap2</a> workflow to
+<p>This exercise will use a <a href="http://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&amp;PAGE_TYPE=BlastHome">BLAST</a> workflow to
 demonstrate the functionality of OSDF for transferring input files to jobs on OSG.</p>
-<p>As presented in the Data <a href="files/osgus25-data.pdf">lecture</a>, for submitting multiple jobs that require larger files, OSDF not only reduces the load on the OSPool network
-but also keeps a copy of the files in different caching sites, which results in faster transfer of files to the Execution Point. </p>
+<p>Because our individual blast jobs from previous exercises would take a bit longer
+with a larger database (too long for an workable exercise), we'll imagine for this exercise that our
+<code>pdbaa_files.tar.gz</code> file is too large for <code>transfer_input_files</code> (larger than ~1 GB).
+For this exercise, we will use the same inputs, but instead of using <code>transfer_input_files</code> for the <code>pdbaa</code> database,
+we will place it in OSDF and have the jobs download from there.</p>
 <p>OSDF is connected to a distributed set of caches spread across the U.S.
 They are connected with high bandwidth connections to each other, and to the data origin servers, where your data is
 originally placed.</p>
 <p><img alt="OSDF Map" src="../files/osgus19-day4-part2-CacheLocations.png" /></p>
 <h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Please make sure that you are logged into <code>ap40.uw.osg-htc.org</code>.</li>
-<li>Create a folder named <code>minimap2-read</code> and <code>cd</code> into the directory</li>
-<li>All the required files for this lesson are located at <code>/ospool/ap40/osg-staff/tutorial-ospool-minimap/</code></li>
-<li>Copy all the files into the <code>minimap2-read</code> directory. </li>
+<li>Make sure you're logged in to <code>ap40.uw.osg-htc.org</code></li>
+<li>Copy the following files from the previous Blast exercises to a new directory in <code>/home/&lt;username&gt;</code> called <code>osdf-shared</code>:<ul>
+<li><code>blast_wrapper.sh</code></li>
+<li><code>blastx</code></li>
+<li><code>mouse_rna.fa.1</code></li>
+<li><code>mouse_rna.fa.2</code></li>
+<li><code>mouse_rna.fa.3</code></li>
+<li>Your most recent submit file (probably named <code>blast_split.sub</code>)</li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">File Sizes</p>
-<ul>
-<li>What are the contents and the size for the <code>data</code> and <code>software</code> directories that you copied?</li>
+</li>
 </ul>
-</div>
-<h3 id="software-setup">Software Setup<a class="headerlink" href="#software-setup" title="Permanent link">&para;</a></h3>
-<p>For using Minimap2, you will need a container of minimap2. The container is provided in the <code>/ospool/ap40/osg-staff/tutorial-ospool-minimap/software</code> directory. </p>
 <h2 id="place-the-database-in-osdf">Place the Database in OSDF<a class="headerlink" href="#place-the-database-in-osdf" title="Permanent link">&para;</a></h2>
 <h3 id="copy-to-your-data-to-the-osdf-space">Copy to your data to the OSDF space<a class="headerlink" href="#copy-to-your-data-to-the-osdf-space" title="Permanent link">&para;</a></h3>
 <p>OSDF provides a directory for you to store data which can be accessed through the caching servers.
-First, you need to move your <code>minimap2.sif</code> image. For <code>ap40.uw.osg-htc.org</code>, the directory
+First, you need to move your BLAST database (<code>pdbaa_files.tar.gz</code>) into this directory. For <code>ap40.uw.osg-htc.org</code>, the directory
 to use is <code>/ospool/ap40/data/[USERNAME]/</code></p>
 <p>Note that files placed in the <code>/ospool/ap40/data/[USERNAME]/</code> directory will only be accessible
 by your own jobs.</p>
@@ -1817,8 +1798,6 @@ especially so that you'll have plenty of space for such files in the future.
 For example, you would delete (<code>rm</code>) files from <code>/ospool/ap40/data/[USERNAME]/</code> on when you don't need them there
 anymore, but only after all jobs have finished.
 The next time you use OSDF after the school, remember to first check for old files that you can delete.</p>
-<h2 id="next-exercise">Next exercise<a class="headerlink" href="#next-exercise" title="Permanent link">&para;</a></h2>
-<p>Once completed, move onto the next exercise: <a href="../part2-ex2-osdf-outputs/">Using OSDF for outputs</a></p>
                 
                   
                 
