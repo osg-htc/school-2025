@@ -23,7 +23,7 @@ We have prepared some Python code, data, and submit files for this exercise:
 1.  Download a tarball of the materials:
 
         :::console
-        user@server $ osdf object get /ospool/uc-shared/public/school/2025/dev/troubleshooting.tar.gz
+        user@server $ osdf object get /ospool/uc-shared/public/school/2025/troubleshooting.tar.gz
 
 3.  Extract the tarball using the commands that you learned earlier
 4.  Change into the newly extracted directory and explore its contents&nbsp;—
@@ -103,7 +103,7 @@ or by submitting the answer to Project Euler (requires an account).
 There is also a working solution that can be retrieved with
 
 ``` console
-user@server $ osdf object get /ospool/uc-shared/public/school/2025/dev/troubleshooting-key.tar.gz
+user@server $ osdf object get /ospool/uc-shared/public/school/2025/troubleshooting-key.tar.gz
 ```
 
 It contains comments labeled `SOLUTION` that you can consult in case you get stuck.

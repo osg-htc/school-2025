@@ -25,9 +25,9 @@ To get the exercise set up:
 
         :::console
         user@ap40 $ cd /ospool/ap40/data/[USERNAME]/
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/dev/ducks.mov
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/dev/teaching.mov
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/dev/test_open_terminal.mov
+        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/ducks.mov
+        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/teaching.mov
+        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/test_open_terminal.mov
 
 1.  We're going to need a list of these files later.  Below is the final list of movie files.
     `cd` back to your `osdf-outputs` directory and create a file named `movie_list.txt`,
@@ -60,7 +60,7 @@ To get the `ffmpeg` binary do the following:
 1.  We'll be downloading the `ffmpeg` pre-built static binary originally from this page: <http://johnvansickle.com/ffmpeg/>. 
 
         :::console
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/dev/ffmpeg-release-64bit-static.tar.xz
+        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/ffmpeg-release-64bit-static.tar.xz
 
 1.  Once the binary is downloaded, un-tar it, and then copy the main `ffmpeg` program into your current directory: 
 
