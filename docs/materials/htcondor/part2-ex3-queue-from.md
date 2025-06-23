@@ -93,7 +93,7 @@ To submit this program with a collection of two variable values for each run, on
 1.  Download and unpack some books from Project Gutenberg:
 
         :::console
-        [username@ap40]$ pelican object get osdf://ospool/uc-shared/public/school/2025/dev/books.tar.gz .
+        [username@ap40]$ pelican object get osdf://ospool/uc-shared/public/school/2025/books.tar.gz .
         [username@ap40]$ tar -xzvf books.tar.gz
 
 1. You'll notice that the books are in a directory called `books/`. For simplicity's sake, let's move the files to the current directory and remove the now-empty `books/` directory.
