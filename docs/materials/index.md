@@ -17,8 +17,7 @@ Worksheet: [Coming soon]
 
 ### Intro to HTCondor Slides
 
-View the slides: [Coming soon]
-<!-- View the slides: [pdf](htcondor/files/osgus24-htc-htcondor.pdf) -->
+View the slides: [pdf](htcondor/files/osgus25-htc-htcondor.pdf)
 <!-- [PowerPoint](htcondor/files/osgus22-htc-htcondor.pptx)) -->
 
 ### Intro Exercises 1: Running and Viewing Simple Jobs (Strongly Recommended)
@@ -37,8 +36,7 @@ View the slides: [Coming soon]
 
 ## Intro to HTCondor Multiple Job Execution
 
-View the Slides: [Coming soon]
-<!-- View the Slides: [pdf](htcondor/files/osgus24-htc-htcondor-multiple-jobs.pdf) -->
+View the Slides: [pdf](htcondor/files/osgus25-htc-htcondor-multiple-jobs.pdf)
 
 ### Intro Exercises 2: Running Many HTC Jobs (Strongly Recommended)
 
