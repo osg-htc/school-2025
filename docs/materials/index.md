@@ -44,8 +44,7 @@ View the Slides: [pdf](htcondor/files/osgus25-htc-htcondor-multiple-jobs.pdf)
 
 ## The Open Science Pool (OSPool)
 
-View the slides: [Coming soon]
-<!-- View the slides: [pdf](osg/files/osgs24-day2-part1-osg-timc.pdf) -->
+View the slides: [pdf](ospool/files/osgs25-day2-part1-osg-timc.pdf)
 
 ### OSPool Exercises: Researching the OSPool (Strongly Recommended)
 
