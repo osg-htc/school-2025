@@ -1775,9 +1775,8 @@
                 
                 
                 <h1 id="osg-exercise-21-troubleshooting-jobs">OSG Exercise 2.1: Troubleshooting Jobs<a class="headerlink" href="#osg-exercise-21-troubleshooting-jobs" title="Permanent link">&para;</a></h1>
-<p>The goal of this exercise is to practice troubleshooting some common problems
+<p>The <strong>goal</strong> of this exercise is to practice troubleshooting some common problems
 that you may encounter when submitting jobs using HTCondor.</p>
-<p>This exercise should work on either of the access points- OSPool or Path Facility</p>
 <p><strong>Note:</strong> This exercise is a little harder than some others.
 To complete it, you will have to find and fix several issues.
 Be patient, keep trying, but if you really get stuck,
@@ -1786,10 +1785,10 @@ But try not to look at the answers!</p>
 <h2 id="acquiring-the-materials">Acquiring the Materials<a class="headerlink" href="#acquiring-the-materials" title="Permanent link">&para;</a></h2>
 <p>We have prepared some Python code, data, and submit files for this exercise:</p>
 <ol>
-<li>Log into an Access Point</li>
+<li>Log into an Access Point (ap40.uw.osg-htc.org)</li>
 <li>
 <p>Download a tarball of the materials:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@server $ </span>osdf object get /ospool/uc-shared/public/school/2025/troubleshooting.tar.gz
+<div class="codehilite"><pre><span></span><code><span class="gp">user@server $ </span>osdf object get /ospool/uc-shared/public/school/2025/troubleshooting.tar.gz .
 </code></pre></div>
 
 </li>
@@ -1858,7 +1857,7 @@ remove them with the following command:</p>
 <h2 id="finding-the-largest-square">Finding the largest square<a class="headerlink" href="#finding-the-largest-square" title="Permanent link">&para;</a></h2>
 <p>The next step in the workflow uses the <code>max_square.py</code> script to find the largest square number,
 if any, for a given anagram word pair.
-Let's submit jobs that run <code>max_square.py</code> for all of the anagram word pairs (i.e., one job per word pair),
+Let's submit jobs that run <code>max_square.py</code> for all of the anagram word pairs (i.e., one job per word pair)
 that you found in the previous section:</p>
 <ol>
 <li>Submit the accompanying <code>squares.sub</code> file from the tarball</li>
@@ -1876,7 +1875,7 @@ then you could run the following command to find the largest square:</p>
 or by submitting the answer to Project Euler (requires an account).</p>
 <h2 id="answer-key">Answer Key<a class="headerlink" href="#answer-key" title="Permanent link">&para;</a></h2>
 <p>There is also a working solution that can be retrieved with</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@server $ </span>osdf object get /ospool/uc-shared/public/school/2025/troubleshooting-key.tar.gz
+<div class="codehilite"><pre><span></span><code><span class="gp">user@server $ </span>osdf object get /ospool/uc-shared/public/school/2025/troubleshooting-key.tar.gz .
 </code></pre></div>
 
 <p>It contains comments labeled <code>SOLUTION</code> that you can consult in case you get stuck.
