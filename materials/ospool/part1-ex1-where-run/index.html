@@ -1839,8 +1839,9 @@ you will run a script against a dataset we compiled with geographic locations of
 </li>
 <li>
 <p>Create a submit file that queues one job to run <code>locate-ospool-job</code>,
-    transfer <code>ospool-site-locations.tsv</code> as an input file,
-    and use the <code>$(Process)</code> macro to write different <code>output</code> and <code>error</code> files.</p>
+    passes one argument for the input filename <code>ospool-site-locations.tsv</code>,
+    transfers <code>ospool-site-locations.tsv</code> as an input file,
+    and uses the <code>$(Process)</code> macro to write different <code>output</code> and <code>error</code> files.</p>
 <p>Try to do this step without looking at materials from the earlier exercises.
 But if you are stuck, see <a href="../../htcondor/part2-ex2-queue-n/">HTC Exercise 2.2</a>.</p>
 </li>
