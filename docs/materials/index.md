@@ -57,8 +57,7 @@ View the slides: [Coming soon]
 
 ## Troubleshooting
 
-View the Slides: [Coming soon]
-<!-- View the Slides: [pdf](troubleshooting/files/OSGUS2024_troubleshooting.pdf) [ppt](troubleshooting/files/OSGUS2024_troubleshooting.pptx) -->
+View the Slides: [pdf](troubleshooting/files/OSGUS2025_troubleshooting.pdf) [ppt](troubleshooting/files/OSGUS2025_troubleshooting.pptx)
 
 ### Troubleshooting Exercises: 
 
