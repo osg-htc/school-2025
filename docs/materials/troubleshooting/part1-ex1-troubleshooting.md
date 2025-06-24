@@ -21,7 +21,7 @@ We have prepared some Python code, data, and submit files for this exercise:
 1.  Download a tarball of the materials:
 
         :::console
-        user@server $ osdf object get /ospool/uc-shared/public/school/2025/troubleshooting.tar.gz .
+        user@server $ cp  /ospool/ap40/osg-staff/osgus25/troubleshooting.tar.gz .
 
 3.  Extract the tarball using the commands that you learned earlier
 4.  Change into the newly extracted directory and explore its contents&nbsp;—
