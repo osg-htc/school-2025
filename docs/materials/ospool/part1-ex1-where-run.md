@@ -48,8 +48,9 @@ To start, you will reuse some basic HTCondor skills from the HTC exercises:
     You will be using `locate-ospool-job` as your executable and `ospool-site-locations.tsv` as an input file.
 
 1.  Create a submit file that queues one job to run `locate-ospool-job`,
-    transfer `ospool-site-locations.tsv` as an input file,
-    and use the `$(Process)` macro to write different `output` and `error` files.
+    passes one argument for the input filename `ospool-site-locations.tsv`,
+    transfers `ospool-site-locations.tsv` as an input file,
+    and uses the `$(Process)` macro to write different `output` and `error` files.
 
     Try to do this step without looking at materials from the earlier exercises.
     But if you are stuck, see [HTC Exercise 2.2](../htcondor/part2-ex2-queue-n.md).
