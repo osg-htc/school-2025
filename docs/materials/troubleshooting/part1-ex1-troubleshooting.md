@@ -4,10 +4,8 @@ status: in progress
 
 # OSG Exercise 2.1: Troubleshooting Jobs
 
-The goal of this exercise is to practice troubleshooting some common problems
+The **goal** of this exercise is to practice troubleshooting some common problems
 that you may encounter when submitting jobs using HTCondor.
-
-This exercise should work on either of the access points- OSPool or Path Facility
 
 **Note:** This exercise is a little harder than some others.
 To complete it, you will have to find and fix several issues.
@@ -19,11 +17,11 @@ But try not to look at the answers!
 
 We have prepared some Python code, data, and submit files for this exercise:
 
-1.  Log into an Access Point
+1.  Log into an Access Point (ap40.uw.osg-htc.org)
 1.  Download a tarball of the materials:
 
         :::console
-        user@server $ osdf object get /ospool/uc-shared/public/school/2025/troubleshooting.tar.gz
+        user@server $ osdf object get /ospool/uc-shared/public/school/2025/troubleshooting.tar.gz .
 
 3.  Extract the tarball using the commands that you learned earlier
 4.  Change into the newly extracted directory and explore its contents&nbsp;—
@@ -79,7 +77,7 @@ Once you have satisfactory output, move onto the next section.
 
 The next step in the workflow uses the `max_square.py` script to find the largest square number,
 if any, for a given anagram word pair.
-Let's submit jobs that run `max_square.py` for all of the anagram word pairs (i.e., one job per word pair),
+Let's submit jobs that run `max_square.py` for all of the anagram word pairs (i.e., one job per word pair)
 that you found in the previous section:
 
 1. Submit the accompanying `squares.sub` file from the tarball
@@ -103,7 +101,7 @@ or by submitting the answer to Project Euler (requires an account).
 There is also a working solution that can be retrieved with
 
 ``` console
-user@server $ osdf object get /ospool/uc-shared/public/school/2025/troubleshooting-key.tar.gz
+user@server $ osdf object get /ospool/uc-shared/public/school/2025/troubleshooting-key.tar.gz .
 ```
 
 It contains comments labeled `SOLUTION` that you can consult in case you get stuck.
