@@ -1803,8 +1803,8 @@
                 <h1 id="ospool-exercise-11-where-do-jobs-run">OSPool Exercise 1.1: Where Do Jobs Run?<a class="headerlink" href="#ospool-exercise-11-where-do-jobs-run" title="Permanent link">&para;</a></h1>
 <p>In the lecture about the Open Science Pool,
 we said that the OSPool is really just a big, strange HTCondor pool.
-Yesterday, you already learned a great deal about HTCondor,
-and even ran your jobs in the OSPool.
+Yesterday, you learned a great deal about HTCondor,
+and ran your jobs in the OSPool.
 So in a certain way, you will not be doing anything new in these exercises.</p>
 <p>Instead, let’s do a bit of research <em>on the OSPool itself</em>,
 to learn more about this strange environment.
@@ -1820,37 +1820,34 @@ Let’s do an experiment!</p>
 <p>There is a single computational task here, and you will run it many times to collect a sample of results.
 The task simply returns information about the geographic location of the Execution Point it runs on.
 We provide the executable and associated data,
-so your work will be to transform this task into a job and run it 50 times.
+so your work will be to transform this task into a job and run it many times.
 Once complete, you will manually combine the results and input them to a mapping service.</p>
 <h3 id="where-in-the-world-are-my-jobs">Where in the world are my jobs?<a class="headerlink" href="#where-in-the-world-are-my-jobs" title="Permanent link">&para;</a></h3>
-<p>To find the physical location of the computers your jobs our running on, you will use a method called <em>geolocation</em>.
-Geolocation uses a registry to match a computer’s network address to an approximate latitude and longitude.</p>
+<p>To find the physical location of the computers your jobs our running on,
+you will run a script against a dataset we compiled with geographic locations of known OSPool contributors.</p>
 <p>To start, you will reuse some basic HTCondor skills from the HTC exercises:</p>
 <ol>
 <li>Log in to <code>ap40.uw.osg-htc.org</code> (if not already)</li>
 <li>Create and change into a new folder for this exercise, for example <code>ospool-ex11</code></li>
 <li>
-<p>Download the geolocation code:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">$ </span>osdf object get /ospool/uc-shared/public/school/2025/location-wrapper.sh ./
-<span class="gp">$ </span>osdf object get /ospool/uc-shared/public/school/2025/wn-geoip.tar.gz ./
+<p>Download the script and associated data:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">$ </span>osdf object get /ospool/uc-shared/public/school/2025/locate-ospool-job ./
+<span class="gp">$ </span>osdf object get /ospool/uc-shared/public/school/2025/ospool-site-locations.tsv ./
 </code></pre></div>
 
-<p>You will be using <code>location-wrapper.sh</code> as your executable and <code>wn-geoip.tar.gz</code> as an input file.</p>
+<p>You will be using <code>locate-ospool-job</code> as your executable and <code>ospool-site-locations.tsv</code> as an input file.</p>
 </li>
 <li>
-<p>Create a submit file that queues 50 jobs to run <code>location-wrapper.sh</code>,
-    transfer <code>wn-geoip.tar.gz</code> as an input file,
-    and use the <code>$(Process)</code> macro to write different <code>output</code> and <code>error</code> files.
-    Also, add the following requirement to the submit file (it’s not important to know what it does, yet):</p>
-<div class="codehilite"><pre><span></span><code>container_image = osdf:///ospool/uc-shared/public/school/2025/python27.sif
-</code></pre></div>
-
+<p>Create a submit file that queues one job to run <code>locate-ospool-job</code>,
+    transfer <code>ospool-site-locations.tsv</code> as an input file,
+    and use the <code>$(Process)</code> macro to write different <code>output</code> and <code>error</code> files.</p>
 <p>Try to do this step without looking at materials from the earlier exercises.
 But if you are stuck, see <a href="../../htcondor/part2-ex2-queue-n/">HTC Exercise 2.2</a>.</p>
 </li>
 <li>
-<p>Submit your jobs and wait for the results</p>
+<p>Submit the one job and wait for the results</p>
 </li>
+<li>Fix any bugs, remove old output files, then submit one batch of 50 jobs</li>
 </ol>
 <h3 id="combining-your-results">Combining your results<a class="headerlink" href="#combining-your-results" title="Permanent link">&para;</a></h3>
 <p>When your jobs finish, it’s time to combine them.
@@ -1861,8 +1858,7 @@ your command will look something like this:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">$ </span>cat location-*.out
 </code></pre></div>
 
-<p>The * is a wildcard so the above cat command runs on all files that start with location- and end in .out. Additionally, you can use cat in combination with the sort and uniq commands using "pipes" (|) to print only the unique results:</p>
-<p>The <code>*</code> is a wildcard so the above cat command runs on all files that start with <code>location-</code> and end in <code>.out</code>.
+<p>The <code>*</code> is a wildcard, so the above <code>cat</code> command runs on all files that start with <code>location-</code> and end in <code>.out</code>.
 Additionally, you can use <code>cat</code> in combination with the <code>sort</code> and <code>uniq</code> commands using “pipes” (<code>|</code>)
 to print only the unique results:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">$ </span>cat location-*.out <span class="p">|</span> sort <span class="p">|</span> uniq
@@ -1870,9 +1866,14 @@ to print only the unique results:</p>
 
 <h2 id="mapping-your-results">Mapping your results<a class="headerlink" href="#mapping-your-results" title="Permanent link">&para;</a></h2>
 <p>To see the locations of the Execution Points that your jobs ran on,
-use the https://www.mapcustomizer.com/ website.
-Copy and paste the combined (unique) results into the text box that pops up
-when clicking on the “Bulk Entry” button on the right-hand side.</p>
+use the <a href="https://www.mapcustomizer.com/">MapCustomizer</a> website:</p>
+<ol>
+<li>Go to the site</li>
+<li>Click on the “Bulk Entry” button on the right-hand side</li>
+<li>Copy the combined (unique) results from your terminal window</li>
+<li>Paste them into the “Locations” text box (they are formatted correctly already)</li>
+<li>Click the “Add locations” button to plot the locations</li>
+</ol>
 <p>Where did your jobs run?
 Did they spread out a lot, clump together, all go to the nearest institution, or something else?
 At this point in your learning, do you have any ideas about why they ran where they did?
