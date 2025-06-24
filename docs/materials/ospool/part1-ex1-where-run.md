@@ -6,8 +6,8 @@ status: testing
 
 In the lecture about the Open Science Pool,
 we said that the OSPool is really just a big, strange HTCondor pool.
-Yesterday, you already learned a great deal about HTCondor,
-and even ran your jobs in the OSPool.
+Yesterday, you learned a great deal about HTCondor,
+and ran your jobs in the OSPool.
 So in a certain way, you will not be doing anything new in these exercises.
 
 Instead, let’s do a bit of research _on the OSPool itself_,
@@ -27,37 +27,35 @@ Let’s do an experiment!
 There is a single computational task here, and you will run it many times to collect a sample of results.
 The task simply returns information about the geographic location of the Execution Point it runs on.
 We provide the executable and associated data,
-so your work will be to transform this task into a job and run it 50 times.
+so your work will be to transform this task into a job and run it many times.
 Once complete, you will manually combine the results and input them to a mapping service.
 
 ### Where in the world are my jobs?
 
-To find the physical location of the computers your jobs our running on, you will use a method called *geolocation*.
-Geolocation uses a registry to match a computer’s network address to an approximate latitude and longitude.
+To find the physical location of the computers your jobs our running on,
+you will run a script against a dataset we compiled with geographic locations of known OSPool contributors.
 
 To start, you will reuse some basic HTCondor skills from the HTC exercises:
 
 1.  Log in to `ap40.uw.osg-htc.org` (if not already)
 1.  Create and change into a new folder for this exercise, for example `ospool-ex11`
-1.  Download the geolocation code:
+1.  Download the script and associated data:
 
         :::console
-        $ osdf object get /ospool/uc-shared/public/school/2025/location-wrapper.sh ./
-        $ osdf object get /ospool/uc-shared/public/school/2025/wn-geoip.tar.gz ./
+        $ osdf object get /ospool/uc-shared/public/school/2025/locate-ospool-job ./
+        $ osdf object get /ospool/uc-shared/public/school/2025/ospool-site-locations.tsv ./
 
-    You will be using `location-wrapper.sh` as your executable and `wn-geoip.tar.gz` as an input file.
+    You will be using `locate-ospool-job` as your executable and `ospool-site-locations.tsv` as an input file.
 
-1.  Create a submit file that queues 50 jobs to run `location-wrapper.sh`,
-    transfer `wn-geoip.tar.gz` as an input file,
+1.  Create a submit file that queues one job to run `locate-ospool-job`,
+    transfer `ospool-site-locations.tsv` as an input file,
     and use the `$(Process)` macro to write different `output` and `error` files.
-    Also, add the following requirement to the submit file (it’s not important to know what it does, yet):
-
-        container_image = osdf:///ospool/uc-shared/public/school/2025/python27.sif
 
     Try to do this step without looking at materials from the earlier exercises.
     But if you are stuck, see [HTC Exercise 2.2](../htcondor/part2-ex2-queue-n.md).
 
-1.  Submit your jobs and wait for the results
+1.  Submit the one job and wait for the results
+1.  Fix any bugs, remove old output files, then submit one batch of 50 jobs
 
 ### Combining your results
 
@@ -71,9 +69,7 @@ your command will look something like this:
 $ cat location-*.out
 ```
 
-The * is a wildcard so the above cat command runs on all files that start with location- and end in .out. Additionally, you can use cat in combination with the sort and uniq commands using "pipes" (|) to print only the unique results:
-
-The `*` is a wildcard so the above cat command runs on all files that start with `location-` and end in `.out`.
+The `*` is a wildcard, so the above `cat` command runs on all files that start with `location-` and end in `.out`.
 Additionally, you can use `cat` in combination with the `sort` and `uniq` commands using “pipes” (`|`)
 to print only the unique results:
 
@@ -84,9 +80,13 @@ $ cat location-*.out | sort | uniq
 ## Mapping your results
 
 To see the locations of the Execution Points that your jobs ran on,
-use the https://www.mapcustomizer.com/ website.
-Copy and paste the combined (unique) results into the text box that pops up
-when clicking on the “Bulk Entry” button on the right-hand side.
+use the [MapCustomizer](https://www.mapcustomizer.com/) website:
+
+1.  Go to the site
+1.  Click on the “Bulk Entry” button on the right-hand side
+1.  Copy the combined (unique) results from your terminal window
+1.  Paste them into the “Locations” text box (they are formatted correctly already)
+1.  Click the “Add locations” button to plot the locations
 
 Where did your jobs run?
 Did they spread out a lot, clump together, all go to the nearest institution, or something else?
