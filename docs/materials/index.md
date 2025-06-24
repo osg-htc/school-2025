@@ -67,8 +67,7 @@ View the Slides: [Coming soon]
 
 ## Software
 
-View the Slides: [Coming soon]
-<!-- View the Slides: [pdf](software/files/osgs24-software.pdf), [pptx](software/files/osgs24-software.pptx) -->
+View the Slides: [pdf](software/files/osgs25-software.pdf), [pptx](software/files/osgs25-software.pptx)
 
 ### Software Exercises 1: Exploring Containers
 
