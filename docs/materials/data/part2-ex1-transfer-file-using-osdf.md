@@ -49,8 +49,8 @@ Modify the Submit File and Wrapper
 You will have to modify the wrapper and submit file to use OSDF:
 
 1. HTCondor knows how to do OSDF transfers, so you just have to provide the correct URL in 
-   `transfer_input_files`. Note there is no servername (3 slashes in :///) and we instead
-   is is just based on namespace (`/ospool/ap40` in this case):
+   `transfer_input_files`. Note there is no servername (3 slashes in :///) and instead
+   it is just based on namespace (`/ospool/ap40` in this case):
 
         ::file
         transfer_input_files = blastx, $(inputfile), osdf:///ospool/ap40/data/[USERNAME]/pdbaa_files.tar.gz
