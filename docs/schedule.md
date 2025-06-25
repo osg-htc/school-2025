@@ -444,7 +444,8 @@ Industry room (3rd floor)
     <tr>
       <td>10:45</td>
       <td>11:30</td>
-      <td><span class="before-dot text-light-orange">Work time: Apply HTC to own research</span><br></td>
+      <td><span class="before-dot text-light-orange">Work time: Apply HTC to own research</span><br>
+        <span class="before-dot text-black"><strong>Optional</strong> Introduction to Research Computing Facilitation</span></td>
       <td>-</td>
     </tr>
     <tr>
@@ -457,8 +458,7 @@ Industry room (3rd floor)
       <td>11:50</td>
       <td>13:00</td>
       <td>
-        Lunch<br>
-        Optional: Introduction to Research Computing Facilitation
+        Lunch
       </td>
       <td>Christina</td>
     </tr>
