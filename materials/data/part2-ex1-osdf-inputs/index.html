@@ -1282,11 +1282,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#place-the-database-in-osdf" class="md-nav__link">
-    Place the Database in OSDF
+  <a href="#place-the-database-and-container-in-osdf" class="md-nav__link">
+    Place the Database and Container in OSDF
   </a>
   
-    <nav class="md-nav" aria-label="Place the Database in OSDF">
+    <nav class="md-nav" aria-label="Place the Database and Container in OSDF">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1756,11 +1756,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#place-the-database-in-osdf" class="md-nav__link">
-    Place the Database in OSDF
+  <a href="#place-the-database-and-container-in-osdf" class="md-nav__link">
+    Place the Database and Container in OSDF
   </a>
   
-    <nav class="md-nav" aria-label="Place the Database in OSDF">
+    <nav class="md-nav" aria-label="Place the Database and Container in OSDF">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1833,35 +1833,39 @@ originally placed.</p>
 <li>Make sure you're logged in to <code>ap40.uw.osg-htc.org</code></li>
 <li>Copy the following files from the previous Blast exercises to a new directory in <code>/home/&lt;username&gt;</code> called <code>osdf-shared</code>:<ul>
 <li><code>blast_wrapper.sh</code></li>
-<li><code>blastx</code></li>
 <li><code>mouse_rna.fa.1</code></li>
 <li><code>mouse_rna.fa.2</code></li>
 <li><code>mouse_rna.fa.3</code></li>
 <li>Your most recent submit file (probably named <code>blast_split.sub</code>)</li>
 </ul>
 </li>
+<li>For this exercise, we will use a container of the <code>blastx</code> named <code>blastx.sif</code>. Download the container using the following command</li>
 </ul>
-<h2 id="place-the-database-in-osdf">Place the Database in OSDF<a class="headerlink" href="#place-the-database-in-osdf" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/blast.sif .
+</code></pre></div>
+
+<h2 id="place-the-database-and-container-in-osdf">Place the Database and Container in OSDF<a class="headerlink" href="#place-the-database-and-container-in-osdf" title="Permanent link">&para;</a></h2>
+<p>The image of the software (<code>blast.sif</code>) will be used frequently and it needs to be copied to the OSDF directory. Details about the OSDF directory is given below.</p>
 <h3 id="copy-to-your-data-to-the-osdf-space">Copy to your data to the OSDF space<a class="headerlink" href="#copy-to-your-data-to-the-osdf-space" title="Permanent link">&para;</a></h3>
 <p>OSDF provides a directory for you to store data which can be accessed through the caching servers.
-First, you need to move your BLAST database (<code>pdbaa_files.tar.gz</code>) into this directory. For <code>ap40.uw.osg-htc.org</code>, the directory
-to use is <code>/ospool/ap40/data/[USERNAME]/</code></p>
+First, you need to move your BLAST database (<code>pdbaa_files.tar.gz</code>) and BLAST container (<code>blast.sif</code>) into this directory. For <code>ap40.uw.osg-htc.org</code>, the directory to use is <code>/ospool/ap40/data/[USERNAME]/</code></p>
 <p>Note that files placed in the <code>/ospool/ap40/data/[USERNAME]/</code> directory will only be accessible
 by your own jobs.</p>
 <h2 id="modify-the-submit-file-and-wrapper">Modify the Submit File and Wrapper<a class="headerlink" href="#modify-the-submit-file-and-wrapper" title="Permanent link">&para;</a></h2>
 <p>You will have to modify the wrapper and submit file to use OSDF:</p>
 <ol>
-<li>
-<p>HTCondor knows how to do OSDF transfers, so you just have to provide the correct URL in 
+<li>For using the container add the following to you submit file</li>
+</ol>
+<p><code>container_image = osdf:///ospool/ap40/data/[USERNAME]/tutorial-ospool-minimap/minimap2.sif</code>
+3. HTCondor knows how to do OSDF transfers, so you just have to provide the correct URL in 
    <code>transfer_input_files</code>. Note there is no servername (3 slashes in :///) and instead
    it is just based on namespace (<code>/ospool/ap40</code> in this case):</p>
-<div class="codehilite"><pre><span></span><code>transfer_input_files = blastx, $(inputfile), osdf:///ospool/ap40/data/[USERNAME]/pdbaa_files.tar.gz
+<div class="codehilite"><pre><span></span><code>    ::file
+    transfer_input_files = $(inputfile), osdf:///ospool/ap40/data/[USERNAME]/pdbaa_files.tar.gz
 </code></pre></div>
 
-</li>
-<li>
-<p>Confirm that your queue statement is correct for the current directory. It should be something like:</p>
-<div class="codehilite"><pre><span></span><code>queue inputfile matching mouse_rna.fa.*
+<ol>
+<li>Confirm that your queue statement is correct for the current directory. It should be something like:<div class="codehilite"><pre><span></span><code>queue inputfile matching mouse_rna.fa.*
 </code></pre></div>
 
 </li>
@@ -1869,7 +1873,7 @@ by your own jobs.</p>
 <p>And that <code>mouse_rna.fa.*</code> files exist in the current directory (you should have copied a few them from the previous exercise
 directory).</p>
 <h2 id="submit-the-job">Submit the Job<a class="headerlink" href="#submit-the-job" title="Permanent link">&para;</a></h2>
-<p>Now submit and monitor the job! If your 100 jobs from the previous exercise haven't started running yet, this job will
+<p>Now submit and monitor the job! If your 154 jobs from the previous exercise haven't started running yet, this job will
 not yet start.
 However, after it has been running for ~2 minutes, you're safe to continue to the next exercise!</p>
 <h2 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link">&para;</a></h2>
