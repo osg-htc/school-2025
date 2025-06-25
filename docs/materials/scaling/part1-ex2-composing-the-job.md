@@ -1,5 +1,3 @@
-[file named incorrectly (should be 1.2, not 2.1?)]
-
 # Composing Your Jobs
 
 ## Exercise Goal
@@ -10,9 +8,7 @@ In our previous exercise, [Scaling-Up Exercise 1 Part 1](../part1-ex1-organizati
 
 High throughput computing allows us to efficiently scale analyses by distributing jobs across many computing resources. In this lesson, we will continue the example from the previous exercise, now learning how to structure and submit a read mapping workflow using the OSPool and `minimap2`. This includes adapting your executable script and submit file to dynamically handle many input files in parallel.
 
-[INSERT MINIMAP WORKFLOW - YOU ARE HERE]
-
-!!! halt "**Halt!** Do not proceed if you haven't completed the [Scaling-Up Exercise 1 Part 1](../part1-ex1-organization)"
+!!! danger "**Halt!** Do not proceed if you haven't completed the [Scaling-Up Exercise 1 Part 1](../part1-ex1-organization)"
     
     This is part two of our Scaling Up Exercise 1 set and should **only** be completed after you've successfully completed [Scaling-Up Exercise 1 Part 1](../part1-ex1-organization). 
 
@@ -20,57 +16,12 @@ High throughput computing allows us to efficiently scale analyses by distributin
 
 Make sure you are logged into `ap40.uw.osg-htc.org`. 
 
-## Composing Your Job
+## Generating the List of Jobs
+Next, we need to generate a list of jobs for HTCondor to run. In previous exercises, we've used the `queue` statements such as `queue <num>` and `queue <variable> matching *.txt`. 
 
-### Adapting the Executable
-Now that we have our data partitioned into independent subsets to be mapped in parallel, we can work on adapting our executable for use on the OSPool. We will start with the following template executable file, which is also found in your project directory under `~/scaling-up/minimap2.sh`.
+For our exercise, we will use the `queue <var> from <list>` submission strategy. 
 
-    :::console
-    #!/bin/bash
-    # Use minimap2 to map the basecalled reads to the reference genome
-    minimap2 -ax map-ont reference_genome.fasta reads.fastq > output.sam
-
-| Command Segment | `minimap2`                             | `-ax map-ont`                                                                      | `reference_genome.fasta`               | `reads.fastq`                                 | `>`                                         | `output.sam`                          |
-|-----------------|----------------------------------------|----------------------------------------------------------------------------------|--------------------------------------|---------------------------------------------|--------------------------------------------|-------------------------------------|
-| **Meaning**         | The program we'll run to map our reads | Specifies the type of reads we're using <br>(Oxford Nanopore Technologies reads) | The input reference we're mapping to | The reads we are mapping against our genome | redirects the output of minimap2 to a file | The output file of our mapping step |
-
-!!! halt "Time-Out! **Think about how you would adapt this executable template for HTC**"
-
-    If we want to map each one of our reads subsets against the reference genome, think about the following questions:
-
-    * What parts of the command will change with each job?
-    * What parts of the command will stay the same?
-
-Let's start by editing our template executable file! In our executable there's two main segments of the `minimap2` command that will be changed: The input `reads.fastq` file and the output `output.sam` file. 
-
-!!! warning "Thinking Ahead Before Errors! **Renaming our output files**"
-
-    What do you think would happen if we do keep the output file on our executable as `output.sam`?
-
-1. Modify the executable to accept the name of our input `reads.fastq` subsets as an argument.
-
-        :::console
-        #!/bin/bash
-        {++reads_subset_file="$1"++}
-        # Use minimap2 to map the basecalled reads to the reference genome
-        minimap2 -ax map-ont reference_genome.fasta {==$(reads_subset_file)==} > output.sam
-
-2. Modify the executable use the name of our input reads subset file (`$reads_subset_file`) as the prefix of our output file.
-
-        :::console
-        #!/bin/bash
-        reads_subset_file="$1"
-        # Use minimap2 to map the basecalled reads to the reference genome
-        minimap2 -ax map-ont reference_genome.fasta "$(reads_subset_file)" > {=="$(reads_subset_file)_output.sam"==}
-
-!!! question "Not sure how variables work on bash?"
-
-    Reach out for help from one of the School staff members! You can also review the Software Carpentries' [Unix Shell - Loops](https://swcarpentry.github.io/shell-novice/05-loop.html) tutorial for examples on how to use these variables in your daily computational use.
-
-### Generating the List of Jobs
-Next, we need to generate a list of jobs for HTCondor to run. In previous exercises, we've used the `queue` statements such as `queue <num>` and `queue <variable> matching *.txt`. For our exercise, we will use the `queue <var> from <list>` submission strategy. 
-
-!!! pro-tip "Think Ahead!" 
+!!! tip "Think Ahead!" 
     What values should we pass to HTCondor to scale our `minimap2` workflow up? 
 
 1. Move to your `~/scaling-up/inputs/` directory
@@ -108,9 +59,52 @@ Next, we need to generate a list of jobs for HTCondor to run. In previous exerci
         ...
         reads_fastq_chunk_j
 
-## Testing Our Jobs - Submit a Test List of Jobs
+## Adapting the Executable
+Now that we have our data partitioned into independent subsets to be mapped in parallel, we can work on adapting our executable for use on the OSPool. We will start with the following template executable file, which is also found in your project directory under `~/scaling-up/minimap2.sh`.
 
-[I actually think this section works better if we introduce it before the Composing Your Job section.]
+    :::console
+    #!/bin/bash
+    # Use minimap2 to map the basecalled reads to the reference genome
+    minimap2 -ax map-ont reference_genome.fasta reads.fastq > output.sam
+
+| Command Segment | `minimap2`                             | `-ax map-ont`                                                                      | `reference_genome.fasta`               | `reads.fastq`                                 | `>`                                         | `output.sam`                          |
+|-----------------|----------------------------------------|----------------------------------------------------------------------------------|--------------------------------------|---------------------------------------------|--------------------------------------------|-------------------------------------|
+| **Meaning**         | The program we'll run to map our reads | Specifies the type of reads we're using <br>(Oxford Nanopore Technologies reads) | The input reference we're mapping to | The reads we are mapping against our genome | redirects the output of minimap2 to a file | The output file of our mapping step |
+
+!!! danger "Time-Out! **Think about how you would adapt this executable template for HTC**"
+
+    If we want to map each one of our reads subsets against the reference genome, think about the following questions:
+
+    * What parts of the command will change with each job?
+    * What parts of the command will stay the same?
+
+Let's start by editing our template executable file! In our executable there's two main segments of the `minimap2` command that will be changed: The input `reads.fastq` file and the output `output.sam` file. 
+
+!!! warning "Thinking Ahead Before Errors! **Renaming our output files**"
+
+    What do you think would happen if we do keep the output file on our executable as `output.sam`?
+
+1. Modify the executable to accept the name of our input `reads.fastq` subsets as an argument.
+
+        :::console
+        #!/bin/bash
+        reads_subset_file="$1"
+        # Use minimap2 to map the basecalled reads to the reference genome
+        minimap2 -ax map-ont reference_genome.fasta $(reads_subset_file) > output.sam
+
+2. Modify the executable use the name of our input reads subset file (`$reads_subset_file`) as the prefix of our output file.
+
+        :::console
+        #!/bin/bash
+        reads_subset_file="$1"
+        # Use minimap2 to map the basecalled reads to the reference genome
+        minimap2 -ax map-ont reference_genome.fasta "$(reads_subset_file)" > "$(reads_subset_file)_output.sam"
+
+!!! question "Not sure how variables work on bash?"
+
+    Reach out for help from one of the School staff members! You can also review the Software Carpentries' [Unix Shell - Loops](https://swcarpentry.github.io/shell-novice/05-loop.html) tutorial for examples on how to use these variables in your daily computational use.
+
+## Testing Our Jobs - Submit a Test List of Jobs
 
 Now we want to submit a test job with our organizing scheme and adapted executable, using only a small set of our reads subset. We're going to start off with the multi-job submit template below. 
 
@@ -145,44 +139,67 @@ Now we want to submit a test job with our organizing scheme and adapted executab
     5. Which file transfer protocols should we use for our inputs/outputs?
         * Consider whether these files are used one or repeatedly across all your jobs.
 
-    !!! halt "Try to Draft a Submit File Before Moving Forward️"
+    !!! danger "Try to Draft a Submit File Before Moving Forward️"
 
 For our template, lets use `read_subset_file` as our variable name to pass the name of each subset file to.
 
-1.  Fill in the incomplete lines of the submit file, as shown below: 
+1. It is useful to think about constructing your submit file starting with the `queue` statement. This helps us predict how we need to structure our submit file in order to dynamically submit many jobs at once. 
+
+    !!! question "What `queue` statement do you think would work best for our current workflow?"
+        
+        Consider the following:
+
+        * We have a set of FASTQ formatted reads_fastq_chunk_ subset files we need to submit along with each job.
+        * Each reads_fastq_chunk_ subset file name is in our `~/scaling-up/list_of_fastq.txt` list of jobs.
+
+        ??? success "Solution"
+
+            Since we have our list of job files saved in `~/scaling-up/list_of_fastq.txt`, we will use the `queue <var> from <list_of_var.txt>` syntax. 
+
+            **Our queue statement will be:**
+            
+            `queue read_subset_file from ~/scaling-up/list_of_fastq.txt`
+
+2. Fill in the incomplete lines of the submit file, as shown below: 
 
         :::console
         container_image         = osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif
 
         executable              = minimap2.sh
-        arguments               = reads_fastq_chunk_a
+        arguments               = $(read_subset_file)
 
-        transfer_input_files    = ./input/reads_fastq_chunk_a, osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
-        transfer_output_files   = reads_fastq_chunk_a_output.sam
-        transfer_output_remaps  = "reads_fastq_chunk_a_output.sam=output/reads_fastq_chunk_a_output.sam"
+3. Now, specify where the input and output files should be:
+
+        :::console
+        transfer_input_files    = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
+        transfer_output_files   = $(read_subset_file)_output.sam
+        transfer_output_remaps  = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
 
     To tell HTCondor the location of the input file, we need to include the input directory.
     Also, this submit file uses the `transfer_output_remaps` feature that you learned about;
     it will move the output file to the `output` directory by renaming or remapping it.
 
-2.  Next, edit the submit file lines that tell the log, output, and error files where to go:
+4.  Next, edit the submit file lines that tell the log, output, and error files where to go:
 
         :::console 
-        output        = logs/output/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.out
-        error         = logs/error/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.err
-        log           = logs/log/job.$(ClusterID).$(ProcID)_reads_fastq_chunk_a_output.log
+        output        = logs/output/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.out
+        error         = logs/error/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.err
+        log           = logs/log/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.log
 
-3.  Last, add to the submit file your resource requirements:
+5.  Add to the submit file your resource requirements:
 
         :::console
         request_cpus           = 2
         request_disk           = 4 GB
         request_memory         = 4 GB 
      
-        queue {==read_subset_file from ./test_list_of_fastq.txt==}
+6.  Lastly, finish your submit file with the `queue` statement:
 
+        queue read_subset_file from ./test_list_of_fastq.txt
     
-    !!! pro-tip "Thinking of our jobs as a `for` or `while` loop"
+    We will be using `./test_list_of_fastq.txt` instead while will only have a sample (3) of our reads subsets. We will use the fully scale list in the next section. 
+
+    !!! tip "Thinking of our jobs as a `for` or `while` loop"
         
         We can think of our multi-job submission as a sort of `for` or `while` loop in bash.
         
@@ -190,31 +207,35 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
             **For Loop:** If you are familiar with the `for` loop structure, imagine you wished to run the following loop:
             
                 :::console
-                for {++read_subset_file++} in {==reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_z==}
+                for read_subset_file in reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_z
                 do
-                    ./minimap2.sh $({++read_subset_file++})
+                    ./minimap2.sh $(read_subset_file)
                 done
                 
-            In the example above, we would feed the list of FASTQ files in `~/scaling-up/inputs/` to the variable `$({++read_subset_file++})` as a {==list of strings==}. To express your jobs as a `for` loop in condor, we would instead use the `queue <Var> in <List>` syntax. In the example above, this would be represented as: 
+            In the example above, we would feed the list of FASTQ files in `~/scaling-up/inputs/` to the variable `$(read_subset_file)` as a list of strings. To express your jobs as a `for` loop in condor, we would instead use the `queue <Var> in <List>` syntax. In the example above, this would be represented as: 
             
-                queue {++read_subset_file++} in ({==reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_z==})
+                queue read_subset_file in (reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_z)
     
         !!! success "" 
             **While Loop:** A closer representation to HTCondor's _list of jobs_ structure is the `while` loop. If you are familiar with the `while` loop in bash, you could also consider the set of job submissions to mirror something like:
             
                 :::console
-                while read {++read_subset_file++};
+                while read read_subset_file;
                 do
-                    ./minimap2.sh $({++read_subset_file++})
-                done < {==list_of_fastq.txt==}
+                    ./minimap2.sh $(read_subset_file)
+                done < list_of_fastq.txt
             
-            Here we feed the contents of `{==list_of_fastq.txt==}`, the list of files in `~/scaling-up/inputs/` to the same `$({++read_subset_file++})` variable. The `while` loop iterates through each line of `list_of_fastq.txt`, appending the line's value to `$(read_subset_file)`. To express your jobs as a `for` loop in condor, we would instead use the `queue <Var> in <List>` syntax. In the example above, this would be represented as: 
+            Here we feed the contents of `list_of_fastq.txt`, the list of files in `~/scaling-up/inputs/` to the same `$(read_subset_file)` variable. The `while` loop iterates through each line of `list_of_fastq.txt`, appending the line's value to `$(read_subset_file)`. To express your jobs as a `for` loop in condor, we would instead use the `queue <Var> in <List>` syntax. In the example above, this would be represented as: 
             
-                queue {++read_subset_file++} from {==./list_of_files.txt==}
+                queue read_subset_file from ./list_of_files.txt
         
         For jobs with more than 5 values, we generally recommend using the `queue var from list_of_files.txt` syntax. 
 
-4.  Submit your job and monitor its progress.
+7.  Generate `./test_list_of_fastq.txt` using `head` command
+
+        head -n 3 ./list_of_fastq.txt > ./test_list_of_fastq.txt
+
+7.  Submit your job and monitor its progress.
     
     Submit your test job using `condor_submit`
 
@@ -231,25 +252,9 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
 
     Review your `condor_watch_q` output and your files on the Access Point. 
 
-## Submit Multiple Jobs
+## Submit Multiple Jobs - Scaling to Full Dataset
 
-Now, you are ready to submit the whole workload. We can think of our multi-job submission as a sort of `for` or `while` loop in bash. If you are familiar with the `for` loop structure, imagine you wished to run the following loop:
-
-    :::console
-    for fastq_read_subset_file in reads_fastq_chunk_a reads_fastq_chunk_b reads_fastq_chunk_c ... reads_fastq_chunk_
-    do
-        ./minimap2.sh $(fastq_read_subset_file)
-    done
-    
-In the example above, we would feed the list of FASTQ files in `~/scaling-up/inputs/` to the variable `$(fastq_read_subset_file)` as a list of strings. A closer representation to HTCondor's _list of jobs_ structure is the `while` loop. If you are familiar with the `while` loop in bash, you could also consider the set of job submissions to mirror something like:
-
-    :::console
-    while read fastq_read_subset_file;
-    do
-        ./minimap2.sh $(fastq_read_subset_file)
-    done < list_of_fastq.txt
-
-Here we feed the contents of `list_of_fastq.txt`, the list of files in `~/scaling-up/inputs/` to the same `$(fastq_read_subset_file)` variable. The `while` loop iterates through each line of `list_of_fastq.txt`, appending the line's value to `$(fastq_read_subset_file)`. 
+Now, you are ready to submit the whole workload. 
 
 !!! example "Try It Yourself!"
 
@@ -266,6 +271,8 @@ Here we feed the contents of `list_of_fastq.txt`, the list of files in `~/scalin
         * Did you test at least one job successfully?
         * Are you remapping outputs into the `outputs/` folder?
 
+    **Think about what needs to change on your `multi_job_minimap.sub` submit file to submit the full dataset.**
+
     When ready, submit with:
     ```
     condor_submit minimap2_multi.submit
@@ -273,32 +280,34 @@ Here we feed the contents of `list_of_fastq.txt`, the list of files in `~/scalin
 
     ??? success "Solution - ⚠️ Try to Solve Before Viewing ⚠️"
 
+        **Make sure to change your `queue` statement to use the full dataset.**
+        
         Your final submit file, `minimap2_multi.submit`, should look something like this:
             
             container_image      = osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif
             
             executable             = ./minimap2.sh
-            {==arguments              = $(read_subset_file)==}
-            transfer_input_files   = {==./input/$(read_subset_file)==}, osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
+            arguments              = $(read_subset_file)
+            transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
             
-            transfer_output_files  = {==./$(read_subset_file)_output.sam==}
-            transfer_output_remaps = {=="$(read_subset_file)==}_output.sam=output/{==$(read_subset_file)==}_output.sam"
+            transfer_output_files  = ./$(read_subset_file)_output.sam
+            transfer_output_remaps = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
             
-            output                 = logs/output/job.$(ClusterID).$(ProcID){==_$(read_subset_file)==}_output.out
-            error                  = logs/error/job.$(ClusterID).$(ProcID){==_$(read_subset_file)==}_output.err
-            log                    = logs/log/job.$(ClusterID).$(ProcID){==_$(read_subset_file)==}_output.log
+            output                 = logs/output/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.out
+            error                  = logs/error/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.err
+            log                    = logs/log/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.log
             
             request_cpus           = 2
             request_disk           = 4 GB
             request_memory         = 4 GB 
             
-            queue {==read_subset_file from ./list_of_fastq.txt==}
+            queue read_subset_file from ./list_of_fastq.txt
 
 ## Checking Your Jobs' Progress
 
 We can use the command `condor_watch_q` to track our job submission. As your jobs progress through the various `job state`, Condor will update the output of `condor_watch_q`.
 
-!!! pro-tip "Pro-Tip: Jobs Holds *Aren't* Always Bad!"
+!!! tip "Pro-Tip: Jobs Holds *Aren't* Always Bad!"
     
     Seeing your jobs in the Held state? Don’t panic! This is often just HTCondor doing its job to protect your workflow.
 

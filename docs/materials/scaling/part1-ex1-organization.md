@@ -6,8 +6,6 @@ When working with large datasets or running a task many times over (e.g. across 
 
 This exercise introduces core principles of HTC workflow organization through a practical example. While the specific task—read mapping—comes from bioinformatics, the underlying strategies apply to any domain that handles data at scale. 
 
-[INSERT MINIMAP WORKFLOW - YOU ARE HERE]
-
 You'll learn how to:
 
 * Plan and organize your workload for high-throughput execution
@@ -26,9 +24,24 @@ Make sure you are logged into `ap40.uw.osg-htc.org`.
 
 To get the files for this exercise:
 
-1.  Type `wget https://github.com/osg-htc/school-2025/raw/main/docs/materials/scaling/files/osgus25-day4-ex11-organizing-files.tar.gz` to download the tarball.
+1.  Make a new directory in `~/scaling-up/` and change directory into it
+2.  Use pelican to get the input files for our exercises:
+
+        :::console
+        osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.mmi
+        osdf object get /ospool/uc-shared/public/school/2025/reads.fastq
+        osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif
+
 1.  As you learned earlier, expand this tarball file; it will create a `organizing-files` directory.
 1.  Change to that directory, or create a separate one for this exercise and copy the files in.
+
+
+!!! note "Using Files from the Data Exercises section"
+
+    We will be reusing some of the files from the Data Exercises 2 - OSDF for inputs and OSDF for outputs sections. If you did not complete these or wish to simply get a fresh set of these files, use the command below:
+        
+        osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.mmi
+        osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif
 
 ## Our Workload
 
@@ -62,7 +75,7 @@ We expect to be working with the following files in each of our jobs:
     * A minimap2 container image - `minimap2.sif`
     * The executable - `run_minimap2.sh`
 * **Outputs**
-    * A SAM-formatted output file - `reads_subset_a.sam` [what is SAM-formatted?] - [Does the above section clarify or need further workup?]
+    * A SAM-formatted output file - `reads_subset_a.sam` 
 * **System Generated Files**
     * A set of log, standard error, and standard out files
 
@@ -74,11 +87,9 @@ how would you organize this HTC workload in directories (folders) on the Access 
 There will also be system and HTCondor files produced when we submit a job&nbsp;&mdash;
 how would you organize the log, standard output, and standard error files?
 
-!!! pro-tip "When to Use the Open Science Data Federation (OSDF)"
+!!! tip "When to Use the Open Science Data Federation (OSDF)"
     
     Make sure to consider which files will be re-used often (common files across all jobs) versus which files will be used only once. Files often re-used, can be placed in your `/ospool/ap40/data/<user.name>/` directory to take advantage of the caching benefits when using the `osdf://` transfer plugin.
-
-    [LARGE FILES ONLY]
 
 ### Organize Files
 
@@ -115,22 +126,13 @@ For our exercise, we will use the following data organizational structure:
         $ mkdir -p scaling-up/inputs
         $ mkdir -p scaling-up/software
 
-    !!! halt "FOR STAFF REVIEWERS: DO WE PREFER?"
-    
-        Do we prefer below:
-    
-            $ mkdir -p inputs outputs logs/{log,error,output}
-            $ cd /ospool/ap40/data/$USER/
-            $ mkdir -p scaling-up/{inputs,software}
-
-
 2. Move the `reads.fastq` file to your `inputs` directory (the one under `/home`) using the `mv` command. 
 
 3. Move the `reference_genome.fasta` file to your `/ospool/ap40/data/<user.name>/scaling-up/inputs` directory using the `mv` command. 
 
 4. Move the `minimap2.sif` container image file to your `/ospool/ap40/data/<user.name>/scaling-up/software` directory using the `mv` command.
 
-!!! pro-tip "Stop and Consider: Why are we moving our files to these directories?"
+!!! tip "Stop and Consider: Why are we moving our files to these directories?"
 
     When preparing your jobs for high-throughput computing, think about how each file will be used. Will the file be reused across many jobs? Or is it specific to a single job? Will it need to be transferred repeatedly—or just once?
     
