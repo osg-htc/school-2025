@@ -10,21 +10,18 @@ demonstrate the functionality of OSDF for transferring input files to jobs on OS
 As presented in the Data [lecture](files/osgus25-data.pdf), for submitting multiple jobs that require larger files, OSDF not only reduces the load on the OSPool network
 but also keeps a copy of the files in different caching sites, which results in faster transfer of files to the Execution Point. 
 
-OSDF is connected to a distributed set of caches spread across the U.S.
-They are connected with high bandwidth connections to each other, and to the data origin servers, where your data is
-originally placed.
-
-![OSDF Map](files/osgus19-day4-part2-CacheLocations.png)
 
 Setup
 -----
 - Please make sure that you are logged into `ap40.uw.osg-htc.org`.
 - Create a folder named `minimap2-read` and `cd` into the directory
-- All the required files for this lesson are located at `/ospool/ap40/osg-staff/tutorial-ospool-minimap/`
-- Copy all the files and folders into the `minimap2-read` directory. 
+- Download the required files for this lesson using the following command
+
+        osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif .
+        osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.fa .
 
 !!! note "File Sizes"
-    - What are the contents and the size of the `data` and `software` directories that you copied?
+    - What are the sizes of the container and the reference genome file.
 
 ### Software Setup
 For using Minimap2, you will need a container of minimap2. The container is provided in the `/ospool/ap40/osg-staff/tutorial-ospool-minimap/software` directory. 
@@ -32,7 +29,7 @@ For using Minimap2, you will need a container of minimap2. The container is prov
 
 Prepare files for the job
 --------------------------------
-Minimap2 compares and aligns large pieces of genetic information, like DNA sequences. This is useful for tasks like identifying similarities between genomes, verifying sequences, or assembling genetic data from scratch. For this exercise, we will just do an indexing using the refern
+Minimap2 compares and aligns large pieces of genetic information, like DNA sequences. This is useful for tasks like identifying similarities between genomes, verifying sequences, or assembling genetic data from scratch. For this exercise, we will perform indexing using the reference genome.
 
 
 Place files in OSDF
@@ -56,14 +53,14 @@ Second, the exercise will use a reference genome file named `Celegans_ref.mmi` t
 
 Considerations
 --------------
-    - Why `minimap2.sif` and `Celegans_ref.mmi` placed in the OSDF directory?
+    - Why `minimap2.sif` is placed in the OSDF directory? Is it a big container?
     - What do you think will happen if you make changes to `minimap2.sif`? Will the caches
    be updated automatically, or is there a possiblility that the old version of
    `minimap2.sif` will be served up to jobs? What is the solution to this problem?
    (Hint: OSDF only considers the filename when caching data)
 
-Modify the Submit File and Wrapper
-----------------------------------
+Create a wrapper script and submit jobs 
+---------------------------------------
 
 Now, our data are ready. We will need our wrapper script and submit file to use OSDF:
 
@@ -72,29 +69,37 @@ Now, our data are ready. We will need our wrapper script and submit file to use 
         #!/bin/bash
         minimap2 -x map-ont -d Celegans_ref.mmi Celegans_ref.fa
 
-2. Create a submit file to submit the wrapper script `minimap2_index.sh` as an executable. Use the software using the
-        container_image = "osdf:///ospool/ap40/data/[USERNAME]/minimap2.sif"  
-   
-5. HTCondor knows how to do OSDF transfers, so you just have to provide the correct URL in 
-   `transfer_input_files`. Note there is no servername (3 slashes in :///) and is just based on namespace (`/ospool/ap40/data/` in this case):
+2. Create `minimap2_index.sub` using either `vim` or `nano`
+        ```
+        +SingularityImage      = "osdf:///ospool/ap40/data/[USERNAME]/tutorial-ospool-minimap/minimap2.sif"
+    
+        executable             = ./minimap2_index.sh
+        
+        transfer_input_files   = Celegans_ref.fa
+    
+        transfer_output_files  = Celegans_ref.mmi 
+        transfer_output_remaps = "Celegans_ref.mmi = /ospool/ap40/data/[USERNAME]/Celegans_ref.mmi"
+        output                 = indexing_step1_$(Cluster)_$(Process).out
+        error                  = indexing_step1_$(Cluster)_$(Process).err
+        log                    = indexing_step1_$(Cluster)_$(Process).log
+        
+        request_cpus           = 4
+        request_disk           = 5 GB
+        request_memory         = 5 GB 
+        
+        queue 1
+       ```
+> [!IMPORTANT]  
+> Notice that we are using the `transfer_output_remaps` attribute in our submit file. By default, HTCondor will transfer outputs to the directory where we submitted our job from. Since we want to transfer the indexed reference genome file `Celegans_ref.mmi` to a specific directory, we can use the `transfer_output_remaps` attribute on our submission script. The syntax of this attribute is:
+>  
+>   ```transfer_output_remaps = "<file_on_execution_point>=<desired_path_to_file_on_access_point>``` 
+>  
+> It is also important to note that we are transferring our `Celegans_ref.mmi` to the OSDF directory `/ospool/<ap##>/data/<user.name>/`. We will be reusing our indexed reference genome file for each mapping job in the ScalingUp exercises, we benefit from the caching feature of the OSDF. Therefore, we can direct `transfer_output_remaps` to redirect the `Celegans_ref.mmi` file to our OSDF directory.
 
-        ::file
-        transfer_input_files = blastx, $(inputfile), osdf:///ospool/ap40/data/[USERNAME]/Celegans_ref.mmi
-
-1. Confirm that your queue statement is correct for the current directory. It should be something like:
-
-        ::file
-        queue inputfile matching mouse_rna.fa.*
-
-And that `mouse_rna.fa.*` files exist in the current directory (you should have copied a few them from the previous exercise
-directory).
-
-Submit the Job
---------------
-
-Now submit and monitor the job! If your 100 jobs from the previous exercise haven't started running yet, this job will
-not yet start.
-However, after it has been running for ~2 minutes, you're safe to continue to the next exercise!
+   3. Submit your `minimap2_index.sub` job to the OSPool
+       ```
+      condor_submit minimap2_index.sub
+      ```
 
 Note: Keeping OSDF 'Clean'
 --------------------------------
