@@ -21,7 +21,7 @@ Setup
         osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.fa .
 
 !!! note "File Sizes"
-    - What are the sizes of the container and the reference genome file.
+    - What are the sizes of the container and the reference genome file?
 
 
 Prepare files for the job
