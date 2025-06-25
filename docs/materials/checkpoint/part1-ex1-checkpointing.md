@@ -26,7 +26,7 @@ To get set up:
 1.  Download the Python script that is the main executable for this exercise:
 
         :::console
-        user@server $ osdf object get /ospool/uc-shared/public/school/2025/fibonacci.py
+        user@server $ osdf object get /ospool/uc-shared/public/school/2025/fibonacci.py ./
 
 1.  If you want to run the script directly, make it executable first:
 

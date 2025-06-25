@@ -23,7 +23,7 @@ You can generate the Mandelbrot set as a quick test with two simple commands.
 1.  Download the goatbrot executable:
 
         :::console
-        username@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/goatbrot
+        username@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/goatbrot ./
         username@ap40 $ chmod a+x goatbrot
 
 

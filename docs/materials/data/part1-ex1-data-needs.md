@@ -35,14 +35,14 @@ genome information.
 1. Copy the BLAST executables:
    
         :::console
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/ncbi-blast-2.16.0+-x64-linux.tar.gz .
+        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/ncbi-blast-2.16.0+-x64-linux.tar.gz ./
         user@ap40 $ tar -xzvf ncbi-blast-2.16.0+-x64-linux.tar.gz
 
 1.  Download these files to your current directory:
 
         :::console
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/pdbaa.tar.gz
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/mouse.fa
+        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/pdbaa.tar.gz ./
+        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/mouse.fa ./
 
 1.  Untar the `pdbaa` database:
 
