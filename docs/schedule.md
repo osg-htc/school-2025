@@ -266,10 +266,10 @@ Industry room (3rd floor)
         <br>
         &#9654; <span style="color: rgb(173, 81, 12);">Spencer Ericksen</span>;
         Small Molecule Facility<br>
-        <div style="margin-left: 2ex;"><a href="/materials/showcase/OSG_School_SSE_2025-06-25.pptx">“Scaling Virtual Screening to Ultra-Large Virtual Chemical Libraries”</a></div>
+        <div style="margin-left: 2ex;"><a href="../materials/showcase/OSG_School_SSE_2025-06-25.pptx">“Scaling Virtual Screening to Ultra-Large Virtual Chemical Libraries”</a></div>
         &#9654; <span style="color: rgb(173, 81, 12);">Michael Martinez</span>;
         Physics<br>
-        <div style="margin-left: 2ex;"><a href="/materials/showcase/martinez_osgschool.pdf">“Dark Matter, Radio Astronomy, and High Throughput Computing”</a></div>
+        <div style="margin-left: 2ex;"><a href="../materials/showcase/martinez_osgschool.pdf">“Dark Matter, Radio Astronomy, and High Throughput Computing”</a></div>
       </td>
       <td>-</td>
     </tr>
