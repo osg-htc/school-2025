@@ -1871,8 +1871,7 @@ This dataset can be downloaded with the following command:</p>
 </code></pre></div>
 
 <p>After un-tar'ing (<code>tar xzf mouse_rna.tar.gz</code>) the file, you should be able to confirm that it's size is roughly 100 MB.
-Not only is this near the size cutoff for HTCondor file transfer, it would take hours to complete a single <code>blastx</code>
-analysis for it and the resulting output file would be huge.</p>
+It would take hours to complete a single <code>blastx</code> analysis for it, and the resulting output file would be huge.</p>
 <h3 id="split-the-input-file">Split the input file<a class="headerlink" href="#split-the-input-file" title="Permanent link">&para;</a></h3>
 <p>For <code>blast</code>, it's scientifically valid to split up the input query file, analyze the pieces, and then put the results
 back together at the end!
