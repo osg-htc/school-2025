@@ -1427,7 +1427,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../part2-ex1-composing-the-job/" class="md-nav__link">
+      <a href="../part2-ex1-composing-the-job.md" class="md-nav__link">
         1.2 - Composing Your Jobs
       </a>
     </li>
@@ -1834,7 +1834,6 @@
 <h2 id="exercise-goal">Exercise Goal<a class="headerlink" href="#exercise-goal" title="Permanent link">&para;</a></h2>
 <p>When working with large datasets or running a task many times over (e.g. across subsets, parameters, or files), organizing your workload becomes essential. High-throughput computing (HTC) allows you to run thousands of independent jobs efficiently, but success depends on how well you prepare your files and manage your project structure.</p>
 <p>This exercise introduces core principles of HTC workflow organization through a practical example. While the specific task—read mapping—comes from bioinformatics, the underlying strategies apply to any domain that handles data at scale. </p>
-<p>[INSERT MINIMAP WORKFLOW - YOU ARE HERE]</p>
 <p>You'll learn how to:</p>
 <ul>
 <li>Plan and organize your workload for high-throughput execution</li>
@@ -1847,10 +1846,28 @@
 <h2 id="get-files">Get Files<a class="headerlink" href="#get-files" title="Permanent link">&para;</a></h2>
 <p>To get the files for this exercise:</p>
 <ol>
-<li>Type <code>wget https://github.com/osg-htc/school-2025/raw/main/docs/materials/scaling/files/osgus25-day4-ex11-organizing-files.tar.gz</code> to download the tarball.</li>
-<li>As you learned earlier, expand this tarball file; it will create a <code>organizing-files</code> directory.</li>
+<li>Make a new directory in <code>~/scaling-up/</code> and change directory into it</li>
+<li>
+<p>Use pelican to get the input files for our exercises:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.mmi</span>
+<span class="go">osdf object get /ospool/uc-shared/public/school/2025/reads.fastq</span>
+<span class="go">osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>As you learned earlier, expand this tarball file; it will create a <code>organizing-files</code> directory.</p>
+</li>
 <li>Change to that directory, or create a separate one for this exercise and copy the files in.</li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Using Files from the Data Exercises section</p>
+<p>We will be reusing some of the files from the Data Exercises 2 - OSDF for inputs and OSDF for outputs sections. If you did not complete these or wish to simply get a fresh set of these files, use the command below:</p>
+<div class="codehilite"><pre><span></span><code>osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.mmi
+osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif
+</code></pre></div>
+
+</div>
 <h2 id="our-workload">Our Workload<a class="headerlink" href="#our-workload" title="Permanent link">&para;</a></h2>
 <p>Imagine you're working with a large set of DNA sequencing data from an organism. The sequencing file contains millions of snippets of DNA, which we call <strong>reads</strong>. Your goal is to figure out where these reads came from by matching them to a known reference genome using a read mapping tool.</p>
 <p>One commonly used tool for this task is <code>minimap2</code>, which quickly finds where each DNA read best matches the reference. For this exercise, we'll use <code>minimap2</code> to map our reads to a reference genome.</p>
@@ -1878,7 +1895,7 @@
 </ul>
 </li>
 <li><strong>Outputs</strong><ul>
-<li>A SAM-formatted output file - <code>reads_subset_a.sam</code> [what is SAM-formatted?] - [Does the above section clarify or need further workup?]</li>
+<li>A SAM-formatted output file - <code>reads_subset_a.sam</code> </li>
 </ul>
 </li>
 <li><strong>System Generated Files</strong><ul>
@@ -1891,10 +1908,9 @@
 how would you organize this HTC workload in directories (folders) on the Access Point?</p>
 <p>There will also be system and HTCondor files produced when we submit a job&nbsp;&mdash;
 how would you organize the log, standard output, and standard error files?</p>
-<div class="admonition pro-tip">
+<div class="admonition tip">
 <p class="admonition-title">When to Use the Open Science Data Federation (OSDF)</p>
 <p>Make sure to consider which files will be re-used often (common files across all jobs) versus which files will be used only once. Files often re-used, can be placed in your <code>/ospool/ap40/data/&lt;user.name&gt;/</code> directory to take advantage of the caching benefits when using the <code>osdf://</code> transfer plugin.</p>
-<p>[LARGE FILES ONLY]</p>
 </div>
 <h3 id="organize-files">Organize Files<a class="headerlink" href="#organize-files" title="Permanent link">&para;</a></h3>
 <p>There are many different ways to organize files;
@@ -1929,15 +1945,6 @@ and a directory for your output files.</p>
 <span class="gp">$ </span>mkdir -p scaling-up/software
 </code></pre></div>
 
-<div class="admonition halt">
-<p class="admonition-title">FOR STAFF REVIEWERS: DO WE PREFER?</p>
-<p>Do we prefer below:</p>
-<div class="codehilite"><pre><span></span><code>$ mkdir -p inputs outputs logs/{log,error,output}
-$ cd /ospool/ap40/data/$USER/
-$ mkdir -p scaling-up/{inputs,software}
-</code></pre></div>
-
-</div>
 </li>
 <li>
 <p>Move the <code>reads.fastq</code> file to your <code>inputs</code> directory (the one under <code>/home</code>) using the <code>mv</code> command. </p>
@@ -1949,7 +1956,7 @@ $ mkdir -p scaling-up/{inputs,software}
 <p>Move the <code>minimap2.sif</code> container image file to your <code>/ospool/ap40/data/&lt;user.name&gt;/scaling-up/software</code> directory using the <code>mv</code> command.</p>
 </li>
 </ol>
-<div class="admonition pro-tip">
+<div class="admonition tip">
 <p class="admonition-title">Stop and Consider: Why are we moving our files to these directories?</p>
 <p>When preparing your jobs for high-throughput computing, think about how each file will be used. Will the file be reused across many jobs? Or is it specific to a single job? Will it need to be transferred repeatedly—or just once?</p>
 <p>With that in mind:<br />
@@ -2055,13 +2062,13 @@ $ mkdir -p scaling-up/{inputs,software}
         </a>
       
       
-        <a href="../part2-ex1-composing-the-job/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="../part2-ex1-chtc-node/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              1.2 - Composing Your Jobs
+              2.1 - Log Into a Local Pool
             </div>
           </div>
           <div class="md-footer__button md-icon">
