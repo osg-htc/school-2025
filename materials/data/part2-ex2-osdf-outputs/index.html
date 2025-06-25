@@ -1341,15 +1341,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#modify-the-submit-file-and-wrapper" class="md-nav__link">
-    Modify the Submit File and Wrapper
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#submit-the-job" class="md-nav__link">
-    Submit the Job
+  <a href="#create-a-wrapper-script-and-submit-jobs" class="md-nav__link">
+    Create a wrapper script and submit jobs
   </a>
   
 </li>
@@ -1823,15 +1816,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#modify-the-submit-file-and-wrapper" class="md-nav__link">
-    Modify the Submit File and Wrapper
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#submit-the-job" class="md-nav__link">
-    Submit the Job
+  <a href="#create-a-wrapper-script-and-submit-jobs" class="md-nav__link">
+    Create a wrapper script and submit jobs
   </a>
   
 </li>
@@ -1861,27 +1847,26 @@
 demonstrate the functionality of OSDF for transferring input files to jobs on OSG.</p>
 <p>As presented in the Data <a href="files/osgus25-data.pdf">lecture</a>, for submitting multiple jobs that require larger files, OSDF not only reduces the load on the OSPool network
 but also keeps a copy of the files in different caching sites, which results in faster transfer of files to the Execution Point. </p>
-<p>OSDF is connected to a distributed set of caches spread across the U.S.
-They are connected with high bandwidth connections to each other, and to the data origin servers, where your data is
-originally placed.</p>
-<p><img alt="OSDF Map" src="../files/osgus19-day4-part2-CacheLocations.png" /></p>
 <h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Please make sure that you are logged into <code>ap40.uw.osg-htc.org</code>.</li>
 <li>Create a folder named <code>minimap2-read</code> and <code>cd</code> into the directory</li>
-<li>All the required files for this lesson are located at <code>/ospool/ap40/osg-staff/tutorial-ospool-minimap/</code></li>
-<li>Copy all the files and folders into the <code>minimap2-read</code> directory. </li>
+<li>Download the required files for this lesson using the following command<div class="codehilite"><pre><span></span><code>osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif .
+osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.fa .
+</code></pre></div>
+
+</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">File Sizes</p>
 <ul>
-<li>What are the contents and the size of the <code>data</code> and <code>software</code> directories that you copied?</li>
+<li>What are the sizes of the container and the reference genome file.</li>
 </ul>
 </div>
 <h3 id="software-setup">Software Setup<a class="headerlink" href="#software-setup" title="Permanent link">&para;</a></h3>
 <p>For using Minimap2, you will need a container of minimap2. The container is provided in the <code>/ospool/ap40/osg-staff/tutorial-ospool-minimap/software</code> directory. </p>
 <h2 id="prepare-files-for-the-job">Prepare files for the job<a class="headerlink" href="#prepare-files-for-the-job" title="Permanent link">&para;</a></h2>
-<p>Minimap2 compares and aligns large pieces of genetic information, like DNA sequences. This is useful for tasks like identifying similarities between genomes, verifying sequences, or assembling genetic data from scratch. For this exercise, we will just do an indexing using the refern</p>
+<p>Minimap2 compares and aligns large pieces of genetic information, like DNA sequences. This is useful for tasks like identifying similarities between genomes, verifying sequences, or assembling genetic data from scratch. For this exercise, we will perform indexing using the reference genome.</p>
 <h2 id="place-files-in-osdf">Place files in OSDF<a class="headerlink" href="#place-files-in-osdf" title="Permanent link">&para;</a></h2>
 <p>There are some files we will be using frequently that do not change often. One example of this is the apptainer/singularity container image we will be using for run our minimap2 mappings. The Open Science Data Federation is a data lake accessible to the OSPool with built in caching. The OSDF can significantly improve throughput for jobs by caching files closer to the execution points. </p>
 <blockquote>
@@ -1896,14 +1881,14 @@ to use is <code>/ospool/ap40/data/[USERNAME]/</code></p>
 by your own jobs.</p>
 <p>Second, the exercise will use a reference genome file named <code>Celegans_ref.mmi</code> to map against the FASTQ files. Copy the <code>Celegans_ref.mmi</code> file to your OSDF directory as well.</p>
 <h2 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>- Why `minimap2.sif` and `Celegans_ref.mmi` placed in the OSDF directory?
+<div class="codehilite"><pre><span></span><code>- Why `minimap2.sif` is placed in the OSDF directory? Is it a big container?
 - What do you think will happen if you make changes to `minimap2.sif`? Will the caches
 </code></pre></div>
 
 <p>be updated automatically, or is there a possiblility that the old version of
    <code>minimap2.sif</code> will be served up to jobs? What is the solution to this problem?
    (Hint: OSDF only considers the filename when caching data)</p>
-<h2 id="modify-the-submit-file-and-wrapper">Modify the Submit File and Wrapper<a class="headerlink" href="#modify-the-submit-file-and-wrapper" title="Permanent link">&para;</a></h2>
+<h2 id="create-a-wrapper-script-and-submit-jobs">Create a wrapper script and submit jobs<a class="headerlink" href="#create-a-wrapper-script-and-submit-jobs" title="Permanent link">&para;</a></h2>
 <p>Now, our data are ready. We will need our wrapper script and submit file to use OSDF:</p>
 <ol>
 <li>
@@ -1915,29 +1900,39 @@ minimap2 -x map-ont -d Celegans_ref.mmi Celegans_ref.fa
 </td></tr></table>
 </li>
 <li>
-<p>Create a submit file to submit the wrapper script <code>minimap2_index.sh</code> as an executable. Use the software using the
-        container_image = "osdf:///ospool/ap40/data/[USERNAME]/minimap2.sif"  </p>
-</li>
-<li>
-<p>HTCondor knows how to do OSDF transfers, so you just have to provide the correct URL in 
-   <code>transfer_input_files</code>. Note there is no servername (3 slashes in :///) and is just based on namespace (<code>/ospool/ap40/data/</code> in this case):</p>
-<div class="codehilite"><pre><span></span><code>transfer_input_files = blastx, $(inputfile), osdf:///ospool/ap40/data/[USERNAME]/Celegans_ref.mmi
+<p>Create <code>minimap2_index.sub</code> using either <code>vim</code> or <code>nano</code>
+        ```
+        +SingularityImage      = "osdf:///ospool/ap40/data/[USERNAME]/tutorial-ospool-minimap/minimap2.sif"</p>
+<div class="codehilite"><pre><span></span><code>executable             = ./minimap2_index.sh
+
+transfer_input_files   = Celegans_ref.fa
+
+transfer_output_files  = Celegans_ref.mmi 
+transfer_output_remaps = &quot;Celegans_ref.mmi = /ospool/ap40/data/[USERNAME]/Celegans_ref.mmi&quot;
+output                 = indexing_step1_$(Cluster)_$(Process).out
+error                  = indexing_step1_$(Cluster)_$(Process).err
+log                    = indexing_step1_$(Cluster)_$(Process).log
+
+request_cpus           = 4
+request_disk           = 5 GB
+request_memory         = 5 GB
+
+queue 1
 </code></pre></div>
 
+<p>```</p>
+<blockquote>
+<p>[!IMPORTANT]<br />
+Notice that we are using the <code>transfer_output_remaps</code> attribute in our submit file. By default, HTCondor will transfer outputs to the directory where we submitted our job from. Since we want to transfer the indexed reference genome file <code>Celegans_ref.mmi</code> to a specific directory, we can use the <code>transfer_output_remaps</code> attribute on our submission script. The syntax of this attribute is:</p>
+<p><code>transfer_output_remaps = "&lt;file_on_execution_point&gt;=&lt;desired_path_to_file_on_access_point&gt;</code> </p>
+<p>It is also important to note that we are transferring our <code>Celegans_ref.mmi</code> to the OSDF directory <code>/ospool/&lt;ap##&gt;/data/&lt;user.name&gt;/</code>. We will be reusing our indexed reference genome file for each mapping job in the ScalingUp exercises, we benefit from the caching feature of the OSDF. Therefore, we can direct <code>transfer_output_remaps</code> to redirect the <code>Celegans_ref.mmi</code> file to our OSDF directory.</p>
+</blockquote>
 </li>
 <li>
-<p>Confirm that your queue statement is correct for the current directory. It should be something like:</p>
-<div class="codehilite"><pre><span></span><code>queue inputfile matching mouse_rna.fa.*
-</code></pre></div>
-
+<p>Submit your <code>minimap2_index.sub</code> job to the OSPool
+       <code>condor_submit minimap2_index.sub</code></p>
 </li>
 </ol>
-<p>And that <code>mouse_rna.fa.*</code> files exist in the current directory (you should have copied a few them from the previous exercise
-directory).</p>
-<h2 id="submit-the-job">Submit the Job<a class="headerlink" href="#submit-the-job" title="Permanent link">&para;</a></h2>
-<p>Now submit and monitor the job! If your 100 jobs from the previous exercise haven't started running yet, this job will
-not yet start.
-However, after it has been running for ~2 minutes, you're safe to continue to the next exercise!</p>
 <h2 id="note-keeping-osdf-clean">Note: Keeping OSDF 'Clean'<a class="headerlink" href="#note-keeping-osdf-clean" title="Permanent link">&para;</a></h2>
 <p>Just as for any data directory, it is VERY important to remove old files from OSDF when you no longer need them,
 especially so that you'll have plenty of space for such files in the future.
