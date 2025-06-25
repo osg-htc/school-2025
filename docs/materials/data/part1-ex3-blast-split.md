@@ -50,13 +50,13 @@ One of these is called [genome tools](http://genometools.org/), and you can down
 (just like BLAST) using the following command:
 
 ``` console
-user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/gt-1.5.10-Linux_x86_64-64bit-complete.tar.gz
+user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/gt-1.6.5-Linux_x86_64-64bit-complete.tar.gz  
 ```
 
 Un-tar the gt package (`tar -xzvf ...`), then run its sequence file splitter as follows, with the target file size of 1MB:
 
 ``` console
-user@ap40 $ ./gt-1.5.10-Linux_x86_64-64bit-complete/bin/gt splitfasta -targetsize 1 mouse_rna.fa
+user@ap40 $ ./gt-1.6.5-Linux_x86_64-64bit-complete/bin/gt splitfasta -targetsize 1 mouse_rna.fa
 ```
 
 You'll notice that the result is a set of 100 files, all about the size of 1 MB, and numbered 1 through 100.
