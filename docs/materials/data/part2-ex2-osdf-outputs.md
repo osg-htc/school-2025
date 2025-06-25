@@ -51,9 +51,6 @@ Second, the exercise will use a reference genome file named `Celegans_ref.mmi` t
 Considerations
 --------------
 - Why `minimap2.sif` is placed in the OSDF directory? Is it a big container?
-- What do you think will happen if you make changes to `minimap2.sif`?
-- Will the caches be updated automatically, or is there a possibility that the old version of `minimap2.sif` will be served up to jobs? What is the solution to this problem?
-   (Hint: OSDF only considers the filename when caching data)
 
 Create a wrapper script and submit jobs 
 ---------------------------------------
@@ -85,6 +82,7 @@ We will need our wrapper script and submit file to use OSDF. Perform the followi
         
         queue 1
        ```
+   
 > [!IMPORTANT]  
 > Notice that we are using the `transfer_output_remaps` attribute in our submit file. By default, HTCondor will transfer outputs to the directory where we submitted our job from. Since we want to transfer the indexed reference genome file `Celegans_ref.mmi` to a specific directory, we can use the `transfer_output_remaps` attribute on our submission script. The syntax of this attribute is:
 >  
