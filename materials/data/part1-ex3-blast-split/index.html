@@ -1870,7 +1870,7 @@ This dataset can be downloaded with the following command:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">user@ap40 $ </span>osdf object get /ospool/uc-shared/public/school/2025/mouse_rna.tar.gz
 </code></pre></div>
 
-<p>After un-tar'ing (<code>tar xzf mouse_rna.tar.gz</code>) the file, you should be able to confirm that it's size is roughly 100 MB.
+<p>After un-tar'ing (<code>tar xzf mouse_rna.tar.gz</code>) the file, you should be able to confirm that it's size is roughly 154 MB.
 It would take hours to complete a single <code>blastx</code> analysis for it, and the resulting output file would be huge.</p>
 <h3 id="split-the-input-file">Split the input file<a class="headerlink" href="#split-the-input-file" title="Permanent link">&para;</a></h3>
 <p>For <code>blast</code>, it's scientifically valid to split up the input query file, analyze the pieces, and then put the results
@@ -1888,7 +1888,7 @@ One of these is called <a href="http://genometools.org/">genome tools</a>, and y
 <div class="codehilite"><pre><span></span><code><span class="gp">user@ap40 $ </span>./gt-1.6.5-Linux_x86_64-64bit-complete/bin/gt splitfasta -targetsize <span class="m">1</span> mouse_rna.fa
 </code></pre></div>
 
-<p>You'll notice that the result is a set of 100 files, all about the size of 1 MB, and numbered 1 through 100.</p>
+<p>You'll notice that the result is a set of 154 files, all about the size of 1 MB, and numbered 1 through 154.</p>
 <h2 id="run-a-jobs-on-split-input">Run a Jobs on Split Input<a class="headerlink" href="#run-a-jobs-on-split-input" title="Permanent link">&para;</a></h2>
 <p>Now, you'll submit jobs on the split input files, where each job will use a different piece of the large original input file.</p>
 <h3 id="modify-the-submit-file">Modify the submit file<a class="headerlink" href="#modify-the-submit-file" title="Permanent link">&para;</a></h3>
