@@ -1840,12 +1840,10 @@ by your own jobs.</p>
 <p>Second, the exercise will use a reference genome file named <code>Celegans_ref.mmi</code> to map against the FASTQ files. Copy the <code>Celegans_ref.mmi</code> file to your OSDF directory as well.</p>
 <h2 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><code>- Why `minimap2.sif` is placed in the OSDF directory? Is it a big container?
-- What do you think will happen if you make changes to `minimap2.sif`? Will the caches
+- What do you think will happen if you make changes to `minimap2.sif`? Will the caches be updated automatically, or is there a possiblility that the old version of `minimap2.sif` will be served up to jobs? What is the solution to this problem?
 </code></pre></div>
 
-<p>be updated automatically, or is there a possiblility that the old version of
-   <code>minimap2.sif</code> will be served up to jobs? What is the solution to this problem?
-   (Hint: OSDF only considers the filename when caching data)</p>
+<p>(Hint: OSDF only considers the filename when caching data)</p>
 <h2 id="create-a-wrapper-script-and-submit-jobs">Create a wrapper script and submit jobs<a class="headerlink" href="#create-a-wrapper-script-and-submit-jobs" title="Permanent link">&para;</a></h2>
 <p>We will need our wrapper script and submit file to use OSDF. Perform the following steps.</p>
 <ol>
