@@ -1854,10 +1854,11 @@ minimap2 -x map-ont -d Celegans_ref.mmi Celegans_ref.fa
 </td></tr></table>
 </li>
 <li>
-<p>Create <code>minimap2_index.sub</code> using either <code>vim</code> or <code>nano</code>
-        ```
-        +SingularityImage      = "osdf:///ospool/ap40/data/[USERNAME]/tutorial-ospool-minimap/minimap2.sif"</p>
-<div class="codehilite"><pre><span></span><code>executable             = ./minimap2_index.sh
+<p>Create <code>minimap2_index.sub</code> using either <code>vim</code> or <code>nano</code></p>
+<p>```</p>
+<div class="codehilite"><pre><span></span><code>container_image      = &quot;osdf:///ospool/ap40/data/[USERNAME]/minimap2.sif&quot;
+
+executable             = ./minimap2_index.sh
 
 transfer_input_files   = Celegans_ref.fa
 
