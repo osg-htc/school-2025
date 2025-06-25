@@ -8,8 +8,6 @@ In our previous exercise, [Scaling-Up Exercise 1 Part 1](../part1-ex1-organizati
 
 High throughput computing allows us to efficiently scale analyses by distributing jobs across many computing resources. In this lesson, we will continue the example from the previous exercise, now learning how to structure and submit a read mapping workflow using the OSPool and `minimap2`. This includes adapting your executable script and submit file to dynamically handle many input files in parallel.
 
-[INSERT MINIMAP WORKFLOW - YOU ARE HERE]
-
 !!! danger "**Halt!** Do not proceed if you haven't completed the [Scaling-Up Exercise 1 Part 1](../part1-ex1-organization)"
     
     This is part two of our Scaling Up Exercise 1 set and should **only** be completed after you've successfully completed [Scaling-Up Exercise 1 Part 1](../part1-ex1-organization). 
@@ -235,7 +233,7 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
 
 7.  Generate `./test_list_of_fastq.txt` using `head` command
 
-        head -n 2 ./list_of_fastq.txt > ./test_list_of_fastq.txt
+        head -n 3 ./list_of_fastq.txt > ./test_list_of_fastq.txt
 
 7.  Submit your job and monitor its progress.
     
@@ -273,6 +271,8 @@ Now, you are ready to submit the whole workload.
         * Did you test at least one job successfully?
         * Are you remapping outputs into the `outputs/` folder?
 
+    **Think about what needs to change on your `multi_job_minimap.sub` submit file to submit the full dataset.**
+
     When ready, submit with:
     ```
     condor_submit minimap2_multi.submit
@@ -280,6 +280,8 @@ Now, you are ready to submit the whole workload.
 
     ??? success "Solution - ⚠️ Try to Solve Before Viewing ⚠️"
 
+        **Make sure to change your `queue` statement to use the full dataset.**
+        
         Your final submit file, `minimap2_multi.submit`, should look something like this:
             
             +SingularityImage      = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
