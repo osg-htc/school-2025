@@ -93,6 +93,7 @@ Here are some commands that will be useful for calculating your job's storage ne
 ### Input requirements
 
 Using the commands that you have learned so far, you should be able to get an idea about the input file size. Now, do the following before moving on to the next exercise.
+
 - Total up the amount of data in all of the files necessary to run the `blastx` wrapper job, including the executable itself.
 - Write down this number.
 - Also take note of how much total data is in the `pdbaa` directory.
