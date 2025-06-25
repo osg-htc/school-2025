@@ -1882,11 +1882,11 @@ sequence that is calculated relative to the entire length of the database.</p>
 into smaller files.
 One of these is called <a href="http://genometools.org/">genome tools</a>, and you can download a package of precompiled binaries
 (just like BLAST) using the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@ap40 $ </span>osdf object get /ospool/uc-shared/public/school/2025/gt-1.5.10-Linux_x86_64-64bit-complete.tar.gz
+<div class="codehilite"><pre><span></span><code><span class="gp">user@ap40 $ </span>osdf object get /ospool/uc-shared/public/school/2025/gt-1.6.5-Linux_x86_64-64bit-complete.tar.gz  
 </code></pre></div>
 
 <p>Un-tar the gt package (<code>tar -xzvf ...</code>), then run its sequence file splitter as follows, with the target file size of 1MB:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">user@ap40 $ </span>./gt-1.5.10-Linux_x86_64-64bit-complete/bin/gt splitfasta -targetsize <span class="m">1</span> mouse_rna.fa
+<div class="codehilite"><pre><span></span><code><span class="gp">user@ap40 $ </span>./gt-1.6.5-Linux_x86_64-64bit-complete/bin/gt splitfasta -targetsize <span class="m">1</span> mouse_rna.fa
 </code></pre></div>
 
 <p>You'll notice that the result is a set of 100 files, all about the size of 1 MB, and numbered 1 through 100.</p>
