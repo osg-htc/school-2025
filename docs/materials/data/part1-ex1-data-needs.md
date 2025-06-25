@@ -55,7 +55,7 @@ Understanding BLAST
 Remember that `blastx` is executed in a command like the following:
 
 ``` console
-user@ap40 $ ./ncbi-blast-2.12.0+/bin/blastx -db <DATABASE ROOTNAME> -query <INPUT FILE> -out <RESULTS FILE>
+user@ap40 $ ./ncbi-blast-2.16.0+/bin/blastx -db <DATABASE ROOTNAME> -query <INPUT FILE> -out <RESULTS FILE>
 ```
 
 In the above, the `<INPUT FILE>` is the name of a file containing a number of genetic sequences (e.g. `mouse.fa`), and
