@@ -33,7 +33,7 @@ This dataset can be downloaded with the following command:
 user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/mouse_rna.tar.gz
 ```
 
-After un-tar'ing (`tar xzf mouse_rna.tar.gz`) the file, you should be able to confirm that it's size is roughly 100 MB.
+After un-tar'ing (`tar xzf mouse_rna.tar.gz`) the file, you should be able to confirm that it's size is roughly 154 MB.
 It would take hours to complete a single `blastx` analysis for it, and the resulting output file would be huge.
 
 ### Split the input file
@@ -58,7 +58,7 @@ Un-tar the gt package (`tar -xzvf ...`), then run its sequence file splitter as 
 user@ap40 $ ./gt-1.6.5-Linux_x86_64-64bit-complete/bin/gt splitfasta -targetsize 1 mouse_rna.fa
 ```
 
-You'll notice that the result is a set of 100 files, all about the size of 1 MB, and numbered 1 through 100.
+You'll notice that the result is a set of 154 files, all about the size of 1 MB, and numbered 1 through 154.
 
 Run a Jobs on Split Input 
 --------------------
