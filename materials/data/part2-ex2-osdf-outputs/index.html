@@ -1291,19 +1291,6 @@
     Setup
   </a>
   
-    <nav class="md-nav" aria-label="Setup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#software-setup" class="md-nav__link">
-    Software Setup
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1343,13 +1330,6 @@
         <li class="md-nav__item">
   <a href="#create-a-wrapper-script-and-submit-jobs" class="md-nav__link">
     Create a wrapper script and submit jobs
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#note-keeping-osdf-clean" class="md-nav__link">
-    Note: Keeping OSDF 'Clean'
   </a>
   
 </li>
@@ -1766,19 +1746,6 @@
     Setup
   </a>
   
-    <nav class="md-nav" aria-label="Setup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#software-setup" class="md-nav__link">
-    Software Setup
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1822,13 +1789,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#note-keeping-osdf-clean" class="md-nav__link">
-    Note: Keeping OSDF 'Clean'
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1863,8 +1823,6 @@ osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.fa .
 <li>What are the sizes of the container and the reference genome file.</li>
 </ul>
 </div>
-<h3 id="software-setup">Software Setup<a class="headerlink" href="#software-setup" title="Permanent link">&para;</a></h3>
-<p>For using Minimap2, you will need a container of minimap2. The container is provided in the <code>/ospool/ap40/osg-staff/tutorial-ospool-minimap/software</code> directory. </p>
 <h2 id="prepare-files-for-the-job">Prepare files for the job<a class="headerlink" href="#prepare-files-for-the-job" title="Permanent link">&para;</a></h2>
 <p>Minimap2 compares and aligns large pieces of genetic information, like DNA sequences. This is useful for tasks like identifying similarities between genomes, verifying sequences, or assembling genetic data from scratch. For this exercise, we will perform indexing using the reference genome.</p>
 <h2 id="place-files-in-osdf">Place files in OSDF<a class="headerlink" href="#place-files-in-osdf" title="Permanent link">&para;</a></h2>
@@ -1889,7 +1847,7 @@ by your own jobs.</p>
    <code>minimap2.sif</code> will be served up to jobs? What is the solution to this problem?
    (Hint: OSDF only considers the filename when caching data)</p>
 <h2 id="create-a-wrapper-script-and-submit-jobs">Create a wrapper script and submit jobs<a class="headerlink" href="#create-a-wrapper-script-and-submit-jobs" title="Permanent link">&para;</a></h2>
-<p>Now, our data are ready. We will need our wrapper script and submit file to use OSDF:</p>
+<p>We will need our wrapper script and submit file to use OSDF. Perform the following steps.</p>
 <ol>
 <li>
 <p>Copy the following contents and save that as <code>minimap2_index.sh</code></p>
@@ -1933,12 +1891,6 @@ Notice that we are using the <code>transfer_output_remaps</code> attribute in ou
        <code>condor_submit minimap2_index.sub</code></p>
 </li>
 </ol>
-<h2 id="note-keeping-osdf-clean">Note: Keeping OSDF 'Clean'<a class="headerlink" href="#note-keeping-osdf-clean" title="Permanent link">&para;</a></h2>
-<p>Just as for any data directory, it is VERY important to remove old files from OSDF when you no longer need them,
-especially so that you'll have plenty of space for such files in the future.
-For example, you would delete (<code>rm</code>) files from <code>/ospool/ap40/data/[USERNAME]/</code> on when you don't need them there
-anymore, but only after all jobs have finished.
-The next time you use OSDF after the school, remember to first check for old files that you can delete.</p>
                 
                   
                 
