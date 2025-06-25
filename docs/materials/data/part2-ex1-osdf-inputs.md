@@ -25,20 +25,25 @@ Setup
 -   Make sure you're logged in to `ap40.uw.osg-htc.org`
 -   Copy the following files from the previous Blast exercises to a new directory in `/home/<username>` called `osdf-shared`:
     - `blast_wrapper.sh`
-    - `blastx`
     - `mouse_rna.fa.1`
     - `mouse_rna.fa.2`
     - `mouse_rna.fa.3`
     - Your most recent submit file (probably named `blast_split.sub`)
+- For this exercise, we will use a container of the `blastx` named `blastx.sif`. Download the container using the following command
 
-Place the Database in OSDF
---------------------------------
+```
+user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/blast.sif .
+```  
+
+Place the Database and Container in OSDF
+----------------------------------------
+
+The image of the software (`blast.sif`) will be used frequently and it needs to be copied to the OSDF directory. Details about the OSDF directory is given below.
 
 ### Copy to your data to the OSDF space
 
 OSDF provides a directory for you to store data which can be accessed through the caching servers.
-First, you need to move your BLAST database (`pdbaa_files.tar.gz`) into this directory. For `ap40.uw.osg-htc.org`, the directory
-to use is `/ospool/ap40/data/[USERNAME]/`
+First, you need to move your BLAST database (`pdbaa_files.tar.gz`) and BLAST container (`blast.sif`) into this directory. For `ap40.uw.osg-htc.org`, the directory to use is `/ospool/ap40/data/[USERNAME]/`
 
 Note that files placed in the `/ospool/ap40/data/[USERNAME]/` directory will only be accessible
 by your own jobs.
@@ -48,14 +53,19 @@ Modify the Submit File and Wrapper
 
 You will have to modify the wrapper and submit file to use OSDF:
 
-1. HTCondor knows how to do OSDF transfers, so you just have to provide the correct URL in 
+1. For using the container add the following to you submit file
+
+   ```
+   container_image = osdf:///ospool/ap40/data/[USERNAME]/tutorial-ospool-minimap/minimap2.sif
+   ```
+3. HTCondor knows how to do OSDF transfers, so you just have to provide the correct URL in 
    `transfer_input_files`. Note there is no servername (3 slashes in :///) and instead
    it is just based on namespace (`/ospool/ap40` in this case):
 
         ::file
-        transfer_input_files = blastx, $(inputfile), osdf:///ospool/ap40/data/[USERNAME]/pdbaa_files.tar.gz
+        transfer_input_files = $(inputfile), osdf:///ospool/ap40/data/[USERNAME]/pdbaa_files.tar.gz
 
-1. Confirm that your queue statement is correct for the current directory. It should be something like:
+4. Confirm that your queue statement is correct for the current directory. It should be something like:
 
         ::file
         queue inputfile matching mouse_rna.fa.*
@@ -66,7 +76,7 @@ directory).
 Submit the Job
 --------------
 
-Now submit and monitor the job! If your 100 jobs from the previous exercise haven't started running yet, this job will
+Now submit and monitor the job! If your 154 jobs from the previous exercise haven't started running yet, this job will
 not yet start.
 However, after it has been running for ~2 minutes, you're safe to continue to the next exercise!
 
