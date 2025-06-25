@@ -1,18 +1,10 @@
 # Health Guidelines
 
-<<<<<<< HEAD
 The OSG School 2025 at the UW–Madison
 welcomes participants from around the United States
 plus Uganda.
 This page contains health guidelines for this year’s School.
 While the focus is on COVID-19,
-=======
-The OSG School 2024 at the UW–Madison
-welcomes participants from around the United States
-plus India, Mali, and Uganda.
-This page contains health guidelines for this year’s School.
-While the focus is in COVID-19,
->>>>>>> dev
 most of these guidelines also apply to preventing the spread of other infectious illnesses
 (flu, colds, GI viruses, etc.).
 
@@ -64,11 +56,7 @@ we will do our best to support you via remote attendance.
 We learned a lot about remote events during the pandemic!
 We can:
 
-<<<<<<< HEAD
 *   Stream lectures live over Zoom
-=======
-*   Try to stream lectures live over Zoom
->>>>>>> dev
 *   Post all slides and exercises on the website
 *   Be active on Slack and email
 *   Conduct one-on-one consultations over Zoom

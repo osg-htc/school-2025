@@ -26,7 +26,7 @@ Access Point as we work with containers.
 First, download the `apptainer-setup.sh` script:
 
 ```
-osdf object get /ospool/uc-shared/public/school/2025/dev/apptainer-setup.sh ./
+osdf object get /ospool/uc-shared/public/school/2025/apptainer-setup.sh ./
 ```
 
 Then run the script using this command:

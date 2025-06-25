@@ -84,7 +84,7 @@ for word in sorted(words.keys()):
 1.  Download the input file for the script (263K lines, ~1.4 MB) and save it in your submit directory:
 
         :::console
-        [username@ap40]$ pelican object get osdf://ospool/uc-shared/public/school/2025/dev/intro-2.1-words.txt .
+        [username@ap40]$ pelican object get osdf://ospool/uc-shared/public/school/2025/intro-2.1-words.txt .
 
 1.  Create a submit file for the `freq.py` executable.
 1.  Add a line called `transfer_input_files = ` to tell HTCondor to transfer the input file to the job:

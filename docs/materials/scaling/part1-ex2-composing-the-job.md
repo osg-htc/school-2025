@@ -163,7 +163,7 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
 2. Fill in the incomplete lines of the submit file, as shown below: 
 
         :::console
-        container_image         = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
+        container_image         = osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif
 
         executable              = minimap2.sh
         arguments               = $(read_subset_file)
@@ -284,7 +284,7 @@ Now, you are ready to submit the whole workload.
         
         Your final submit file, `minimap2_multi.submit`, should look something like this:
             
-            +SingularityImage      = "osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif"
+            container_image      = osdf:///ospool/ap40/data/<user.name>/scaling-up/software/minimap2.sif
             
             executable             = ./minimap2.sh
             arguments              = $(read_subset_file)

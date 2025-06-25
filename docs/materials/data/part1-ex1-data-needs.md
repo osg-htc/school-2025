@@ -35,14 +35,14 @@ genome information.
 1. Copy the BLAST executables:
    
         :::console
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/dev/ncbi-blast-2.16.0+-x64-linux.tar.gz .
+        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/ncbi-blast-2.16.0+-x64-linux.tar.gz ./
         user@ap40 $ tar -xzvf ncbi-blast-2.16.0+-x64-linux.tar.gz
 
 1.  Download these files to your current directory:
 
         :::console
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/dev/pdbaa.tar.gz
-        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/dev/mouse.fa
+        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/pdbaa.tar.gz ./
+        user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/mouse.fa ./
 
 1.  Untar the `pdbaa` database:
 
@@ -55,7 +55,7 @@ Understanding BLAST
 Remember that `blastx` is executed in a command like the following:
 
 ``` console
-user@ap40 $ ./ncbi-blast-2.12.0+/bin/blastx -db <DATABASE ROOTNAME> -query <INPUT FILE> -out <RESULTS FILE>
+user@ap40 $ ./ncbi-blast-2.16.0+/bin/blastx -db <DATABASE ROOTNAME> -query <INPUT FILE> -out <RESULTS FILE>
 ```
 
 In the above, the `<INPUT FILE>` is the name of a file containing a number of genetic sequences (e.g. `mouse.fa`), and
@@ -93,6 +93,7 @@ Here are some commands that will be useful for calculating your job's storage ne
 ### Input requirements
 
 Using the commands that you have learned so far, you should be able to get an idea about the input file size. Now, do the following before moving on to the next exercise.
+
 - Total up the amount of data in all of the files necessary to run the `blastx` wrapper job, including the executable itself.
 - Write down this number.
 - Also take note of how much total data is in the `pdbaa` directory.
@@ -102,13 +103,12 @@ Using the commands that you have learned so far, you should be able to get an id
 
 ### Output requirements
 
-You also  need to get an idea about the output file sizes as well to estimate the total disk requirement. 
-- To sum the output file sizes, estimate the file sizes of the following files
-   - The output that we care about from `blastx` is saved in the file whose name is indicated after the `-out` argument to
-`blastx`.
-   - Also, remember that HTCondor also creates the error, output, and log files, which you'll need to add up, too.
-   - Are there any other files?
-   - Total all of these together, as well.
+You also  need to get an idea about the output file sizes as well to estimate the total disk requirement.To sum the output file sizes, estimate the file sizes of the following files
+
+- The output that we care about from `blastx` is saved in the file whose name is indicated after the `-out` argument to `blastx`.
+- Also, remember that HTCondor also creates the error, output, and log files, which you'll need to add up, too.
+- Are there any other files?
+- Total all of these together, as well.
 
 <!--
 #removed for 2020 Virtual school since (I assume) we won't have a group discussion forum 

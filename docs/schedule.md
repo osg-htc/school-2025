@@ -114,9 +114,10 @@ Industry room (3rd floor)
       <td>19:00</td>
       <td>20:30</td>
       <td>
-        <span class="before-dot text-orange">Evening work session (optional)</span>
+        <span class="before-dot text-orange">Evening work session (optional)</span><br>
+        Memorial Union – Board Room (3rd Floor East)
       </td>
-      <td>TBD</td>
+      <td>Andrew, Tim C.</td>
     </tr>
   </tbody>
 </table>
@@ -213,9 +214,10 @@ Industry room (3rd floor)
       <td>19:00</td>
       <td>20:30</td>
       <td>
-        <span class="before-dot text-orange">Evening work session (optional)</span>
+        <span class="before-dot text-orange">Evening work session (optional)</span><br>
+        Memorial Union – Board Room (3rd Floor East)
       </td>
-      <td>TBD</td>
+      <td>Christina, Showmic, Tim C.</td>
     </tr> 
   </tbody>
 </table>
@@ -262,12 +264,12 @@ Industry room (3rd floor)
       <td>
         HTC Showcase Part 1
         <br>
-        &#9654; <span style="color: rgb(173, 81, 12);">Michael Martinez</span>;
-        Physics<br>
-        <!--<div style="margin-left: 2ex;">“Title of talk”</div>-->
         &#9654; <span style="color: rgb(173, 81, 12);">Spencer Ericksen</span>;
         Small Molecule Facility<br>
-        <!--<div style="margin-left: 2ex;">“Title of talk”</div>-->
+        <div style="margin-left: 2ex;"><a href="../materials/showcase/OSG_School_SSE_2025-06-25.pptx">“Scaling Virtual Screening to Ultra-Large Virtual Chemical Libraries”</a></div>
+        &#9654; <span style="color: rgb(173, 81, 12);">Michael Martinez</span>;
+        Physics<br>
+        <div style="margin-left: 2ex;"><a href="../materials/showcase/martinez_osgschool.pdf">“Dark Matter, Radio Astronomy, and High Throughput Computing”</a></div>
       </td>
       <td>-</td>
     </tr>
@@ -298,9 +300,10 @@ Industry room (3rd floor)
       <td>19:00</td>
       <td>20:30</td>
       <td>
-        <span class="before-dot text-orange">Evening work session (optional)</span>
+        <span class="before-dot text-orange">Evening work session (optional)</span><br>
+        Memorial Union – Board Room (3rd Floor East)
       </td>
-      <td>TBD</td>
+      <td>Amber, Showmic</td>
     </tr>
   </tbody>
 </table>
@@ -388,9 +391,10 @@ Industry room (3rd floor)
       <td>19:00</td>
       <td>20:30</td>
       <td>
-        <span class="before-dot text-orange">Evening work session (optional)</span>
+        <span class="before-dot text-orange">Evening work session (optional)</span><br>
+        Memorial Union – Board Room (3rd Floor East)
       </td>
-      <td>TBD</td>
+      <td>Danny, Tim C.</td>
     </tr>
   </tbody>
 </table>
@@ -440,7 +444,8 @@ Industry room (3rd floor)
     <tr>
       <td>10:45</td>
       <td>11:30</td>
-      <td><span class="before-dot text-light-orange">Work time: Apply HTC to own research</span><br></td>
+      <td><span class="before-dot text-light-orange">Work time: Apply HTC to own research</span><br>
+        <span class="before-dot text-black"><strong>Optional</strong> Introduction to Research Computing Facilitation</span></td>
       <td>-</td>
     </tr>
     <tr>
@@ -453,8 +458,7 @@ Industry room (3rd floor)
       <td>11:50</td>
       <td>13:00</td>
       <td>
-        Lunch<br>
-        Optional: Introduction to Research Computing Facilitation
+        Lunch
       </td>
       <td>Christina</td>
     </tr>
@@ -475,7 +479,7 @@ Industry room (3rd floor)
     </tr>
     <tr>
       <td>14:00</td>
-      <td>14:15</td>
+      <td>14:20</td>
       <td>
         Open Q&A<br>
         Break
@@ -483,26 +487,26 @@ Industry room (3rd floor)
       <td>-</td>
     </tr>
     <tr>
-      <td>14:15</td>
-      <td>15:15</td>
+      <td>14:20</td>
+      <td>15:20</td>
       <td>Lightning talks by volunteer participants</td>
       <td>Attendees</td>
     </tr>
     <tr>
-      <td>15:15</td>
-      <td>15:30</td>
+      <td>15:20</td>
+      <td>15:45</td>
       <td>Open Q&amp;A <br> break</td>
       <td>staff</td>
     </tr>
     <tr>
-      <td>15:30</td>
-      <td>16:30</td>
+      <td>15:45</td>
+      <td>16:40</td>
       <td>HTC and HTCondor Philosophy</td>
       <td>Dr. Miron Livny; Greg Thain</td>
     </tr>
     <tr>
-      <td>16:30</td>
-      <td>17:00</td>
+      <td>16:40</td>
+      <td>17:10</td>
       <td><span class="before-dot text-light-blue">Lecture: Forward</span></td>
       <td>Tim</td>
     </tr>

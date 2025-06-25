@@ -2,23 +2,19 @@
 
 ## School Overview and Intro
 
-View the slides: [Coming soon]
-<!-- View the slides: [pdf](welcome/files/osgs24-day1-part1-welcome-timc.pdf) -->
+View the slides: [pdf](welcome/files/osgs25-day1-part1-welcome-timc.pdf)
 
 ## Intro to HTC and HTCondor Job Execution
 
 ### Intro to HTC Slides
 
-Intro to HTC: [Coming soon]
-<!-- Intro to HTC: [pptx](htcondor/osgschool24-htc-intro.pptx) -->
+Intro to HTC: [pdf](htcondor/files/osgschool25-htc-intro.pdf)
 
-Worksheet: [Coming soon]
-<!-- Worksheet: [pdf](htcondor/HTC-List-Of-Jobs.pdf) or [Google Drive](https://docs.google.com/presentation/d/1DnJMOuw0YjuVg70vCvafXlJUm4k5Ovv7Zd1SJbfk6hU/edit?usp=sharing) -->
+Worksheet: [pdf](htcondor/files/HTC-List-Of-Jobs.pdf) or [Google Drive](https://docs.google.com/presentation/d/1DnJMOuw0YjuVg70vCvafXlJUm4k5Ovv7Zd1SJbfk6hU/edit?usp=sharing)
 
 ### Intro to HTCondor Slides
 
-View the slides: [Coming soon]
-<!-- View the slides: [pdf](htcondor/files/osgus24-htc-htcondor.pdf) -->
+View the slides: [pdf](htcondor/files/osgus25-htc-htcondor.pdf)
 <!-- [PowerPoint](htcondor/files/osgus22-htc-htcondor.pptx)) -->
 
 ### Intro Exercises 1: Running and Viewing Simple Jobs (Strongly Recommended)
@@ -37,8 +33,7 @@ View the slides: [Coming soon]
 
 ## Intro to HTCondor Multiple Job Execution
 
-View the Slides: [Coming soon]
-<!-- View the Slides: [pdf](htcondor/files/osgus24-htc-htcondor-multiple-jobs.pdf) -->
+View the Slides: [pdf](htcondor/files/osgus25-htc-htcondor-multiple-jobs.pdf)
 
 ### Intro Exercises 2: Running Many HTC Jobs (Strongly Recommended)
 
@@ -47,22 +42,21 @@ View the Slides: [Coming soon]
 - [Exercise 2.3: Use `queue from` with custom variables](htcondor/part2-ex3-queue-from.md)
 - [Bonus Exercise 2.4: Use `queue matching` with a custom variable](htcondor/part2-ex4-queue-matching.md)
 
-## OSG
+## The Open Science Pool (OSPool)
 
-View the slides: [Coming soon]
-<!-- View the slides: [pdf](osg/files/osgs24-day2-part1-osg-timc.pdf) -->
+View the slides: [pdf](ospool/files/osgs25-day2-part1-osg-timc.pdf)
 
-### OSG Exercises: Comparing PATh and OSG (Strongly Recommended)
+### OSPool Exercises: Researching the OSPool (Strongly Recommended)
 
-- [Exercise 1.1: Log in to the OSPool Access Point](osg/part1-ex1-login-scp.md)
-- [Exercise 1.2: Running jobs in the OSPool](osg/part1-ex2-submit-osg.md)
-- [Exercise 1.3: Hardware differences between PATh and OSG](osg/part1-ex3-hardware-diffs.md)
-- [Exercise 1.4: Software differences in OSPool](osg/part1-ex4-software-diffs.md)
+- [Exercise 1.1: Where Do Jobs Run?](ospool/part1-ex1-where-run.md)
+- [Exercise 1.2: How Much Can I Get?](ospool/part1-ex2-capacity.md)
+- [Exercise 1.3: How Does Capacity Change?](ospool/part1-ex3-dynamic-capacity.md)
+- [Exercise 1.4: What Is In an Execution Point?](ospool/part1-ex4-ep-sandbox.md)
+- [Bonus Exercise 1.5: Viewing OSPool Information](ospool/part1-ex5-ospool-views.md)
 
 ## Troubleshooting
 
-View the Slides: [Coming soon]
-<!-- View the Slides: [pdf](troubleshooting/files/OSGUS2024_troubleshooting.pdf) [ppt](troubleshooting/files/OSGUS2024_troubleshooting.pptx) -->
+View the Slides: [pdf](troubleshooting/files/OSGUS2025_troubleshooting.pdf) [ppt](troubleshooting/files/OSGUS2025_troubleshooting.pptx)
 
 ### Troubleshooting Exercises: 
 
@@ -71,8 +65,7 @@ View the Slides: [Coming soon]
 
 ## Software
 
-View the Slides: [Coming soon]
-<!-- View the Slides: [pdf](software/files/osgs24-software.pdf), [pptx](software/files/osgs24-software.pptx) -->
+View the Slides: [pdf](software/files/osgs25-software.pdf), [pptx](software/files/osgs25-software.pptx)
 
 ### Software Exercises 1: Exploring Containers
 
@@ -105,8 +98,7 @@ View the Slides: [Coming soon]
 
 ## Data
 
-View the Slides: [Coming soon]
-<!-- View the slides: [pdf](data/files/osgus24-data.pdf) -->
+View the Slides: [pdf](data/files/osgus25-data.pdf)
 
 ### Data Exercises 1: HTCondor File Transfer (Strongly Recommended)
 
