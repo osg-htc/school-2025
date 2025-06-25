@@ -23,9 +23,6 @@ Setup
 !!! note "File Sizes"
     - What are the sizes of the container and the reference genome file.
 
-### Software Setup
-For using Minimap2, you will need a container of minimap2. The container is provided in the `/ospool/ap40/osg-staff/tutorial-ospool-minimap/software` directory. 
-
 
 Prepare files for the job
 --------------------------------
@@ -62,7 +59,7 @@ Considerations
 Create a wrapper script and submit jobs 
 ---------------------------------------
 
-Now, our data are ready. We will need our wrapper script and submit file to use OSDF:
+We will need our wrapper script and submit file to use OSDF. Perform the following steps.
 
 1. Copy the following contents and save that as `minimap2_index.sh`
 
@@ -100,15 +97,6 @@ Now, our data are ready. We will need our wrapper script and submit file to use 
        ```
       condor_submit minimap2_index.sub
       ```
-
-Note: Keeping OSDF 'Clean'
---------------------------------
-
-Just as for any data directory, it is VERY important to remove old files from OSDF when you no longer need them,
-especially so that you'll have plenty of space for such files in the future.
-For example, you would delete (`rm`) files from `/ospool/ap40/data/[USERNAME]/` on when you don't need them there
-anymore, but only after all jobs have finished.
-The next time you use OSDF after the school, remember to first check for old files that you can delete.
 
 
 
