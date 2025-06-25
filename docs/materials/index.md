@@ -109,7 +109,7 @@ View the Slides: [Coming soon]
 
 ### Data Exercises 2: Using OSDF (Strongly Recommended)
 
-- [Exercise 2.1: OSDF for inputs](data/part2-ex1-transfer-file-using-osdf.md)
+- [Exercise 2.1: OSDF for inputs](data/part2-ex1-osdf-inputs.md)
 - [Exercise 2.2: OSDF for outputs](data/part2-ex2-osdf-outputs.md)
 
 ## Scaling Up
