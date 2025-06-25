@@ -1841,9 +1841,6 @@ by your own jobs.</p>
 <h2 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Why <code>minimap2.sif</code> is placed in the OSDF directory? Is it a big container?</li>
-<li>What do you think will happen if you make changes to <code>minimap2.sif</code>?</li>
-<li>Will the caches be updated automatically, or is there a possibility that the old version of <code>minimap2.sif</code> will be served up to jobs? What is the solution to this problem?
-   (Hint: OSDF only considers the filename when caching data)</li>
 </ul>
 <h2 id="create-a-wrapper-script-and-submit-jobs">Create a wrapper script and submit jobs<a class="headerlink" href="#create-a-wrapper-script-and-submit-jobs" title="Permanent link">&para;</a></h2>
 <p>We will need our wrapper script and submit file to use OSDF. Perform the following steps.</p>
@@ -1878,17 +1875,17 @@ queue 1
 </code></pre></div>
 
 <p>```</p>
+</li>
+</ol>
 <blockquote>
 <p>[!IMPORTANT]<br />
 Notice that we are using the <code>transfer_output_remaps</code> attribute in our submit file. By default, HTCondor will transfer outputs to the directory where we submitted our job from. Since we want to transfer the indexed reference genome file <code>Celegans_ref.mmi</code> to a specific directory, we can use the <code>transfer_output_remaps</code> attribute on our submission script. The syntax of this attribute is:</p>
 <p><code>transfer_output_remaps = "&lt;file_on_execution_point&gt;=&lt;desired_path_to_file_on_access_point&gt;</code> </p>
 <p>It is also important to note that we are transferring our <code>Celegans_ref.mmi</code> to the OSDF directory <code>/ospool/&lt;ap##&gt;/data/&lt;user.name&gt;/</code>. We will be reusing our indexed reference genome file for each mapping job in the ScalingUp exercises, we benefit from the caching feature of the OSDF. Therefore, we can direct <code>transfer_output_remaps</code> to redirect the <code>Celegans_ref.mmi</code> file to our OSDF directory.</p>
 </blockquote>
-</li>
-<li>
-<p>Submit your <code>minimap2_index.sub</code> job to the OSPool
-       <code>condor_submit minimap2_index.sub</code></p>
-</li>
+<ol>
+<li>Submit your <code>minimap2_index.sub</code> job to the OSPool
+       <code>condor_submit minimap2_index.sub</code></li>
 </ol>
                 
                   
