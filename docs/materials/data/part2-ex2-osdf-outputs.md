@@ -72,7 +72,7 @@ We will need our wrapper script and submit file to use OSDF. Perform the followi
         transfer_input_files   = Celegans_ref.fa
     
         transfer_output_files  = Celegans_ref.mmi 
-        transfer_output_remaps = "Celegans_ref.mmi = /ospool/ap40/data/[USERNAME]/Celegans_ref.mmi"
+        transfer_output_remaps = "Celegans_ref.mmi = osdf:///ospool/ap40/data/[USERNAME]/Celegans_ref.mmi"
         output                 = indexing_step1_$(Cluster)_$(Process).out
         error                  = indexing_step1_$(Cluster)_$(Process).err
         log                    = indexing_step1_$(Cluster)_$(Process).log
