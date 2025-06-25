@@ -104,6 +104,7 @@ Using the commands that you have learned so far, you should be able to get an id
 ### Output requirements
 
 You also  need to get an idea about the output file sizes as well to estimate the total disk requirement. 
+
 - To sum the output file sizes, estimate the file sizes of the following files
    - The output that we care about from `blastx` is saved in the file whose name is indicated after the `-out` argument to
 `blastx`.
