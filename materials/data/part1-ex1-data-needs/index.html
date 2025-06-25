@@ -1932,13 +1932,15 @@ run a hypothetical BLAST job with a wrapper script, where the job:</p>
 <p>Remember, <code>blastx</code> reads the un-compressed <code>pdbaa</code> files.</p>
 </div>
 <h3 id="output-requirements">Output requirements<a class="headerlink" href="#output-requirements" title="Permanent link">&para;</a></h3>
-<p>You also  need to get an idea about the output file sizes as well to estimate the total disk requirement. 
-- To sum the output file sizes, estimate the file sizes of the following files
-   - The output that we care about from <code>blastx</code> is saved in the file whose name is indicated after the <code>-out</code> argument to
-<code>blastx</code>.
-   - Also, remember that HTCondor also creates the error, output, and log files, which you'll need to add up, too.
-   - Are there any other files?
-   - Total all of these together, as well.</p>
+<p>You also  need to get an idea about the output file sizes as well to estimate the total disk requirement. </p>
+<ul>
+<li>To sum the output file sizes, estimate the file sizes of the following files</li>
+<li>The output that we care about from <code>blastx</code> is saved in the file whose name is indicated after the <code>-out</code> argument to
+<code>blastx</code>.</li>
+<li>Also, remember that HTCondor also creates the error, output, and log files, which you'll need to add up, too.</li>
+<li>Are there any other files?</li>
+<li>Total all of these together, as well.</li>
+</ul>
 <!--
 #removed for 2020 Virtual school since (I assume) we won't have a group discussion forum 
 Talk about this as a group!
