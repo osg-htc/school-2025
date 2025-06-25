@@ -118,10 +118,11 @@ View the Slides: [Coming soon]
 
 ### Scaling Up Exercises
 
--   [Exercise 1.1: Organizing HTC workloads](scaling/part1-ex1-organization.md)
--   [Exercise 1.2: Composing Your Jobs](scaling/part2-ex1-composing-the-job.md)
--   [Exercise 1.2: Investigating Job Attributes](scaling/part1-ex2-job-attributes.md)
--   [Exercise 1.3: Getting Job Information from Log Files](scaling/part1-ex3-log-files.md)
+- 	[Exercise 1.1: Organizing HTC workloads](scaling/part1-ex1-organization.md)
+- 	[Exercise 1.2: Composing Your Jobs](scaling/part1-ex2-composing-the-job.md)
+- 	[Exercise 2.1: Log Into a Local Pool](scaling/part2-ex1-chtc-node.md)
+- 	[Exercise 2.2: Hardware Differences Between OSPool and the CHTC Pool](scaling/part2-ex2-hardware-diffs.md)
+- 	[Exercise 2.3: Software Differences Between OSPool and the CHTC Pool](scaling/part2-ex3-software-diffs.md)
 
 ## Workflows with DAGMan
 
