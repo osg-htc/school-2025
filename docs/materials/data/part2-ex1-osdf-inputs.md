@@ -53,19 +53,20 @@ Modify the Submit File and Wrapper
 
 You will have to modify the wrapper and submit file to use OSDF:
 
-1. For using the container add the following to you submit file
+1. For using the container, add the following line to your submit file
 
    ```
-   container_image = osdf:///ospool/ap40/data/[USERNAME]/tutorial-ospool-minimap/minimap2.sif
+   container_image = osdf:///ospool/ap40/data/[USERNAME]/blast.sif
    ```
-3. HTCondor knows how to do OSDF transfers, so you just have to provide the correct URL in 
+   
+2. HTCondor knows how to do OSDF transfers, so you just have to provide the correct URL in 
    `transfer_input_files`. Note there is no servername (3 slashes in :///) and instead
    it is just based on namespace (`/ospool/ap40` in this case):
 
         ::file
         transfer_input_files = $(inputfile), osdf:///ospool/ap40/data/[USERNAME]/pdbaa_files.tar.gz
 
-4. Confirm that your queue statement is correct for the current directory. It should be something like:
+3. Confirm that your queue statement is correct for the current directory. It should be something like:
 
         ::file
         queue inputfile matching mouse_rna.fa.*
@@ -85,7 +86,7 @@ Considerations
 
 1. Why did we not place all files in OSDF (for example, `blastx` and `mouse_rna.fa.*`)?
 
-1. What do you think will happen if you make changes to `pdbaa_files.tar.gz`? Will the caches
+2. What do you think will happen if you make changes to `pdbaa_files.tar.gz`? Will the caches
    be updated automatically, or is there a possiblility that the old version of
    `pdbaa_files.tar.gz` will be served up to jobs? What is the solution to this problem?
    (Hint: OSDF only considers the filename when caching data)
