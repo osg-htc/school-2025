@@ -63,8 +63,10 @@ We will need our wrapper script and submit file to use OSDF. Perform the followi
         minimap2 -x map-ont -d Celegans_ref.mmi Celegans_ref.fa
 
 2. Create `minimap2_index.sub` using either `vim` or `nano`
-        ```
-        +SingularityImage      = "osdf:///ospool/ap40/data/[USERNAME]/tutorial-ospool-minimap/minimap2.sif"
+
+       ```
+        
+        container_image      = "osdf:///ospool/ap40/data/[USERNAME]/minimap2.sif"
     
         executable             = ./minimap2_index.sh
         
