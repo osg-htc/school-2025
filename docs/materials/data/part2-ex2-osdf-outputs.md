@@ -50,8 +50,9 @@ Second, the exercise will use a reference genome file named `Celegans_ref.mmi` t
 
 Considerations
 --------------
-    - Why `minimap2.sif` is placed in the OSDF directory? Is it a big container?
-    - What do you think will happen if you make changes to `minimap2.sif`? Will the caches be updated automatically, or is there a possiblility that the old version of `minimap2.sif` will be served up to jobs? What is the solution to this problem?
+- Why `minimap2.sif` is placed in the OSDF directory? Is it a big container?
+- What do you think will happen if you make changes to `minimap2.sif`?
+- Will the caches be updated automatically, or is there a possibility that the old version of `minimap2.sif` will be served up to jobs? What is the solution to this problem?
    (Hint: OSDF only considers the filename when caching data)
 
 Create a wrapper script and submit jobs 
