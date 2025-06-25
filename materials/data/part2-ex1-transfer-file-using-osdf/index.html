@@ -1761,8 +1761,8 @@ by your own jobs.</p>
 <ol>
 <li>
 <p>HTCondor knows how to do OSDF transfers, so you just have to provide the correct URL in 
-   <code>transfer_input_files</code>. Note there is no servername (3 slashes in :///) and we instead
-   is is just based on namespace (<code>/ospool/ap40</code> in this case):</p>
+   <code>transfer_input_files</code>. Note there is no servername (3 slashes in :///) and instead
+   it is just based on namespace (<code>/ospool/ap40</code> in this case):</p>
 <div class="codehilite"><pre><span></span><code>transfer_input_files = blastx, $(inputfile), osdf:///ospool/ap40/data/[USERNAME]/pdbaa_files.tar.gz
 </code></pre></div>
 
