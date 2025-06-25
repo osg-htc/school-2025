@@ -98,8 +98,7 @@ View the Slides: [pdf](software/files/osgs25-software.pdf), [pptx](software/file
 
 ## Data
 
-View the Slides: [Coming soon]
-<!-- View the slides: [pdf](data/files/osgus24-data.pdf) -->
+View the Slides: [pdf](data/files/osgus25-data.pdf) -->
 
 ### Data Exercises 1: HTCondor File Transfer (Strongly Recommended)
 
