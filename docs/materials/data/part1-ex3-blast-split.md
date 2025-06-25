@@ -34,8 +34,7 @@ user@ap40 $ osdf object get /ospool/uc-shared/public/school/2025/mouse_rna.tar.g
 ```
 
 After un-tar'ing (`tar xzf mouse_rna.tar.gz`) the file, you should be able to confirm that it's size is roughly 100 MB.
-Not only is this near the size cutoff for HTCondor file transfer, it would take hours to complete a single `blastx`
-analysis for it and the resulting output file would be huge.
+It would take hours to complete a single `blastx` analysis for it, and the resulting output file would be huge.
 
 ### Split the input file
 
