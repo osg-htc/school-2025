@@ -84,7 +84,7 @@ However, after it has been running for ~2 minutes, you're safe to continue to th
 Considerations
 --------------
 
-1. Why did we not place all files in OSDF (for example, `blastx` and `mouse_rna.fa.*`)?
+1. Why did we not place all files in OSDF?
 
 2. What do you think will happen if you make changes to `pdbaa_files.tar.gz`? Will the caches
    be updated automatically, or is there a possiblility that the old version of
