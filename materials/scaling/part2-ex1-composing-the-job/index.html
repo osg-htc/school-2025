@@ -2021,7 +2021,7 @@ drwx------ 10 username username 4096 Jun 13 16:07 ..
 <ol>
 <li>
 <p>Fill in the incomplete lines of the submit file, as shown below: </p>
-<div class="codehilite"><pre><span></span><code><span class="go">container_image         = &quot;osdf:///ospool/ap40/data/&lt;user.name&gt;/scaling-up/software/minimap2.sif&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="go">container_image         = osdf:///ospool/ap40/data/&lt;user.name&gt;/scaling-up/software/minimap2.sif</span>
 
 <span class="go">executable              = minimap2.sh</span>
 <span class="go">arguments               = reads_fastq_chunk_a</span>
@@ -2135,7 +2135,7 @@ it will move the output file to the <code>output</code> directory by renaming or
 <p>When ready, submit with:
 <code>condor_submit minimap2_multi.submit</code></p>
 <details class="success"><summary>Solution - ⚠️ Try to Solve Before Viewing ⚠️</summary><p>Your final submit file, <code>minimap2_multi.submit</code>, should look something like this:</p>
-<div class="codehilite"><pre><span></span><code>+SingularityImage      = &quot;osdf:///ospool/ap40/data/&lt;user.name&gt;/scaling-up/software/minimap2.sif&quot;
+<div class="codehilite"><pre><span></span><code>container_image      = osdf:///ospool/ap40/data/&lt;user.name&gt;/scaling-up/software/minimap2.sif
 
 executable             = ./minimap2.sh
 {==arguments              = $(read_subset_file)==}

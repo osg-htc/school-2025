@@ -1857,14 +1857,14 @@ minimap2 -x map-ont -d Celegans_ref.mmi Celegans_ref.fa
 <p>Create <code>minimap2_index.sub</code> using either <code>vim</code> or <code>nano</code></p>
 </li>
 </ol>
-<div class="codehilite"><pre><span></span><code>        container_image      = &quot;osdf:///ospool/ap40/data/[USERNAME]/minimap2.sif&quot;
+<div class="codehilite"><pre><span></span><code>        container_image      = osdf:///ospool/ap40/data/[USERNAME]/minimap2.sif
 
         executable             = ./minimap2_index.sh
 
         transfer_input_files   = Celegans_ref.fa
 
         transfer_output_files  = Celegans_ref.mmi 
-        transfer_output_remaps = &quot;Celegans_ref.mmi = /ospool/ap40/data/[USERNAME]/Celegans_ref.mmi&quot;
+        transfer_output_remaps = &quot;Celegans_ref.mmi = osdf:///ospool/ap40/data/[USERNAME]/Celegans_ref.mmi&quot;
         output                 = indexing_step1_$(Cluster)_$(Process).out
         error                  = indexing_step1_$(Cluster)_$(Process).err
         log                    = indexing_step1_$(Cluster)_$(Process).log
