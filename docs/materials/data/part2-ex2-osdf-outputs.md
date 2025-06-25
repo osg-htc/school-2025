@@ -65,7 +65,6 @@ We will need our wrapper script and submit file to use OSDF. Perform the followi
 2. Create `minimap2_index.sub` using either `vim` or `nano`
 
        ```
-        
         container_image      = "osdf:///ospool/ap40/data/[USERNAME]/minimap2.sif"
     
         executable             = ./minimap2_index.sh
