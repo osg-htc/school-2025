@@ -160,8 +160,7 @@ View the Slides: [Coming soon]
 
 ### Self-checkpointing for long-running jobs
 
-View the Slides: [Coming soon]
-<!-- View the slides: [pdf](checkpoint/files/OSGUS2024_checkpointing.pdf) [ppt](checkpoint/files/OSGUS2024_checkpointing.pptx) -->
+View the Slides: [pdf](checkpoint/files/OSGUS2025_checkpointing.pdf) [ppt](checkpoint/files/OSGUS2025_checkpointing.pptx)
 
 -   [Exercise 1.1: Trying out self-checkpointing](checkpoint/part1-ex1-checkpointing.md)
 
