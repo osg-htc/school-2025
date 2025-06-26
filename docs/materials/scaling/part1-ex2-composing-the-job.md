@@ -250,7 +250,6 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
 
         :::console
         condor_watch_q
-        [OUTPUT OF WATCH Q]
 
 ??? success "Always Check Your Test Jobs Worked!"
 
