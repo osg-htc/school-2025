@@ -113,7 +113,7 @@ View the Slides: [pdf](data/files/osgus25-data.pdf)
 
 ## Scaling Up
 
-View the Slides: [Coming soon]
+View the Slides: [pdf](scaling/files/osgschool25-scaling.pdf)
 <!-- View the slides: [pptx](scaling/files/osgschool24-learning-scaling.pptx) -->
 
 ### Scaling Up Exercises
