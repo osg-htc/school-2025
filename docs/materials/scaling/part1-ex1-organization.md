@@ -34,11 +34,7 @@ To get the files for this exercise:
 
     !!! warning "Slow Download Speeds"
 
-        Some files, particularly `reads.fastq`, may take a few minutes to download. If the issue remains for more than 10 minutes, reach out to one of the School staff members for help. 
-
-1.  As you learned earlier, expand this tarball file; it will create a `organizing-files` directory.
-1.  Change to that directory, or create a separate one for this exercise and copy the files in.
-
+        Some files, particularly `reads.fastq`, may take a few minutes to download. If the issue remains for more than 10 minutes, reach out to one of the School staff members for help.
 
 !!! note "Using Files from the Data Exercises section"
 
@@ -67,7 +63,7 @@ We want to run this command to map all our reads against the reference genome. F
 
     :::console
     $ expr $(wc -l < reads.fastq) / 4
-    $ 49382043
+    $ 1392453
 
 Read mapping using algorithms, like `minimap2`, do not scale up well by simply adding additional CPUs to the problem. These mappers typically plateau their speed around 2-4 CPUs. This problem, however, can be solved by employing a "divide and conquer" approach. With this approach, we can subdivide our input reads.fastq file into smaller subsets which can be submitting to HTCondor as a set of independent parallel-running jobs. 
 
