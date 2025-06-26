@@ -28,9 +28,9 @@ To get the files for this exercise:
 2.  Use pelican to get the input files for our exercises:
 
         :::console
-        osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.mmi
-        osdf object get /ospool/uc-shared/public/school/2025/reads.fastq
-        osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif
+        osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.mmi ./
+        osdf object get /ospool/uc-shared/public/school/2025/reads.fastq ./
+        osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif ./
 
 1.  As you learned earlier, expand this tarball file; it will create a `organizing-files` directory.
 1.  Change to that directory, or create a separate one for this exercise and copy the files in.
@@ -40,8 +40,8 @@ To get the files for this exercise:
 
     We will be reusing some of the files from the Data Exercises 2 - OSDF for inputs and OSDF for outputs sections. If you did not complete these or wish to simply get a fresh set of these files, use the command below:
         
-        osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.mmi
-        osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif
+        osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.mmi ./
+        osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif ./
 
 ## Our Workload
 
