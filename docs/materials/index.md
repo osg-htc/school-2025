@@ -126,8 +126,7 @@ View the Slides: [Coming soon]
 
 ## Workflows with DAGMan
 
-View the Slides: [Coming soon]
-<!-- View the slides: [pptx](workflows/files/osg24-dagman.pptx) -->
+View the slides: [pptx](workflows/files/osg25-dagman.pptx), [pdf](workflows/files/osg25-dagman.pdf)
 
 ### DAGMan Exercises 1
 
