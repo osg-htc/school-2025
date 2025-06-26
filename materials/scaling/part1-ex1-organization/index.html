@@ -1798,22 +1798,22 @@
 <li>Make a new directory in <code>~/scaling-up/</code> and change directory into it</li>
 <li>
 <p>Use pelican to get the input files for our exercises:</p>
-<div class="codehilite"><pre><span></span><code><span class="go">osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.mmi</span>
-<span class="go">osdf object get /ospool/uc-shared/public/school/2025/reads.fastq</span>
-<span class="go">osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif</span>
+<div class="codehilite"><pre><span></span><code><span class="go">osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.mmi ./</span>
+<span class="go">osdf object get /ospool/uc-shared/public/school/2025/reads.fastq ./</span>
+<span class="go">osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif ./</span>
 </code></pre></div>
 
+<div class="admonition warning">
+<p class="admonition-title">Slow Download Speeds</p>
+<p>Some files, particularly <code>reads.fastq</code>, may take a few minutes to download. If the issue remains for more than 10 minutes, reach out to one of the School staff members for help.</p>
+</div>
 </li>
-<li>
-<p>As you learned earlier, expand this tarball file; it will create a <code>organizing-files</code> directory.</p>
-</li>
-<li>Change to that directory, or create a separate one for this exercise and copy the files in.</li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Using Files from the Data Exercises section</p>
 <p>We will be reusing some of the files from the Data Exercises 2 - OSDF for inputs and OSDF for outputs sections. If you did not complete these or wish to simply get a fresh set of these files, use the command below:</p>
-<div class="codehilite"><pre><span></span><code>osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.mmi
-osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif
+<div class="codehilite"><pre><span></span><code>osdf object get /ospool/uc-shared/public/school/2025/Celegans_ref.mmi ./
+osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif ./
 </code></pre></div>
 
 </div>
@@ -1821,16 +1821,16 @@ osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif
 <p>Imagine you're working with a large set of DNA sequencing data from an organism. The sequencing file contains millions of snippets of DNA, which we call <strong>reads</strong>. Your goal is to figure out where these reads came from by matching them to a known reference genome using a read mapping tool.</p>
 <p>One commonly used tool for this task is <code>minimap2</code>, which quickly finds where each DNA read best matches the reference. For this exercise, we'll use <code>minimap2</code> to map our reads to a reference genome.</p>
 <p>To do that, we might run a command like:</p>
-<div class="codehilite"><pre><span></span><code><span class="gp">$ </span>minimap2 -ax map-ont <span class="o">[</span>reference_genome.fasta<span class="o">]</span> <span class="o">[</span>sequencing_reads.fastq<span class="o">]</span> &gt; output.sam
+<div class="codehilite"><pre><span></span><code><span class="gp">$ </span>minimap2 -ax map-ont <span class="o">[</span>Celegans_ref.mmi<span class="o">]</span> <span class="o">[</span>sequencing_reads.fastq<span class="o">]</span> &gt; output.sam
 </code></pre></div>
 
 <p>Here’s what these files are:
-- <code>reference_genome.fasta</code>: a file containing the complete reference genome we’re mapping to.
+- <code>Celegans_ref.mmi</code>: a file containing the complete reference genome we’re mapping to.
 - <code>sequencing_reads.fastq</code>: a file containing millions of DNA fragments, called <strong>reads</strong>, from a sequencing machine.
 - <code>output.sam</code>: a <strong>SAM file</strong>, which is a standard text format, used to store the results of mapping—where each read aligns in the genome.</p>
 <p>We want to run this command to map all our reads against the reference genome. FASTQ files contain 4 lines per read, you can run the following command to calculate the number of reads in your FASTQ file:</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">$ </span>expr <span class="k">$(</span>wc -l &lt; reads.fastq<span class="k">)</span> / <span class="m">4</span>
-<span class="gp">$ </span><span class="m">49382043</span>
+<span class="gp">$ </span><span class="m">1392453</span>
 </code></pre></div>
 
 <p>Read mapping using algorithms, like <code>minimap2</code>, do not scale up well by simply adding additional CPUs to the problem. These mappers typically plateau their speed around 2-4 CPUs. This problem, however, can be solved by employing a "divide and conquer" approach. With this approach, we can subdivide our input reads.fastq file into smaller subsets which can be submitting to HTCondor as a set of independent parallel-running jobs. </p>
@@ -1838,7 +1838,7 @@ osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif
 <ul>
 <li><strong>Inputs</strong><ul>
 <li>A subset of reads.fastq - <code>reads_subset_a.fastq</code></li>
-<li>The reference genome - <code>reference_genome.fasta</code></li>
+<li>The indexed reference genome - <code>Celegans_ref.mmi</code></li>
 <li>A minimap2 container image - <code>minimap2.sif</code></li>
 <li>The executable - <code>run_minimap2.sh</code></li>
 </ul>
@@ -1883,15 +1883,15 @@ and a directory for your output files.</p>
 <ol>
 <li>
 <p>Set up this structure on the command line by running: </p>
-<div class="codehilite"><pre><span></span><code><span class="gp">$ </span>mkdir -p inputs
-<span class="gp">$ </span>mkdir -p outputs
-<span class="gp">$ </span>mkdir -p logs
-<span class="gp">$ </span>mkdir -p logs/log
-<span class="gp">$ </span>mkdir -p logs/error
-<span class="gp">$ </span>mkdir -p logs/output
-<span class="gp">$ </span><span class="nb">cd</span> /ospool/ap40/data/<span class="nv">$USER</span>/
-<span class="gp">$ </span>mkdir -p scaling-up/inputs
-<span class="gp">$ </span>mkdir -p scaling-up/software
+<div class="codehilite"><pre><span></span><code><span class="go">mkdir -p inputs</span>
+<span class="go">mkdir -p outputs</span>
+<span class="go">mkdir -p logs</span>
+<span class="go">mkdir -p logs/log</span>
+<span class="go">mkdir -p logs/error</span>
+<span class="go">mkdir -p logs/output</span>
+<span class="go">cd /ospool/ap40/data/$USER/</span>
+<span class="go">mkdir -p scaling-up/inputs</span>
+<span class="go">mkdir -p scaling-up/software</span>
 </code></pre></div>
 
 </li>
@@ -1899,7 +1899,7 @@ and a directory for your output files.</p>
 <p>Move the <code>reads.fastq</code> file to your <code>inputs</code> directory (the one under <code>/home</code>) using the <code>mv</code> command. </p>
 </li>
 <li>
-<p>Move the <code>reference_genome.fasta</code> file to your <code>/ospool/ap40/data/&lt;user.name&gt;/scaling-up/inputs</code> directory using the <code>mv</code> command. </p>
+<p>Move the <code>Celegans_ref.mmi</code> file to your <code>/ospool/ap40/data/&lt;user.name&gt;/scaling-up/inputs</code> directory using the <code>mv</code> command. </p>
 </li>
 <li>
 <p>Move the <code>minimap2.sif</code> container image file to your <code>/ospool/ap40/data/&lt;user.name&gt;/scaling-up/software</code> directory using the <code>mv</code> command.</p>
@@ -1910,9 +1910,9 @@ and a directory for your output files.</p>
 <p>When preparing your jobs for high-throughput computing, think about how each file will be used. Will the file be reused across many jobs? Or is it specific to a single job? Will it need to be transferred repeatedly—or just once?</p>
 <p>With that in mind:<br />
 - Why might it make sense to place <code>reads.fastq</code> in your <code>/home</code> directory?<br />
-- Why are we storing <code>reference_genome.fasta</code> and <code>minimap2.sif</code> in <code>/ospool/ap40/data/</code> instead?</p>
+- Why are we storing <code>Celegans_ref.mmi</code> and <code>minimap2.sif</code> in <code>/ospool/ap40/data/</code> instead?</p>
 <details class="success"><summary>Solution</summary><p>Files in <code>/home</code> are transferred to each job, directly from the AP to the EP. These files do not get cached in the OSDF, which makes sense for files that change across jobs—such as subsets of <code>reads.fastq</code>. </p>
-<p>But <code>reference_genome.fasta</code> and <code>minimap2.sif</code> are the same in every job. By storing them in <code>/ospool/ap40/data/</code> and using <code>osdf://</code> to access them, we avoid repeatedly transferring them. Instead, they're cached near where jobs run, which speeds things up and reduces network load.</p>
+<p>But <code>Celegans_ref.mmi</code> and <code>minimap2.sif</code> are the same in every job. By storing them in <code>/ospool/ap40/data/</code> and using <code>osdf://</code> to access them, we avoid repeatedly transferring them. Instead, they're cached near where jobs run, which speeds things up and reduces network load.</p>
 </details>
 </div>
 <h3 id="wrangling-the-data">Wrangling the Data<a class="headerlink" href="#wrangling-the-data" title="Permanent link">&para;</a></h3>
@@ -1925,12 +1925,12 @@ and a directory for your output files.</p>
 
 </li>
 <li>
-<p>Split the FASTQ file into subsets. We can divide our <code>reads.fastq</code> into subsets of <code>500,000</code> reads per subset. Since each FASTQ read consist of four lines in the FASTQ file, we can split <code>reads.fastq</code> every 2,000,000 lines.</p>
-<div class="codehilite"><pre><span></span><code><span class="go">split -l 2000000 reads.fastq reads_fastq_chunk_</span>
+<p>Split the FASTQ file into subsets. We can divide our <code>reads.fastq</code> into subsets of ~<code>14,000</code> reads per subset. Since each FASTQ read consist of four lines in the FASTQ file, we can split <code>reads.fastq</code> every 56,000 lines.</p>
+<div class="codehilite"><pre><span></span><code><span class="go">split -l 56000 reads.fastq reads_fastq_chunk_</span>
 <span class="go">rm reads.fastq</span>
 </code></pre></div>
 
-<p>This will generate 99 read subset files with the prefix <code>eads_fastq_chunk_</code>. </p>
+<p>This will generate 100 read subset files with the prefix <code>eads_fastq_chunk_</code>. </p>
 <div class="admonition tip">
 <p class="admonition-title">Subsetting Data - Your Milage May Vary</p>
 <p>When subsetting your data, you should exercise your own judgement. The ideal job profile on the OSPool typically looks something like:</p>
@@ -1945,13 +1945,13 @@ and a directory for your output files.</p>
 </li>
 <li>
 <p>Delete (or move) the <code>reads.fastq</code> file from the input directory.</p>
-</li>
-</ol>
 <p>In the next exercise, we will generate a list of jobs for HTCondor using the the subset files in this directory. To avoid accidentally including the <code>reads.fastq</code> file in our list of jobs, please delete it or move it out of this directory.</p>
 <div class="admonition warning">
 <p class="admonition-title">Organization in HTC is Critical!</p>
 <p>One of the most important steps in scaling up our workflows to run on HTC systems, such as the OSPool, is maintaining a clear organizational structure. This includes deleting files we will not be using anymore. For the rest of the exercise, we will not be using the <code>reads.fastq</code> file after splitting it. <strong>Not deleting this file can cause downstream issues. Do not skip this step.</strong></p>
 </div>
+</li>
+</ol>
 <h2 id="review-your-progress">Review Your Progress<a class="headerlink" href="#review-your-progress" title="Permanent link">&para;</a></h2>
 <p>Now that we've set up our directory structure and pre-processed our data, we can focus on preparing our submission scripts and getting our jobs running!</p>
 <div class="admonition success">
@@ -1972,7 +1972,7 @@ and a directory for your output files.</p>
 ├── /ospool/ap40/data/&lt;user.name&gt;/
 │   ├── scaling-up
 │   │   ├── inputs
-│   │   │   ├── reference_genome.fasta
+│   │   │   ├── Celegans_ref.mmi
 │   │   ├── software
 │   │   │   ├── minimap2.sif
 </code></pre></div>

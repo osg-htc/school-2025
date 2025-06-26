@@ -1830,7 +1830,7 @@ drwx------ 10 username username 4096 Jun 13 16:07 ..
 <p>Now that we have our data partitioned into independent subsets to be mapped in parallel, we can work on adapting our executable for use on the OSPool. We will start with the following template executable file, which is also found in your project directory under <code>~/scaling-up/minimap2.sh</code>.</p>
 <div class="codehilite"><pre><span></span><code><span class="gp">#</span>!/bin/bash
 <span class="gp"># </span>Use minimap2 to map the basecalled reads to the reference genome
-<span class="go">minimap2 -ax map-ont reference_genome.fasta reads.fastq &gt; output.sam</span>
+<span class="go">minimap2 -ax map-ont Celegans_ref.mmi reads.fastq &gt; output.sam</span>
 </code></pre></div>
 
 <table>
@@ -1839,7 +1839,7 @@ drwx------ 10 username username 4096 Jun 13 16:07 ..
 <th>Command Segment</th>
 <th><code>minimap2</code></th>
 <th><code>-ax map-ont</code></th>
-<th><code>reference_genome.fasta</code></th>
+<th><code>Celegans_ref.mmi</code></th>
 <th><code>reads.fastq</code></th>
 <th><code>&gt;</code></th>
 <th><code>output.sam</code></th>
@@ -1876,7 +1876,7 @@ drwx------ 10 username username 4096 Jun 13 16:07 ..
 <div class="codehilite"><pre><span></span><code><span class="gp">#</span>!/bin/bash
 <span class="go">reads_subset_file=&quot;$1&quot;</span>
 <span class="gp"># </span>Use minimap2 to map the basecalled reads to the reference genome
-<span class="go">minimap2 -ax map-ont reference_genome.fasta $(reads_subset_file) &gt; output.sam</span>
+<span class="go">minimap2 -ax map-ont Celegans_ref.mmi $(reads_subset_file) &gt; output.sam</span>
 </code></pre></div>
 
 </li>
@@ -1885,7 +1885,7 @@ drwx------ 10 username username 4096 Jun 13 16:07 ..
 <div class="codehilite"><pre><span></span><code><span class="gp">#</span>!/bin/bash
 <span class="go">reads_subset_file=&quot;$1&quot;</span>
 <span class="gp"># </span>Use minimap2 to map the basecalled reads to the reference genome
-<span class="go">minimap2 -ax map-ont reference_genome.fasta &quot;$(reads_subset_file)&quot; &gt; &quot;$(reads_subset_file)_output.sam&quot;</span>
+<span class="go">minimap2 -ax map-ont Celegans_ref.mmi &quot;$(reads_subset_file)&quot; &gt; &quot;$(reads_subset_file)_output.sam&quot;</span>
 </code></pre></div>
 
 </li>
@@ -1965,7 +1965,7 @@ drwx------ 10 username username 4096 Jun 13 16:07 ..
 </li>
 <li>
 <p>Now, specify where the input and output files should be:</p>
-<div class="codehilite"><pre><span></span><code><span class="go">transfer_input_files    = ./input/$(read_subset_file), osdf:///ospool/ap40/data/&lt;user.name&gt;/scaling-up/inputs/reference_genome.fasta</span>
+<div class="codehilite"><pre><span></span><code><span class="go">transfer_input_files    = ./input/$(read_subset_file), osdf:///ospool/ap40/data/&lt;user.name&gt;/scaling-up/inputs/Celegans_ref.mmi</span>
 <span class="go">transfer_output_files   = $(read_subset_file)_output.sam</span>
 <span class="go">transfer_output_remaps  = &quot;$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam&quot;</span>
 </code></pre></div>
@@ -2077,7 +2077,7 @@ it will move the output file to the <code>output</code> directory by renaming or
 
 executable             = ./minimap2.sh
 arguments              = $(read_subset_file)
-transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/&lt;user.name&gt;/scaling-up/inputs/reference_genome.fasta
+transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/&lt;user.name&gt;/scaling-up/inputs/Celegans_ref.mmi
 
 transfer_output_files  = ./$(read_subset_file)_output.sam
 transfer_output_remaps = &quot;$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam&quot;
