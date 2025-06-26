@@ -114,7 +114,7 @@ nav:
     - Scaling Up:
       - Scaling Up - Organizing and Testing:
         - 1.1 - Organizing HTC workloads: materials/scaling/part1-ex1-organization.md
-        - 1.2 - Composing Your Jobs: materials/scaling/part2-ex1-composing-the-job.md
+        - 1.2 - Composing Your Jobs: materials/scaling/part1-ex2-composing-the-job.md
       - Exploring Resources:
         - 2.1 - Log Into a Local Pool: materials/scaling/part2-ex1-chtc-node.md
         - 2.2 - Hardware Differences Between OSPool and the CHTC Pool: materials/scaling/part2-ex2-hardware-diffs.md
