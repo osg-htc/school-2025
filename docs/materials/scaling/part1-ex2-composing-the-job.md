@@ -173,7 +173,7 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
         :::console
         transfer_input_files    = inputs/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/Celegans_ref.mmi
         transfer_output_files   = $(read_subset_file)_output.sam
-        transfer_output_remaps  = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
+        transfer_output_remaps  = "$(read_subset_file)_output.sam=outputs/$(read_subset_file)_output.sam"
 
     To tell HTCondor the location of the input file, we need to include the input directory.
     Also, this submit file uses the `transfer_output_remaps` feature that you learned about;
@@ -292,10 +292,10 @@ Now, you are ready to submit the whole workload.
             
             executable             = ./minimap2.sh
             arguments              = $(read_subset_file)
-            transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/Celegans_ref.mmi
+            transfer_input_files   = ./inputs/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/Celegans_ref.mmi
             
             transfer_output_files  = ./$(read_subset_file)_output.sam
-            transfer_output_remaps = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
+            transfer_output_remaps = "$(read_subset_file)_output.sam=outputs/$(read_subset_file)_output.sam"
             
             output                 = logs/output/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.out
             error                  = logs/error/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.err
