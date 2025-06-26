@@ -52,10 +52,10 @@ One commonly used tool for this task is `minimap2`, which quickly finds where ea
 To do that, we might run a command like:
 
     :::console
-    $ minimap2 -ax map-ont [reference_genome.fasta] [sequencing_reads.fastq] > output.sam
+    $ minimap2 -ax map-ont [Celegans_ref.mmi] [sequencing_reads.fastq] > output.sam
 
 Here’s what these files are:
-- `reference_genome.fasta`: a file containing the complete reference genome we’re mapping to.
+- `Celegans_ref.mmi`: a file containing the complete reference genome we’re mapping to.
 - `sequencing_reads.fastq`: a file containing millions of DNA fragments, called **reads**, from a sequencing machine.
 - `output.sam`: a **SAM file**, which is a standard text format, used to store the results of mapping—where each read aligns in the genome.
 
@@ -71,7 +71,7 @@ We expect to be working with the following files in each of our jobs:
 
 * **Inputs**
     * A subset of reads.fastq - `reads_subset_a.fastq`
-    * The reference genome - `reference_genome.fasta`
+    * The indexed reference genome - `Celegans_ref.mmi`
     * A minimap2 container image - `minimap2.sif`
     * The executable - `run_minimap2.sh`
 * **Outputs**
@@ -128,7 +128,7 @@ For our exercise, we will use the following data organizational structure:
 
 2. Move the `reads.fastq` file to your `inputs` directory (the one under `/home`) using the `mv` command. 
 
-3. Move the `reference_genome.fasta` file to your `/ospool/ap40/data/<user.name>/scaling-up/inputs` directory using the `mv` command. 
+3. Move the `Celegans_ref.mmi` file to your `/ospool/ap40/data/<user.name>/scaling-up/inputs` directory using the `mv` command. 
 
 4. Move the `minimap2.sif` container image file to your `/ospool/ap40/data/<user.name>/scaling-up/software` directory using the `mv` command.
 
@@ -138,13 +138,13 @@ For our exercise, we will use the following data organizational structure:
     
     With that in mind:  
     - Why might it make sense to place `reads.fastq` in your `/home` directory?  
-    - Why are we storing `reference_genome.fasta` and `minimap2.sif` in `/ospool/ap40/data/` instead?
+    - Why are we storing `Celegans_ref.mmi` and `minimap2.sif` in `/ospool/ap40/data/` instead?
 
     ??? success "Solution"
 
         Files in `/home` are transferred to each job, directly from the AP to the EP. These files do not get cached in the OSDF, which makes sense for files that change across jobs—such as subsets of `reads.fastq`. 
 
-        But `reference_genome.fasta` and `minimap2.sif` are the same in every job. By storing them in `/ospool/ap40/data/` and using `osdf://` to access them, we avoid repeatedly transferring them. Instead, they're cached near where jobs run, which speeds things up and reduces network load.
+        But `Celegans_ref.mmi` and `minimap2.sif` are the same in every job. By storing them in `/ospool/ap40/data/` and using `osdf://` to access them, we avoid repeatedly transferring them. Instead, they're cached near where jobs run, which speeds things up and reduces network load.
 
 
 ### Wrangling the Data
@@ -155,13 +155,13 @@ To get ready for our mapping step, we need to prepare our read files. This inclu
         :::console
         cd ~/scaling-up/inputs/
 
-2. Split the FASTQ file into subsets. We can divide our `reads.fastq` into subsets of `500,000` reads per subset. Since each FASTQ read consist of four lines in the FASTQ file, we can split `reads.fastq` every 2,000,000 lines.
+2. Split the FASTQ file into subsets. We can divide our `reads.fastq` into subsets of ~`14,000` reads per subset. Since each FASTQ read consist of four lines in the FASTQ file, we can split `reads.fastq` every 56,000 lines.
 
         :::console
-        split -l 2000000 reads.fastq reads_fastq_chunk_
+        split -l 56000 reads.fastq reads_fastq_chunk_
         rm reads.fastq 
 
-    This will generate 99 read subset files with the prefix `eads_fastq_chunk_`. 
+    This will generate 100 read subset files with the prefix `eads_fastq_chunk_`. 
 
     !!! tip "Subsetting Data - Your Milage May Vary"
     
@@ -176,11 +176,11 @@ To get ready for our mapping step, we need to prepare our read files. This inclu
 
 3. Delete (or move) the `reads.fastq` file from the input directory.
 
-In the next exercise, we will generate a list of jobs for HTCondor using the the subset files in this directory. To avoid accidentally including the `reads.fastq` file in our list of jobs, please delete it or move it out of this directory.
+    In the next exercise, we will generate a list of jobs for HTCondor using the the subset files in this directory. To avoid accidentally including the `reads.fastq` file in our list of jobs, please delete it or move it out of this directory.
 
-!!! warning "Organization in HTC is Critical!"
-    
-    One of the most important steps in scaling up our workflows to run on HTC systems, such as the OSPool, is maintaining a clear organizational structure. This includes deleting files we will not be using anymore. For the rest of the exercise, we will not be using the `reads.fastq` file after splitting it. **Not deleting this file can cause downstream issues. Do not skip this step.**
+    !!! warning "Organization in HTC is Critical!"
+        
+        One of the most important steps in scaling up our workflows to run on HTC systems, such as the OSPool, is maintaining a clear organizational structure. This includes deleting files we will not be using anymore. For the rest of the exercise, we will not be using the `reads.fastq` file after splitting it. **Not deleting this file can cause downstream issues. Do not skip this step.**
 
 ## Review Your Progress
 
@@ -206,6 +206,6 @@ Now that we've set up our directory structure and pre-processed our data, we can
         ├── /ospool/ap40/data/<user.name>/
         │   ├── scaling-up
         │   │   ├── inputs
-        │   │   │   ├── reference_genome.fasta
+        │   │   │   ├── Celegans_ref.mmi
         │   │   ├── software
         │   │   │   ├── minimap2.sif

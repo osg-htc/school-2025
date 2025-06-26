@@ -65,9 +65,9 @@ Now that we have our data partitioned into independent subsets to be mapped in p
     :::console
     #!/bin/bash
     # Use minimap2 to map the basecalled reads to the reference genome
-    minimap2 -ax map-ont reference_genome.fasta reads.fastq > output.sam
+    minimap2 -ax map-ont Celegans_ref.mmi reads.fastq > output.sam
 
-| Command Segment | `minimap2`                             | `-ax map-ont`                                                                      | `reference_genome.fasta`               | `reads.fastq`                                 | `>`                                         | `output.sam`                          |
+| Command Segment | `minimap2`                             | `-ax map-ont`                                                                      | `Celegans_ref.mmi`               | `reads.fastq`                                 | `>`                                         | `output.sam`                          |
 |-----------------|----------------------------------------|----------------------------------------------------------------------------------|--------------------------------------|---------------------------------------------|--------------------------------------------|-------------------------------------|
 | **Meaning**         | The program we'll run to map our reads | Specifies the type of reads we're using <br>(Oxford Nanopore Technologies reads) | The input reference we're mapping to | The reads we are mapping against our genome | redirects the output of minimap2 to a file | The output file of our mapping step |
 
@@ -90,7 +90,7 @@ Let's start by editing our template executable file! In our executable there's t
         #!/bin/bash
         reads_subset_file="$1"
         # Use minimap2 to map the basecalled reads to the reference genome
-        minimap2 -ax map-ont reference_genome.fasta $(reads_subset_file) > output.sam
+        minimap2 -ax map-ont Celegans_ref.mmi $(reads_subset_file) > output.sam
 
 2. Modify the executable use the name of our input reads subset file (`$reads_subset_file`) as the prefix of our output file.
 
@@ -98,7 +98,7 @@ Let's start by editing our template executable file! In our executable there's t
         #!/bin/bash
         reads_subset_file="$1"
         # Use minimap2 to map the basecalled reads to the reference genome
-        minimap2 -ax map-ont reference_genome.fasta "$(reads_subset_file)" > "$(reads_subset_file)_output.sam"
+        minimap2 -ax map-ont Celegans_ref.mmi "$(reads_subset_file)" > "$(reads_subset_file)_output.sam"
 
 !!! question "Not sure how variables work on bash?"
 
@@ -171,7 +171,7 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
 3. Now, specify where the input and output files should be:
 
         :::console
-        transfer_input_files    = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
+        transfer_input_files    = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/Celegans_ref.mmi
         transfer_output_files   = $(read_subset_file)_output.sam
         transfer_output_remaps  = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
 
@@ -288,7 +288,7 @@ Now, you are ready to submit the whole workload.
             
             executable             = ./minimap2.sh
             arguments              = $(read_subset_file)
-            transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/reference_genome.fasta
+            transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/Celegans_ref.mmi
             
             transfer_output_files  = ./$(read_subset_file)_output.sam
             transfer_output_remaps = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
