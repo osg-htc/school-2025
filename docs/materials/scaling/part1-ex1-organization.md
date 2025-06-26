@@ -116,15 +116,15 @@ For our exercise, we will use the following data organizational structure:
 1.  Set up this structure on the command line by running: 
 
         :::console
-        $ mkdir -p inputs
-        $ mkdir -p outputs
-        $ mkdir -p logs
-        $ mkdir -p logs/log
-        $ mkdir -p logs/error
-        $ mkdir -p logs/output
-        $ cd /ospool/ap40/data/$USER/
-        $ mkdir -p scaling-up/inputs
-        $ mkdir -p scaling-up/software
+        mkdir -p inputs
+        mkdir -p outputs
+        mkdir -p logs
+        mkdir -p logs/log
+        mkdir -p logs/error
+        mkdir -p logs/output
+        cd /ospool/ap40/data/$USER/
+        mkdir -p scaling-up/inputs
+        mkdir -p scaling-up/software
 
 2. Move the `reads.fastq` file to your `inputs` directory (the one under `/home`) using the `mv` command. 
 
