@@ -32,6 +32,10 @@ To get the files for this exercise:
         osdf object get /ospool/uc-shared/public/school/2025/reads.fastq ./
         osdf object get /ospool/uc-shared/public/school/2025/minimap2.sif ./
 
+    !!! warning "Slow Download Speeds"
+
+        Some files, particularly `reads.fastq`, may take a few minutes to download. If the issue remains for more than 10 minutes, reach out to one of the School staff members for help. 
+
 1.  As you learned earlier, expand this tarball file; it will create a `organizing-files` directory.
 1.  Change to that directory, or create a separate one for this exercise and copy the files in.
 
