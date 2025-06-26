@@ -362,7 +362,7 @@ Industry room (3rd floor)
       <td>
         <span class="before-dot text-pink">Exercises: DAGMan</span><br>
         <span class="before-dot text-light-orange">Work Time: Apply HTC to own research</span><br>
-        <span class="before-dot text-black">Individual consultations</span>
+        <span class="before-dot text-black">Individual consultations</span><br>
         <span class="before-dot text-orange">Bioinformatics work session (optional)</span><br>
       </td>
       <td>staff</td>
@@ -378,7 +378,7 @@ Industry room (3rd floor)
       <td>15:45</td>
       <td>
         <span class="before-dot text-light-orange">Work Time: Apply HTC to own research</span><br>
-        <span class="before-dot text-black">Individual consultations</span>
+        <span class="before-dot text-black">Individual consultations</span><br>
         <span class="before-dot text-orange">Bioinformatics work session (optional)</span><br>
       </td>
       <td>staff</td>
