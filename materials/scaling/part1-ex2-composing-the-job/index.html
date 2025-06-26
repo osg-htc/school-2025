@@ -1788,9 +1788,9 @@
 <ol>
 <li>
 <p>Move to your <code>~/scaling-up/inputs/</code> directory</p>
-<div class="codehilite"><pre><span></span><code>$ mv ~/scaling-up/inputs/
+<div class="codehilite"><pre><span></span><code>$ cd ~/scaling-up/inputs/
 $ ls -la
-total 12
+total 11626328
 drwxr-xr-x  2 username username 4096 Jun 13 16:08 .
 drwx------ 10 username username 4096 Jun 13 16:07 ..
 -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_a
@@ -1803,7 +1803,7 @@ drwx------ 10 username username 4096 Jun 13 16:07 ..
 <li>
 <p>Make a list of all the files in <code>~/scaling-up/inputs/</code> and save it to <code>~/scaling-up/list_of_fastq.txt</code></p>
 <div class="codehilite"><pre><span></span><code><span class="gp">$ </span>ls &gt; ~/scaling-up/list_of_fastq.txt
-<span class="gp">$ </span>mv ~/scaling-up/
+<span class="gp">$ </span><span class="nb">cd</span> ~/scaling-up/
 <span class="gp">$ </span>ls -la
 <span class="go">total 12</span>
 <span class="go">drwxr-xr-x  2 username username 4096 Jun 13 16:08 .</span>
@@ -1815,13 +1815,13 @@ drwx------ 10 username username 4096 Jun 13 16:07 ..
 <li>
 <p>Use <code>head</code> to preview the first 10 lines of <code>list_of_fastq.txt</code></p>
 <div class="codehilite"><pre><span></span><code><span class="gp">$ </span>head ~/scaling-up/list_of_fastq.txt
-<span class="go">reads_fastq_chunk_a</span>
-<span class="go">reads_fastq_chunk_b</span>
-<span class="go">reads_fastq_chunk_c</span>
-<span class="go">reads_fastq_chunk_d</span>
-<span class="go">reads_fastq_chunk_e</span>
+<span class="go">reads_fastq_chunk_aa</span>
+<span class="go">reads_fastq_chunk_ab</span>
+<span class="go">reads_fastq_chunk_ac</span>
+<span class="go">reads_fastq_chunk_ad</span>
+<span class="go">reads_fastq_chunk_ae</span>
 <span class="go">...</span>
-<span class="go">reads_fastq_chunk_j</span>
+<span class="go">reads_fastq_chunk_aj</span>
 </code></pre></div>
 
 </li>
@@ -1876,7 +1876,7 @@ drwx------ 10 username username 4096 Jun 13 16:07 ..
 <div class="codehilite"><pre><span></span><code><span class="gp">#</span>!/bin/bash
 <span class="go">reads_subset_file=&quot;$1&quot;</span>
 <span class="gp"># </span>Use minimap2 to map the basecalled reads to the reference genome
-<span class="go">minimap2 -ax map-ont Celegans_ref.mmi $(reads_subset_file) &gt; output.sam</span>
+<span class="go">minimap2 -ax map-ont Celegans_ref.mmi &quot;$reads_subset_file&quot; &gt; output.sam</span>
 </code></pre></div>
 
 </li>
@@ -1885,7 +1885,7 @@ drwx------ 10 username username 4096 Jun 13 16:07 ..
 <div class="codehilite"><pre><span></span><code><span class="gp">#</span>!/bin/bash
 <span class="go">reads_subset_file=&quot;$1&quot;</span>
 <span class="gp"># </span>Use minimap2 to map the basecalled reads to the reference genome
-<span class="go">minimap2 -ax map-ont Celegans_ref.mmi &quot;$(reads_subset_file)&quot; &gt; &quot;$(reads_subset_file)_output.sam&quot;</span>
+<span class="go">minimap2 -ax map-ont Celegans_ref.mmi &quot;$reads_subset_file&quot; &gt; &quot;${reads_subset_file}_output.sam&quot;</span>
 </code></pre></div>
 
 </li>
@@ -1965,9 +1965,9 @@ drwx------ 10 username username 4096 Jun 13 16:07 ..
 </li>
 <li>
 <p>Now, specify where the input and output files should be:</p>
-<div class="codehilite"><pre><span></span><code><span class="go">transfer_input_files    = ./input/$(read_subset_file), osdf:///ospool/ap40/data/&lt;user.name&gt;/scaling-up/inputs/Celegans_ref.mmi</span>
+<div class="codehilite"><pre><span></span><code><span class="go">transfer_input_files    = inputs/$(read_subset_file), osdf:///ospool/ap40/data/&lt;user.name&gt;/scaling-up/inputs/Celegans_ref.mmi</span>
 <span class="go">transfer_output_files   = $(read_subset_file)_output.sam</span>
-<span class="go">transfer_output_remaps  = &quot;$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam&quot;</span>
+<span class="go">transfer_output_remaps  = &quot;$(read_subset_file)_output.sam=outputs/$(read_subset_file)_output.sam&quot;</span>
 </code></pre></div>
 
 <p>To tell HTCondor the location of the input file, we need to include the input directory.
@@ -2036,6 +2036,10 @@ it will move the output file to the <code>output</code> directory by renaming or
 </li>
 <li>
 <p>Submit your job and monitor its progress.</p>
+<div class="admonition danger">
+<p class="admonition-title">Remember to Check Your Submit File</p>
+<p>A common reason your job may go on hold is forgetting to replace <code>&lt;user.name&gt;</code> with your OSPool username. Check your files and path are setup correctly. For example, your container_image path should look something like: <code>osdf:///ospool/ap40/data/daniel.morales/scaling-up/software/minimap2.sif</code>.</p>
+</div>
 <p>Submit your test job using <code>condor_submit</code></p>
 <div class="codehilite"><pre><span></span><code><span class="go">condor_submit multi_job_minimap.sub</span>
 </code></pre></div>
@@ -2077,10 +2081,10 @@ it will move the output file to the <code>output</code> directory by renaming or
 
 executable             = ./minimap2.sh
 arguments              = $(read_subset_file)
-transfer_input_files   = ./input/$(read_subset_file), osdf:///ospool/ap40/data/&lt;user.name&gt;/scaling-up/inputs/Celegans_ref.mmi
+transfer_input_files   = ./inputs/$(read_subset_file), osdf:///ospool/ap40/data/&lt;user.name&gt;/scaling-up/inputs/Celegans_ref.mmi
 
 transfer_output_files  = ./$(read_subset_file)_output.sam
-transfer_output_remaps = &quot;$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam&quot;
+transfer_output_remaps = &quot;$(read_subset_file)_output.sam=outputs/$(read_subset_file)_output.sam&quot;
 
 output                 = logs/output/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.out
 error                  = logs/error/job.$(ClusterID).$(ProcID)_$(read_subset_file)_output.err
