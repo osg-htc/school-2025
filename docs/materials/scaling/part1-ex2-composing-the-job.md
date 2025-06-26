@@ -26,9 +26,9 @@ For our exercise, we will use the `queue <var> from <list>` submission strategy.
 
 1. Move to your `~/scaling-up/inputs/` directory
         
-        $ mv ~/scaling-up/inputs/
+        $ cd ~/scaling-up/inputs/
         $ ls -la
-        total 12
+        total 11626328
         drwxr-xr-x  2 username username 4096 Jun 13 16:08 .
         drwx------ 10 username username 4096 Jun 13 16:07 ..
         -rw-r--r--  1 username username   14 Jun 13 16:08 reads_fastq_chunk_a
@@ -40,7 +40,7 @@ For our exercise, we will use the `queue <var> from <list>` submission strategy.
 
         :::console
         $ ls > ~/scaling-up/list_of_fastq.txt
-        $ mv ~/scaling-up/
+        $ cd ~/scaling-up/
         $ ls -la
         total 12
         drwxr-xr-x  2 username username 4096 Jun 13 16:08 .
@@ -51,13 +51,13 @@ For our exercise, we will use the `queue <var> from <list>` submission strategy.
 
         :::console
         $ head ~/scaling-up/list_of_fastq.txt
-        reads_fastq_chunk_a
-        reads_fastq_chunk_b
-        reads_fastq_chunk_c
-        reads_fastq_chunk_d
-        reads_fastq_chunk_e
+        reads_fastq_chunk_aa
+        reads_fastq_chunk_ab
+        reads_fastq_chunk_ac
+        reads_fastq_chunk_ad
+        reads_fastq_chunk_ae
         ...
-        reads_fastq_chunk_j
+        reads_fastq_chunk_aj
 
 ## Adapting the Executable
 Now that we have our data partitioned into independent subsets to be mapped in parallel, we can work on adapting our executable for use on the OSPool. We will start with the following template executable file, which is also found in your project directory under `~/scaling-up/minimap2.sh`.
@@ -90,7 +90,7 @@ Let's start by editing our template executable file! In our executable there's t
         #!/bin/bash
         reads_subset_file="$1"
         # Use minimap2 to map the basecalled reads to the reference genome
-        minimap2 -ax map-ont Celegans_ref.mmi $(reads_subset_file) > output.sam
+        minimap2 -ax map-ont Celegans_ref.mmi "$reads_subset_file" > output.sam
 
 2. Modify the executable use the name of our input reads subset file (`$reads_subset_file`) as the prefix of our output file.
 
@@ -98,7 +98,7 @@ Let's start by editing our template executable file! In our executable there's t
         #!/bin/bash
         reads_subset_file="$1"
         # Use minimap2 to map the basecalled reads to the reference genome
-        minimap2 -ax map-ont Celegans_ref.mmi "$(reads_subset_file)" > "$(reads_subset_file)_output.sam"
+        minimap2 -ax map-ont Celegans_ref.mmi "$reads_subset_file" > "${reads_subset_file}_output.sam"
 
 !!! question "Not sure how variables work on bash?"
 
@@ -171,7 +171,7 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
 3. Now, specify where the input and output files should be:
 
         :::console
-        transfer_input_files    = ./input/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/Celegans_ref.mmi
+        transfer_input_files    = inputs/$(read_subset_file), osdf:///ospool/ap40/data/<user.name>/scaling-up/inputs/Celegans_ref.mmi
         transfer_output_files   = $(read_subset_file)_output.sam
         transfer_output_remaps  = "$(read_subset_file)_output.sam=output/$(read_subset_file)_output.sam"
 
@@ -237,6 +237,10 @@ For our template, lets use `read_subset_file` as our variable name to pass the n
 
 7.  Submit your job and monitor its progress.
     
+    !!! danger "Remember to Check Your Submit File"
+
+        A common reason your job may go on hold is forgetting to replace `<user.name>` with your OSPool username. Check your files and path are setup correctly. For example, your container_image path should look something like: `osdf:///ospool/ap40/data/daniel.morales/scaling-up/software/minimap2.sif`.
+
     Submit your test job using `condor_submit`
 
         :::console
