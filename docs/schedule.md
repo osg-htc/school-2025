@@ -426,7 +426,7 @@ Industry room (3rd floor)
         <strong>Optional</strong> Lecture: Self-Checkpointing<br>
         <span class="before-dot text-light-orange">Work Time: Apply HTC to own research</span>
       </td>
-      <td>Ian</td>
+      <td>Showmic</td>
     </tr>
     <tr>
       <td>9:45</td>
