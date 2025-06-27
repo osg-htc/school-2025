@@ -155,8 +155,7 @@ END EXTRA TOPICS THAT ARE NOT READY YET -->
 
 ### Machine Learning
 
-View the Slides: [Coming soon]
-<!-- View the slides: [pdf](ml/Throughput-ML-iross-OSGUS24.pdf) -->
+View the Slides: [pdf](ml/Throughput-ML-iross-OSGUS25.pdf)
 
 ### Self-checkpointing for long-running jobs
 
