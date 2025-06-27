@@ -1,4 +1,4 @@
-# OSG School 2024 Assignment
+# OSG School 2025 Assignment
 
 The School focused on using high-throughput computing (HTC) to support and transform research.
 Your final assignment lets you show what you learned and how you might apply your new abilities.
@@ -11,7 +11,7 @@ We ask for it to:
 
 ## Option 1: Lightning Talk on Last Day of School
 
-<span style="color: #FF6600; font-weight: bold;">If you did a lightning talk on Friday, August 9,</span>
+<span style="color: #FF6600; font-weight: bold;">If you did a lightning talk on Friday, June 27,</span>
 it was your final assignment and you are done.
 
 ## Option 2: Short Write-Up
@@ -24,16 +24,17 @@ We will not publish your write-up&nbsp;&mdash; it is just between you and us.
 
 For the content, think of a written version of a lightning talk:
 
-1.  Describe your science for a broad audience in 1 paragraph to 1 page (this is a good life skill!)
-1.  Describe one computing challenge that you want to work on (also 1 paragraph to 1 page)
+1.  Describe your science for a broad audience in **no more than** 1 page (this is a good life skill!)
+1.  Describe one computing challenge that you want to work on (1 paragraph to 1 page)
 1.  Explain your plan to work on that challenge with the new things you learned at the School (probably a whole page)
 
 For the last part, your audience is the School staff,
 so you do not have to re-explain concepts and methods that we explained here.
 Instead, write about how you will apply those things!
 
-You are welcome to dive into details (like resource needs, etc.),
-but be sure to start with the high-level plan so we understand the context.
+Try to be detailed about your planned work, including things like resource needs and so on;
+**but** be sure to start with the high-level plan so we understand the context.
+A simple diagram may help.
 
 Be sure to put most of your effort into the third part, the plan.
 If you paste in three pages of intro from another paper,
@@ -49,7 +50,7 @@ we will probably ask for more details on the plan!
 
 ### Deadline
 
-The paper is due 20 September 2024.
+The paper is due 1 August 2025.
 Contact us early if you need an extension.
 
 ## Questions?
