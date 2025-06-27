@@ -55,6 +55,7 @@ nav:
     - Dining options:               logistics/dining.md
     - Madison Fun Day:              logistics/fun-day.md
     - Long-term OSPool access:      logistics/projects.md
+    - Final assignment:             logistics/assignment.md
   - Materials:
     - Overview:                     materials/index.md
     - Intro to HTCondor:
