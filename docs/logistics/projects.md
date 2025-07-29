@@ -20,12 +20,14 @@ Please complete the following steps by July 31:
 1. Go to this link: [Project Creation Form](https://topology.opensciencegrid.org/generate_project_yaml)
 1. Fill out the form.
 
-    !!! note
-	    If the Project Name doesn't auto-populate, use `OSG_School_2025`. 
+    !!! note "Tips for Filling Out the Form"
+	    If the Project Name doesn't auto-populate, use `OSG_School_2025`. For your project description, please include a summary of what your lab works on. Include what the overarching research question is. For your `Field of Science ID` and `Field of Science (Legacy)` responses, please choose the entry that best fits your lab's research area. 
+
 	
 	After completing the form, click "Submit manually": 
 	
 	<img src="../../assets/submit-manually.png" width=500px>
+ 
 
 1. Send an email to [support@osg-htc.org](mailto:support@osg-htc.org) with the following: 
 
@@ -33,7 +35,10 @@ Please complete the following steps by July 31:
 
 	![](../assets/yaml-output.png)
 
-    1. CC the PI of your research group, asking them to confirm your membership. 
+ 	!!! warning "Please email the YAML Output to the OSPool Team"
+	    You do not need to go to GitHub and upload these yourself, the team will do this for you. Please email the outputted YAML file to support@osg-htc.org with the subject: `OSG School 2025 - Account Conversion - <Your First and Last Name>`.
+
+    2. CC the PI of your research group, asking them to confirm your membership. 
 	in their group. If you are the PI, that should be indicated in 
 	the email. 
 
@@ -41,6 +46,6 @@ Please complete the following steps by July 31:
 your email to confirm that you are working with them!!
 
 Once the project PI has confirmed your membership, OSG Facilitators will create a new 
-project of the form `Institution_PIName`. You will receive
-a notification when you are added to the new project, and a follow up email from 
-the OSG facilitation team. 
+project of the form `Institution_PIName`. 
+
+**You will receive a notification when you are added to the new project, and a follow up email from the OSG facilitation team.**
